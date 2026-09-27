@@ -1,0 +1,185 @@
+{
+  "_schema_version": "1.0.0",
+  "_conventions": {
+    "description": "Binding coordination rules for shared_state.json. This file is the single coordination surface for the SA Dropship Agent Crew.",
+    "authority": "README.md is the source of truth. If any agent output, prompt, or reasoning conflicts with README.md, README.md wins and the conflict must be escalated to the human operator.",
+    "rules": [
+      "Only the Supervisor Agent writes the top-level structure of this file. Sub-agents append only to their own namespace.",
+      "No agent imports another agent directly. All coordination flows through the Supervisor via this file.",
+      "Every write includes: timestamp (ISO 8601), agent, confidence (1-10), source.",
+      "Any field marked UNVERIFIED must be surfaced to the human by the Supervisor. It must never be silently used in a downstream calculation, price, or recommendation.",
+      "confidence is the writing agent's self-assessed certainty on a 1-10 scale. It is not a margin, a probability, or a price.",
+      "source must be a real, checkable reference: a URL, a document, a dataset, or an explicit 'sandbox test'. Words such as 'assumed', 'estimated', 'typical', or 'industry standard' are not sources.",
+      "All cost math lives only in tools/landed_cost.py. All HS code, duty and VAT math lives only in tools/customs.py. Agents import from them; they never re-implement the formulas.",
+      "Every landed-cost calculation must include 15% VAT on the customs value. There are no exceptions.",
+      "Any net margin below 20% (after product + shipping + duty + 15% VAT + payment fees + ad CPA) must be rejected and explained, never approved."
+    ],
+    "hard_stops_reference": "README.md section 2 - the full non-negotiable HARD STOP list. Do not duplicate it here; the README is authoritative and duplication invites drift.",
+    "hitl_gates_reference": "README.md section 5 - the full HITL gate list. Approval format: state WHAT, WHY, COST, RISK. Human replies APPROVED or REJECTED plus reason.",
+    "namespace_init_note": "Namespaces below were initialised by the Supervisor with no findings. An initialised namespace is scaffolding, not evidence: confidence is null, verified is false, and findings is empty until a sub-agent appends real, sourced data."
+  },
+  "supervisor": {
+    "_meta": {
+      "owner": "agents/supervisor.py",
+      "role": "Task decomposition, routing to sub-agents, final briefing to the human",
+      "must_never": "Execute sub-agent tasks directly (README section 3)",
+      "append_key": "sessions"
+    },
+    "timestamp": "2026-09-27T18:42:18+02:00",
+    "agent": "supervisor",
+    "confidence": 10,
+    "source": "README.md section 7 (Supervisor initialises the top-level structure of shared_state.json)",
+    "verified": true,
+    "sessions": [
+      {
+        "session_id": "01a0e3b8",
+        "branch": "arena/01a0e3b8-okay",
+        "timestamp": "2026-09-27T18:42:18+02:00",
+        "agent": "supervisor",
+        "confidence": 10,
+        "source": "README.md section 7; human operator direction given in session",
+        "task": "Scaffold shared_state.json and document the branch-naming exception in README section 8",
+        "why": "shared_state.json is the single coordination surface every sub-agent must read and append to. It did not exist, so no sub-agent could be built or tested. The README designates it Supervisor-owned.",
+        "sub_agents_routed": [],
+        "hitl_gates_crossed": [],
+        "hitl_gates_note": "No HITL gate crossed: no paid service, no sample order, no product launch, no ad campaign, no merge touching tools/landed_cost.py or tools/customs.py, no customer-facing commitment.",
+        "hard_stops_triggered": [],
+        "outputs": [
+          "shared_state.json",
+          "shared_state.schema.md",
+          "README.md (section 8 branch-naming exception)"
+        ],
+        "tests_run": [
+          "python3 -m json.tool shared_state.json (JSON validity)"
+        ],
+        "open_flags": [
+          "Option panel recorded 'halt' for the branch-naming question while the written operator direction said to proceed on the pinned branch. Treated the written direction as operative and flagged to the human. No code, spend, or git safety rule was affected either way."
+        ]
+      }
+    ]
+  },
+  "market_research": {
+    "_meta": {
+      "owner": "agents/market_research.py",
+      "role": "SA product discovery, customs viability",
+      "must_never": "Recommend a product without a verified HS code (README section 3)",
+      "append_key": "findings",
+      "append_contract": {
+        "array": "findings",
+        "each_entry_must_include": ["id", "timestamp", "agent", "confidence", "source", "data"],
+        "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
+      }
+    },
+    "timestamp": "2026-09-27T18:42:18+02:00",
+    "agent": "supervisor",
+    "confidence": null,
+    "source": "README.md section 7 (namespace initialised by Supervisor, no findings yet)",
+    "verified": false,
+    "findings": [],
+    "unverified_fields": []
+  },
+  "sourcing": {
+    "_meta": {
+      "owner": "agents/sourcing.py",
+      "role": "Supplier verification, sample planning",
+      "must_never": "Commit to purchases (README section 3)",
+      "append_key": "findings",
+      "append_contract": {
+        "array": "findings",
+        "each_entry_must_include": ["id", "timestamp", "agent", "confidence", "source", "data"],
+        "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
+      }
+    },
+    "timestamp": "2026-09-27T18:42:18+02:00",
+    "agent": "supervisor",
+    "confidence": null,
+    "source": "README.md section 7 (namespace initialised by Supervisor, no findings yet)",
+    "verified": false,
+    "findings": [],
+    "unverified_fields": []
+  },
+  "pricing": {
+    "_meta": {
+      "owner": "agents/pricing.py",
+      "role": "Landed cost, margin math, price setting",
+      "must_never": "Approve a margin below 20% (README section 3)",
+      "append_key": "findings",
+      "append_contract": {
+        "array": "findings",
+        "each_entry_must_include": ["id", "timestamp", "agent", "confidence", "source", "data"],
+        "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array.",
+        "cost_math_rule": "All cost math must call tools/landed_cost.py. Never re-implement the formula. 15% VAT on customs value is mandatory in every calculation."
+      }
+    },
+    "timestamp": "2026-09-27T18:42:18+02:00",
+    "agent": "supervisor",
+    "confidence": null,
+    "source": "README.md section 7 (namespace initialised by Supervisor, no findings yet)",
+    "verified": false,
+    "findings": [],
+    "unverified_fields": []
+  },
+  "listing": {
+    "_meta": {
+      "owner": "agents/listing.py",
+      "role": "SEO copy, product descriptions",
+      "must_never": "Make unverifiable claims (README section 3)",
+      "append_key": "findings",
+      "append_contract": {
+        "array": "findings",
+        "each_entry_must_include": ["id", "timestamp", "agent", "confidence", "source", "data"],
+        "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array.",
+        "language_rule": "SA English spelling (colour, organise). Rand pricing. Reference Takealot, WhatsApp, PayFast, SnapScan where relevant."
+      }
+    },
+    "timestamp": "2026-09-27T18:42:18+02:00",
+    "agent": "supervisor",
+    "confidence": null,
+    "source": "README.md section 7 (namespace initialised by Supervisor, no findings yet)",
+    "verified": false,
+    "findings": [],
+    "unverified_fields": []
+  },
+  "ad_growth": {
+    "_meta": {
+      "owner": "agents/ad_growth.py",
+      "role": "Campaign design, ad copy, budgets",
+      "must_never": "Launch campaigns without approval (README section 3)",
+      "append_key": "findings",
+      "append_contract": {
+        "array": "findings",
+        "each_entry_must_include": ["id", "timestamp", "agent", "confidence", "source", "data"],
+        "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array.",
+        "benchmark_note": "ZA ad CPA benchmark is R150-R300 per conversion (README section 4). Any budget figure is a proposal only until the human approves it at a HITL gate."
+      }
+    },
+    "timestamp": "2026-09-27T18:42:18+02:00",
+    "agent": "supervisor",
+    "confidence": null,
+    "source": "README.md section 7 (namespace initialised by Supervisor, no findings yet)",
+    "verified": false,
+    "findings": [],
+    "unverified_fields": []
+  },
+  "support": {
+    "_meta": {
+      "owner": "agents/support.py",
+      "role": "Ticket handling, FAQs",
+      "must_never": "Promise refunds or replacements (README section 3)",
+      "append_key": "findings",
+      "append_contract": {
+        "array": "findings",
+        "each_entry_must_include": ["id", "timestamp", "agent", "confidence", "source", "data"],
+        "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array.",
+        "commitment_rule": "Any refund, replacement or customer-facing commitment requires a HITL gate before it is written into a reply."
+      }
+    },
+    "timestamp": "2026-09-27T18:42:18+02:00",
+    "agent": "supervisor",
+    "confidence": null,
+    "source": "README.md section 7 (namespace initialised by Supervisor, no findings yet)",
+    "verified": false,
+    "findings": [],
+    "unverified_fields": []
+  }
+}
