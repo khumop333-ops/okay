@@ -137,13 +137,873 @@
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
       }
     },
-    "timestamp": "2026-09-27T18:42:18+02:00",
-    "agent": "supervisor",
-    "confidence": null,
-    "source": "README.md section 7 (namespace initialised by Supervisor, no findings yet)",
+    "timestamp": "2026-09-29T22:04:57+02:00",
+    "agent": "market_research",
+    "confidence": 4,
+    "source": "27 findings appended this session (mr-0001..mr-0027); finding confidence range 4-8; namespace roll-up takes the minimum (conservative — the weakest file bounds the set).",
     "verified": false,
-    "findings": [],
-    "unverified_fields": []
+    "findings": [
+      {
+        "id": "mr-0001",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 7,
+        "source": "Takealot demand: mybroadband.co.za 2023 holidays (fast charger top seller) + 2024 Blue Dot (AirTag/iPhone accessories); duty: https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06)",
+        "data": {
+          "product_name": "USB-C fast charger + cable set (45-65W GaN)",
+          "stage": "customs_screened",
+          "recommendation": "investigate",
+          "demand": "high",
+          "demand_evidence": "Fast chargers/iPhone cables repeatedly in Takealot top-seller reports 2023-2024.",
+          "hs_code": "8504.40 (charger) / 8544.42 (cable fitted with connectors)",
+          "duty_rate_pct": "0% charger / 15% cable",
+          "hs_source": "https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06)",
+          "category_note": "bundle rated at highest line (cable 15%); composite-GRI treatment UNVERIFIED — see unverified_fields",
+          "takealot_price_floor_zar": 95,
+          "takealot_evidence": "Generic 45W+ cable from R95 (3.8*, 2139 reviews); Samsung 25W R430-599; GaN 35-65W R229-1099 (takealot.com PLID93727502/PLID98539537/PLID93521202).",
+          "competition_analyst": "high",
+          "competition_method": "takealot-snippet-breadth: 8+ listings, one 2139-review incumbent, Samsung/originals + multi-brand generics.",
+          "UNVERIFIED_established_seller_count": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "price_floor_vs_cpa_flag": "RED: R95 floor below README R150-300 CPA benchmark — Pricing must verify; generics look unviable, GaN R229+ sub-niche only a hypothesis.",
+          "reasoning": "Customs pass (0%/15%), proven Takealot demand, but competition-dominated and floor likely below CPA. Blocked on margin math.",
+          "customs_verdict": {
+            "risk": "medium",
+            "eliminate": false,
+            "reason": "verified SA duty 15% within the 0-25% session band."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0002",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 7,
+        "source": "Demand: gauteng.net load-shedding gadgets (solar banks from R600) + amazon.co.za solar-charger bestsellers + red-e.co.za R1,029; code: dutiable.io + volza.com (8507.60); SA rate: https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06)",
+        "data": {
+          "product_name": "Solar power bank 10,000-20,000 mAh",
+          "stage": "customs_screened",
+          "recommendation": "investigate",
+          "demand": "high",
+          "demand_evidence": "Load-shedding is the SA-specific demand engine: 3 SA sources, Amazon.co.za category bestsellers.",
+          "hs_code": "8507.60",
+          "duty_rate_pct": "0%",
+          "hs_source": "https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06); code corroborated by dutiable.io/hs-code/electronics/portable-power-bank + volza.com (85076000, 7.2M+ shipments)",
+          "classification_caveat": "Solar-integrated units could attract an 8541.43 (10%) essential-character argument — needs tariff determination.",
+          "takealot_price_floor_zar": 258,
+          "takealot_evidence": "10k mAh R258-344; 20k foldable solar R699; 60k from R580 (takealot.com PLID92826531/PLID94752361/PLID95695632). Reviews thin (2-5).",
+          "competition_analyst": "medium",
+          "competition_method": "takealot-snippet-breadth: 5+ listings, max 5 reviews — no incumbent.",
+          "UNVERIFIED_established_seller_count": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "loadshedding_note": "Core use-case IS load-shedding resilience; solar input suits Gauteng sun.",
+          "reasoning": "LEAD CANDIDATE FOR PRICING (not approved): verified 0% duty + strong ZA demand + no incumbent + floor above CPA benchmark. Blocked only on margin math.",
+          "customs_verdict": {
+            "risk": "low",
+            "eliminate": false,
+            "reason": "duty-free SA tariff line — prioritised per README §4."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0003",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 5,
+        "source": "Demand: mybroadband.co.za (Magneto rechargeable light #1 Dec holidays; Takealot load-shedding devices statement); code: tariffnumber.com/2026/85131000 + seair.co.in (8513.10); SA lamps rate UNVERIFIED (8513.90 parts @0% per jlog.co.za is a different line).",
+        "data": {
+          "product_name": "Rechargeable LED / solar emergency light (portable)",
+          "stage": "customs_screened",
+          "recommendation": "investigate",
+          "demand": "high",
+          "demand_evidence": "Magneto rechargeable light topped Takealot Dec sales; EcoFlow/Gizzu/Magneto named as load-shedding staples.",
+          "hs_code": "8513.10 (portable self-powered lamps)",
+          "UNVERIFIED_duty_rate_pct": null,
+          "hs_source": "Code tree: tariffnumber.com/2026/85131000; seair.co.in (85131010 torch, 1609 shipments). SA line rate NOT found after 2 attempts.",
+          "related_line_context": "8513.90 parts @0% (jlog.co.za) and 9405.11 fixed LED luminaires @20% (Tradecaravan) are NOT this line — cited for context only.",
+          "takealot_price_floor_zar": 179,
+          "takealot_evidence": "3-pack multifunction R179-259 (4.8*, 91 reviews); solar loadshedding light R378-449; tubes R179-190 (PLID90990262/PLID90599483/PLID91069119).",
+          "competition_analyst": "medium",
+          "competition_method": "takealot-snippet-breadth: 6+ listings, max 91 reviews — re-check 100-review threshold.",
+          "UNVERIFIED_established_seller_count": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "reasoning": "Strong ZA demand + floor above CPA, but SA duty UNVERIFIED and Magneto/Gizzu brand presence. Blocked on duty + margin.",
+          "customs_verdict": {
+            "risk": "unknown",
+            "eliminate": false,
+            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0004",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 6,
+        "source": "Demand: adjacent-category (TikTok smartphone accessories; Takealot automotive catalogue breadth 136,790 lines on takealot.com/all/?q=car+phone+holder filter panel); code: deepbeez.com/d/hs/phone-holder + volza.com magnetic-car-phone-mount (39269099); SA rate: https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06)",
+        "data": {
+          "product_name": "Car phone holder / mount (plastic)",
+          "stage": "customs_screened",
+          "recommendation": "investigate",
+          "demand": "medium",
+          "demand_evidence": "No direct demand source found — graded medium on smartphone-accessory adjacency + large automotive catalogue. Explicitly weaker file.",
+          "hs_code": "3926.90",
+          "duty_rate_pct": "20%",
+          "hs_source": "https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06)",
+          "classification_caveat": "Metal-dominant mounts may fall under 8302/7616 (volza records exist) — plastic construction assumed; Sourcing to confirm.",
+          "takealot_price_floor_zar": 114,
+          "takealot_evidence": "Car-specific from R114; R179/R415 listings; adjacent desk holder R95 (4.0*, 148) (PLID100368859/PLID102501646/PLID99208827).",
+          "competition_analyst": "medium",
+          "competition_method": "takealot-snippet-breadth: 4+ listings, car-specific reviews thin.",
+          "UNVERIFIED_established_seller_count": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "price_floor_vs_cpa_flag": "RED: car-specific floor R114 below R150-300 CPA — Pricing must verify.",
+          "reasoning": "Customs pass (20%) but demand file is adjacency-inference and floor sits below CPA. Weakest of the customs-passed four.",
+          "customs_verdict": {
+            "risk": "medium",
+            "eliminate": false,
+            "reason": "verified SA duty 20% within the 0-25% session band."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0005",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 5,
+        "source": "Demand: shopify.com/za/blog/tiktok-products (#4 cases/screen protectors/stickers); code candidates: ftp.bills.com.au (7007.19 tempered / 3919.90 film) + volza.com mobile-screen-guard (7007.21xx usage); SA line rate UNVERIFIED.",
+        "data": {
+          "product_name": "Tempered glass screen protector",
+          "stage": "customs_screened",
+          "recommendation": "investigate",
+          "demand": "high",
+          "demand_evidence": "TikTok top-20 product group; Takealot case+glass bundles (R99-105) confirm attach-rate demand.",
+          "hs_code": "7007.19 (toughened safety glass, non-vehicle) — probable; film variants 3919.90/3920",
+          "UNVERIFIED_duty_rate_pct": null,
+          "hs_source": "Code candidates per ftp.bills.com.au + volza.com; SA rates NOT found (ch.70 typical Free-30% per jlog.co.za chapter page; 7007.21.20 windscreens 30% per ITAC Report 712 is a different line).",
+          "takealot_price_floor_zar": 99,
+          "takealot_evidence": "R99 cluster (Rockymile, Weva, A35/iPhone lines); up to R135 (PLID95141911/PLID92609303/PLID94033296).",
+          "competition_analyst": "high",
+          "competition_method": "takealot-snippet-breadth: commoditised R99 floor across 4+ listings; reviews thin.",
+          "UNVERIFIED_established_seller_count": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "price_floor_vs_cpa_flag": "RED: R99 floor below R150-300 CPA — viability doubtful; Pricing to verify, likely reject.",
+          "reasoning": "High demand but commoditised R99 floor + UNVERIFIED duty. Probable reject once Pricing runs the tool.",
+          "customs_verdict": {
+            "risk": "unknown",
+            "eliminate": false,
+            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0006",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 5,
+        "source": "Demand: shopify.com/za/blog/tiktok-products (#10 makeup tools; 22.7M #makeuptutorial posts); code: tariffnumber.com/2026/96033090 (9603.30 cosmetic brushes) + US ruling NY M83962; SA line rate UNVERIFIED.",
+        "data": {
+          "product_name": "Makeup brush set (8-20 pc, unpowered)",
+          "stage": "customs_screened",
+          "recommendation": "investigate",
+          "demand": "high",
+          "demand_evidence": "TikTok top-20 group with the largest tutorial hashtag (22.7M posts) — strong demo-ability for ads.",
+          "hs_code": "9603.30",
+          "UNVERIFIED_duty_rate_pct": null,
+          "hs_source": "Code per tariffnumber.com/2026/96033090 + US CBP NY M83962 (cosmetic brushes from China); SA rate NOT found after 2 attempts.",
+          "takealot_price_floor_zar": 119,
+          "takealot_evidence": "32pc R119; 8pc R188; 15pc from R189; GLO 14pc from R258 (4.5*, 545 reviews); MAANGE 20pc R749 (PLID100780885/PLID46866541/PLID98301556).",
+          "competition_analyst": "high",
+          "competition_method": "takealot-snippet-breadth: 545-review incumbent (GLO) + wide R119-749 range.",
+          "UNVERIFIED_established_seller_count": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "price_floor_vs_cpa_flag": "AMBER: floor R119 below CPA but mid-range R189-258 sits inside/near it — set size is the lever; Pricing to verify.",
+          "reasoning": "Unpowered-accessory profile per README §4 priority, but duty UNVERIFIED + 545-review incumbent. Mid-size sets the only plausible angle.",
+          "customs_verdict": {
+            "risk": "unknown",
+            "eliminate": false,
+            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0007",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 7,
+        "source": "Demand: shopify.com/za/blog/tiktok-products (#4) + tiktok.com/discover SA (@leratospov: smartphone accessories top-selling in SA); code: dutiable.io (3926.90.97 plastic / 4202.32 leather) + volza.com ZA records (4202.91/4202.32) + seair.co.in split; SA rates: https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06)",
+        "data": {
+          "product_name": "Phone case / cover, PLASTIC ONLY (TPU/silicone; leather excluded)",
+          "stage": "customs_screened",
+          "recommendation": "investigate",
+          "demand": "high",
+          "demand_evidence": "Global TikTok top-20 AND SA-specific TikTok testimony — strongest demand file in the set.",
+          "hs_code": "3926.90 (plastic)",
+          "duty_rate_pct": "20%",
+          "hs_source": "https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06); material split per dutiable.io/phone-case + seair.co.in + volza.com ZA import records",
+          "leather_exclusion": "Leather/folio cases fall under 4202 (4202.32 per dutiable/volza); 4202.92 verified @30% (Tradecaravan) is a heading proxy only and 4202.32 line rate is UNVERIFIED — leather variants excluded from scope regardless.",
+          "takealot_price_floor_zar": 67,
+          "takealot_evidence": "TPU from R67-89; MagSafe from R105 (4.6*, 181); bundle R105 (4.2*, 164); gel R129 (4.3*, 102); case+glass R99 (4.8*, 147) (PLID92204674/PLID90064206/PLID97456252).",
+          "competition_analyst": "high",
+          "competition_method": "takealot-snippet-breadth: four 100+ review listings + R67 floor — deepest competition file observed.",
+          "UNVERIFIED_established_seller_count": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "price_floor_vs_cpa_flag": "RED: R67 floor far below R150-300 CPA — viability doubtful; Pricing to verify, likely reject.",
+          "reasoning": "Best demand + customs pass, worst price/competition structure. Only a differentiated (MagSafe/design-led) angle could survive — Pricing decides.",
+          "customs_verdict": {
+            "risk": "medium",
+            "eliminate": false,
+            "reason": "verified SA duty 20% within the 0-25% session band."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0008",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 5,
+        "source": "Demand: shopify.com/za/blog/tiktok-products (#8 necklaces, #20 rings) + tiktok.com/discover SA (@marketingwithtjbanks: jewellery sustained demand); code: 7117.19 per dutiable.io + freightamigo.com; SA line rate UNVERIFIED (ch.71 typical Free-20% per jlog.co.za chapter page; 7113.19 precious @20% is a different heading).",
+        "data": {
+          "product_name": "Imitation jewellery (necklaces/rings, base metal or non-metal)",
+          "stage": "customs_screened",
+          "recommendation": "investigate",
+          "demand": "high",
+          "demand_evidence": "Global TikTok top-20 twice AND SA-specific sustained-demand testimony; stainless/titanium-steel styles visible on Takealot.",
+          "hs_code": "7117.19 (base metal) / 7117.90 (non-metal)",
+          "UNVERIFIED_duty_rate_pct": null,
+          "hs_source": "Code per dutiable.io (7117.19) + freightamigo.com + tariffnumber.com/2026/71179000; SA line rates NOT found after 2 attempts. Non-SA references only: EU 4%, US 11%, India 20%.",
+          "takealot_price_floor_zar": 118,
+          "takealot_evidence": "Droplet steel set from R118 (4.5*, 144); moissanite-style from R126; R168-238 (takealot.com/fashion/necklaces-32919).",
+          "competition_analyst": "medium",
+          "competition_method": "takealot-snippet-breadth: category page shows multi-listing depth; one 144-review listing; thinnest Takealot file — re-check.",
+          "UNVERIFIED_established_seller_count": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "price_floor_vs_cpa_flag": "RED: R118 floor below R150-300 CPA — sets/bundles the only plausible lever; Pricing to verify.",
+          "reasoning": "Strong demand signals but duty UNVERIFIED + thin competition file + floor below CPA. Needs duty determination first.",
+          "customs_verdict": {
+            "risk": "unknown",
+            "eliminate": false,
+            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0009",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 8,
+        "source": "Demand: tiktok.com/discover SA (@leratospov: shapewear top-selling); duty: README §4 (apparel 40-45%) + jlog.co.za + afrotools.com (clothing 40-45%) + https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06) (6109.10/6204.62 @45%).",
+        "data": {
+          "product_name": "Shapewear (apparel)",
+          "stage": "rejected",
+          "recommendation": "reject",
+          "demand": "high",
+          "demand_evidence": "SA-specific TikTok testimony.",
+          "hs_code": "UNVERIFIED at line level (category: apparel/textiles)",
+          "duty_rate_pct": "40-45% (category band, multiple sources)",
+          "hs_source": "Category band per README §4 + jlog + afrotools + Tradecaravan apparel lines @45%; exact shapewear line NOT looked up — rejection stands at category level.",
+          "UNVERIFIED_takealot_price_floor_zar": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "reasoning": "REJECT: README §4 apparel HIGH RISK; 40-45% duty exceeds 25% elimination threshold with no exceptional-margin evidence. No further spend.",
+          "customs_verdict": {
+            "risk": "high",
+            "eliminate": true,
+            "reason": "README §4: apparel/textiles run 40-45% duty — HIGH RISK, reject unless margin is exceptional AND flagged."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0010",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 8,
+        "source": "Demand: tiktok.com/discover SA (@marketingwithtjbanks niche: sneakers); duty: https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06) (6402.99 @30%) + afrotools.com (footwear 30% + 20-50% anti-dumping on Chinese footwear).",
+        "data": {
+          "product_name": "Sneakers / rubber-plastic footwear",
+          "stage": "rejected",
+          "recommendation": "reject",
+          "demand": "high",
+          "demand_evidence": "SA-specific TikTok niche testimony.",
+          "hs_code": "6402.99",
+          "duty_rate_pct": "30% (or 500c/2u) + anti-dumping risk 20-50% on China origin",
+          "hs_source": "https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06); anti-dumping per afrotools.com/blog/import-duty-south-africa-2026",
+          "UNVERIFIED_takealot_price_floor_zar": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "reasoning": "REJECT: 30% exceeds threshold before anti-dumping; with China-origin anti-dumping the duty stack is prohibitive. No further spend.",
+          "customs_verdict": {
+            "risk": "high",
+            "eliminate": true,
+            "reason": "verified SA duty 30% exceeds the 25% session elimination threshold."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0011",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 8,
+        "source": "Demand: shopify.com/za/blog/tiktok-products (#3 dresses, #9 t-shirts) + shopify.com/za Google Trends (wrap skirt breakout); duty: https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06) (6109.10/6204.62 @45%).",
+        "data": {
+          "product_name": "T-shirts / casual dresses / wrap skirts (apparel)",
+          "stage": "rejected",
+          "recommendation": "reject",
+          "demand": "high",
+          "demand_evidence": "TikTok top-20 + Google breakout term — demand is real, duty kills it.",
+          "hs_code": "6109.10 / 6204.62 (representative apparel lines)",
+          "duty_rate_pct": "45%",
+          "hs_source": "https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06)",
+          "UNVERIFIED_takealot_price_floor_zar": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "reasoning": "REJECT: 45% apparel duty per README §4 HIGH RISK. Demand strength is irrelevant past the elimination threshold.",
+          "customs_verdict": {
+            "risk": "high",
+            "eliminate": true,
+            "reason": "README §4: apparel/textiles run 40-45% duty — HIGH RISK, reject unless margin is exceptional AND flagged."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0012",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 6,
+        "source": "Demand/competition: alibaba.com Takealot insights (12 of top-15 skincare SA-founded; all 1200+ reviews, 4.7+) + mybroadband (serums top sellers) + shopify tiktok (#11 serums); duty: https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06) (3304.99 @20%) vs jlog.co.za/cosmetics-personal-care-hs-33-4 (3304 @15%) — CONFLICT; SAHPRA per jlog.",
+        "data": {
+          "product_name": "Serums / skincare preparations",
+          "stage": "customs_screened",
+          "recommendation": "investigate",
+          "demand": "high",
+          "demand_evidence": "Repeat Takealot top-seller + TikTok K-beauty virality.",
+          "hs_code": "3304.99 / 3304",
+          "duty_rate_pct": "15-20% — SOURCE CONFLICT, SARS line check required",
+          "hs_source": "Tradecaravan 3304.99 @20% vs JLog 3304 @15% — range recorded, no winner picked.",
+          "regulatory_flag": "SAHPRA notification/registration may be required before sale (jlog.co.za) — Sourcing must confirm; not verified by MR.",
+          "competition_analyst": "high",
+          "competition_method": "secondary-report: top-15 skincare all 1200+ reviews, 83% SA-founded/locally formulated — local-climate moat.",
+          "UNVERIFIED_established_seller_count": null,
+          "UNVERIFIED_takealot_price_floor_zar": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "reasoning": "Duty passes IF 15-20% confirmed, but local-brand dominance + SAHPRA friction make this a weak dropship fit. Duty line + regulatory answers first.",
+          "customs_verdict": {
+            "risk": "medium",
+            "eliminate": false,
+            "reason": "verified SA duty 20% within the 0-25% session band."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0013",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 5,
+        "source": "Demand/competition: perfectdealz.co.za (air fryers top Takealot seller; 70x Table Mountain stack) + mybroadband Blue Dot (Bennett Read in both top-10s); HS UNVERIFIED (8516.60 @20% ovens/cookers per Tradecaravan is adjacent, not this appliance).",
+        "data": {
+          "product_name": "Air fryer (full appliance)",
+          "stage": "trend_captured",
+          "recommendation": "investigate",
+          "demand": "high",
+          "demand_evidence": "Top Takealot unit seller across sources.",
+          "UNVERIFIED_hs_code": null,
+          "UNVERIFIED_duty_rate_pct": null,
+          "hs_source": "No lookup performed — rejection/competition logic dominates; 8516.60 @20% cited as adjacent-line context only, NOT assigned.",
+          "competition_analyst": "high",
+          "competition_method": "secondary-report: Bennett Read/Defy/Milex brand dominance in both volume and value top-10s.",
+          "logistics_flag": "Bulky appliance: freight + damage + returns risk; load-shedding usage angle exists but brands own it.",
+          "UNVERIFIED_takealot_price_floor_zar": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "reasoning": "Not a dropship-from-China candidate against entrenched local brands; kept visible so the crew does not re-discover it. Accessories (silicone/paper) are a separate future screen, not covered here.",
+          "customs_verdict": {
+            "risk": "unknown",
+            "eliminate": false,
+            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0014",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 6,
+        "source": "Demand/competition: mybroadband (TVs 3 of top-5 by value; Samsung/Hisense/Skyworth); duty: https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06) (8528.72 @25%).",
+        "data": {
+          "product_name": "Smart TV (55-75 inch)",
+          "stage": "rejected",
+          "recommendation": "reject",
+          "demand": "high",
+          "demand_evidence": "Dominates Takealot value rankings.",
+          "hs_code": "8528.72",
+          "duty_rate_pct": "25% (at threshold, not above)",
+          "hs_source": "https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06)",
+          "UNVERIFIED_takealot_price_floor_zar": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "reasoning": "REJECT: duty passes at exactly 25%, but brand-dominated big-ticket market + freight impossibility for parcel dropship. Not viable on logistics/competition.",
+          "customs_verdict": {
+            "risk": "medium",
+            "eliminate": false,
+            "reason": "verified SA duty 25% within the 0-25% session band."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0015",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 5,
+        "source": "Demand: alibaba.com Takealot insights (CAPS kits 3:1 over toys; 5.1x repeat purchase); duty: https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06) (9503.00 @20%).",
+        "data": {
+          "product_name": "Educational toys / puzzles / CAPS-aligned kits",
+          "stage": "trend_captured",
+          "recommendation": "investigate",
+          "demand": "medium",
+          "demand_evidence": "Single secondary report (Alibaba insights) — real but single-sourced; needs corroboration.",
+          "hs_code": "9503.00 (toys, scale models, puzzles)",
+          "duty_rate_pct": "20%",
+          "hs_source": "https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06)",
+          "competition_note": "Winning examples are locally developed (Stellenbosch linguists, SA rainfall calibration) — generic imports compete on price only.",
+          "UNVERIFIED_established_seller_count": null,
+          "UNVERIFIED_takealot_price_floor_zar": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "reasoning": "Customs pass; demand single-sourced and localisation cuts both ways. Corroborate demand before any Takealot screen.",
+          "customs_verdict": {
+            "risk": "medium",
+            "eliminate": false,
+            "reason": "verified SA duty 20% within the 0-25% session band."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0016",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 5,
+        "source": "Demand: alibaba.com Takealot insights (GPS collars +89%, dental chews +76%, joint supplements +112%); HS UNVERIFIED (no lookup performed).",
+        "data": {
+          "product_name": "Pet GPS collar / premium pet accessories",
+          "stage": "trend_captured",
+          "recommendation": "investigate",
+          "demand": "medium",
+          "demand_evidence": "Single secondary report with strong growth figures — needs corroboration.",
+          "UNVERIFIED_hs_code": null,
+          "UNVERIFIED_duty_rate_pct": null,
+          "hs_source": "No lookup performed this session; candidates span 4201/8526 — Sourcing/Pricing to classify.",
+          "UNVERIFIED_takealot_price_floor_zar": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "reasoning": "Premiumisation trend fits dropship (high value, low weight for non-electronic lines), but HS + demand corroboration come first.",
+          "customs_verdict": {
+            "risk": "unknown",
+            "eliminate": false,
+            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0017",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 6,
+        "source": "Demand: cjdropshipping.com (+134% YoY search interest, global) — NO SA-specific evidence found.",
+        "data": {
+          "product_name": "Mouth tape / sleep strips",
+          "stage": "rejected",
+          "recommendation": "reject",
+          "demand": "low",
+          "demand_evidence": "Global signal only; pipeline requires SA-specific demand signals — none found.",
+          "UNVERIFIED_hs_code": null,
+          "UNVERIFIED_duty_rate_pct": null,
+          "hs_source": "No lookup — rejected at demand stage.",
+          "UNVERIFIED_net_margin_pct": null,
+          "reasoning": "REJECT (revivable): no ZA demand evidence. Revisit only with SA search/social proof.",
+          "customs_verdict": {
+            "risk": "unknown",
+            "eliminate": false,
+            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0018",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 6,
+        "source": "Demand: cjdropshipping.com (climbing global interest) — NO SA-specific evidence found.",
+        "data": {
+          "product_name": "Hard-water shower filter",
+          "stage": "rejected",
+          "recommendation": "reject",
+          "demand": "low",
+          "demand_evidence": "Global signal only; no ZA evidence despite plausible hard-water angle.",
+          "UNVERIFIED_hs_code": null,
+          "UNVERIFIED_duty_rate_pct": null,
+          "hs_source": "No lookup — rejected at demand stage.",
+          "UNVERIFIED_net_margin_pct": null,
+          "reasoning": "REJECT (revivable): no ZA demand evidence. Revisit only with SA proof.",
+          "customs_verdict": {
+            "risk": "unknown",
+            "eliminate": false,
+            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0019",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 4,
+        "source": "Demand: tiktok.com/discover SA (@marketingwithtjbanks: wigs & hair sustained demand) — single anecdotal source; HS UNVERIFIED (no lookup performed).",
+        "data": {
+          "product_name": "Wigs / hair extensions (synthetic)",
+          "stage": "trend_captured",
+          "recommendation": "investigate",
+          "demand": "medium",
+          "demand_evidence": "Single SA TikTok testimony — anecdotal, needs corroboration.",
+          "UNVERIFIED_hs_code": null,
+          "UNVERIFIED_duty_rate_pct": null,
+          "hs_source": "No lookup performed this session.",
+          "UNVERIFIED_takealot_price_floor_zar": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "reasoning": "SA demand hint with human-hair premium risk (cost) and unverified HS. Corroborate + classify before screening.",
+          "customs_verdict": {
+            "risk": "unknown",
+            "eliminate": false,
+            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0020",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 5,
+        "source": "Demand: shopify.com/za/blog/tiktok-products (#18 sunglasses, $3 price disruption) + alibaba.com (high SA UV exposure as local skin/climate factor); HS UNVERIFIED (9001.50 lenses @0% per Tradecaravan is components, not mounted spectacles).",
+        "data": {
+          "product_name": "Sunglasses (affordable plastic frames)",
+          "stage": "trend_captured",
+          "recommendation": "investigate",
+          "demand": "medium",
+          "demand_evidence": "Global TikTok demand + SA high-UV relevance; summer-seasonal — timing note for Supervisor (Sep = pre-summer).",
+          "UNVERIFIED_hs_code": null,
+          "UNVERIFIED_duty_rate_pct": null,
+          "hs_source": "No lookup performed; 9001.50 @0% cited as adjacent-line context only, NOT assigned.",
+          "UNVERIFIED_takealot_price_floor_zar": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "reasoning": "Seasonal SA fit (pre-summer Sep) with TikTok price-disruption precedent. HS + Takealot screen next if routed.",
+          "customs_verdict": {
+            "risk": "unknown",
+            "eliminate": false,
+            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0021",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 5,
+        "source": "Demand: shopify.com/za/blog/tiktok-products (#5 earphones/headphones); code: tariffnumber.com/2021/85183000 (8518.30) + app.coresupplychains.com (8518 in ZA imports); SA line rate UNVERIFIED.",
+        "data": {
+          "product_name": "Earphones / headphones (wired + TWS)",
+          "stage": "trend_captured",
+          "recommendation": "investigate",
+          "demand": "high",
+          "demand_evidence": "TikTok top-20 group.",
+          "hs_code": "8518.30",
+          "UNVERIFIED_duty_rate_pct": null,
+          "hs_source": "Code per tariffnumber.com + ZA-import corroboration (coresupplychains); SA rate not found.",
+          "UNVERIFIED_takealot_price_floor_zar": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "reasoning": "Code verified, SA duty not. Wireless adds load-shedding-adjacent (commute) angle but also brand competition (Anker/JBL types) — screen after duty.",
+          "customs_verdict": {
+            "risk": "unknown",
+            "eliminate": false,
+            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0022",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 6,
+        "source": "Demand: quicksync.pro/blog/tiktok-shop-trending-products-2026 (Kalodata: kitchen gadgets impulse-buy; SEESE $1.97M July) + mybroadband (Homeware = Takealot #1 category); duty: https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06) (3926.90 plastic @20% / 7323.93 stainless @20%).",
+        "data": {
+          "product_name": "Kitchen gadgets (choppers, prep tools; plastic/steel)",
+          "stage": "trend_captured",
+          "recommendation": "investigate",
+          "demand": "high",
+          "demand_evidence": "TikTok impulse-buy mechanics (20-sec demos) + Takealot's #1 category by demand.",
+          "hs_code": "3926.90 / 7323.93 (material-dependent)",
+          "duty_rate_pct": "20%",
+          "hs_source": "https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06)",
+          "UNVERIFIED_established_seller_count": null,
+          "UNVERIFIED_takealot_price_floor_zar": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "reasoning": "Customs pass + top-category demand; Takealot screen deferred (session budget) — next-screen candidate if routed.",
+          "customs_verdict": {
+            "risk": "medium",
+            "eliminate": false,
+            "reason": "verified SA duty 20% within the 0-25% session band."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0023",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 4,
+        "source": "Demand: shopify.com/za Google Trends (reusable bottles, Stanley-led spikes/normalisation) — global framing, brand-dominated; HS UNVERIFIED (no lookup).",
+        "data": {
+          "product_name": "Reusable water bottles / flasks",
+          "stage": "trend_captured",
+          "recommendation": "investigate",
+          "demand": "medium",
+          "demand_evidence": "Spiky brand-led demand (Stanley) — followers face brand competition, not open demand.",
+          "UNVERIFIED_hs_code": null,
+          "UNVERIFIED_duty_rate_pct": null,
+          "hs_source": "No lookup performed this session.",
+          "UNVERIFIED_takealot_price_floor_zar": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "reasoning": "Brand-owned spikes are not addressable demand for a no-name import. Weak file; deprioritise unless a niche (kids/sport) is routed.",
+          "customs_verdict": {
+            "risk": "unknown",
+            "eliminate": false,
+            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0024",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 4,
+        "source": "Demand: tiktok.com/discover SA (@marketingwithtjbanks: 23 hot-comb sales anecdote) — single weak anecdote; HS UNVERIFIED (no lookup).",
+        "data": {
+          "product_name": "Hot comb / electric hair straightening comb",
+          "stage": "trend_captured",
+          "recommendation": "investigate",
+          "demand": "low",
+          "demand_evidence": "One seller anecdote — proof of concept for one store, not market demand.",
+          "UNVERIFIED_hs_code": null,
+          "UNVERIFIED_duty_rate_pct": null,
+          "hs_source": "No lookup performed this session.",
+          "UNVERIFIED_takealot_price_floor_zar": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "loadshedding_note": "Electric styling tool — load-shedding scheduling affects usage reviews/ads.",
+          "reasoning": "Weakest demand file; kept as a classified ad, not an opportunity. Do not route further without corroboration.",
+          "customs_verdict": {
+            "risk": "unknown",
+            "eliminate": false,
+            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0025",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 5,
+        "source": "Demand: shopify.com/za/blog/tiktok-products (#1 perfume, #PerfumeTok, dupe culture); duty band: jlog.co.za/cosmetics-personal-care-hs-33-4 (ch.33 10-20%) + SAHPRA flag; competition UNVERIFIED.",
+        "data": {
+          "product_name": "Perfume / fragrance dupes",
+          "stage": "trend_captured",
+          "recommendation": "investigate",
+          "demand": "high",
+          "demand_evidence": "TikTok's #1 product group with dupe economics.",
+          "hs_code": "Chapter 33 (line UNVERIFIED)",
+          "duty_rate_pct": "10-20% band (line rate UNVERIFIED)",
+          "hs_source": "Band per jlog.co.za cosmetics page; exact line NOT looked up.",
+          "regulatory_flag": "SAHPRA notification/registration may apply (jlog) — Sourcing must confirm.",
+          "UNVERIFIED_takealot_price_floor_zar": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "reasoning": "Top demand, but cosmetics regulation + unverified line + probable brand/counterfeit adjacency (dupes) need Supervisor guidance before spend.",
+          "customs_verdict": {
+            "risk": "unknown",
+            "eliminate": false,
+            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0026",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 4,
+        "source": "Demand: shopify.com/za Google Trends (#1 yoga mats, steady year-round); HS UNVERIFIED (no lookup).",
+        "data": {
+          "product_name": "Yoga mats / resistance bands",
+          "stage": "trend_captured",
+          "recommendation": "investigate",
+          "demand": "medium",
+          "demand_evidence": "Steady global search demand; no SA-specific signal — generic fitness, no local edge.",
+          "UNVERIFIED_hs_code": null,
+          "UNVERIFIED_duty_rate_pct": null,
+          "hs_source": "No lookup performed this session.",
+          "UNVERIFIED_takealot_price_floor_zar": null,
+          "UNVERIFIED_net_margin_pct": null,
+          "reasoning": "Steady but undifferentiated and bulky (mats). Bands better on freight if ever routed; both need HS first.",
+          "customs_verdict": {
+            "risk": "unknown",
+            "eliminate": false,
+            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+          },
+          "competition_rule_verdict": {
+            "level": "unknown",
+            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+          }
+        }
+      },
+      {
+        "id": "mr-0027",
+        "timestamp": "2026-09-29T22:04:57+02:00",
+        "agent": "market_research",
+        "confidence": 8,
+        "source": "This session's sandbox record: 26 findings above + agents/market_research.py + tests/test_market_research.py (19/19 pass) + README.md + shared_state.schema.md",
+        "data": {
+          "record_type": "session_summary_for_supervisor",
+          "task": "Market Research capability #1: trend capture (26 candidates) + customs-viability screening (8 deep) + screening module.",
+          "counts": {
+            "trend_captured": 26,
+            "deep_screened": 8,
+            "investigate": 20,
+            "reject": 6
+          },
+          "top_pick": null,
+          "top_pick_reason": "Nothing may proceed: HARD STOP #3 (no verified margin exists — tools/landed_cost.py unbuilt) + HARD STOP #2 (4 deep-screen duties UNVERIFIED). top_pick is null by rule, not by indecision.",
+          "lead_for_pricing_NOT_APPROVED": "mr-0002 solar power bank (0% verified duty + strong ZA demand + medium competition + R258 floor above CPA). Approval requires the Pricing tool + HITL gate 5.",
+          "contract_conflicts_resolved_readme_wins": [
+            "1. Brief output format (state.market_research with candidates[]/top_pick) vs file contract (append-only findings[] per README §7 + schema §3): followed the FILE contract; candidates live in findings data, no restructure.",
+            "2. Pipeline assumes tools/landed_cost.py exists: it does not (Phase 0 excluded it deliberately). Zero inline computation performed; all margins UNVERIFIED.",
+            "3. No Supervisor routing entry exists in state (only Phase 0 session): task taken from session assignment per README §9 Phase 1 order (MR first). Flagged here, not halted.",
+            "4. Brief says report to Supervisor, never the human: substance is in-state; chat held to README §8 mechanics (agent/task/HARD STOPs/PR) only.",
+            "5. Cosmetics duty conflict 3304.99 @20% (Tradecaravan) vs 3304 @15% (JLog): range recorded, no winner picked.",
+            "6. SARS ATV method (value + duty + 10% uplift) x 15% vs README formula (value x 0.15, no uplift): DISCREPANCY FLAGGED for Supervisor/Pricing — MR does not touch cost math."
+          ],
+          "method_limits": [
+            "Takealot server-side search ignores ?q= for bots (verified: generic feed on 2 queries) — competition/price via targeted snippet breadth; established seller counts UNVERIFIED for all.",
+            "SA duty rates from credible secondary sources (Tradecaravan SARS-derived index, JLog Schedule-1 pages); SARS Tariff Book itself not directly read — Sourcing should confirm lead lines via sars.gov.za or §47(9) determination.",
+            "Price-floor-vs-CPA flags are observations (floor < R150-300 benchmark), NOT margin computations — Pricing owns the verdict via the tool.",
+            "No supplier contact, no sample, no ad, no spend — no HITL gate crossed. HITL-5 analysis: this PR touches no pricing/customs math (module classifies and gates; it computes no cost) — human to confirm at merge."
+          ],
+          "routing_requests": [
+            "Pricing capability next: build tools/landed_cost.py + tools/customs.py (needs human APPROVED at HITL gate 5 before merge), then run mr-0002 + mr-0001 + mr-0007 + mr-0004 margins.",
+            "Sourcing: confirm 8513.10 / 7117.19 / 7007.19 / 9603.30 SA line rates + 4202.32 leather-case rate + solar-bank 8507.60-vs-8541 question.",
+            "Supervisor: resolve README-vs-SARS ATV formula question before Pricing builds the tool."
+          ],
+          "hard_stops_status": "No HARD STOP violated. #2 enforced (UNVERIFIED + stop, 4 duties + all margins + all seller counts), #3 enforced mechanically (rank_candidates refuses unscored), #4 untouched (no cost math exists to omit VAT from), #6/#7 clean (no force-push, no secrets), #8/#9 respected (state exists on main; one PR)."
+        }
+      }
+    ],
+    "unverified_fields": [
+      "UNVERIFIED_duty_rate_pct for 8513.10 (portable lamps), 7117.19/7117.90 (imitation jewellery), 7007.19 (toughened glass), 9603.30 (cosmetic brushes), 8518.30 (earphones): verify against SARS Schedule 1 Part 1 (sars.gov.za Customs and Excise > Tariff) or binding section 47(9) determination. Two web attempts each exhausted for the deep-screened four.",
+      "UNVERIFIED_duty_rate_pct for trend-only candidates (wigs, sunglasses, pet GPS, flasks, hot comb, sports bands, perfume line, air fryer, mouth tape, shower filter): no lookup performed — classify only if Supervisor routes them.",
+      "UNVERIFIED_net_margin_pct for ALL 26 candidates: blocked until Pricing builds tools/landed_cost.py (requires human APPROVED at HITL gate 5). No inline computation was performed.",
+      "UNVERIFIED_established_seller_count for ALL candidates: Takealot server-side search ignores ?q= for bots (verified this session); needs JS-rendered browsing or official seller data. Competition grades are listing-proxy judgements with method labels.",
+      "Cosmetics duty conflict: 3304.99 @20% (Tradecaravan) vs 3304 @15% (JLog) — SARS line check required before use.",
+      "4202.32 (leather/folio phone cases) SA line rate UNVERIFIED — 4202.92 @30% is a heading proxy only; leather variants excluded from scope regardless.",
+      "Solar-integrated power banks: 8507.60 @0% vs 8541.43 @10% essential-character question — tariff determination required.",
+      "Charger+cable bundle: composite-GRI treatment UNVERIFIED — rated at highest line (cable 15%) conservatively.",
+      "Metal-dominant car mounts may classify under 8302/7616, not 3926.90 — plastic construction assumed; Sourcing to confirm.",
+      "README landed-cost formula vs SARS ATV method (10% uplift on non-SACU value): discrepancy flagged for Supervisor/Pricing; MR takes no position (cost math is Pricing-owned)."
+    ]
   },
   "sourcing": {
     "_meta": {
