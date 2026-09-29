@@ -1,7 +1,3 @@
-
-
----
-
 ```markdown
 # SA DROPSHIP AGENT CREW — OPERATING CONTRACT
 
@@ -43,9 +39,14 @@ would be violated:
 5. **No direct-to-human sub-agent output.** Sub-agents report to the
    Supervisor Agent. Only the Supervisor Agent addresses the human.
 6. **No destructive git operations.** Never force-push, never delete
-   branches, never rewrite history. Always work on a feature branch.
+   branches, never rewrite history.
 7. **No secrets in the repo.** Never commit API keys, tokens, credentials,
    or `.env` files. Use `.env.example` and `.gitignore`.
+8. **No session without a state file.** See §8, Session Precondition. If
+   `shared_state.json` does not exist on `main`, do not open a sub-agent
+   session. Run the Supervisor scaffold first.
+9. **No unmerged carry-over.** A session's PR must be merged to `main`
+   before the next session opens. Unmerged branches do not carry forward.
 
 ---
 
@@ -53,7 +54,7 @@ would be violated:
 
 | Agent | Owns | Must NEVER do |
 |---|---|---|
-| **Supervisor** | Task decomposition, routing, final briefing | Execute sub-agent tasks directly |
+| **Supervisor** | Task decomposition, routing, final briefing, top-level state structure | Execute sub-agent tasks directly |
 | **MarketResearch** | SA product discovery, customs viability | Recommend without verified HS code |
 | **Sourcing** | Supplier verification, sample planning | Commit to purchases |
 | **Pricing** | Landed cost, margin math, price setting | Approve margin < 20% |
@@ -69,9 +70,6 @@ agent directly — all coordination flows through the Supervisor via
 
 ## 4. SOUTH AFRICA COMPLIANCE RULES
 
-These are the local truths that make or break this business. Bake them into
-every relevant agent.
-
 - **VAT:** 15% on customs value. Always.
 - **Import Duty:** Look up the real HS code on the SARS tariff database.
   Apparel/textiles run 40–45% — treat as HIGH RISK.
@@ -86,7 +84,7 @@ product + shipping + (customs_value × duty) + (customs_value × 0.15)
 - **Ad CPA benchmark (ZA):** R150–R300 per conversion.
 - **Shipping reality:** Customs clearance adds 5–15 business days. Flag any
   supplier whose total delivery exceeds 21 days.
-- **Load-shedding:** Consider it for electronics and for ad scheduling.
+- **Load-shedding:** Consider it for electronics and ad scheduling.
 - **Language:** SA English ("colour", "organise"). Rand pricing. Mention
   Takealot, WhatsApp, PayFast, SnapScan where relevant.
 - **Priority categories:** Unpowered accessories (often 0% duty) > everything
@@ -117,6 +115,7 @@ the risk**. The human replies with `APPROVED` or `REJECTED` plus reason.
 /
 ├── README.md                  ← this contract
 ├── shared_state.json          ← inter-agent state (single source of truth)
+├── shared_state.schema.md     ← field documentation
 ├── agents/
 │   ├── supervisor.py
 │   ├── market_research.py
@@ -128,11 +127,13 @@ the risk**. The human replies with `APPROVED` or `REJECTED` plus reason.
 ├── tools/
 │   ├── customs.py             ← HS code + duty + VAT calculator
 │   ├── landed_cost.py         ← single source of truth for cost math
-│   └── scrapers/              ← Takealot, Google Trends ZA, etc.
-├── listings/                  ← generated listing files
-├── campaigns/                 ← generated campaign briefs
+│   └── scrapers/
+├── listings/
+├── campaigns/
 ├── support_logs/
 ├── tests/
+├── requirements.txt
+├── .gitignore
 └── .env.example
 
 ```
@@ -147,37 +148,95 @@ cost math may live. Every agent imports from them. No duplicate formulas.
 `shared_state.json` is the single coordination surface. Rules:
 
 - Only the Supervisor writes the top-level structure.
-- Sub-agents append to their own namespaced key (e.g., `state.market_research`).
-- Every write includes: `timestamp`, `agent`, `confidence` (1–10), `source`.
+- Sub-agents append only to their own namespaced key (e.g., `state.market_research`).
+- Every write includes: `timestamp`, `agent`, `confidence` (1–10), `source`, `verified`.
 - Any field marked `UNVERIFIED` must be surfaced to the human, not silently used.
+
+Top-level namespaces: `supervisor`, `market_research`, `sourcing`, `pricing`,
+`listing`, `ad_growth`, `support`.
 
 ---
 
 ## 8. SESSION WORKFLOW (ARENA AGENT MODE)
 
-At the **start of every session**, Arena must:
+### Session Precondition (READ BEFORE OPENING A SESSION)
+
+Before opening **any** Agent Mode session that is not a Supervisor bootstrap
+session, confirm the `main` branch contains `shared_state.json`. If it does
+not, **do not open the session**. The correct action is to run a Supervisor
+bootstrap session first (§9, Phase 0).
+
+A sub-agent session against an empty tree is contractually forbidden and must
+halt without opening a PR. Repeating this halt across sessions is a process
+bug, not agent behavior.
+
+### Branch Naming
+
+Preferred: `feat/{agent}-{short-task}`.
+
+**Exception:** When the execution harness pins a branch name (e.g.
+`arena/{session-id}`), that pinned name takes precedence. The safety intent
+of this rule — no commits to `main`, one PR per session, one agent per
+session — still applies and must not be violated. If a harness pins the
+session to `main`, that is a real violation: halt.
+
+### At the Start of Every Session
 
 1. Read this README in full.
 2. Read `shared_state.json`.
 3. State which agent it is acting as, and which task it is doing.
 4. Confirm it has not violated any HARD STOP rule.
+5. Confirm the task fits in ONE PR this session.
 
-During the session:
+### During the Session
 
-- Work on a feature branch: `feat/{agent-name}-{short-task}`.
+- Work on the harness-provided or `feat/` branch.
 - Write tests for any new logic in `tools/`.
 - Use the sandbox to run tests before committing.
 
-At the **end of every session**:
+### At the End of Every Session
 
-- One PR per session, max. If a second task is needed, stop and start fresh.
+- ONE PR per session, maximum.
 - PR description must include: what changed, why, tests run, risks, and
   which HARD STOP rules were relevant.
 - Update `shared_state.json` with the session's output.
+- **Merge rule:** the human operator must merge this PR to `main` before the
+  next session opens. Unmerged PRs do not carry forward. This is the only
+  manual step in the loop, and it is non-optional.
 
 ---
 
-## 9. DEFINITION OF DONE
+## 9. BUILD PHASES
+
+### Phase 0 — Bootstrap (ONE consolidated PR, Supervisor only)
+
+Purpose: produce the minimum viable foundation so sub-agent sessions can
+start against a real tree. This phase deliberately overrides the "one agent
+at a time" rule, because none of the items below are agent logic.
+
+Single PR scope:
+- `shared_state.json` with all seven namespaces and the metadata schema
+- `shared_state.schema.md`
+- Directory skeleton per §6
+- `.gitignore`, `.env.example`, `requirements.txt`
+
+No agent code. No `tools/` cost math. No scrapers.
+
+### Phase 1+ — One Agent, One Capability, One PR
+
+After Phase 0 is merged:
+
+1. Supervisor routes the first goal.
+2. Sub-agents are built one capability at a time, in dependency order:
+   Market Research → Sourcing → Pricing → Listing → Ad Growth → Support.
+3. Each capability is its own PR, merged to `main` before the next opens.
+
+Do not build a "complete agent" in one session. Build the smallest capability
+that produces a verifiable output and exercises the state contract.
+
+---
+
+## 10. DEFINITION OF DONE
 
 A task is only "done" when ALL of these are true:
 
@@ -187,32 +246,31 @@ A task is only "done" when ALL of these are true:
 - [ ] SA compliance rules respected (VAT, duty, language)
 - [ ] `shared_state.json` updated with timestamped, sourced output
 - [ ] PR opened with full description
+- [ ] PR **merged to `main`** before the next session opens
 - [ ] Human approval obtained if a HITL gate was crossed
 
 ---
 
-## 10. ANTI-PATTERNS — ARENA, DO NOT DO THESE
+## 11. ANTI-PATTERNS — ARENA, DO NOT DO THESE
 
-- ❌ Do not generate a "complete working system" in one shot. Build one agent
-  at a time, verify, merge, then move on.
+- ❌ Do not generate a "complete working system" in one shot.
 - ❌ Do not hallucinate supplier names, prices, or HS codes to fill a schema.
-- ❌ Do not write marketing copy that promises results ("guaranteed income").
-- ❌ Do not add dependencies without listing them in `requirements.txt` and
-  justifying why a free/standard alternative won't work.
+- ❌ Do not write marketing copy that promises results.
+- ❌ Do not add dependencies without listing them in `requirements.txt`.
 - ❌ Do not refactor unrelated files in the same PR.
-- ❌ Do not "improve" the cost formula. It is defined in `tools/landed_cost.py`.
+- ❌ Do not "improve" the cost formula. It lives in `tools/landed_cost.py`.
+- ❌ Do not open a sub-agent session against an empty `shared_state.json`.
+- ❌ Do not accumulate unmerged branches. Merge or close, then move on.
 - ❌ Do not treat this README as optional context. It is the contract.
 
 ---
 
-## 11. IF IN DOUBT
+## 12. IF IN DOUBT
 
 Stop. Ask the human operator. A paused session costs nothing.
-A wrong commit costs money, trust, and time.
 
 **The goal is a system that a human can trust to make correct decisions —
 not a system that acts fast and hopes for the best.**
 ```
 
 ---
-
