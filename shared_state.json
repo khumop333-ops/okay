@@ -1238,13 +1238,352 @@
         "cost_math_rule": "All cost math must call tools/landed_cost.py. Never re-implement the formula. 15% VAT on customs value is mandatory in every calculation."
       }
     },
-    "timestamp": "2026-09-27T18:42:18+02:00",
-    "agent": "supervisor",
-    "confidence": null,
-    "source": "README.md section 7 (namespace initialised by Supervisor, no findings yet)",
+    "timestamp": "2026-09-29T23:00:05+02:00",
+    "agent": "pricing",
+    "confidence": 7,
+    "source": "tools/landed_cost.py v1.0.0, tools/customs.py v1.0.0; 3 findings appended this session (pr-0001..pr-0003); namespace roll-up takes the minimum finding confidence (conservative)",
     "verified": false,
-    "findings": [],
-    "unverified_fields": []
+    "findings": [
+      {
+        "id": "pr-0001",
+        "timestamp": "2026-09-29T23:00:05+02:00",
+        "agent": "pricing",
+        "confidence": 9,
+        "source": "tools/landed_cost.py v1.0.0, tools/customs.py v1.0.0; README sections 2, 4, 6; session brief cost model; sandbox tests tests/test_customs.py + tests/test_landed_cost.py + tests/test_pricing_agent.py (all pass)",
+        "verified": true,
+        "data": {
+          "record_type": "capability",
+          "task": "Pricing capability #1: build tools/customs.py v1.0.0 + tools/landed_cost.py v1.0.0 (the ONLY cost-math modules, README section 6) + agents/pricing.py orchestration + unittest suites; append first pricing findings. ONE PR.",
+          "formula_implemented": "LANDED COST (ZAR) = product + shipping + (customs_value x duty) + (customs_value x 0.15 VAT) + payment_fee (3-5% of selling price); NET MARGIN = price - landed_cost - ad_cpa - platform_fees",
+          "contract_constants": {
+            "vat_rate_on_customs_value": 0.15,
+            "payment_fee_pct_of_selling_price": [
+              3.0,
+              5.0
+            ],
+            "hard_floor_net_margin_pct": 20.0,
+            "min_net_margin_pct_for_accept": 25.0,
+            "target_net_margin_band_pct": [
+              35.0,
+              40.0
+            ],
+            "ad_cpa_benchmark_zar": [
+              150.0,
+              300.0
+            ],
+            "return_rate_pct": [
+              5.0,
+              10.0
+            ],
+            "impulse_multiplier": [
+              2.5,
+              3.0
+            ],
+            "considered_multiplier": [
+              2.0,
+              2.5
+            ],
+            "competitor_band_of_median": 0.125
+          },
+          "verdict_integrity_rule": "evaluate_pricing() returns verdict='blocked' unless the caller asserts inputs_verified=true; a margin from guessed costs is never published as accept/reject (HARD STOP #2, schema section 4).",
+          "brief_vs_state_reconciliations": [
+            "Brief assumed tools/landed_cost.py + tools/customs.py already exist: they did not (Phase 0 excluded them deliberately; MR routed this build to Pricing). Building them IS this session's one capability.",
+            "Brief asked for 'verified supplier costs' from state: none exist (so-0002: Sourcing halted, zero verified suppliers). HARD STOP #2 forbids inventing them, so NO product margin verdict is issued this session; break-even ceilings (which need no supplier quote) are delivered instead.",
+            "Brief output format (verdict accept|reject per product) vs no verified costs: verdict='blocked' recorded with block_reason; the accept|reject schema is implemented in evaluate_pricing() and will be used when Sourcing delivers verified quotes.",
+            "VAT is on the customs value (product + shipping), never the retail price — calculate_vat() takes no rate override so HARD STOP #4 cannot be bypassed by a caller."
+          ],
+          "hitl_gate_5_status": "CROSSED-BY-BUILD: this PR adds pricing/customs logic, which is HITL gate 5 territory. Human approval requested in the PR description; nothing merges without APPROVED."
+        }
+      },
+      {
+        "id": "pr-0002",
+        "timestamp": "2026-09-29T23:00:05+02:00",
+        "agent": "pricing",
+        "confidence": 7,
+        "source": "tools/landed_cost.py v1.0.0, tools/customs.py v1.0.0; duty 0% per shared_state mr-0002 (HS 8507.60); price points R258/R344/R699 per mr-0002 takealot_evidence (R258 and R699 re-corroborated this session against live Takealot pages); CPA R150-R300 per README section 4",
+        "verified": false,
+        "data": {
+          "record_type": "break_even_analysis",
+          "product": "Solar power bank 10,000-20,000 mAh (mr-0002 — MR lead for pricing, NOT APPROVED; approval sits at HITL gate 3)",
+          "method": "Inverse landed-cost math (tools/landed_cost.py:max_customs_base_for_margin). Asks: at a verified competitive price, what is the MAXIMUM product+shipping cost that still clears a target net margin? Needs no supplier quote, so it violates no HARD STOP. Worst-case assumptions: payment fee 5% of selling price, return rate 10% (zero salvage). platform_fees=0 is an UNVERIFIED placeholder — real marketplace fees would LOWER every ceiling below, so treat ceilings as optimistic upper bounds.",
+          "break_even_rows": [
+            {
+              "price_point": "10,000mAh floor (Takealot PLID92826531)",
+              "price_zar": 258.0,
+              "price_source": "shared_state mr-0002 takealot_evidence; re-corroborated this session: takealot.com/PLID92826531 shows R258",
+              "price_corroborated_this_session": true,
+              "ad_cpa_zar": 150.0,
+              "target_net_margin_pct": 20.0,
+              "target_label": "HARD STOP floor (reject below)",
+              "max_product_plus_shipping_zar": 15.39,
+              "feasible": true,
+              "formula": "base_max = (P(1 - r - f - t) - CPA - platform_fees) / (1 + d + 0.15)"
+            },
+            {
+              "price_point": "10,000mAh floor (Takealot PLID92826531)",
+              "price_zar": 258.0,
+              "price_source": "shared_state mr-0002 takealot_evidence; re-corroborated this session: takealot.com/PLID92826531 shows R258",
+              "price_corroborated_this_session": true,
+              "ad_cpa_zar": 150.0,
+              "target_net_margin_pct": 25.0,
+              "target_label": "Pricing minimum for accept",
+              "max_product_plus_shipping_zar": 4.17,
+              "feasible": true,
+              "formula": "base_max = (P(1 - r - f - t) - CPA - platform_fees) / (1 + d + 0.15)"
+            },
+            {
+              "price_point": "10,000mAh floor (Takealot PLID92826531)",
+              "price_zar": 258.0,
+              "price_source": "shared_state mr-0002 takealot_evidence; re-corroborated this session: takealot.com/PLID92826531 shows R258",
+              "price_corroborated_this_session": true,
+              "ad_cpa_zar": 150.0,
+              "target_net_margin_pct": 35.0,
+              "target_label": "target band lower edge",
+              "max_product_plus_shipping_zar": null,
+              "feasible": false,
+              "formula": "base_max = (P(1 - r - f - t) - CPA - platform_fees) / (1 + d + 0.15)"
+            },
+            {
+              "price_point": "10,000mAh floor (Takealot PLID92826531)",
+              "price_zar": 258.0,
+              "price_source": "shared_state mr-0002 takealot_evidence; re-corroborated this session: takealot.com/PLID92826531 shows R258",
+              "price_corroborated_this_session": true,
+              "ad_cpa_zar": 300.0,
+              "target_net_margin_pct": 20.0,
+              "target_label": "HARD STOP floor (reject below)",
+              "max_product_plus_shipping_zar": null,
+              "feasible": false,
+              "formula": "base_max = (P(1 - r - f - t) - CPA - platform_fees) / (1 + d + 0.15)"
+            },
+            {
+              "price_point": "10,000mAh floor (Takealot PLID92826531)",
+              "price_zar": 258.0,
+              "price_source": "shared_state mr-0002 takealot_evidence; re-corroborated this session: takealot.com/PLID92826531 shows R258",
+              "price_corroborated_this_session": true,
+              "ad_cpa_zar": 300.0,
+              "target_net_margin_pct": 25.0,
+              "target_label": "Pricing minimum for accept",
+              "max_product_plus_shipping_zar": null,
+              "feasible": false,
+              "formula": "base_max = (P(1 - r - f - t) - CPA - platform_fees) / (1 + d + 0.15)"
+            },
+            {
+              "price_point": "10,000mAh floor (Takealot PLID92826531)",
+              "price_zar": 258.0,
+              "price_source": "shared_state mr-0002 takealot_evidence; re-corroborated this session: takealot.com/PLID92826531 shows R258",
+              "price_corroborated_this_session": true,
+              "ad_cpa_zar": 300.0,
+              "target_net_margin_pct": 35.0,
+              "target_label": "target band lower edge",
+              "max_product_plus_shipping_zar": null,
+              "feasible": false,
+              "formula": "base_max = (P(1 - r - f - t) - CPA - platform_fees) / (1 + d + 0.15)"
+            },
+            {
+              "price_point": "10,000mAh band top (mr-0002 evidence)",
+              "price_zar": 344.0,
+              "price_source": "shared_state mr-0002 takealot_evidence ('10k mAh R258-344')",
+              "price_corroborated_this_session": false,
+              "ad_cpa_zar": 150.0,
+              "target_net_margin_pct": 20.0,
+              "target_label": "HARD STOP floor (reject below)",
+              "max_product_plus_shipping_zar": 64.0,
+              "feasible": true,
+              "formula": "base_max = (P(1 - r - f - t) - CPA - platform_fees) / (1 + d + 0.15)"
+            },
+            {
+              "price_point": "10,000mAh band top (mr-0002 evidence)",
+              "price_zar": 344.0,
+              "price_source": "shared_state mr-0002 takealot_evidence ('10k mAh R258-344')",
+              "price_corroborated_this_session": false,
+              "ad_cpa_zar": 150.0,
+              "target_net_margin_pct": 25.0,
+              "target_label": "Pricing minimum for accept",
+              "max_product_plus_shipping_zar": 49.04,
+              "feasible": true,
+              "formula": "base_max = (P(1 - r - f - t) - CPA - platform_fees) / (1 + d + 0.15)"
+            },
+            {
+              "price_point": "10,000mAh band top (mr-0002 evidence)",
+              "price_zar": 344.0,
+              "price_source": "shared_state mr-0002 takealot_evidence ('10k mAh R258-344')",
+              "price_corroborated_this_session": false,
+              "ad_cpa_zar": 150.0,
+              "target_net_margin_pct": 35.0,
+              "target_label": "target band lower edge",
+              "max_product_plus_shipping_zar": 19.13,
+              "feasible": true,
+              "formula": "base_max = (P(1 - r - f - t) - CPA - platform_fees) / (1 + d + 0.15)"
+            },
+            {
+              "price_point": "10,000mAh band top (mr-0002 evidence)",
+              "price_zar": 344.0,
+              "price_source": "shared_state mr-0002 takealot_evidence ('10k mAh R258-344')",
+              "price_corroborated_this_session": false,
+              "ad_cpa_zar": 300.0,
+              "target_net_margin_pct": 20.0,
+              "target_label": "HARD STOP floor (reject below)",
+              "max_product_plus_shipping_zar": null,
+              "feasible": false,
+              "formula": "base_max = (P(1 - r - f - t) - CPA - platform_fees) / (1 + d + 0.15)"
+            },
+            {
+              "price_point": "10,000mAh band top (mr-0002 evidence)",
+              "price_zar": 344.0,
+              "price_source": "shared_state mr-0002 takealot_evidence ('10k mAh R258-344')",
+              "price_corroborated_this_session": false,
+              "ad_cpa_zar": 300.0,
+              "target_net_margin_pct": 25.0,
+              "target_label": "Pricing minimum for accept",
+              "max_product_plus_shipping_zar": null,
+              "feasible": false,
+              "formula": "base_max = (P(1 - r - f - t) - CPA - platform_fees) / (1 + d + 0.15)"
+            },
+            {
+              "price_point": "10,000mAh band top (mr-0002 evidence)",
+              "price_zar": 344.0,
+              "price_source": "shared_state mr-0002 takealot_evidence ('10k mAh R258-344')",
+              "price_corroborated_this_session": false,
+              "ad_cpa_zar": 300.0,
+              "target_net_margin_pct": 35.0,
+              "target_label": "target band lower edge",
+              "max_product_plus_shipping_zar": null,
+              "feasible": false,
+              "formula": "base_max = (P(1 - r - f - t) - CPA - platform_fees) / (1 + d + 0.15)"
+            },
+            {
+              "price_point": "20,000mAh foldable solar (Takealot PLID95695632 page)",
+              "price_zar": 699.0,
+              "price_source": "shared_state mr-0002 takealot_evidence; re-corroborated this session: PLID95695632 page shows the 20,000mAh foldable at R699",
+              "price_corroborated_this_session": true,
+              "ad_cpa_zar": 150.0,
+              "target_net_margin_pct": 20.0,
+              "target_label": "HARD STOP floor (reject below)",
+              "max_product_plus_shipping_zar": 264.65,
+              "feasible": true,
+              "formula": "base_max = (P(1 - r - f - t) - CPA - platform_fees) / (1 + d + 0.15)"
+            },
+            {
+              "price_point": "20,000mAh foldable solar (Takealot PLID95695632 page)",
+              "price_zar": 699.0,
+              "price_source": "shared_state mr-0002 takealot_evidence; re-corroborated this session: PLID95695632 page shows the 20,000mAh foldable at R699",
+              "price_corroborated_this_session": true,
+              "ad_cpa_zar": 150.0,
+              "target_net_margin_pct": 25.0,
+              "target_label": "Pricing minimum for accept",
+              "max_product_plus_shipping_zar": 234.26,
+              "feasible": true,
+              "formula": "base_max = (P(1 - r - f - t) - CPA - platform_fees) / (1 + d + 0.15)"
+            },
+            {
+              "price_point": "20,000mAh foldable solar (Takealot PLID95695632 page)",
+              "price_zar": 699.0,
+              "price_source": "shared_state mr-0002 takealot_evidence; re-corroborated this session: PLID95695632 page shows the 20,000mAh foldable at R699",
+              "price_corroborated_this_session": true,
+              "ad_cpa_zar": 150.0,
+              "target_net_margin_pct": 35.0,
+              "target_label": "target band lower edge",
+              "max_product_plus_shipping_zar": 173.48,
+              "feasible": true,
+              "formula": "base_max = (P(1 - r - f - t) - CPA - platform_fees) / (1 + d + 0.15)"
+            },
+            {
+              "price_point": "20,000mAh foldable solar (Takealot PLID95695632 page)",
+              "price_zar": 699.0,
+              "price_source": "shared_state mr-0002 takealot_evidence; re-corroborated this session: PLID95695632 page shows the 20,000mAh foldable at R699",
+              "price_corroborated_this_session": true,
+              "ad_cpa_zar": 300.0,
+              "target_net_margin_pct": 20.0,
+              "target_label": "HARD STOP floor (reject below)",
+              "max_product_plus_shipping_zar": 134.22,
+              "feasible": true,
+              "formula": "base_max = (P(1 - r - f - t) - CPA - platform_fees) / (1 + d + 0.15)"
+            },
+            {
+              "price_point": "20,000mAh foldable solar (Takealot PLID95695632 page)",
+              "price_zar": 699.0,
+              "price_source": "shared_state mr-0002 takealot_evidence; re-corroborated this session: PLID95695632 page shows the 20,000mAh foldable at R699",
+              "price_corroborated_this_session": true,
+              "ad_cpa_zar": 300.0,
+              "target_net_margin_pct": 25.0,
+              "target_label": "Pricing minimum for accept",
+              "max_product_plus_shipping_zar": 103.83,
+              "feasible": true,
+              "formula": "base_max = (P(1 - r - f - t) - CPA - platform_fees) / (1 + d + 0.15)"
+            },
+            {
+              "price_point": "20,000mAh foldable solar (Takealot PLID95695632 page)",
+              "price_zar": 699.0,
+              "price_source": "shared_state mr-0002 takealot_evidence; re-corroborated this session: PLID95695632 page shows the 20,000mAh foldable at R699",
+              "price_corroborated_this_session": true,
+              "ad_cpa_zar": 300.0,
+              "target_net_margin_pct": 35.0,
+              "target_label": "target band lower edge",
+              "max_product_plus_shipping_zar": 43.04,
+              "feasible": true,
+              "formula": "base_max = (P(1 - r - f - t) - CPA - platform_fees) / (1 + d + 0.15)"
+            }
+          ],
+          "reading": [
+            "At the R258 floor (10k units), even a ZERO-cost product cannot clear the 25% accept minimum at CPA R300; at CPA R150 the 25% minimum needs product+shipping under ~R4 and even the 20% HARD-STOP floor needs it under ~R15. The commodity 10k segment is near-certainly unviable.",
+            "At R344, the ceiling is ~R49 (25% target, CPA R150) — still below any realistic landed solar-bank cost.",
+            "Only the R699 20,000mAh foldable segment leaves realistic room: ceiling ~R234 at 25%/CPA150, ~R104 at 25%/CPA300, ~R173 at the 35% target at CPA R150.",
+            "Sourcing routing request: any supplier quote for this lead must be DDP-to-SA and BELOW these ceilings for its segment, with the quote document cited — else Pricing will reject on margin."
+          ],
+          "verdict": "blocked",
+          "block_reason": "HARD STOP #2 + so-0002: zero verified supplier costs exist, so no landed cost, selling price or accept/reject margin verdict can be computed without inventing inputs. Blocked, not rejected: the product is not being failed on margin — margin math is impossible until Sourcing delivers verified quotes.",
+          "UNVERIFIED_supplier_cost_zar": null
+        }
+      },
+      {
+        "id": "pr-0003",
+        "timestamp": "2026-09-29T23:00:05+02:00",
+        "agent": "pricing",
+        "confidence": 8,
+        "source": "shared_state.json market_research mr-0001/mr-0002/mr-0004/mr-0007 + so-0002 halt record; README section 4 formula vs SARS ATV method (flagged by MR, mr-0027 contract_conflicts item 6)",
+        "verified": false,
+        "data": {
+          "record_type": "escalations_and_routing",
+          "routed_candidates_blocked": [
+            {
+              "id": "mr-0002",
+              "product": "Solar power bank",
+              "blocker": "no verified supplier cost (so-0002)"
+            },
+            {
+              "id": "mr-0001",
+              "product": "USB-C GaN charger + cable",
+              "blocker": "no verified supplier cost; additionally the charger+cable composite-GRI classification is UNVERIFIED (bundle rated at cable 15% conservatively) — Sourcing must confirm before any margin run"
+            },
+            {
+              "id": "mr-0007",
+              "product": "Plastic phone case",
+              "blocker": "no verified supplier cost; MR file flags R67 floor far below CPA — likely margin reject once costs exist"
+            },
+            {
+              "id": "mr-0004",
+              "product": "Car phone holder",
+              "blocker": "no verified supplier cost; MR file flags R114 floor below CPA — likely margin reject once costs exist"
+            }
+          ],
+          "atv_formula_discrepancy_DECISION_REQUESTED": {
+            "issue": "README section 4 charges VAT as customs_value x 0.15. SARS' ATV method for non-SACU consignments charges 15% on (customs value + duty + 10% uplift). The two disagree; MR flagged it for the Supervisor before the tool was built (mr-0027).",
+            "action_taken": "tools/customs.py implements the README contract formula EXACTLY (README section 1: the README wins conflicts). The SARS method is NOT implemented.",
+            "risk": "If SARS' method is the legally correct one, every landed cost in this tool UNDERSTATES VAT, inflating every margin — the worst possible direction for a margin gate. Quantified: on a R100 customs value at 10% duty, README VAT = R15.00 vs ATV VAT = R18.15 (+21% VAT, +R3.15 landed per R100).",
+            "request": "Supervisor/human to decide BEFORE any verdict-bearing margin run: keep README formula (contract-consistent) or amend README + tool to the ATV method (HITL gate 5 + README amendment). This agent does not pick."
+          },
+          "platform_fees_UNVERIFIED": "Net margin per the brief subtracts 'Platform Fees'. No verified Takealot/marketplace fee schedule exists in state; the parameter defaults to R0 which OVERSTATES margin. Must be sourced before any accept verdict is treated as final.",
+          "competitor_median_note": "MR evidence provides named Takealot price points/floors with PLIDs, not a computed category median. This session uses named price points, never a fabricated median; a real median needs the Takealot browsing fix noted in so-0002/mr method_limits."
+        }
+      }
+    ],
+    "unverified_fields": [
+      "Supplier unit costs for ALL candidates remain UNVERIFIED (so-0002 halt) — no landed cost or accept/reject margin verdict possible until Sourcing delivers cited, DDP-to-SA quotes.",
+      "platform_fees_zar (Takealot/marketplace fee schedule) UNVERIFIED — defaults to 0, which overstates margin; source before any accept.",
+      "VAT base discrepancy (README customs_value x 0.15 vs SARS ATV (value + duty + 10% uplift) x 15%) — decision requested in pr-0003 BEFORE any verdict-bearing margin run.",
+      "Competitor 'median' prices: MR evidence gives named price points with PLIDs, not a computed median — named points used, never an invented median.",
+      "mr-0001 charger+cable composite-GRI classification UNVERIFIED (carried from mr-0001) — confirm before margin runs on bundles."
+    ]
   },
   "listing": {
     "_meta": {
