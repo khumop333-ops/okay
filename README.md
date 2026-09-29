@@ -165,6 +165,13 @@ At the **start of every session**, Arena must:
 During the session:
 
 - Work on a feature branch: `feat/{agent-name}-{short-task}`.
+  - **Branch naming exception:** when the execution harness pins a branch name
+    (e.g. `arena/{session-id}`), that pinned name takes precedence over the
+    `feat/{agent}-{task}` template. The safety intent of this rule — no commits
+    to `main`, one PR per session, one agent per session — still applies in full
+    and must not be violated. A pinned *feature* branch is a naming mismatch and
+    is acceptable; a pinned *`main`* branch is a safety breach and the session
+    must halt.
 - Write tests for any new logic in `tools/`.
 - Use the sandbox to run tests before committing.
 
