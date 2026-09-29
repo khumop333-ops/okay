@@ -40,7 +40,32 @@
       "source": "README.md section 7; human operator direction given in session",
       "task": "Phase 0 bootstrap: shared_state.json and its write contract, repo directory skeleton, .gitignore, .env.example, requirements.txt, and the README section 8 branch-naming exception. No agent logic, no tools/ cost math.",
       "why": "shared_state.json is the single coordination surface every sub-agent must read and append to, and it did not exist, so no sub-agent could be built or tested. The README designates it Supervisor-owned (section 7). The operator extended the scope mid-session to a consolidated bootstrap PR.",
-      "scope_authority": "OPERATOR-DIRECTED, not README-derived. The operator described this as 'Phase 0, defined in README section 9'. That citation is incorrect: README section 9 is 'Definition of Done' (a checklist), and the string 'phase' does not appear anywhere in README.md. The individual items are nonetheless README-compatible: .gitignore and .env.example are mandated by section 2 rule 7, requirements.txt is referenced by section 10, and the directory tree is defined by section 6.",
+      "scope_authority": "README-DERIVED. The operator described this as 'Phase 0, defined in README section 9', and that citation is CORRECT: README section 9 is 'BUILD PHASES', and 'Phase 0 - Bootstrap' specifies exactly this consolidated-PR scope. CORRECTION TO AN EARLIER ENTRY IN THIS RECORD: an interim version of this field claimed the citation was incorrect and that 'phase' does not appear in README.md. That claim was WRONG. It was made against a stale local README, because the execution environment was re-created mid-session (fresh shallow clone) while the operator had already amended README.md on main in commit d3d5993. The operator was right and the agent was wrong. Recorded so the error is not inherited by a future session.",
+      "contract_changes_on_main": {
+        "commit": "d3d5993",
+        "timestamp": "2026-09-29T19:33:00+02:00",
+        "agent": "human operator",
+        "confidence": 10,
+        "source": "origin/main, README.md",
+        "verified": true,
+        "changes": [
+          "README section 8 restructured into subsections: Session Precondition, Branch Naming, At the Start of Every Session, During the Session, At the End of Every Session.",
+          "README section 9 replaced 'Definition of Done' with 'BUILD PHASES': Phase 0 Bootstrap (this consolidated PR, Supervisor only) and Phase 1+ One Agent, One Capability, One PR.",
+          "New HARD STOP 8: no session without a state file. If shared_state.json does not exist on main, do not open a sub-agent session; run the Supervisor bootstrap first.",
+          "New HARD STOP 9: no unmerged carry-over. A session's PR must be merged to main before the next session opens. Unmerged branches do not carry forward.",
+          "README section 6 now lists shared_state.schema.md, requirements.txt, .gitignore and .env.example as expected repo files.",
+          "Branch Naming subsection now contains the harness-pinned-branch exception, written by the operator."
+        ]
+      },
+      "agent_error_log": [
+        {
+          "error": "Told the human operator their README section 9 'Phase 0' citation was incorrect, and asserted the string 'phase' does not appear in README.md.",
+          "cause": "Read a stale README. The environment was re-created between turns via a fresh shallow clone that restored working-tree files from a snapshot taken before the operator amended the README on main.",
+          "detection": "git ls-remote showed main at d3d5993 while the local base was 898ab3a; git show d3d5993:README.md revealed the new section 9 BUILD PHASES.",
+          "correction": "Re-read the README in full from origin/main, confirmed the operator's citation was correct, took main's README verbatim, and corrected this state record.",
+          "lesson": "A README read at session start is not authoritative for the whole session. Re-read it from origin/main whenever git shows main has moved. This is the failure mode README section 1 warns about: reasoning conflicting with the contract."
+        }
+      ],
       "operator_directives": [
         {
           "directive": "Scaffold shared_state.json only; no directories, no requirements, no .env.example, no agent code.",
@@ -62,12 +87,20 @@
       "outputs": [
         "shared_state.json",
         "shared_state.schema.md",
-        "README.md (section 8 branch-naming exception)",
         ".gitignore",
         ".env.example",
         "requirements.txt",
-        "agents/, tools/, tools/scrapers/, listings/, campaigns/, support_logs/, tests/ (directory skeleton with .gitkeep placeholders only — no .py modules)"
+        "agents/, tools/, tools/scrapers/, listings/, campaigns/, support_logs/, tests/ (directory skeleton with .gitkeep placeholders only — no .py modules)",
+        "README.md: taken VERBATIM from origin/main (d3d5993). No README change is contributed by this PR."
       ],
+      "readme_change_dropped": "An earlier commit on this branch amended README section 8 with a branch-naming exception. The operator had already written a better version of that same exception into main's new 'Branch Naming' subsection. The agent's amendment was therefore redundant and was dropped; main's README is taken verbatim. This also keeps the PR free of an unrelated-file change, per README section 10.",
+      "git_integration": {
+        "problem": "The environment was re-created mid-session (fresh shallow clone). The remote branch arena/01a0e3b8-okay held commit 680ab02 (the state-file scaffold) which was absent locally, while the local branch held f396311 (the bootstrap additions). The two were siblings, both children of 898ab3a, so a naive push would have DELETED 680ab02 from the remote.",
+        "resolution": "Merged 680ab02 into the local branch (preserving it as an ancestor), then took main's README verbatim on top. No force-push, no history rewrite, no branch deletion. The push is a clean fast-forward because 680ab02 is an ancestor of HEAD.",
+        "force_push_used": false,
+        "hard_stop_6_respected": true,
+        "note": "git merge of origin/main was refused with 'refusing to merge unrelated histories' because the shallow clone grafted the history boundary. Rather than pass --allow-unrelated-histories (semantically wrong: the histories ARE related, sharing 898ab3a), the merge was avoided because main's only change was README.md, which was taken directly with git checkout."
+      },
       "deliberately_excluded": [
         "agents/*.py — each agent module arrives in its own agent's PR (README section 10: one agent at a time)",
         "tools/customs.py, tools/landed_cost.py — cost math is HITL gate 5 territory and needs real verified data, not placeholders",
@@ -81,10 +114,13 @@
         "git tracked-file audit: confirmed no .env and no .py module was staged"
       ],
       "open_flags": [
-        "Option panel recorded 'halt' for the branch-naming question while the written operator direction said to proceed on the pinned branch. Treated the written direction as operative and flagged to the human. No code, spend, or git safety rule was affected either way.",
+        "HARD STOP 9 now applies: this PR must be MERGED TO MAIN by the human before the next session opens. Unmerged PRs do not carry forward. This is the only manual step in the loop and it is non-optional.",
+        "HARD STOP 8 now applies: main does not yet contain shared_state.json, so no sub-agent session may open until this PR is merged.",
         "Namespace isolation is convention plus documentation, not an enforced lock. A validating loader or write-guard is a follow-up.",
         "support_logs/ will eventually hold customer tickets carrying personal data. A scrubbing/anonymising policy must be agreed with the human before any real ticket is committed. No such policy exists yet and none was invented.",
-        "No agent reads shared_state.json yet, so the contract is unexercised until the Market Research PR appends its first finding."
+        "No agent reads shared_state.json yet, so the contract is unexercised until the first Phase 1+ PR appends its first finding.",
+        "Agent correctness note, see agent_error_log: the operator's 'Phase 0, README section 9' citation was correct and the agent wrongly 'corrected' it against a stale README.",
+        "Historical: the option panel recorded 'halt' for the branch-naming question while the written operator direction said to proceed on the pinned branch. The written direction was treated as operative. No code, spend, or git safety rule was affected either way."
       ]
     }
     ]
