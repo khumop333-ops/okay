@@ -1,0 +1,100 @@
+# ---------------------------------------------------------------------------
+# Secrets — README §2 rule 7: never commit API keys, tokens, credentials,
+# or .env files. Use .env.example and this .gitignore instead.
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+.netrc
+.git-credentials
+
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ---------------------------------------------------------------------------
+# Virtual environments
+# ---------------------------------------------------------------------------
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# ---------------------------------------------------------------------------
+# Caches and tooling artifacts
+# ---------------------------------------------------------------------------
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+*.cover
+.hypothesis/
+.cache
+
+# ---------------------------------------------------------------------------
+# OS and editor noise
+# ---------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# ---------------------------------------------------------------------------
+# NOTE — deliberately NOT ignored:
+#
+#   listings/  campaigns/  support_logs/  shared_state.json
+#
+# These are crew deliverables and coordination state, so they are tracked.
+# Be deliberate about what lands in them:
+#
+#   * support_logs/ will eventually hold customer tickets. Real tickets carry
+#     personal data. A scrubbing/anonymising policy must be agreed with the
+#     human BEFORE any real ticket is committed — this PR adds no such policy
+#     because no ticket data exists yet. Flagged as an open risk.
+#   * listings/ and campaigns/ are human-reviewed outputs, so they belong in
+#     git for auditability rather than being swept into an ignore rule.
+# ---------------------------------------------------------------------------

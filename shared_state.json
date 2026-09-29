@@ -1,0 +1,252 @@
+{
+  "_schema_version": "1.0.0",
+  "_conventions": {
+    "description": "Binding coordination rules for shared_state.json. This file is the single coordination surface for the SA Dropship Agent Crew.",
+    "authority": "README.md is the source of truth. If any agent output, prompt, or reasoning conflicts with README.md, README.md wins and the conflict must be escalated to the human operator.",
+    "rules": [
+      "Only the Supervisor Agent writes the top-level structure of this file. Sub-agents append only to their own namespace.",
+      "No agent imports another agent directly. All coordination flows through the Supervisor via this file.",
+      "Every write includes: timestamp (ISO 8601), agent, confidence (1-10), source.",
+      "Any field marked UNVERIFIED must be surfaced to the human by the Supervisor. It must never be silently used in a downstream calculation, price, or recommendation.",
+      "confidence is the writing agent's self-assessed certainty on a 1-10 scale. It is not a margin, a probability, or a price.",
+      "source must be a real, checkable reference: a URL, a document, a dataset, or an explicit 'sandbox test'. Words such as 'assumed', 'estimated', 'typical', or 'industry standard' are not sources.",
+      "All cost math lives only in tools/landed_cost.py. All HS code, duty and VAT math lives only in tools/customs.py. Agents import from them; they never re-implement the formulas.",
+      "Every landed-cost calculation must include 15% VAT on the customs value. There are no exceptions.",
+      "Any net margin below 20% (after product + shipping + duty + 15% VAT + payment fees + ad CPA) must be rejected and explained, never approved."
+    ],
+    "hard_stops_reference": "README.md section 2 - the full non-negotiable HARD STOP list. Do not duplicate it here; the README is authoritative and duplication invites drift.",
+    "hitl_gates_reference": "README.md section 5 - the full HITL gate list. Approval format: state WHAT, WHY, COST, RISK. Human replies APPROVED or REJECTED plus reason.",
+    "namespace_init_note": "Namespaces below were initialised by the Supervisor with no findings. An initialised namespace is scaffolding, not evidence: confidence is null, verified is false, and findings is empty until a sub-agent appends real, sourced data."
+  },
+  "supervisor": {
+    "_meta": {
+      "owner": "agents/supervisor.py",
+      "role": "Task decomposition, routing to sub-agents, final briefing to the human",
+      "must_never": "Execute sub-agent tasks directly (README section 3)",
+      "append_key": "sessions"
+    },
+    "timestamp": "2026-09-27T18:42:18+02:00",
+    "agent": "supervisor",
+    "confidence": 10,
+    "source": "README.md section 7 (Supervisor initialises the top-level structure of shared_state.json)",
+    "verified": true,
+    "sessions": [
+    {
+      "session_id": "01a0e3b8",
+      "branch": "arena/01a0e3b8-okay",
+      "timestamp": "2026-09-27T18:42:18+02:00",
+      "agent": "supervisor",
+      "confidence": 10,
+      "source": "README.md section 7; human operator direction given in session",
+      "task": "Phase 0 bootstrap: shared_state.json and its write contract, repo directory skeleton, .gitignore, .env.example, requirements.txt, and the README section 8 branch-naming exception. No agent logic, no tools/ cost math.",
+      "why": "shared_state.json is the single coordination surface every sub-agent must read and append to, and it did not exist, so no sub-agent could be built or tested. The README designates it Supervisor-owned (section 7). The operator extended the scope mid-session to a consolidated bootstrap PR.",
+      "scope_authority": "README-DERIVED. The operator described this as 'Phase 0, defined in README section 9', and that citation is CORRECT: README section 9 is 'BUILD PHASES', and 'Phase 0 - Bootstrap' specifies exactly this consolidated-PR scope. CORRECTION TO AN EARLIER ENTRY IN THIS RECORD: an interim version of this field claimed the citation was incorrect and that 'phase' does not appear in README.md. That claim was WRONG. It was made against a stale local README, because the execution environment was re-created mid-session (fresh shallow clone) while the operator had already amended README.md on main in commit d3d5993. The operator was right and the agent was wrong. Recorded so the error is not inherited by a future session.",
+      "contract_changes_on_main": {
+        "commit": "d3d5993",
+        "timestamp": "2026-09-29T19:33:00+02:00",
+        "agent": "human operator",
+        "confidence": 10,
+        "source": "origin/main, README.md",
+        "verified": true,
+        "changes": [
+          "README section 8 restructured into subsections: Session Precondition, Branch Naming, At the Start of Every Session, During the Session, At the End of Every Session.",
+          "README section 9 replaced 'Definition of Done' with 'BUILD PHASES': Phase 0 Bootstrap (this consolidated PR, Supervisor only) and Phase 1+ One Agent, One Capability, One PR.",
+          "New HARD STOP 8: no session without a state file. If shared_state.json does not exist on main, do not open a sub-agent session; run the Supervisor bootstrap first.",
+          "New HARD STOP 9: no unmerged carry-over. A session's PR must be merged to main before the next session opens. Unmerged branches do not carry forward.",
+          "README section 6 now lists shared_state.schema.md, requirements.txt, .gitignore and .env.example as expected repo files.",
+          "Branch Naming subsection now contains the harness-pinned-branch exception, written by the operator."
+        ]
+      },
+      "agent_error_log": [
+        {
+          "error": "Told the human operator their README section 9 'Phase 0' citation was incorrect, and asserted the string 'phase' does not appear in README.md.",
+          "cause": "Read a stale README. The environment was re-created between turns via a fresh shallow clone that restored working-tree files from a snapshot taken before the operator amended the README on main.",
+          "detection": "git ls-remote showed main at d3d5993 while the local base was 898ab3a; git show d3d5993:README.md revealed the new section 9 BUILD PHASES.",
+          "correction": "Re-read the README in full from origin/main, confirmed the operator's citation was correct, took main's README verbatim, and corrected this state record.",
+          "lesson": "A README read at session start is not authoritative for the whole session. Re-read it from origin/main whenever git shows main has moved. This is the failure mode README section 1 warns about: reasoning conflicting with the contract."
+        }
+      ],
+      "operator_directives": [
+        {
+          "directive": "Scaffold shared_state.json only; no directories, no requirements, no .env.example, no agent code.",
+          "timestamp": "2026-09-27T18:42:18+02:00",
+          "source": "Operator written direction, first message",
+          "reasoning_recorded": "Operator argued the directory skeleton was 'a trap dressed as efficiency' and that pre-creating structure ahead of need is the guessing behaviour README section 10 warns against."
+        },
+        {
+          "directive": "Expand to one consolidated bootstrap PR: state file, schema doc, directory skeleton, .gitignore, .env.example, requirements.txt. Still no agent logic, no tools/ cost math.",
+          "timestamp": "2026-09-27T18:42:18+02:00",
+          "source": "Operator written direction, second message",
+          "note": "This reverses the operator's own earlier position on the directory skeleton. The reversal is recorded here so a future session can see it was deliberate rather than a contradiction introduced by an agent. Operators own scope; agents do not."
+        }
+      ],
+      "sub_agents_routed": [],
+      "hitl_gates_crossed": [],
+      "hitl_gates_note": "No HITL gate crossed: no paid service, no sample order, no product launch, no ad campaign, no merge touching tools/landed_cost.py or tools/customs.py, no customer-facing commitment.",
+      "hard_stops_triggered": [],
+      "outputs": [
+        "shared_state.json",
+        "shared_state.schema.md",
+        ".gitignore",
+        ".env.example",
+        "requirements.txt",
+        "agents/, tools/, tools/scrapers/, listings/, campaigns/, support_logs/, tests/ (directory skeleton with .gitkeep placeholders only — no .py modules)",
+        "README.md: taken VERBATIM from origin/main (d3d5993). No README change is contributed by this PR."
+      ],
+      "readme_change_dropped": "An earlier commit on this branch amended README section 8 with a branch-naming exception. The operator had already written a better version of that same exception into main's new 'Branch Naming' subsection. The agent's amendment was therefore redundant and was dropped; main's README is taken verbatim. This also keeps the PR free of an unrelated-file change, per README section 10.",
+      "git_integration": {
+        "problem": "The environment was re-created mid-session (fresh shallow clone). The remote branch arena/01a0e3b8-okay held commit 680ab02 (the state-file scaffold) which was absent locally, while the local branch held f396311 (the bootstrap additions). The two were siblings, both children of 898ab3a, so a naive push would have DELETED 680ab02 from the remote.",
+        "resolution": "Merged 680ab02 into the local branch (preserving it as an ancestor), then took main's README verbatim on top. No force-push, no history rewrite, no branch deletion. The push is a clean fast-forward because 680ab02 is an ancestor of HEAD.",
+        "force_push_used": false,
+        "hard_stop_6_respected": true,
+        "note": "git merge of origin/main was refused with 'refusing to merge unrelated histories' because the shallow clone grafted the history boundary. Rather than pass --allow-unrelated-histories (semantically wrong: the histories ARE related, sharing 898ab3a), the merge was avoided because main's only change was README.md, which was taken directly with git checkout."
+      },
+      "deliberately_excluded": [
+        "agents/*.py — each agent module arrives in its own agent's PR (README section 10: one agent at a time)",
+        "tools/customs.py, tools/landed_cost.py — cost math is HITL gate 5 territory and needs real verified data, not placeholders",
+        "tests/*.py — no tools/ logic exists yet to test; test coverage lands with the first PR containing logic"
+      ],
+      "tests_run": [
+        "python3 -m json.tool shared_state.json (JSON validity)",
+        "Contract assertions: top-level keys exact; every namespace carries timestamp/agent/confidence/source/verified; findings and unverified_fields empty at init; _conventions documents UNVERIFIED surfacing, own-namespace appends, 15% VAT and the >=20% margin floor",
+        "Secret scan across all new files: clean",
+        "git log inspected: no force-push, no branch deletion, no history rewrite",
+        "git tracked-file audit: confirmed no .env and no .py module was staged"
+      ],
+      "open_flags": [
+        "HARD STOP 9 now applies: this PR must be MERGED TO MAIN by the human before the next session opens. Unmerged PRs do not carry forward. This is the only manual step in the loop and it is non-optional.",
+        "HARD STOP 8 now applies: main does not yet contain shared_state.json, so no sub-agent session may open until this PR is merged.",
+        "Namespace isolation is convention plus documentation, not an enforced lock. A validating loader or write-guard is a follow-up.",
+        "support_logs/ will eventually hold customer tickets carrying personal data. A scrubbing/anonymising policy must be agreed with the human before any real ticket is committed. No such policy exists yet and none was invented.",
+        "No agent reads shared_state.json yet, so the contract is unexercised until the first Phase 1+ PR appends its first finding.",
+        "Agent correctness note, see agent_error_log: the operator's 'Phase 0, README section 9' citation was correct and the agent wrongly 'corrected' it against a stale README.",
+        "Historical: the option panel recorded 'halt' for the branch-naming question while the written operator direction said to proceed on the pinned branch. The written direction was treated as operative. No code, spend, or git safety rule was affected either way."
+      ]
+    }
+    ]
+  },
+  "market_research": {
+    "_meta": {
+      "owner": "agents/market_research.py",
+      "role": "SA product discovery, customs viability",
+      "must_never": "Recommend a product without a verified HS code (README section 3)",
+      "append_key": "findings",
+      "append_contract": {
+        "array": "findings",
+        "each_entry_must_include": ["id", "timestamp", "agent", "confidence", "source", "data"],
+        "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
+      }
+    },
+    "timestamp": "2026-09-27T18:42:18+02:00",
+    "agent": "supervisor",
+    "confidence": null,
+    "source": "README.md section 7 (namespace initialised by Supervisor, no findings yet)",
+    "verified": false,
+    "findings": [],
+    "unverified_fields": []
+  },
+  "sourcing": {
+    "_meta": {
+      "owner": "agents/sourcing.py",
+      "role": "Supplier verification, sample planning",
+      "must_never": "Commit to purchases (README section 3)",
+      "append_key": "findings",
+      "append_contract": {
+        "array": "findings",
+        "each_entry_must_include": ["id", "timestamp", "agent", "confidence", "source", "data"],
+        "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
+      }
+    },
+    "timestamp": "2026-09-27T18:42:18+02:00",
+    "agent": "supervisor",
+    "confidence": null,
+    "source": "README.md section 7 (namespace initialised by Supervisor, no findings yet)",
+    "verified": false,
+    "findings": [],
+    "unverified_fields": []
+  },
+  "pricing": {
+    "_meta": {
+      "owner": "agents/pricing.py",
+      "role": "Landed cost, margin math, price setting",
+      "must_never": "Approve a margin below 20% (README section 3)",
+      "append_key": "findings",
+      "append_contract": {
+        "array": "findings",
+        "each_entry_must_include": ["id", "timestamp", "agent", "confidence", "source", "data"],
+        "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array.",
+        "cost_math_rule": "All cost math must call tools/landed_cost.py. Never re-implement the formula. 15% VAT on customs value is mandatory in every calculation."
+      }
+    },
+    "timestamp": "2026-09-27T18:42:18+02:00",
+    "agent": "supervisor",
+    "confidence": null,
+    "source": "README.md section 7 (namespace initialised by Supervisor, no findings yet)",
+    "verified": false,
+    "findings": [],
+    "unverified_fields": []
+  },
+  "listing": {
+    "_meta": {
+      "owner": "agents/listing.py",
+      "role": "SEO copy, product descriptions",
+      "must_never": "Make unverifiable claims (README section 3)",
+      "append_key": "findings",
+      "append_contract": {
+        "array": "findings",
+        "each_entry_must_include": ["id", "timestamp", "agent", "confidence", "source", "data"],
+        "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array.",
+        "language_rule": "SA English spelling (colour, organise). Rand pricing. Reference Takealot, WhatsApp, PayFast, SnapScan where relevant."
+      }
+    },
+    "timestamp": "2026-09-27T18:42:18+02:00",
+    "agent": "supervisor",
+    "confidence": null,
+    "source": "README.md section 7 (namespace initialised by Supervisor, no findings yet)",
+    "verified": false,
+    "findings": [],
+    "unverified_fields": []
+  },
+  "ad_growth": {
+    "_meta": {
+      "owner": "agents/ad_growth.py",
+      "role": "Campaign design, ad copy, budgets",
+      "must_never": "Launch campaigns without approval (README section 3)",
+      "append_key": "findings",
+      "append_contract": {
+        "array": "findings",
+        "each_entry_must_include": ["id", "timestamp", "agent", "confidence", "source", "data"],
+        "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array.",
+        "benchmark_note": "ZA ad CPA benchmark is R150-R300 per conversion (README section 4). Any budget figure is a proposal only until the human approves it at a HITL gate."
+      }
+    },
+    "timestamp": "2026-09-27T18:42:18+02:00",
+    "agent": "supervisor",
+    "confidence": null,
+    "source": "README.md section 7 (namespace initialised by Supervisor, no findings yet)",
+    "verified": false,
+    "findings": [],
+    "unverified_fields": []
+  },
+  "support": {
+    "_meta": {
+      "owner": "agents/support.py",
+      "role": "Ticket handling, FAQs",
+      "must_never": "Promise refunds or replacements (README section 3)",
+      "append_key": "findings",
+      "append_contract": {
+        "array": "findings",
+        "each_entry_must_include": ["id", "timestamp", "agent", "confidence", "source", "data"],
+        "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array.",
+        "commitment_rule": "Any refund, replacement or customer-facing commitment requires a HITL gate before it is written into a reply."
+      }
+    },
+    "timestamp": "2026-09-27T18:42:18+02:00",
+    "agent": "supervisor",
+    "confidence": null,
+    "source": "README.md section 7 (namespace initialised by Supervisor, no findings yet)",
+    "verified": false,
+    "findings": [],
+    "unverified_fields": []
+  }
+}

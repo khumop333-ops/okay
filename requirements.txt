@@ -1,0 +1,13 @@
+# requirements.txt — no runtime dependencies yet.
+#
+# README §10: "Do not add dependencies without listing them in
+# requirements.txt and justifying why a free/standard alternative won't work."
+#
+# README §1: the crew is intended to be "mostly-free".
+#
+# Every addition must arrive in the SAME PR as the code that imports it, with
+# the justification recorded in that PR's description. Adding a dependency
+# "ahead of need" is the guessing behaviour README §10 warns against.
+#
+# This file is intentionally comment-only. An empty dependency list is a
+# verifiable fact; a speculative one is a guess dressed up as a plan.
