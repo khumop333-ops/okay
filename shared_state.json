@@ -1031,10 +1031,10 @@
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
       }
     },
-    "timestamp": "2026-09-29T22:15:14.555996+02:00",
+    "timestamp": "2026-09-29T22:43:03.976316+02:00",
     "agent": "sourcing",
     "confidence": 5,
-    "source": "so-0001 (web research + shared_state.json market_research findings); see finding source for carrier citations",
+    "source": "so-0001 (web research) + so-0002 (bash network diagnostic + supervisor directive, PR #3)",
     "verified": false,
     "findings": [
       {
@@ -1181,6 +1181,31 @@
           "next_action": "negotiate (send the cost-negotiation draft to a Supervisor-provided supplier shortlist to obtain REAL, verifiable unit costs + written DDP-to-SA quotes); then request human approval for sample_order at HITL gate 2. Do NOT place orders.",
           "hard_stops_status": "No HARD STOP violated. #1 respected (no order placed, no purchase committed); #2 respected (no invented supplier names/prices/transit - all unverifiable supplier metrics flagged UNVERIFIED); #4 untouched (no cost math performed - Pricing owns landed cost via tools/landed_cost.py); #6/#7 clean (no force-push, no secrets); #8/#9 respected (state exists on main; this is one PR)."
         }
+      },
+      {
+        "id": "so-0002",
+        "timestamp": "2026-09-29T22:43:03.976316+02:00",
+        "agent": "sourcing",
+        "confidence": 9,
+        "source": "bash sandbox network probe (python urllib + curl) against alibaba.com, aliexpress.com, sars.gov.za, cjdropshipping.com; plus supervisor directive recorded in PR #3 review. Per-candidate audit of shared_state.json market_research findings mr-0001..mr-0027.",
+        "verified": true,
+        "data": {
+          "purpose": "Network reachability diagnostic requested by Supervisor; records the routing decision per the Supervisor's precise clarification of the 'verified' gate.",
+          "supervisor_clarification_accepted": "customs_screened is a processing state, NOT a verification state. The Sourcing gate is exact: recommendation in {proceed, investigate} AND per-candidate verified:true (backed by a real source URL). market_research.verified=false at the namespace level reflects that NO candidate carries verified:true. Therefore Sourcing has no valid inputs and must stay halted; route back to Market Research. No category-level promotion of 'investigate' findings into 'verified candidates' — that would be the HARD STOP #2 hallucination the contract exists to prevent. The earlier so-0001 request for a 'curated supplier shortlist' is HEREBY WITHDRAWN: a human-supplied list would be invented data and is rejected.",
+          "individual_candidate_audit": "Inspected all market_research findings (mr-0001..mr-0027). Count of individual findings carrying verified:true = 0 (confirmed programmatically). Findings carry confidence scores + real source URLs but no verification boolean, and several carry UNVERIFIED_ duty fields. By the contract definition ('verified' = backed by a real source URL) the candidates are NOT marked verified, so 0 satisfy the Sourcing gate. Consequence: Sourcing cannot issue any verified supplier sign-off this session.",
+          "network_diagnostic": {
+            "dns_resolution": "OK (alibaba 23.0.194.189; sars 172.64.149.166; example 104.20.23.154)",
+            "tcp_port_80": "Connect succeeds with no connection error for example.com and www.alibaba.com",
+            "tls_port_443": "FAILS — 'TLS/SSL connection has been closed (EOF)' (python urllib) / curl '(35) OpenSSL SSL_connect: SSL_ERROR_SYSCALL' for alibaba.com, aliexpress.com, sars.gov.za, cjdropshipping.com",
+            "bash_https_reachable": false,
+            "agent_web_tools": "web_search and fetch_page returned live 2025/2026 content earlier this session, so agent-level HTTPS egress WORKS via the tool path (server-side), independent of the bash sandbox",
+            "conclusion": "TOOLING GAP (bash sandbox): DNS + raw TCP egress are present, but TLS/HTTPS egress from the bash shell is blocked/terminated. Public supplier pages cannot be curled/fetched from bash. Supplier verification can still be attempted via the agent's web_search/fetch_page tools (which have HTTPS egress), but the bash path the diagnostic targeted is non-functional for HTTPS."
+          },
+          "routing_decision": "Sourcing HALTED this session on two independent grounds: (1) NO candidate satisfies the verified:true gate -> route back to Market Research to produce verified:true candidates with real source URLs (re-run SARS duty lookups for mr-0003/0005/0006/0008/0012; mark verified candidates). (2) The bash TLS tooling gap is the real blocker for bash-based verification and must be surfaced to the human/Supervisor as a tooling gap (not as a rule to relax). Awaiting Supervisor decision: enable bash HTTPS egress, rely on agent web tools, scope the work down to offline-verifiable capabilities, or pause the pipeline.",
+          "ddp_forwarder_note": "Accepted Supervisor correction: Sweet Protrading, ZHTX, Yiwu Eway, Wingspeed, Guangzhou Yuyuan, PT5 are logistics/DDP FORWARDERS, not product suppliers. Correctly excluded from supplier verification; retained only as shipping-analysis inputs for a later step.",
+          "hard_stops_status": "No HARD STOP violated. #1 (no order/purchase), #2 (no invented data — halted rather than fabricate; did NOT promote unverified to verified; withdrew the shortlist request), #6/#7 (no force-push/secrets), #8/#9 (state on main; one PR) respected.",
+          "next_action_for_supervisor": "Decide on the bash TLS tooling gap. Then route to Market Research to (re)verify candidates with real source URLs so Sourcing has verified:true inputs in a follow-up session. Do NOT provide a curated supplier list (would be invented data)."
+        }
       }
     ],
     "unverified_fields": [
@@ -1189,7 +1214,8 @@
       "Alibaba DDP forwarder metrics (Sweet Protrading, ZHTX, Yiwu Eway, Wingspeed, etc.) are AGGREGATED directory/marketing claims, not independently verified order-volume/rating - treat as leads only.",
       "SARS de-minimis / courier clearance threshold for split-shipment guidance - UNVERIFIED; Pricing/Supervisor to confirm with SARS.",
       "SA local-warehouse / fulfilment-partner availability for our specific SKUs - UNVERIFIED.",
-      "Customs duty for mr-0003/0005/0006/0008/0012 remains UNVERIFIED (carried from market_research) - these candidates are excluded from sampling until verified."
+      "Customs duty for mr-0003/0005/0006/0008/0012 remains UNVERIFIED (carried from market_research) - these candidates are excluded from sampling until verified.",
+      "bash sandbox TLS/HTTPS egress is blocked (DNS+TCP OK, TLS handshake fails). Public supplier pages cannot be fetched from bash; rely on agent web tools or restore bash HTTPS egress. No candidate currently carries verified:true, so Sourcing remains halted and routes back to Market Research."
     ]
   },
   "pricing": {
