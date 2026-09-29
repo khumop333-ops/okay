@@ -31,98 +31,98 @@
     "source": "README.md section 7 (Supervisor initialises the top-level structure of shared_state.json)",
     "verified": true,
     "sessions": [
-    {
-      "session_id": "01a0e3b8",
-      "branch": "arena/01a0e3b8-okay",
-      "timestamp": "2026-09-27T18:42:18+02:00",
-      "agent": "supervisor",
-      "confidence": 10,
-      "source": "README.md section 7; human operator direction given in session",
-      "task": "Phase 0 bootstrap: shared_state.json and its write contract, repo directory skeleton, .gitignore, .env.example, requirements.txt, and the README section 8 branch-naming exception. No agent logic, no tools/ cost math.",
-      "why": "shared_state.json is the single coordination surface every sub-agent must read and append to, and it did not exist, so no sub-agent could be built or tested. The README designates it Supervisor-owned (section 7). The operator extended the scope mid-session to a consolidated bootstrap PR.",
-      "scope_authority": "README-DERIVED. The operator described this as 'Phase 0, defined in README section 9', and that citation is CORRECT: README section 9 is 'BUILD PHASES', and 'Phase 0 - Bootstrap' specifies exactly this consolidated-PR scope. CORRECTION TO AN EARLIER ENTRY IN THIS RECORD: an interim version of this field claimed the citation was incorrect and that 'phase' does not appear in README.md. That claim was WRONG. It was made against a stale local README, because the execution environment was re-created mid-session (fresh shallow clone) while the operator had already amended README.md on main in commit d3d5993. The operator was right and the agent was wrong. Recorded so the error is not inherited by a future session.",
-      "contract_changes_on_main": {
-        "commit": "d3d5993",
-        "timestamp": "2026-09-29T19:33:00+02:00",
-        "agent": "human operator",
+      {
+        "session_id": "01a0e3b8",
+        "branch": "arena/01a0e3b8-okay",
+        "timestamp": "2026-09-27T18:42:18+02:00",
+        "agent": "supervisor",
         "confidence": 10,
-        "source": "origin/main, README.md",
-        "verified": true,
-        "changes": [
-          "README section 8 restructured into subsections: Session Precondition, Branch Naming, At the Start of Every Session, During the Session, At the End of Every Session.",
-          "README section 9 replaced 'Definition of Done' with 'BUILD PHASES': Phase 0 Bootstrap (this consolidated PR, Supervisor only) and Phase 1+ One Agent, One Capability, One PR.",
-          "New HARD STOP 8: no session without a state file. If shared_state.json does not exist on main, do not open a sub-agent session; run the Supervisor bootstrap first.",
-          "New HARD STOP 9: no unmerged carry-over. A session's PR must be merged to main before the next session opens. Unmerged branches do not carry forward.",
-          "README section 6 now lists shared_state.schema.md, requirements.txt, .gitignore and .env.example as expected repo files.",
-          "Branch Naming subsection now contains the harness-pinned-branch exception, written by the operator."
-        ]
-      },
-      "agent_error_log": [
-        {
-          "error": "Told the human operator their README section 9 'Phase 0' citation was incorrect, and asserted the string 'phase' does not appear in README.md.",
-          "cause": "Read a stale README. The environment was re-created between turns via a fresh shallow clone that restored working-tree files from a snapshot taken before the operator amended the README on main.",
-          "detection": "git ls-remote showed main at d3d5993 while the local base was 898ab3a; git show d3d5993:README.md revealed the new section 9 BUILD PHASES.",
-          "correction": "Re-read the README in full from origin/main, confirmed the operator's citation was correct, took main's README verbatim, and corrected this state record.",
-          "lesson": "A README read at session start is not authoritative for the whole session. Re-read it from origin/main whenever git shows main has moved. This is the failure mode README section 1 warns about: reasoning conflicting with the contract."
-        }
-      ],
-      "operator_directives": [
-        {
-          "directive": "Scaffold shared_state.json only; no directories, no requirements, no .env.example, no agent code.",
-          "timestamp": "2026-09-27T18:42:18+02:00",
-          "source": "Operator written direction, first message",
-          "reasoning_recorded": "Operator argued the directory skeleton was 'a trap dressed as efficiency' and that pre-creating structure ahead of need is the guessing behaviour README section 10 warns against."
+        "source": "README.md section 7; human operator direction given in session",
+        "task": "Phase 0 bootstrap: shared_state.json and its write contract, repo directory skeleton, .gitignore, .env.example, requirements.txt, and the README section 8 branch-naming exception. No agent logic, no tools/ cost math.",
+        "why": "shared_state.json is the single coordination surface every sub-agent must read and append to, and it did not exist, so no sub-agent could be built or tested. The README designates it Supervisor-owned (section 7). The operator extended the scope mid-session to a consolidated bootstrap PR.",
+        "scope_authority": "README-DERIVED. The operator described this as 'Phase 0, defined in README section 9', and that citation is CORRECT: README section 9 is 'BUILD PHASES', and 'Phase 0 - Bootstrap' specifies exactly this consolidated-PR scope. CORRECTION TO AN EARLIER ENTRY IN THIS RECORD: an interim version of this field claimed the citation was incorrect and that 'phase' does not appear in README.md. That claim was WRONG. It was made against a stale local README, because the execution environment was re-created mid-session (fresh shallow clone) while the operator had already amended README.md on main in commit d3d5993. The operator was right and the agent was wrong. Recorded so the error is not inherited by a future session.",
+        "contract_changes_on_main": {
+          "commit": "d3d5993",
+          "timestamp": "2026-09-29T19:33:00+02:00",
+          "agent": "human operator",
+          "confidence": 10,
+          "source": "origin/main, README.md",
+          "verified": true,
+          "changes": [
+            "README section 8 restructured into subsections: Session Precondition, Branch Naming, At the Start of Every Session, During the Session, At the End of Every Session.",
+            "README section 9 replaced 'Definition of Done' with 'BUILD PHASES': Phase 0 Bootstrap (this consolidated PR, Supervisor only) and Phase 1+ One Agent, One Capability, One PR.",
+            "New HARD STOP 8: no session without a state file. If shared_state.json does not exist on main, do not open a sub-agent session; run the Supervisor bootstrap first.",
+            "New HARD STOP 9: no unmerged carry-over. A session's PR must be merged to main before the next session opens. Unmerged branches do not carry forward.",
+            "README section 6 now lists shared_state.schema.md, requirements.txt, .gitignore and .env.example as expected repo files.",
+            "Branch Naming subsection now contains the harness-pinned-branch exception, written by the operator."
+          ]
         },
-        {
-          "directive": "Expand to one consolidated bootstrap PR: state file, schema doc, directory skeleton, .gitignore, .env.example, requirements.txt. Still no agent logic, no tools/ cost math.",
-          "timestamp": "2026-09-27T18:42:18+02:00",
-          "source": "Operator written direction, second message",
-          "note": "This reverses the operator's own earlier position on the directory skeleton. The reversal is recorded here so a future session can see it was deliberate rather than a contradiction introduced by an agent. Operators own scope; agents do not."
-        }
-      ],
-      "sub_agents_routed": [],
-      "hitl_gates_crossed": [],
-      "hitl_gates_note": "No HITL gate crossed: no paid service, no sample order, no product launch, no ad campaign, no merge touching tools/landed_cost.py or tools/customs.py, no customer-facing commitment.",
-      "hard_stops_triggered": [],
-      "outputs": [
-        "shared_state.json",
-        "shared_state.schema.md",
-        ".gitignore",
-        ".env.example",
-        "requirements.txt",
-        "agents/, tools/, tools/scrapers/, listings/, campaigns/, support_logs/, tests/ (directory skeleton with .gitkeep placeholders only — no .py modules)",
-        "README.md: taken VERBATIM from origin/main (d3d5993). No README change is contributed by this PR."
-      ],
-      "readme_change_dropped": "An earlier commit on this branch amended README section 8 with a branch-naming exception. The operator had already written a better version of that same exception into main's new 'Branch Naming' subsection. The agent's amendment was therefore redundant and was dropped; main's README is taken verbatim. This also keeps the PR free of an unrelated-file change, per README section 10.",
-      "git_integration": {
-        "problem": "The environment was re-created mid-session (fresh shallow clone). The remote branch arena/01a0e3b8-okay held commit 680ab02 (the state-file scaffold) which was absent locally, while the local branch held f396311 (the bootstrap additions). The two were siblings, both children of 898ab3a, so a naive push would have DELETED 680ab02 from the remote.",
-        "resolution": "Merged 680ab02 into the local branch (preserving it as an ancestor), then took main's README verbatim on top. No force-push, no history rewrite, no branch deletion. The push is a clean fast-forward because 680ab02 is an ancestor of HEAD.",
-        "force_push_used": false,
-        "hard_stop_6_respected": true,
-        "note": "git merge of origin/main was refused with 'refusing to merge unrelated histories' because the shallow clone grafted the history boundary. Rather than pass --allow-unrelated-histories (semantically wrong: the histories ARE related, sharing 898ab3a), the merge was avoided because main's only change was README.md, which was taken directly with git checkout."
-      },
-      "deliberately_excluded": [
-        "agents/*.py — each agent module arrives in its own agent's PR (README section 10: one agent at a time)",
-        "tools/customs.py, tools/landed_cost.py — cost math is HITL gate 5 territory and needs real verified data, not placeholders",
-        "tests/*.py — no tools/ logic exists yet to test; test coverage lands with the first PR containing logic"
-      ],
-      "tests_run": [
-        "python3 -m json.tool shared_state.json (JSON validity)",
-        "Contract assertions: top-level keys exact; every namespace carries timestamp/agent/confidence/source/verified; findings and unverified_fields empty at init; _conventions documents UNVERIFIED surfacing, own-namespace appends, 15% VAT and the >=20% margin floor",
-        "Secret scan across all new files: clean",
-        "git log inspected: no force-push, no branch deletion, no history rewrite",
-        "git tracked-file audit: confirmed no .env and no .py module was staged"
-      ],
-      "open_flags": [
-        "HARD STOP 9 now applies: this PR must be MERGED TO MAIN by the human before the next session opens. Unmerged PRs do not carry forward. This is the only manual step in the loop and it is non-optional.",
-        "HARD STOP 8 now applies: main does not yet contain shared_state.json, so no sub-agent session may open until this PR is merged.",
-        "Namespace isolation is convention plus documentation, not an enforced lock. A validating loader or write-guard is a follow-up.",
-        "support_logs/ will eventually hold customer tickets carrying personal data. A scrubbing/anonymising policy must be agreed with the human before any real ticket is committed. No such policy exists yet and none was invented.",
-        "No agent reads shared_state.json yet, so the contract is unexercised until the first Phase 1+ PR appends its first finding.",
-        "Agent correctness note, see agent_error_log: the operator's 'Phase 0, README section 9' citation was correct and the agent wrongly 'corrected' it against a stale README.",
-        "Historical: the option panel recorded 'halt' for the branch-naming question while the written operator direction said to proceed on the pinned branch. The written direction was treated as operative. No code, spend, or git safety rule was affected either way."
-      ]
-    }
+        "agent_error_log": [
+          {
+            "error": "Told the human operator their README section 9 'Phase 0' citation was incorrect, and asserted the string 'phase' does not appear in README.md.",
+            "cause": "Read a stale README. The environment was re-created between turns via a fresh shallow clone that restored working-tree files from a snapshot taken before the operator amended the README on main.",
+            "detection": "git ls-remote showed main at d3d5993 while the local base was 898ab3a; git show d3d5993:README.md revealed the new section 9 BUILD PHASES.",
+            "correction": "Re-read the README in full from origin/main, confirmed the operator's citation was correct, took main's README verbatim, and corrected this state record.",
+            "lesson": "A README read at session start is not authoritative for the whole session. Re-read it from origin/main whenever git shows main has moved. This is the failure mode README section 1 warns about: reasoning conflicting with the contract."
+          }
+        ],
+        "operator_directives": [
+          {
+            "directive": "Scaffold shared_state.json only; no directories, no requirements, no .env.example, no agent code.",
+            "timestamp": "2026-09-27T18:42:18+02:00",
+            "source": "Operator written direction, first message",
+            "reasoning_recorded": "Operator argued the directory skeleton was 'a trap dressed as efficiency' and that pre-creating structure ahead of need is the guessing behaviour README section 10 warns against."
+          },
+          {
+            "directive": "Expand to one consolidated bootstrap PR: state file, schema doc, directory skeleton, .gitignore, .env.example, requirements.txt. Still no agent logic, no tools/ cost math.",
+            "timestamp": "2026-09-27T18:42:18+02:00",
+            "source": "Operator written direction, second message",
+            "note": "This reverses the operator's own earlier position on the directory skeleton. The reversal is recorded here so a future session can see it was deliberate rather than a contradiction introduced by an agent. Operators own scope; agents do not."
+          }
+        ],
+        "sub_agents_routed": [],
+        "hitl_gates_crossed": [],
+        "hitl_gates_note": "No HITL gate crossed: no paid service, no sample order, no product launch, no ad campaign, no merge touching tools/landed_cost.py or tools/customs.py, no customer-facing commitment.",
+        "hard_stops_triggered": [],
+        "outputs": [
+          "shared_state.json",
+          "shared_state.schema.md",
+          ".gitignore",
+          ".env.example",
+          "requirements.txt",
+          "agents/, tools/, tools/scrapers/, listings/, campaigns/, support_logs/, tests/ (directory skeleton with .gitkeep placeholders only — no .py modules)",
+          "README.md: taken VERBATIM from origin/main (d3d5993). No README change is contributed by this PR."
+        ],
+        "readme_change_dropped": "An earlier commit on this branch amended README section 8 with a branch-naming exception. The operator had already written a better version of that same exception into main's new 'Branch Naming' subsection. The agent's amendment was therefore redundant and was dropped; main's README is taken verbatim. This also keeps the PR free of an unrelated-file change, per README section 10.",
+        "git_integration": {
+          "problem": "The environment was re-created mid-session (fresh shallow clone). The remote branch arena/01a0e3b8-okay held commit 680ab02 (the state-file scaffold) which was absent locally, while the local branch held f396311 (the bootstrap additions). The two were siblings, both children of 898ab3a, so a naive push would have DELETED 680ab02 from the remote.",
+          "resolution": "Merged 680ab02 into the local branch (preserving it as an ancestor), then took main's README verbatim on top. No force-push, no history rewrite, no branch deletion. The push is a clean fast-forward because 680ab02 is an ancestor of HEAD.",
+          "force_push_used": false,
+          "hard_stop_6_respected": true,
+          "note": "git merge of origin/main was refused with 'refusing to merge unrelated histories' because the shallow clone grafted the history boundary. Rather than pass --allow-unrelated-histories (semantically wrong: the histories ARE related, sharing 898ab3a), the merge was avoided because main's only change was README.md, which was taken directly with git checkout."
+        },
+        "deliberately_excluded": [
+          "agents/*.py — each agent module arrives in its own agent's PR (README section 10: one agent at a time)",
+          "tools/customs.py, tools/landed_cost.py — cost math is HITL gate 5 territory and needs real verified data, not placeholders",
+          "tests/*.py — no tools/ logic exists yet to test; test coverage lands with the first PR containing logic"
+        ],
+        "tests_run": [
+          "python3 -m json.tool shared_state.json (JSON validity)",
+          "Contract assertions: top-level keys exact; every namespace carries timestamp/agent/confidence/source/verified; findings and unverified_fields empty at init; _conventions documents UNVERIFIED surfacing, own-namespace appends, 15% VAT and the >=20% margin floor",
+          "Secret scan across all new files: clean",
+          "git log inspected: no force-push, no branch deletion, no history rewrite",
+          "git tracked-file audit: confirmed no .env and no .py module was staged"
+        ],
+        "open_flags": [
+          "HARD STOP 9 now applies: this PR must be MERGED TO MAIN by the human before the next session opens. Unmerged PRs do not carry forward. This is the only manual step in the loop and it is non-optional.",
+          "HARD STOP 8 now applies: main does not yet contain shared_state.json, so no sub-agent session may open until this PR is merged.",
+          "Namespace isolation is convention plus documentation, not an enforced lock. A validating loader or write-guard is a follow-up.",
+          "support_logs/ will eventually hold customer tickets carrying personal data. A scrubbing/anonymising policy must be agreed with the human before any real ticket is committed. No such policy exists yet and none was invented.",
+          "No agent reads shared_state.json yet, so the contract is unexercised until the first Phase 1+ PR appends its first finding.",
+          "Agent correctness note, see agent_error_log: the operator's 'Phase 0, README section 9' citation was correct and the agent wrongly 'corrected' it against a stale README.",
+          "Historical: the option panel recorded 'halt' for the branch-naming question while the written operator direction said to proceed on the pinned branch. The written direction was treated as operative. No code, spend, or git safety rule was affected either way."
+        ]
+      }
     ]
   },
   "market_research": {
@@ -133,7 +133,14 @@
       "append_key": "findings",
       "append_contract": {
         "array": "findings",
-        "each_entry_must_include": ["id", "timestamp", "agent", "confidence", "source", "data"],
+        "each_entry_must_include": [
+          "id",
+          "timestamp",
+          "agent",
+          "confidence",
+          "source",
+          "data"
+        ],
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
       }
     },
@@ -1013,17 +1020,177 @@
       "append_key": "findings",
       "append_contract": {
         "array": "findings",
-        "each_entry_must_include": ["id", "timestamp", "agent", "confidence", "source", "data"],
+        "each_entry_must_include": [
+          "id",
+          "timestamp",
+          "agent",
+          "confidence",
+          "source",
+          "data"
+        ],
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
       }
     },
-    "timestamp": "2026-09-27T18:42:18+02:00",
-    "agent": "supervisor",
-    "confidence": null,
-    "source": "README.md section 7 (namespace initialised by Supervisor, no findings yet)",
+    "timestamp": "2026-09-29T22:15:14.555996+02:00",
+    "agent": "sourcing",
+    "confidence": 5,
+    "source": "so-0001 (web research + shared_state.json market_research findings); see finding source for carrier citations",
     "verified": false,
-    "findings": [],
-    "unverified_fields": []
+    "findings": [
+      {
+        "id": "so-0001",
+        "timestamp": "2026-09-29T22:15:14.555996+02:00",
+        "agent": "sourcing",
+        "confidence": 5,
+        "source": "shared_state.json market_research findings mr-0001..mr-0027 (candidates + customs screen); real published carrier/platform guides: ePacket->SA chinapostaltracking.com/qa/does-epacket-ship-to-south-africa-6087 + salehoo.com/aliexpress-standard-shipping-vs-epacket + epacketexpress.com; AliExpress SA joyofcreating.org + news.astools.app 2026 + reddit.com/r/southafrica; CJ perfectdealz.co.za + cjdropshipping.com blog + dodropshipping.com; DHL smartbuy.alibaba.com buying guide + tonlexing.com; Aramex tomade.com + parcelfromchina.com + easyparcel.com; Alibaba DDP alibaba.com/supplier/suppliers-for-dropshipping-in-south-africa + china2southafrica.co.za + alicouriers.com",
+        "verified": false,
+        "data": {
+          "task": "Sourcing capability #1: supplier discovery/verification framework + SA shipping analysis for MarketResearch 'investigate' candidates. No orders placed, no supplier committed, no price set (README section 3 + HARD STOP #1).",
+          "precondition_assessment": {
+            "expected_by_brief": "state.market_research.candidates with products marked 'proceed' or 'investigate' AND verified=true.",
+            "actual_state": "No 'candidates' key exists. market_research uses a 'findings' array with recommendation values: investigate / reject / trend_captured / customs_screened. ZERO findings are marked 'proceed'. The market_research namespace top-level 'verified' is false. No Supervisor routing session approving a candidate for sourcing exists in state (only the Phase 0 bootstrap session present).",
+            "strict_gate_result": "NOT MET. Brief INPUTS require 'proceed' OR 'investigate' with verified=true. No product satisfies this. Sourcing therefore CANNOT issue a verified supplier sign-off from the current state. The verifiable portion of the work (carrier/platform SA-shipping reality) is delivered below; all supplier-level verification is flagged UNVERIFIED and must not be silently used downstream.",
+            "action_requested_from_supervisor": "Confirm whether the market_research 'investigate'/'customs_screened' findings are the in-scope sourcing candidates (no 'proceed'/no 'candidates' key exists), and supply a curated supplier shortlist with REAL, verifiable metrics (order volume, rating, response time, per-product DDP-to-SA, unit cost). Per-supplier verification cannot be invented (HARD STOP #2) and is not retrievable in this sandbox."
+          },
+          "in_scope_leads_treated_as_candidates": [
+            "mr-0002 Solar power bank 10-20k mAh (HS 8507.60 @0% duty VERIFIED) — LEAD: customs-cleared, strong ZA load-shedding demand, floor R258 above CPA benchmark",
+            "mr-0001 USB-C GaN fast charger + cable (8504.40 @0% / 8544.42 @15%)",
+            "mr-0007 Plastic phone case (3926.90 @20%)",
+            "mr-0004 Car phone holder (3926.90 @20%)",
+            "mr-0022 Kitchen gadgets (3926.90/7323.93 @20%)",
+            "mr-0015 Educational toys/puzzles (9503.00 @20%)"
+          ],
+          "excluded_pending_duty_verification": [
+            "mr-0003 Rechargeable LED light (8513.10 duty UNVERIFIED)",
+            "mr-0005 Tempered glass (7007.19 duty UNVERIFIED)",
+            "mr-0006 Makeup brush set (9603.30 duty UNVERIFIED)",
+            "mr-0008 Imitation jewellery (7117.19 duty UNVERIFIED)",
+            "mr-0012 Serums (3304 duty conflict 15-20%, SAHPRA flag)"
+          ],
+          "supplier_discovery_platforms_checked": [
+            "AliExpress",
+            "CJ Dropshipping",
+            "Alibaba",
+            "1688.com"
+          ],
+          "shipping_analysis_sa": {
+            "per_section_confidence": 7,
+            "note": "Carrier/platform transit facts below are multi-sourced from real published guides (cited in 'source'). These are ROUTE-level facts, not per-supplier quotes. Customs clearance adds 5-15 business days per README section 4; any total > 21 days is flagged.",
+            "carriers": [
+              {
+                "carrier": "ePacket",
+                "available_to_sa": false,
+                "sa_transit_days": "N/A - SERVICE NOT OFFERED TO SOUTH AFRICA",
+                "cost": "N/A",
+                "source": "chinapostaltracking.com/qa/does-epacket-ship-to-south-africa-6087 ('ePacket doesn't ship to South Africa at present'); salehoo.com ('Does not ship to ... Africa'); epacketexpress.com ('ePacket service is still not available for shipping to South Africa')",
+                "verified": true,
+                "flag": "ELIMINATED for SA. Critical SA-specific finding: ePacket cannot be used to South Africa at all. Any plan relying on ePacket to SA is invalid."
+              },
+              {
+                "carrier": "AliExpress Standard Shipping / Cainiao / Choice",
+                "available_to_sa": true,
+                "sa_transit_days": "Standard 15-45 days (anecdotal 11-22 days); Choice 10-15 days; Premium 7-15 days",
+                "cost": "Often included / low (approx $5-15 standard per some guides)",
+                "source": "joyofcreating.org/does-aliexpress-ship-to-south-africa (2026); news.astools.app 2026; reddit.com/r/southafrica (2025, 11-22 days standard)",
+                "verified": true,
+                "flag": "Total incl. clearance can exceed 21 days -> FLAG per SA rule. Cheapest, slowest, postal last-mile (SA Post) risk."
+              },
+              {
+                "carrier": "CJ Dropshipping (CJPacket)",
+                "available_to_sa": true,
+                "sa_transit_days": "CJPacket 10-18 days; DHL option 3-7 days",
+                "cost": "UNVERIFIED_per_supplier",
+                "source": "perfectdealz.co.za (2025, CJPacket 10-18d, DHL 3-7d); cjdropshipping.com blog; dodropshipping.com (11-28 business days, rating 4.7/5 secondary)",
+                "verified": true,
+                "flag": "CJPacket total can approach/exceed 21 days with clearance -> FLAG. Good SA-focused dropshipping fit (sourcing from 1688/AliExpress/Taobao)."
+              },
+              {
+                "carrier": "DHL Express (China -> SA)",
+                "available_to_sa": true,
+                "sa_transit_days": "3-7 business days (Express Worldwide 3-5 days)",
+                "cost": "Approx $30-60 for ~2kg (Express Worldwide ~$55/2kg per guide)",
+                "source": "smartbuy.alibaba.com buying guide (2026); tonlexing.com; made-in-china.com listings (3-5 days)",
+                "verified": true,
+                "flag": "Fastest, door-to-door, customs clearance included. Best for high-value/sample shipments. Highest cost."
+              },
+              {
+                "carrier": "Aramex (China -> SA)",
+                "available_to_sa": true,
+                "sa_transit_days": "~4-10 days (observed avg 8.2d; 4-7 working days per forwarder; 4 working days per easyparcel)",
+                "cost": "Cheaper than EMS; no remote-area surcharge (per-parcel tariff ~R140-233/kg referenced, unverified for our products)",
+                "source": "tomade.com (8.2d avg from 3-pkg sample); parcelfromchina.com (4-7 working days); easyparcel.com (4 working days to SA); aramexglobalshopper.com",
+                "verified": true,
+                "flag": "Mid-speed, customs-handled, Africa-friendly routing. Viable DDP/express alternative to DHL at lower cost."
+              },
+              {
+                "carrier": "Alibaba DDP forwarders (air/sea)",
+                "available_to_sa": "Conditional - must be explicitly quoted DDP",
+                "sa_transit_days": "Air DDP 7-25 days; Sea DDP 25-40 days (from aggregated Alibaba supplier-directory page)",
+                "cost": "Air DDP approx $1.20-8.00/kg (aggregated, unverified for our SKUs)",
+                "source": "alibaba.com/supplier/suppliers-for-dropshipping-in-south-africa.html (secondary/aggregated); china2southafrica.co.za; alicouriers.com",
+                "verified": false,
+                "flag": "Most standard Alibaba quotes are EXW/FOB - duties NOT included (china2southafrica.co.za). DDP must be confirmed IN WRITING (alicouriers.com 'fake DDP' warning: if asked to pay duty on arrival it was never DDP). Prioritised per SA rule (README section 4) but UNVERIFIED at product level."
+              }
+            ],
+            "ddp_recommendation": "Prioritise DDP to SA (README section 4 SA-specific rule: avoids customs headaches). For samples/high-value, DHL Express or Aramex (duties prepaid via a DDP forwarder). ePacket is NOT an option to SA. For bulk, confirm a written DDP air/sea quote from a SA-oriented forwarder.",
+            "sa_warehouse_note": "Several CJ/Alibaba-forwarder listings advertise SA/ Africa warehouse or local fulfilment (e.g. CJ local warehouse 2-3 days, Sweet Protrading Africa-focused). UNVERIFIED for our SKUs - to be confirmed by Supervisor before relying on it.",
+            "split_shipment_note": "For high-value orders, recommend splitting shipments to stay under SARS thresholds (de minimis / courier clearance limits). Threshold figure UNVERIFIED - Pricing/Supervisor to confirm with SARS."
+          },
+          "supplier_verification_status": {
+            "criteria": [
+              "order_volume_gt_500",
+              "rating_gt_4_5",
+              "response_time_lt_24h",
+              "sa_shipping_options_and_days",
+              "ddp_available_to_sa"
+            ],
+            "result": "NOT COMPLETED - 0 suppliers passed verification.",
+            "reason": "Per-supplier metrics (order volume, rating, response time, per-product SA shipping, DDP) are not retrievable in this sandbox (platforms are JS-rendered/bot-blocked) and MUST NOT be invented per HARD STOP #2 (No guessed data: never invent supplier costs, shipping times, ratings). The schema UNVERIFIED mechanism is used instead of fabrication.",
+            "real_ddp_forwarder_leads_to_investigate": [
+              {
+                "platform": "Alibaba",
+                "name": "Sweet Protrading (Africa-focused dropshipping)",
+                "note": "Listed on Alibaba supplier directory as offering DDP to South Africa, 8-25 days, low MOQ. AGGREGATED DIRECTORY DATA - not product-specific, not independently verified.",
+                "source": "alibaba.com/supplier/suppliers-for-dropshipping-in-south-africa.html",
+                "verified": false
+              },
+              {
+                "platform": "Alibaba",
+                "name": "ZHTX Freight / Yiwu Eway / Wingspeed / Guangzhou Yuyuan / PT5 China Sourcing",
+                "note": "Directory-listed SA DDP forwarders (air DDP 7-15d, $1.20-8/kg). AGGREGATED, self-reported metrics (e.g. '100% on-time', '<=4h reply') are marketing-page claims, NOT independently verified order-volume/rating.",
+                "source": "alibaba.com/supplier/suppliers-for-dropshipping-in-south-africa.html",
+                "verified": false
+              }
+            ]
+          },
+          "cost_negotiation_draft": {
+            "status": "TEMPLATE ONLY - not sent, not populated with real figures (would require invented numbers). To be completed once a curated supplier shortlist with real unit costs exists.",
+            "message_template": "Hi [SUPPLIER NAME], I'm sourcing [PRODUCT / HS CODE] for the South African market and project [QTY] units/month at steady reorder. Two requests: (1) Please quote your best unit price at MOQ and at [VOLUME] units, targeting a 10-15% improvement on your listed price. (2) Please confirm a WRITTEN DDP quote to [SA CITY / address]: Incoterm = DDP, with import duty AND 15% VAT prepaid and included (not estimated), and name the SA customs broker you use. Also confirm: SA shipping line + transit days, your typical response time, and your sample unit price + sample ship method (DHL/Aramex preferred). Thanks."
+          },
+          "sample_recommendation": {
+            "sample_order_recommended": true,
+            "awaiting_human_approval": "sample_order",
+            "proposed_samples": [
+              "LEAD: mr-0002 Solar power bank 10-20k mAh - customs-cleared (0% duty), strongest ZA demand. Recommend 2-3 unit sample via DDP (DHL/Aramex) to validate build quality + real SA transit.",
+              "RUNNER-UP: mr-0001 USB-C GaN charger + cable - 0% charger duty accessory, complements the power-bank lead. Sample 2-3 units."
+            ],
+            "why_not_others_yet": "mr-0003/0005/0006/0008/0012 excluded until SA duty is verified (HARD STOP #2 - cannot proceed on UNVERIFIED duty). mr-0007/0004/0022/0015 are viable but secondary to the customs-cleared lead.",
+            "hard_stop_note": "HARD STOP #1: NO sample order is placed by this agent. This is a PROPOSAL for human approval at HITL gate 2 (before placing any sample order)."
+          },
+          "recommended_supplier": "UNVERIFIED - no supplier passed verification. Awaiting curated shortlist + real metrics from Supervisor before any recommended_supplier can be named.",
+          "next_action": "negotiate (send the cost-negotiation draft to a Supervisor-provided supplier shortlist to obtain REAL, verifiable unit costs + written DDP-to-SA quotes); then request human approval for sample_order at HITL gate 2. Do NOT place orders.",
+          "hard_stops_status": "No HARD STOP violated. #1 respected (no order placed, no purchase committed); #2 respected (no invented supplier names/prices/transit - all unverifiable supplier metrics flagged UNVERIFIED); #4 untouched (no cost math performed - Pricing owns landed cost via tools/landed_cost.py); #6/#7 clean (no force-push, no secrets); #8/#9 respected (state exists on main; this is one PR)."
+        }
+      }
+    ],
+    "unverified_fields": [
+      "Per-supplier order volume, rating, response time, per-product SA shipping days, and DDP-to-SA availability for ALL candidate products - NOT retrievable in sandbox and MUST NOT be invented (HARD STOP #2). Require a Supervisor-provided curated supplier shortlist with real metrics.",
+      "Exact per-SKU unit_cost_usd / unit_cost_zar for every candidate - no real quote obtained; cost_negotiation_draft is a TEMPLATE, not sent.",
+      "Alibaba DDP forwarder metrics (Sweet Protrading, ZHTX, Yiwu Eway, Wingspeed, etc.) are AGGREGATED directory/marketing claims, not independently verified order-volume/rating - treat as leads only.",
+      "SARS de-minimis / courier clearance threshold for split-shipment guidance - UNVERIFIED; Pricing/Supervisor to confirm with SARS.",
+      "SA local-warehouse / fulfilment-partner availability for our specific SKUs - UNVERIFIED.",
+      "Customs duty for mr-0003/0005/0006/0008/0012 remains UNVERIFIED (carried from market_research) - these candidates are excluded from sampling until verified."
+    ]
   },
   "pricing": {
     "_meta": {
@@ -1033,7 +1200,14 @@
       "append_key": "findings",
       "append_contract": {
         "array": "findings",
-        "each_entry_must_include": ["id", "timestamp", "agent", "confidence", "source", "data"],
+        "each_entry_must_include": [
+          "id",
+          "timestamp",
+          "agent",
+          "confidence",
+          "source",
+          "data"
+        ],
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array.",
         "cost_math_rule": "All cost math must call tools/landed_cost.py. Never re-implement the formula. 15% VAT on customs value is mandatory in every calculation."
       }
@@ -1054,7 +1228,14 @@
       "append_key": "findings",
       "append_contract": {
         "array": "findings",
-        "each_entry_must_include": ["id", "timestamp", "agent", "confidence", "source", "data"],
+        "each_entry_must_include": [
+          "id",
+          "timestamp",
+          "agent",
+          "confidence",
+          "source",
+          "data"
+        ],
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array.",
         "language_rule": "SA English spelling (colour, organise). Rand pricing. Reference Takealot, WhatsApp, PayFast, SnapScan where relevant."
       }
@@ -1075,7 +1256,14 @@
       "append_key": "findings",
       "append_contract": {
         "array": "findings",
-        "each_entry_must_include": ["id", "timestamp", "agent", "confidence", "source", "data"],
+        "each_entry_must_include": [
+          "id",
+          "timestamp",
+          "agent",
+          "confidence",
+          "source",
+          "data"
+        ],
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array.",
         "benchmark_note": "ZA ad CPA benchmark is R150-R300 per conversion (README section 4). Any budget figure is a proposal only until the human approves it at a HITL gate."
       }
@@ -1096,7 +1284,14 @@
       "append_key": "findings",
       "append_contract": {
         "array": "findings",
-        "each_entry_must_include": ["id", "timestamp", "agent", "confidence", "source", "data"],
+        "each_entry_must_include": [
+          "id",
+          "timestamp",
+          "agent",
+          "confidence",
+          "source",
+          "data"
+        ],
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array.",
         "commitment_rule": "Any refund, replacement or customer-facing commitment requires a HITL gate before it is written into a reply."
       }
