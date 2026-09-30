@@ -200,6 +200,9 @@ session to `main`, that is a real violation: halt.
 - PR description must include: what changed, why, tests run, risks, and
   which HARD STOP rules were relevant.
 - Update `shared_state.json` with the session's output.
+- Push the branch to remote BEFORE the session ends. Arena sandboxes are
+  ephemeral — a local commit that is not pushed is permanently lost when
+  the session closes. Push is not optional.
 - **Merge rule:** the human operator must merge this PR to `main` before the
   next session opens. Unmerged PRs do not carry forward. This is the only
   manual step in the loop, and it is non-optional.
