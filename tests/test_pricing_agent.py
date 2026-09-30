@@ -74,6 +74,65 @@ class TestReadiness(unittest.TestCase):
         self.assertTrue(report["sourcing_halted"])
         self.assertIn("NO accept/reject", report["conclusion"])
 
+    def test_verified_supplier_costs_finds_nested_quotes(self):
+        """so-0003 nests its quotes; the audit must not report zero just
+        because the unit cost is inside a ``suppliers`` array."""
+        state = synthetic_state()
+        state["sourcing"]["findings"] = [
+            {
+                "id": "so-9002",
+                "agent": "sourcing",
+                "verified": True,
+                "data": {
+                    "suppliers": [
+                        {"unit_cost_zar": 86.80, "verified": True},
+                        {"unit_cost_zar": 999.0, "verified": False},
+                        {"UNVERIFIED_unit_cost_zar": 1.0, "verified": True},
+                        {"unit_cost_zar": None, "verified": True},
+                    ]
+                },
+            }
+        ]
+        self.assertEqual(pricing.verified_supplier_costs(state), ["so-9002"])
+
+    def test_unverified_finding_does_not_count_as_a_verified_cost(self):
+        state = synthetic_state()
+        state["sourcing"]["findings"] = [
+            {
+                "id": "so-9003",
+                "agent": "sourcing",
+                "verified": False,
+                "data": {"unit_cost_zar": 12.34},
+            }
+        ]
+        self.assertEqual(pricing.verified_supplier_costs(state), [])
+
+    def test_conclusion_changes_when_verified_costs_exist(self):
+        state = synthetic_state()
+        state["sourcing"]["findings"] = [
+            {
+                "id": "so-9002",
+                "agent": "sourcing",
+                "verified": True,
+                "data": {"unit_cost_zar": 86.80},
+            }
+        ]
+        report = pricing.readiness_report(state)
+        self.assertEqual(report["verified_supplier_costs"], ["so-9002"])
+        self.assertIn("VERIFIED supplier unit costs", report["conclusion"])
+        self.assertNotIn("NO accept/reject margin verdict is possible",
+                         report["conclusion"])
+
+    def test_halt_record_is_reported_as_history_not_current_state(self):
+        state = synthetic_state()
+        state["sourcing"]["findings"].append(
+            {"id": "so-9002", "agent": "sourcing", "verified": True,
+             "data": {"unit_cost_zar": 86.80}}
+        )
+        report = pricing.readiness_report(state)
+        self.assertEqual(report["sourcing_halt_findings"], ["so-9001"])
+        self.assertEqual(report["sourcing_findings_after_halt"], ["so-9002"])
+
     def test_lead_candidate_read(self):
         report = pricing.readiness_report(self.state)
         self.assertEqual(report["lead_candidate"], "Test Widget")
@@ -189,6 +248,22 @@ class TestApplyFindings(unittest.TestCase):
         self.assertIn("Supplier unit costs", joined)
         self.assertIn("platform_fees", joined)
         self.assertIn("ATV", joined)
+
+    def test_session_two_unverified_gaps_are_recorded(self):
+        """Schema section 4: every UNVERIFIED_ field in the new findings
+        must also appear in the namespace's unverified_fields array."""
+        allf = self.findings + pricing.build_verdict_findings("x")
+        pricing.apply_findings(self.state, allf, "x")
+        joined = " ".join(self.state["pricing"]["unverified_fields"])
+        for needle in (
+            "shipping_to_sa_zar per unit",
+            "UNVERIFIED_platform_fees_zar",
+            "UNVERIFIED_competitor_median_price_zar",
+            "SARS PRIMARY line-level reading",
+            "UNAPPROVED pending HITL gate 5",
+        ):
+            with self.subTest(needle=needle):
+                self.assertIn(needle, joined)
 
 
 class TestVerdictMatrix(unittest.TestCase):

@@ -91,23 +91,54 @@ def finding(state: Dict, namespace: str, finding_id: str) -> Optional[Dict]:
 # ---------------------------------------------------------------------------
 
 
-def verified_supplier_costs(state: Dict) -> List[str]:
-    """Supplier cost entries with a verified flag, across all namespaces.
+def _iter_verified_unit_costs(node, inherited_verified: bool):
+    """Yield (key, value) for numeric unit-cost fields that are VERIFIED.
 
-    Returns a list of finding ids; empty means NONE verified — the
-    so-0002 halt condition. This is an audit, not a guess.
+    Recurses into nested structures because real quotes nest (so-0003
+    carries a ``suppliers`` array, each entry with its own ``verified``
+    flag). Two rules keep this from laundering a guess into an audit:
+
+      * a field whose name starts with ``UNVERIFIED_`` is never counted,
+        whatever it contains (schema section 4); and
+      * a value only counts when the element holding it — or a parent, for
+        the finding-level flag — is explicitly ``verified: true``.
+    """
+    if isinstance(node, dict):
+        own = node.get("verified")
+        verified = inherited_verified if own is None else own is True
+        for key, val in node.items():
+            if (
+                isinstance(val, (int, float))
+                and not isinstance(val, bool)
+                and "unit_cost" in key.lower()
+                and not key.upper().startswith("UNVERIFIED_")
+            ):
+                if verified:
+                    yield key, float(val)
+            else:
+                yield from _iter_verified_unit_costs(val, verified)
+    elif isinstance(node, list):
+        for item in node:
+            yield from _iter_verified_unit_costs(item, inherited_verified)
+
+
+def verified_supplier_costs(state: Dict) -> List[str]:
+    """Finding ids that carry at least one VERIFIED numeric unit cost.
+
+    Empty means no verified supplier cost exists anywhere in state. This is
+    an audit, not a guess: it reports what state actually contains, so the
+    Supervisor can see when Sourcing has moved on from a halt record.
     """
     verified: List[str] = []
     for ns in ("market_research", "sourcing", "pricing"):
         for entry in state.get(ns, {}).get("findings", []):
-            data = entry.get("data", {})
-            for key, val in data.items():
-                if (
-                    "unit_cost" in key.lower()
-                    and isinstance(val, (int, float))
-                    and entry.get("verified") is True
-                ):
-                    verified.append(entry["id"])
+            found = list(
+                _iter_verified_unit_costs(
+                    entry.get("data", {}), entry.get("verified") is True
+                )
+            )
+            if found and entry.get("id") not in verified:
+                verified.append(entry["id"])
     return verified
 
 
@@ -115,26 +146,57 @@ def readiness_report(state: Dict) -> Dict:
     """What the pricing namespace can and cannot do right now."""
     mr_lead = finding(state, "market_research", "mr-0002")
     sourcing = state.get("sourcing", {})
-    halted = any(
-        "HALTED" in json.dumps(f.get("data", {}).get("routing_decision", ""))
+    halt_ids = [
+        f["id"]
         for f in sourcing.get("findings", [])
-    )
+        if "HALTED" in json.dumps(f.get("data", {}).get("routing_decision", ""))
+    ]
+    halted = bool(halt_ids)
+    cost_ids = verified_supplier_costs(state)
+    # A halt record is history, not necessarily the current state: Sourcing
+    # delivered quotes in later findings (so-0003/so-0004). Say both.
+    later = [
+        f["id"]
+        for f in sourcing.get("findings", [])
+        if halt_ids and f["id"] > halt_ids[-1]
+    ]
+    if cost_ids:
+        conclusion = (
+            f"{len(cost_ids)} finding(s) carry VERIFIED supplier unit costs "
+            f"({', '.join(cost_ids)}), so accept/reject margin verdicts are "
+            "now possible on those inputs (see pricing pr-0005/pr-0006). "
+            "Approvals remain blocked where shipping, platform fees or "
+            "classification are still UNVERIFIED — read the namespace's "
+            "unverified_fields before acting."
+        )
+    else:
+        conclusion = (
+            "NO accept/reject margin verdict is possible: zero verified "
+            "supplier costs exist. Publishable today: maximum-allowable-cost "
+            "break-evens from verified duty + competitor prices + the "
+            "README CPA band."
+        )
     return {
         "verified_duty_lines": sorted(customs.VERIFIED_DUTY_LINES.keys()),
-        "verified_supplier_costs": verified_supplier_costs(state),
+        "verified_supplier_costs": cost_ids,
         "sourcing_halted": halted,
+        "sourcing_halt_findings": halt_ids,
+        "sourcing_findings_after_halt": later,
+        "sourcing_status": (
+            "halt record exists ("
+            + ", ".join(halt_ids)
+            + ") and later sourcing findings "
+            + ("exist: " + ", ".join(later) if later else "do not exist")
+            if halted
+            else "no halt record in state"
+        ),
         "lead_candidate": (
             mr_lead["data"]["product_name"] if mr_lead else None
         ),
         "lead_duty_rate_pct": (
             mr_lead["data"].get("duty_rate_pct") if mr_lead else None
         ),
-        "conclusion": (
-            "NO accept/reject margin verdict is possible: zero verified "
-            "supplier costs exist (so-0002). Publishable today: "
-            "maximum-allowable-cost break-evens from verified duty + "
-            "competitor prices + the README CPA band."
-        ),
+        "conclusion": conclusion,
     }
 
 
@@ -502,6 +564,35 @@ def apply_findings(state: Dict, findings: List[Dict], ts: str) -> Dict:
         "invented median.",
         "mr-0001 charger+cable composite-GRI classification UNVERIFIED "
         "(carried from mr-0001) — confirm before margin runs on bundles.",
+        # --- capability #2 (mr-0002 verdict session) ---
+        "mr-0002 shipping_to_sa_zar per unit: NO supplier displayed an SA "
+        "lane or DDP (so-0003/so-0005). Every pr-0006 block carries "
+        "UNVERIFIED_shipping_to_sa_zar = R161.83, the only figure fetched "
+        "anywhere (Coremax Standard $19.80/2 boxes, destination country "
+        "UNVERIFIED), and R0 is a mathematical bound only. No combination "
+        "in pr-0005 is approvable until a DDP-to-SA per-unit quote exists.",
+        "platform_fees_zar remains UNVERIFIED (pr-0003): pr-0005/pr-0006 "
+        "compute BOTH R0 and R30/order and both are assumptions — "
+        "UNVERIFIED_platform_fees_zar is recorded per block, not a sourced "
+        "fee schedule.",
+        "Competitor price point for the 20,000mAh segment is a single named "
+        "Takealot point (PLID95695632, R699), not a computed category "
+        "median — UNVERIFIED_competitor_median_price_zar is null in every "
+        "pr-0006 block, and the R299/R338 cluster is 10,000mAh evidence "
+        "(segment mismatch recorded in pr-0005).",
+        "SARS PRIMARY line-level reading for 8507.60 is still unread (two "
+        "agreeing secondary sources + SARS corroboration of the heading), "
+        "and the 8541.43 composite alternative remains a source defect. "
+        "Both can only RAISE duty, so they cannot rescue the pr-0006 "
+        "reject.",
+        "The SARS ATV VAT basis is UNAPPROVED pending HITL gate 5 (pr-0004): "
+        "the 'atv' cells in pr-0005 are sensitivity only, and "
+        "tools/landed_cost.evaluate_pricing() refuses that basis, so no "
+        "verdict rests on it.",
+        "mr-0002 volume tiers are not usable as entry prices: the >=500-box "
+        "Coremax tier (R68.49) has UNVERIFIED box contents, and Quark's "
+        "displayed tiers are UNVERIFIED as to 10,000 vs 20,000mAh variant. "
+        "Only entry-MOQ prices feed the pr-0005 matrix.",
     ]
     for line in extra:
         if line not in ns["unverified_fields"]:
