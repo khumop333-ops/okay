@@ -1746,11 +1746,11 @@
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
       }
     },
-    "timestamp": "2026-09-29T22:43:03.976316+02:00",
+    "timestamp": "2026-09-30T09:39:10+02:00",
     "agent": "sourcing",
-    "confidence": 5,
-    "source": "so-0001 (web research) + so-0002 (bash network diagnostic + supervisor directive, PR #3)",
-    "verified": false,
+    "confidence": 6,
+    "source": "so-0003 (mr-0002 solar power bank supplier quotes) + so-0004 (mr-0003 LED emergency light supplier quotes); incremental push discipline per session push rule",
+    "verified": true,
     "findings": [
       {
         "id": "so-0001",
@@ -1921,6 +1921,147 @@
           "hard_stops_status": "No HARD STOP violated. #1 (no order/purchase), #2 (no invented data — halted rather than fabricate; did NOT promote unverified to verified; withdrew the shortlist request), #6/#7 (no force-push/secrets), #8/#9 (state on main; one PR) respected.",
           "next_action_for_supervisor": "Decide on the bash TLS tooling gap. Then route to Market Research to (re)verify candidates with real source URLs so Sourcing has verified:true inputs in a follow-up session. Do NOT provide a curated supplier list (would be invented data)."
         }
+      },
+      {
+        "id": "so-0003",
+        "timestamp": "2026-09-30T09:39:10+02:00",
+        "agent": "sourcing",
+        "confidence": 6,
+        "source": "fetch_page on: https://www.aliexpress.com/w/wholesale-solar-power-bank.html; https://electronics.alibaba.com/supplier/power-bank-charger-20000mah (all fetched & read 2026-09-30). FX: x-rates.com USD/ZAR table 16.345073 (page-dated 2026-01-01 - STALE, disclosed).",
+        "verified": true,
+        "verified_scope": "verified=true applies ONLY to the fetched-quote fields marked verified in each supplier entry; every not-observable field is UNVERIFIED_-prefixed",
+        "data": {
+          "record_type": "supplier_quotes",
+          "product_id": "mr-0002",
+          "product": "Solar power bank 20,000 mAh (solar charging, LED, built-in cables)",
+          "hs_code": "8507.60 @0% (mr-0034, verified); 8541.43 composite alternative OPEN",
+          "quotes_fetched_count": 2,
+          "suppliers": [
+            {
+              "platform": "AliExpress",
+              "supplier_name": null,
+              "UNVERIFIED_supplier_name": "AliExpress store name not exposed in server-rendered list page; item page is JS-gated in this sandbox",
+              "supplier_url": "https://www.aliexpress.com/w/wholesale-solar-power-bank.html (item 3256811681367819 -> https://www.aliexpress.us/item/3256811681367819.html)",
+              "listing_title": "20000mAh Portable Solar Power Bank Dual LED Lights 4 Built-in Cables Fast Charging for iPhone Android Phones AirPods",
+              "unit_cost_usd": 10.31,
+              "unit_cost_usd_context": "page price fetched 2026-09-30; struck-through list $57.62 at -82%; 'New shoppers save $47.31' banner present, so $10.31 is the current displayed promo price",
+              "unit_cost_zar": null,
+              "moq": 1,
+              "moq_note": "single-item retail listing; MOQ 1 implied by retail platform",
+              "rating_observed": "4.9 (75 sold)",
+              "shipping_to_sa_days": null,
+              "UNVERIFIED_shipping_to_sa_days": "list page shows no SA lane; gateway rendered as US (aliexpress.us) with 'United States' ship-from filter",
+              "shipping_cost_per_unit_zar": null,
+              "UNVERIFIED_shipping_cost_per_unit_zar": "no SA shipping quote visible on fetched page",
+              "ddp_available": null,
+              "UNVERIFIED_ddp_available": "not stated on fetched page",
+              "reliability_score": null,
+              "UNVERIFIED_reliability_score": "store-level order volume / response time not retrievable in sandbox",
+              "verified": true,
+              "verified_scope": "unit price, rating (4.9), 75 sold, item id — all read from fetched page",
+              "fetch_date": "2026-09-30",
+              "notes": "20,000mAh-class unit at $10.31 promo. Unit cost alone ~R169 at stale Jan-2026 FX (see so-0003 fx note) — already above the R90 total landed target before any shipping/VAT; finding to be reported, not hidden. Battery cargo: courier lithium restrictions apply."
+            },
+            {
+              "platform": "Alibaba",
+              "supplier_name": "Guangzhou Coremax New Energy Technology Co., Ltd.",
+              "supplier_url": "https://kms9.en.alibaba.com/ (product: https://www.alibaba.com/product-detail/New-Trending-Waterproof-20000Mah-Solar-Charger_1601727591668.html)",
+              "listing_title": "New Trending Waterproof 20000Mah Solar Charger Outdoor Travel Solar Charger Power Bank",
+              "unit_cost_usd_min": 4.66,
+              "unit_cost_usd_max": 5.9,
+              "unit_cost_usd": 4.66,
+              "unit_cost_usd_context": "tier range $4.66-5.90 as displayed on supplier hub page fetched 2026-09-30",
+              "unit_cost_zar": null,
+              "moq": null,
+              "moq_displayed": "2 boxes (box count not defined on fetched page)",
+              "supplier_metrics_observed": {
+                "age": "1 yr on platform",
+                "matches": "4/4",
+                "inquiry_rank": "Top 20% for inquiries in Power Banks & Power Station",
+                "reorder_rate": "<15%",
+                "on_time_delivery": "100.0%",
+                "response_time": "≤5h reply (meets <24h requirement)",
+                "transactions": "US $3,900+ (platform-displayed figure; NOT >500 order volume — order-count metric not exposed)"
+              },
+              "shipping_to_sa_days": null,
+              "UNVERIFIED_shipping_to_sa_days": "not shown on fetched hub/product pages; requires RFQ",
+              "shipping_cost_per_unit_zar": null,
+              "UNVERIFIED_shipping_cost_per_unit_zar": "not shown on fetched pages",
+              "ddp_available": null,
+              "UNVERIFIED_ddp_available": "not shown on fetched pages",
+              "reliability_score": 6,
+              "reliability_score_basis": "platform-displayed metrics only (100% on-time, ≤5h reply, <15% reorder) BUT 1-yr store age and only $3,900 displayed transactions — thin history; score provisional, order-count >500 check UNMET/UNVERIFIED",
+              "verified": true,
+              "verified_scope": "supplier name, store URL, price range, MOQ string, platform metrics — all read from fetched page",
+              "fetch_date": "2026-09-30",
+              "notes": "Lowest hard unit cost so far ($4.66-5.90 ≈ R76-96 @ stale FX). Verified-supplier status NOT claimed on this profile (no 'verified' badge observed in fetch)."
+            }
+          ],
+          "fx_note": "unit_cost_zar conversions deferred until a CURRENT USD/ZAR rate is fetched; stale-rate indicative conversions are labelled, never silently used",
+          "target_note": "Session target: landed cost <= R90 at CPA R150 / R299 retail. Interim observation only (Pricing owns landed-cost math): cheapest hard unit cost fetched is $4.66-5.90 (Alibaba Coremax) - unit cost alone approaches/exceeds R90 before shipping, VAT(15%) and any duty; the R90 target looks UNREACHABLE on fetched quotes. Lowest achievable will be stated in the final finding; formal computation deferred to Pricing/tools/landed_cost.py.",
+          "recommended_supplier": null,
+          "UNVERIFIED_recommended_supplier": "final recommendation withheld until 3rd supplier + SA-shipping data lands",
+          "sample_order_recommended": null,
+          "UNVERIFIED_sample_order_recommended": "not yet determinable - supplier set incomplete this push (incremental push per quote per HARD-STOP-adjacent push rule)",
+          "awaiting_human_approval": "sample_order",
+          "next_action": "negotiate",
+          "no_order_placed": "HARD STOP #1 honoured: no sample ordered, no purchase committed; recommendation only",
+          "sars_primary_850760": "PENDING - this push is mid-session",
+          "composite_854143": "PENDING - this push is mid-session"
+        }
+      },
+      {
+        "id": "so-0004",
+        "timestamp": "2026-09-30T09:39:10+02:00",
+        "agent": "sourcing",
+        "confidence": 6,
+        "source": "fetch_page on: https://www.aliexpress.com/w/wholesale-rechargeable-led-emergency-light.html (all fetched & read 2026-09-30). FX: x-rates.com USD/ZAR table 16.345073 (page-dated 2026-01-01 - STALE, disclosed).",
+        "verified": true,
+        "verified_scope": "verified=true applies ONLY to the fetched-quote fields marked verified in each supplier entry; every not-observable field is UNVERIFIED_-prefixed",
+        "data": {
+          "record_type": "supplier_quotes",
+          "product_id": "mr-0003",
+          "product": "Rechargeable LED / solar emergency light (portable)",
+          "hs_code": "8513.10 @0% (mr-0028, verified)",
+          "quotes_fetched_count": 1,
+          "suppliers": [
+            {
+              "platform": "AliExpress",
+              "supplier_name": null,
+              "UNVERIFIED_supplier_name": "AliExpress store name not exposed in server-rendered list page ('Sold By: NITEK Light Store(Trader)' was visible only on a DIFFERENT, now-unavailable item page fetched via search snippet; not attributable to this listing)",
+              "supplier_url": "https://www.aliexpress.com/w/wholesale-rechargeable-led-emergency-light.html (item 3256812349912434 -> https://www.aliexpress.us/item/3256812349912434.html)",
+              "listing_title": "4/10 Pack Rechargeable Emergency Light Bulbs A19, Camping Lamp Battery Powered LED Light Bulb 3000K Daylight E26 E27 15W Equivalent 60W with 1200mAh for Home Power Outage Camping Hurricane Incandescent Light Emergency Light Bulb",
+              "product_fit_note": "Rechargeable self-powered LED lamp (E27 bulb form) — inside the mr-0003 'portable rechargeable emergency light' brief and HS 8513.10's portable-lamp scope; bulb-vs-lantern format flagged for Supervisor/Listing",
+              "unit_cost_usd": 1.09,
+              "unit_cost_usd_context": "page price fetched 2026-09-30; struck-through $59.55 at -98% (promo pricing; 'Early bird deal, only 3 left'); pack size for $1.09 not stated in fetched chunk — per-unit basis UNVERIFIED",
+              "unit_cost_zar": null,
+              "moq": 4,
+              "moq_note": "title implies 4/10-pack options; minimum purchasable pack for the displayed price not confirmed — UNVERIFIED",
+              "rating_observed": "5 (7 sold)",
+              "shipping_to_sa_days": null,
+              "UNVERIFIED_shipping_to_sa_days": "no SA lane on fetched page",
+              "shipping_cost_per_unit_zar": null,
+              "UNVERIFIED_shipping_cost_per_unit_zar": "not shown",
+              "ddp_available": null,
+              "UNVERIFIED_ddp_available": "not shown",
+              "reliability_score": null,
+              "UNVERIFIED_reliability_score": "store metrics not retrievable; only 7 sold observed",
+              "verified": true,
+              "verified_scope": "displayed price, rating, sold count, item id — read from fetched page",
+              "fetch_date": "2026-09-30",
+              "notes": "Second item on same fetched page: 'Rechargeable Emergency Light Bulbs 6/10Pack ... 1200mAh' $16.13 (list $89.37, -81%), 5, 7 sold, FREE SHIPPING badge, item 3256812354418209 — recorded as corroboration."
+            }
+          ],
+          "fx_note": "unit_cost_zar conversions deferred until a CURRENT USD/ZAR rate is fetched; stale-rate indicative conversions are labelled, never silently used",
+          "target_note": "Session target: landed cost <= R120 at CPA R150 / R349 retail. Interim observation only (Pricing owns landed-cost math): fetched unit cost $1.09 (pack-basis UNVERIFIED) sits far below the target BEFORE shipping/VAT - target plausible; formal computation deferred to Pricing/tools/landed_cost.py.",
+          "recommended_supplier": null,
+          "UNVERIFIED_recommended_supplier": "final recommendation withheld until 3rd supplier + SA-shipping data lands",
+          "sample_order_recommended": null,
+          "UNVERIFIED_sample_order_recommended": "not yet determinable - supplier set incomplete this push (incremental push per quote per HARD-STOP-adjacent push rule)",
+          "awaiting_human_approval": "sample_order",
+          "next_action": "negotiate",
+          "no_order_placed": "HARD STOP #1 honoured: no sample ordered, no purchase committed; recommendation only"
+        }
       }
     ],
     "unverified_fields": [
@@ -1930,8 +2071,14 @@
       "SARS de-minimis / courier clearance threshold for split-shipment guidance - UNVERIFIED; Pricing/Supervisor to confirm with SARS.",
       "SA local-warehouse / fulfilment-partner availability for our specific SKUs - UNVERIFIED.",
       "Customs duty for mr-0003/0005/0006/0008/0012 remains UNVERIFIED (carried from market_research) - these candidates are excluded from sampling until verified.",
-      "bash sandbox TLS/HTTPS egress is blocked (DNS+TCP OK, TLS handshake fails). Public supplier pages cannot be fetched from bash; rely on agent web tools or restore bash HTTPS egress. No candidate currently carries verified:true, so Sourcing remains halted and routes back to Market Research."
-    ]
+      "bash sandbox TLS/HTTPS egress is blocked (DNS+TCP OK, TLS handshake fails). Public supplier pages cannot be fetched from bash; rely on agent web tools or restore bash HTTPS egress. No candidate currently carries verified:true, so Sourcing remains halted and routes back to Market Research.",
+      "so-0003/so-0004: per-supplier order volume (>500 check) - platform order-COUNT not exposed on fetched pages (Alibaba exposes US$ transaction totals, AliExpress exposes per-item sold counts only); MUST NOT be invented (HARD STOP #2).",
+      "so-0003/so-0004: AliExpress store names for the quoted items - item pages JS-gated in sandbox; store attribution UNVERIFIED.",
+      "so-0003/so-0004: shipping_to_sa_days, shipping_cost_per_unit_zar, ddp_available for every quoted supplier - no SA lane rendered to this sandbox session; requires supplier RFQ. Do NOT infer from platform marketing pages.",
+      "so-0003: SARS primary-source retry for 8507.60 and the 8541.43 composite-classification question - see cross_checks in so-0003; open until resolved this session.",
+      "fx_rate: current USD/ZAR rate not yet obtained; x-rates.com table fetched but page-dated 2026-01-01 (stale). ZAR figures converted with it must be labelled stale."
+    ],
+    "verified_scope": "namespace-level verified=true refers ONLY to quote fields actually fetched and read this session (each supplier entry carries its own verified + verified_scope); all store-level/SA-lane fields that could not be observed are UNVERIFIED_-prefixed and listed in unverified_fields"
   },
   "pricing": {
     "_meta": {
