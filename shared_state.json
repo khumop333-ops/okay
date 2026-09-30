@@ -25,10 +25,10 @@
       "must_never": "Execute sub-agent tasks directly (README section 3)",
       "append_key": "sessions"
     },
-    "timestamp": "2026-09-27T18:42:18+02:00",
+    "timestamp": "2026-09-30T08:15:38+02:00",
     "agent": "supervisor",
-    "confidence": 10,
-    "source": "README.md section 7 (Supervisor initialises the top-level structure of shared_state.json)",
+    "confidence": 9,
+    "source": "Session 01a0f0e5 (Supervisor, operator-directed close-out): process-failure record sup-0001 appended to supervisor.findings. Facts verified directly this session against primary sources: git log --all (full 15-commit history; NEXT_SESSION_HANDOFF.md never existed in any commit; mr-0028+ appears in no version of this file), git branch -a + git ls-remote origin (main + 4 arena branches, all merged), gh pr list --state all (4 PRs, all MERGED, none contains the handoff), git cat-file -t 21b39b6 + git fsck --lost-found (not a valid object; no dangling objects). The root_cause narrative in sup-0001 is operator-provided; the absence facts it rests on were directly verified.",
     "verified": true,
     "sessions": [
       {
@@ -122,6 +122,24 @@
           "Agent correctness note, see agent_error_log: the operator's 'Phase 0, README section 9' citation was correct and the agent wrongly 'corrected' it against a stale README.",
           "Historical: the option panel recorded 'halt' for the branch-naming question while the written operator direction said to proceed on the pinned branch. The written direction was treated as operative. No code, spend, or git safety rule was affected either way."
         ]
+      }
+    ],
+    "findings": [
+      {
+        "id": "sup-0001",
+        "timestamp": "2026-09-30T08:15:38+02:00",
+        "agent": "supervisor",
+        "confidence": 9,
+        "source": "this session — confirmed via git log, git branch -a, and gh pr list",
+        "verified": true,
+        "data": {
+          "type": "process_failure",
+          "severity": "high",
+          "description": "Prior Market Research session (claimed commit 21b39b6, findings mr-0028..mr-0037) was never pushed to remote. Arena sandbox is ephemeral — local commits are destroyed when the session ends. Verification work is permanently lost.",
+          "root_cause": "Agent committed locally but did not push before session ended. HARD STOP #9 requires merge before next session, but does not explicitly require push before session end.",
+          "impact": "Nine candidates (mr-0003/0005/0006/0008/0012/0002/0021/0023/0025) revert to unverified in state on main. Sourcing remains blocked.",
+          "mitigation": "Amend README §8 to add: 'A session MUST push its commit to a remote branch before ending. Work that exists only in the local sandbox is lost. Push early, push often.'"
+        }
       }
     ]
   },
