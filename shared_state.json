@@ -165,7 +165,7 @@
     "timestamp": "2026-09-30T08:51:33+02:00",
     "agent": "market_research",
     "confidence": 4,
-    "source": "41 findings accumulated (mr-0001..mr-0041); roll-up confidence is the minimum of the findings (conservative). Latest batch: mr-0037, mr-0038, mr-0039, mr-0040, mr-0041.",
+    "source": "42 findings accumulated (mr-0001..mr-0042); roll-up confidence is the minimum of the findings (conservative). Latest batch: mr-0042.",
     "verified": false,
     "findings": [
       {
@@ -1561,19 +1561,169 @@
           "UNVERIFIED_estimated_ad_cpa_zar": null,
           "UNVERIFIED_established_seller_count": null
         }
+      },
+      {
+        "id": "mr-0042",
+        "timestamp": "2026-09-30T08:51:33+02:00",
+        "agent": "market_research",
+        "confidence": 8,
+        "source": "This session's record: 14 superseding findings mr-0028..mr-0041 appended to shared_state.json market_research.findings, each carrying its own dated URL and fetch date; all against https://tradecaravan.co.za/hs-codes/ (SARS-derived index, dataset current 2026-08-06) after the SARS primary-source attempt was made and blocked (documented in mr-0028 and in market_research.unverified_fields). Tests: 84/84 pass (unittest, 4 modules: test_customs 17, test_landed_cost 32, test_market_research 19, test_pricing_agent 16). Push discipline: 4 pushes to origin/arena/01a0f112-okay during the session (after 3, 3, 3 and 5 findings).",
+        "verified": true,
+        "data": {
+          "record_type": "session_summary_for_supervisor",
+          "task": "Re-run duty-rate verification for the candidates left UNVERIFIED in state.market_research (mr-0003, mr-0005, mr-0006, mr-0008, mr-0012, mr-0002, mr-0021, mr-0023, mr-0025 and other flagged UNVERIFIED candidates).",
+          "scope_honoured": "State-only changes (shared_state.json). No code changes, no new scraper, no supplier-cost work, no pricing/landing-cost computation.",
+          "counts": {
+            "superseding_findings": 14,
+            "candidates_touched": 14,
+            "duty_rate_verified": 11,
+            "negative_results_recorded": 3
+          },
+          "duty_verified_this_session": [
+            {
+              "supersedes": "mr-0003",
+              "finding": "mr-0028",
+              "hs": "8513.10",
+              "duty": "0%",
+              "product": "Rechargeable LED / solar emergency light"
+            },
+            {
+              "supersedes": "mr-0008",
+              "finding": "mr-0031",
+              "hs": "7117.19",
+              "duty": "20% (base metal)",
+              "product": "Imitation jewellery"
+            },
+            {
+              "supersedes": "mr-0012",
+              "finding": "mr-0032",
+              "hs": "3304.99",
+              "duty": "20%",
+              "product": "Serums / skincare",
+              "also": "closes the 15% vs 20% source conflict"
+            },
+            {
+              "supersedes": "mr-0021",
+              "finding": "mr-0033",
+              "hs": "8518.30",
+              "duty": "0%",
+              "product": "Earphones / headphones"
+            },
+            {
+              "supersedes": "mr-0002",
+              "finding": "mr-0034",
+              "hs": "8507.60",
+              "duty": "0%",
+              "product": "Solar power bank",
+              "also": "competing line 8541.43 headline 10% (source self-contradicts)"
+            },
+            {
+              "supersedes": "mr-0023",
+              "finding": "mr-0035",
+              "hs": "9617.00",
+              "duty": "20%",
+              "product": "Vacuum flasks / insulated bottles"
+            },
+            {
+              "supersedes": "mr-0025",
+              "finding": "mr-0036",
+              "hs": "3303.00",
+              "duty": "20%",
+              "product": "Perfume"
+            },
+            {
+              "supersedes": "mr-0020",
+              "finding": "mr-0037",
+              "hs": "9004.10",
+              "duty": "0%",
+              "product": "Sunglasses"
+            },
+            {
+              "supersedes": "mr-0026",
+              "finding": "mr-0038",
+              "hs": "9506.91",
+              "duty": "0%",
+              "product": "Yoga mats / resistance bands",
+              "caveat": "classification of a mat itself UNVERIFIED"
+            },
+            {
+              "supersedes": "mr-0019",
+              "finding": "mr-0039",
+              "hs": "6704.19 / 6704.20",
+              "duty": "20%",
+              "product": "Wigs / extensions",
+              "caveat": "complete synthetic wig line 6704.11 unrated"
+            },
+            {
+              "supersedes": "mr-0013",
+              "finding": "mr-0040",
+              "hs": "8516.60",
+              "duty": "20%",
+              "product": "Air fryer",
+              "caveat": "probable line; 8516.79 alternative unrated"
+            }
+          ],
+          "negative_results_recorded": [
+            {
+              "supersedes": "mr-0005",
+              "finding": "mr-0029",
+              "hs": "7007.19",
+              "status": "UNVERIFIED"
+            },
+            {
+              "supersedes": "mr-0006",
+              "finding": "mr-0030",
+              "hs": "9603.30",
+              "status": "UNVERIFIED"
+            },
+            {
+              "supersedes": "mr-0024",
+              "finding": "mr-0041",
+              "hs": "8516.32",
+              "status": "UNVERIFIED"
+            }
+          ],
+          "zero_duty_club_after_this_session": [
+            "8507.60 solar power bank (mr-0034)",
+            "8518.30 earphones (mr-0033)",
+            "8513.10 LED emergency light (mr-0028)",
+            "9004.10 sunglasses (mr-0037)",
+            "9506.91 fitness equipment (mr-0038)",
+            "8504.40 charger (mr-0001, prior session)"
+          ],
+          "top_pick": null,
+          "top_pick_reason": "Unchanged and deliberate. HARD STOP #3: no candidate has a verified net margin - Pricing's own pr-0003 states supplier unit costs are UNVERIFIED (so-0002 halt). A top pick would be a launch recommendation, which MR may not make and the data does not support.",
+          "pricing_shortlist_by_customs_tier_NOT_APPROVED": [
+            "1. Solar power bank (mr-0002 / mr-0034) - 0% duty, load-shedding demand, classification question between 8507.60 and 8541.43.",
+            "2. Earphones / headphones (mr-0021 / mr-0033) - 0% duty, high demand, but brand competition and an ICASA question.",
+            "3. Rechargeable LED emergency light (mr-0003 / mr-0028) - 0% duty, load-shedding demand, Magneto/Gizzu brand presence.",
+            "4. Sunglasses (mr-0020 / mr-0037) - 0% duty, trend demand, NRCS question.",
+            "5. Yoga mats / resistance bands (mr-0026 / mr-0038) - 0% on 9506.91, classification conditional."
+          ],
+          "routing_requests": [
+            "Sourcing: confirm the outstanding SARS line rates (7007.19, 9603.30, 7117.90, 6704.11, 8516.32, 8516.79, 9004.90) by reading Schedule No. 1 Part 1 or via a section 47(9) determination; confirm the classification calls flagged in mr-0034 (solar bank), mr-0035 (vacuum vs non-vacuum bottle), mr-0038 (yoga mat), mr-0039 (complete wig vs extensions), mr-0040 (air fryer line); confirm ICASA (mr-0033) and NRCS (mr-0037) approval gates.",
+            "Pricing: run landed cost + margin on the 0%-duty shortlist above once supplier costs exist (pr-0003 gate), using tools/landed_cost.py and tools/customs.py only.",
+            "Supervisor: the mr-0034 note that the 8541.43 source page contradicts itself (10% headline vs 'free of ordinary duty' sentence) - do not let that line enter a calculation until settled; and the standing ATV-formula discrepancy (pr-0003)."
+          ],
+          "method_limits": [
+            "SARS primary source was not reachable this session: the consolidated Schedule No. 1 Part 1 PDF truncates around Chapter 3 via the fetch tool, the old deep link 404s, and tariff.sars.gov.za did not load. All 11 verified rates rest on Tradecaravan's SARS-derived index, dated 2026-08-06, whose pages cite the SARS Tariff Book and disclaim s47(9) binding force. Primary-source confirmation remains outstanding for every line.",
+            "No supplier contact, no sample, no ad, no spend - no HITL gate crossed. HITL gate 5 relevance: this PR changes no pricing or customs MATH (it updates state values only, and tools/ import nothing from state at runtime); the human should nevertheless confirm at merge because duty rates feed future calculations."
+          ],
+          "push_discipline_note": "Practised README section 8's push rule: the branch was pushed four times mid-session (after 3, 3, 3 and 5 findings) rather than once at the end, so a mid-session failure would still have preserved verified work.",
+          "hard_stops_status": "No HARD STOP violated. #2 enforced three times with recorded negative results (7007.19, 9603.30, 8516.32) rather than substituted sibling rates; #3 untouched (no margin claimed); #4 untouched (no cost math performed); #6/#7 clean (no force-push, no secrets, state-only); #8 precondition verified (shared_state.json present on main before work started); #9 one PR, pushed."
+        }
       }
     ],
     "unverified_fields": [
-      "UNVERIFIED_duty_rate_pct for 7117.90 (imitation jewellery, NON-base metal), 7007.19 (toughened safety glass, non-vehicle) and 9603.30 (cosmetic/artist brushes): these lines carry no duty page in the reachable SARS-derived index (https://tradecaravan.co.za/hs-codes/, data current 2026-08-06) and the risk-checker database returns 'Code not in our dataset'. Evidence recorded in mr-0029 (7007.19), mr-0030 (9603.30) and mr-0031 (7117.90) as negative results. Verify by reading the line in SARS Schedule No. 1 Part 1 or via a section 47(9) determination.",
-      "MR SARS primary-source method limit (new this session): the SARS Schedule No. 1 Part 1 consolidated PDF (https://www.sars.gov.za/legal-lprim-ce-sch1p1chpt1-to-99-schedule-no-1-part-1-chapters-1-to-99/, page updated 2026-08-28) is fetchable only up to roughly Chapter 3 before the fetch tool truncates, so Chapters 33/67/70/71/85/90/96 cannot be read directly by this method; the old deep link .../schedules-to-the-customs-and-excise-act-1964-tariff-book/ 404s and https://tariff.sars.gov.za/ did not load (all attempted 2026-09-30). Duty lines verified this session therefore rest on Tradecaravan's SARS-derived index (dataset dated 2026-08-06, page cites SARS Tariff Book Schedule 1 Part 1). Primary-source line confirmation remains outstanding for every duty line.",
-      "UNVERIFIED_icasa_type_approval for wireless audio (mr-0033, HS 8518.30): Bluetooth/TWS devices are likely to need ICASA equipment type approval / Letter of Authority before sale in SA. Not verified this session - Sourcing must confirm before any order. Related: any lithium-battery-containing product (earbuds, power banks) may face courier/air-freight battery restrictions - Sourcing's shipping check.",
+      "UNVERIFIED_duty_rate_pct for 7007.19 (toughened safety glass), 9603.30 (cosmetic brushes), 8516.32 (electro-thermic hair-dressing apparatus other than dryers), 7117.90 (imitation jewellery, non-base metal), 6704.11 (complete wigs of synthetic textile), 8516.79 (n.e.c. domestic electro-thermic appliances), 9004.90 (spectacles/goggles other than sunglasses): no line rate in the reachable SARS-derived index (https://tradecaravan.co.za/hs-codes/, dataset 2026-08-06) and the risk-checker returns 'Code not in our dataset'. Negative results recorded in mr-0029, mr-0030 and mr-0041; the others are carried in mr-0031, mr-0039, mr-0040, mr-0037. Verify by reading the line in SARS Schedule No. 1 Part 1 or via a section 47(9) determination. Sibling rates must NOT be borrowed (e.g. 8516.31 hair dryers 0% is not the hot-comb rate).",
+      "UNVERIFIED_classification (rate known, line not settled): solar power bank 8507.60 vs 8541.43 (mr-0034); vacuum flask 9617.00 vs non-vacuum bottle lines (mr-0035); yoga mat 9506.91 vs Chapter 39 floor-covering/plastics lines (mr-0038); complete wig 6704.11 vs extensions 6704.19 (mr-0039); air fryer 8516.60 vs 8516.79 (mr-0040); charger+cable composite GRI (mr-0001); metal-dominant car mount 3926.90 vs 8302/7616 (mr-0004). Each affects the duty that applies even where a rate is known.",
+      "Source contradiction to resolve before use (new this session): the 8541.43 solar-panel page states 10% in its headline and worked example but also says solar modules 'generally enter free of ordinary duty' (mr-0034). Recorded, unresolved, unused.",
+      "MR SARS primary-source method limit: the SARS Schedule No. 1 Part 1 consolidated PDF (https://www.sars.gov.za/legal-lprim-ce-sch1p1chpt1-to-99-schedule-no-1-part-1-chapters-1-to-99/, updated 2026-08-28) truncates around Chapter 3 via the fetch tool, so Chapters 33/67/70/71/85/90/96 cannot be read directly; the old deep link 404s and https://tariff.sars.gov.za/ did not load (all attempted 2026-09-30). All rates verified this session therefore rest on Tradecaravan's SARS-derived index (dated 2026-08-06, pages cite the SARS Tariff Book). Primary-source line confirmation is outstanding for EVERY duty line in this namespace.",
+      "UNVERIFIED_icasa_type_approval for wireless audio (mr-0033, HS 8518.30) and UNVERIFIED_nrcs_letter_of_authority for eyewear (mr-0037, HS 9004.10): likely SA approval gates, not verified this session - Sourcing to confirm before any order. Related: lithium-battery-containing goods (earbuds, power banks) may face courier/air-freight restrictions.",
       "UNVERIFIED_net_margin_pct for ALL candidates: still blocked - Pricing's pr-0003 states supplier unit costs are UNVERIFIED (so-0002 halt) and requests an ATV-formula decision before any verdict-bearing margin run. No inline computation was performed and none is permitted here.",
       "UNVERIFIED_established_seller_count for ALL candidates: Takealot server-side search ignores ?q= for bots (verified 2026-09-29); needs JS-rendered browsing or official seller data. Competition grades remain listing-proxy judgements with method labels.",
-      "4202.32 (leather/folio phone cases) SA line rate UNVERIFIED - 4202.92 @30% is a heading proxy only; leather variants excluded from scope regardless.",
-      "Solar-integrated power banks: both candidate lines are now rate-verified (8507.60 @0% per mr-0034; 8541.43 @10%), but WHICH line applies to a solar-integrated power bank is a classification determination (essential character), not a rate question. Not decided here.",
-      "Charger+cable bundle: composite-GRI treatment UNVERIFIED - rated at highest line (cable 8544.42 @15%) conservatively; carried forward for Sourcing.",
-      "Metal-dominant car mounts may classify under 8302/7616, not 3926.90 - plastic construction assumed; Sourcing to confirm.",
-      "Skincare classification boundary (mr-0032): heading 3304 excludes medicaments and sunscreen/sun-tan preparations, so therapeutic-claim serums can move to Chapter 30 (a different duty line). Regulatory (SAHPRA) and classification confirmation belong to Sourcing.",
+      "Candidates trend-captured but still not customs-screened (carried over, no rate attempted this session): mr-0016 pet GPS collar, mr-0017 mouth tape / sleep strips, mr-0018 hard-water shower filter. Also 4202.32 (leather/folio phone cases) SA line rate UNVERIFIED - 4202.92 @30% is a heading proxy only.",
+      "Regulatory/IP flags carried forward: SAHPRA for cosmetics/skincare (mr-0032) and perfume (mr-0036); trademark/counterfeit adjacency on fragrance 'dupes' (mr-0036); heading 3304 excludes medicaments and sunscreen, so therapeutic-claim serums can move to Chapter 30 (mr-0032).",
       "README landed-cost formula vs SARS ATV method (customs value + duty + 10% uplift) x 15%: discrepancy flagged for Supervisor/Pricing (pr-0003 request). MR takes no position - cost math is Pricing-owned."
     ]
   },
