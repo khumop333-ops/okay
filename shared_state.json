@@ -1746,10 +1746,10 @@
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
       }
     },
-    "timestamp": "2026-09-30T09:41:07+02:00",
+    "timestamp": "2026-09-30T09:42:57+02:00",
     "agent": "sourcing",
-    "confidence": 6,
-    "source": "so-0003 (mr-0002 solar power bank supplier quotes) + so-0004 (mr-0003 LED emergency light supplier quotes); incremental push discipline per session push rule",
+    "confidence": 7,
+    "source": "so-0003 (mr-0002 quotes + both mandatory cross-checks), so-0004 (mr-0003 quotes), so-0005 (session summary for Supervisor). 6 supplier quotes + 4 cross-check pages fetched & read 2026-09-30; FX Google Finance 16.3460.",
     "verified": true,
     "findings": [
       {
@@ -1926,8 +1926,8 @@
         "id": "so-0003",
         "timestamp": "2026-09-30T09:41:07+02:00",
         "agent": "sourcing",
-        "confidence": 6,
-        "source": "fetch_page on: https://www.aliexpress.com/w/wholesale-solar-power-bank.html; https://electronics.alibaba.com/supplier/power-bank-charger-20000mah (all fetched & read 2026-09-30). FX: x-rates.com USD/ZAR table 16.345073 (page-dated 2026-01-01 - STALE, disclosed).",
+        "confidence": 7,
+        "source": "fetch_page, all fetched & read 2026-09-30: https://www.aliexpress.com/w/wholesale-solar-power-bank.html; https://electronics.alibaba.com/supplier/power-bank-charger-20000mah; https://www.alibaba.com/product-detail/New-Trending-Waterproof-20000Mah-Solar-Charger_1601727591668.html; https://www.alibaba.com/product-detail/2025-Trending-Outdoor-Solar-Power-Bank_11000031677557.html; cross-checks: https://www.sars.gov.za/legal-lprim-ce-schtb-index-to-tariff-book/ (2 chunks); https://www.sars.gov.za/customs-and-excise/prohibited-restricted-and-counterfeit-goods/whats-new-prohibited-and-restricted-imports-and-exports-list/; https://jlog.co.za/hs-code/hs-8507-60-... (SA 8507.60 line, updated 2026-07-04); https://dutiable.io/hs-code/power-batteries/solar-power-bank; https://rulings.cbp.gov/ruling/N180696 (body JS-gated, text via official-page excerpt). FX: Google Finance USD/ZAR 16.3460 @ 2026-09-30 07:33 UTC.",
         "verified": true,
         "verified_scope": "verified=true applies ONLY to the fetched-quote fields marked verified in each supplier entry; every not-observable field is UNVERIFIED_-prefixed",
         "data": {
@@ -2061,23 +2061,63 @@
           ],
           "fx_note": "unit_cost_zar conversions deferred until a CURRENT USD/ZAR rate is fetched; stale-rate indicative conversions are labelled, never silently used",
           "target_note": "Session target: landed cost <= R90 at CPA R150 / R299 retail. Interim observation only (Pricing owns landed-cost math): cheapest hard unit cost fetched is $4.66-5.90 (Alibaba Coremax) - unit cost alone approaches/exceeds R90 before shipping, VAT(15%) and any duty; the R90 target looks UNREACHABLE on fetched quotes. Lowest achievable will be stated in the final finding; formal computation deferred to Pricing/tools/landed_cost.py.",
-          "recommended_supplier": null,
-          "UNVERIFIED_recommended_supplier": "final recommendation withheld until 3rd supplier + SA-shipping data lands",
-          "sample_order_recommended": null,
-          "UNVERIFIED_sample_order_recommended": "not yet determinable - supplier set incomplete this push (incremental push per quote per HARD-STOP-adjacent push rule)",
+          "recommended_supplier": "Shenzhen Quark Thinking Technology Co., Ltd. (Alibaba) - provisional: best verifiable reliability profile (4 yrs, 5/5 store rating on 63 reviews, <=1h response, 85.7% on-time) at $10.50 entry tier; Guangzhou Coremax is the LOW-COST alternative ($5.31 entry, $4.19 at >=500 boxes) with the only fetched shipping quote ($19.80/2 boxes, guaranteed Oct 11 - Nov 19 window - >21-day flag). Final choice withheld pending SA-lane DDP RFQs.",
+          "sample_order_recommended": true,
+          "UNVERIFIED_sample_order_recommended": "RECOMMENDATION ONLY - HARD STOP: no order placed; requires human approval at the HITL gate (README section 5 gate 2)",
           "awaiting_human_approval": "sample_order",
-          "next_action": "negotiate",
+          "next_action": "order_sample",
           "no_order_placed": "HARD STOP #1 honoured: no sample ordered, no purchase committed; recommendation only",
           "sars_primary_850760": "PENDING - this push is mid-session",
-          "composite_854143": "PENDING - this push is mid-session"
+          "composite_854143": "PENDING - this push is mid-session",
+          "cross_checks": {
+            "check_1_sars_primary_850760": {
+              "status": "ATTEMPTED - GAP RECORDED, PROCEEDED per session brief (do not halt)",
+              "attempts_this_session": [
+                "https://www.sars.gov.za/legal-lprim-ce-schtb-index-to-tariff-book/ - FETCHED IN FULL (both chunks): SARS Schedule No.1 index-to-tariff-book PDF; confirms Chapter 85 structure ('Electrical machinery and equipment...') but is an INDEX ONLY - no line-level rates. NEW primary URL not attempted by prior sessions.",
+                "https://www.sars.gov.za/customs-and-excise/prohibited-restricted-and-counterfeit-goods/whats-new-prohibited-and-restricted-imports-and-exports-list/ - FETCHED IN FULL: SARS names tariff heading 8507.60 on its own site: '31 January 2025 - ... Tariff heading 8507.60 does not require a Letter of Authority' (previously detained for NRCS per 7 June 2023 entry). PRIMARY-SOURCE corroboration that 8507.60 is a live SA heading with NO NRCS LoA. Regulatory finding, not a rate.",
+                "Line-level duty rate in the SARS tariff book itself: UNREACHABLE again this session (consolidated Schedule No.1 Part 1 PDF truncates ~Chapter 3 via fetch tool - known MR limit; old deep link 404; tariff.sars.gov.za did not load; per-chapter PDFs not offered by the index)."
+              ],
+              "gap_statement": "No PRIMARY line reading of 8507.60 obtained in any session to date. Rate evidence remains: mr-0034 (Tradecaravan 8507-60 page 'General customs duty 0%', dataset 2026-08-06) + jlog.co.za HS 8507.60 page FETCHED IN FULL this session ('General (MFN) customs duty under SARS Schedule 1 is free (0%)'; VAT 15% on ATV with 10% uplift for non-SACU origin; worked example R2,000 FOB -> R330 duty+VAT; page updated 2026-07-04 citing SARS Harmonised Tariff Schedule) + SARS primary corroboration of the heading's existence/LoA-free status. Two independent secondary sources agree at 0%; primary line reading still outstanding - Pricing must NOT treat this as primary-confirmed.",
+              "bonus_regulatory_finding": "SARS primary source (fetched): 8507.60 requires NO NRCS Letter of Authority (31 Jan 2025 update) - removes a regulatory gate for the solar power bank."
+            },
+            "check_2_composite_854143_vs_850760": {
+              "status": "INVESTIGATED - SUBSTANTIALLY RESOLVED by public sources; residual risk recorded, flagged to Supervisor",
+              "evidence_fetched_or_read": [
+                "dutiable.io/hs-code/power-batteries/solar-power-bank - FETCHED IN FULL: 'Applicable Rule GRI 1 - power banks are lithium-ion accumulators under 8507.60; the charging circuit is ancillary' and explicitly: 'Solar-panel power banks (with attached solar panel for recharging) are 8507.60 - the solar panel is ancillary to the battery.' Also: >100Wh (~27,000mAh) power banks restricted in checked luggage - 20,000mAh @3.7V is ~74Wh, below the threshold (logistics note).",
+                "CBP CROSS ruling N180696 (official rulings.cbp.gov page fetched; body is JS-gated in sandbox - operative text obtained from the official page's search-index excerpt): stand-alone solar panel + rechargeable battery pack = retail set; functions weighed, essential character not determinable -> GRI 3(c) -> heading 8507 (last in numerical order among equally-meriting headings), following HQ H136116 (Sherpa Power Pack + Nomad Solar Panel).",
+                "CBP NY N206384 (search excerpt): lithium-ion rechargeable battery pack classified 8507.60.0000."
+              ],
+              "resolution": "International classification practice is consistent: a power bank with an integrated/attached solar recharging panel classifies under 8507.60 (battery provides essential character; solar element ancillary). GRI 3(c) fallback also lands on 8507. The mr-0034-recorded Tradecaravan 8541.43 page contradiction is a secondary-source defect that does not gate the 8507.60 route; it stays on record as such.",
+              "residual_risk": "NOT a SARS determination. SARS classifies at clearance and is not bound by CBP/EBTI practice. The 8541.43 alternative (10% headline, self-contradicting source) remains theoretically arguable by an clearing officer. Mitigation: request a SARS advance tariff determination (binding ruling) before scaling ad spend; sample-order stage proceeds under 8507.60 with this risk documented."
+            }
+          },
+          "sample_plan": [
+            {
+              "supplier": "Shenzhen Quark Thinking Technology Co., Ltd.",
+              "sample": "1 unit, 20000mAh variant, entry tier $10.50 (~R171.63); shipping to be negotiated - request DDP ZA quote with the sample RFQ"
+            },
+            {
+              "supplier": "Guangzhou Coremax New Energy Technology Co., Ltd.",
+              "sample": "1 box (box contents UNVERIFIED - confirm before ordering), $5.31 (~R86.80) + Standard shipping $19.80/2 boxes; request DDP ZA alternative"
+            }
+          ],
+          "sample_budget_note": "Indicative sample spend ≈ $35-40 (~R570-655) before any DDP uplift - cited FX 16.3460. FOR HUMAN APPROVAL; Sourcing places no orders.",
+          "target_finding": "SESSION TARGET NOT REACHED - REPORTED, NOT HIDDEN: target landed cost <= R90 is UNREACHABLE on every fetched quote. Lowest fetched unit cost is Coremax $4.19 (~R68.49) but ONLY at >=500 boxes (box contents UNVERIFIED); the practical entry tier is $5.31 (~R86.80) BEFORE shipping, 15% VAT (on ATV incl. 10% uplift per fetched jlog method) and any fees. Formal landed-cost computation is Pricing's (tools/landed_cost.py); the verifiable finding is: no fetched supplier path plausibly lands at or below R90; realistic floor is materially above it. Sourcing recommends Pricing treat R90 as infeasible for this product at current quotes.",
+          "sa_specifics": {
+            "ddp": "NONE of the three suppliers displays DDP-to-SA; Coremax page explicitly defers taxes to checkout (DAP-like). DDP-to-SA must be requested by RFQ - SA-specific rule priority.",
+            "sa_warehouse": "None observed for any mr-0002 supplier.",
+            "customs_time": "README: SA customs adds 5-15 business days; Coremax's fetched guaranteed window (Oct 11 - Nov 19) ALREADY breaches the 21-day total-delivery flag at its upper bound before customs - FLAGGED.",
+            "split_shipments": "Sample shipments are low-value; the SARS courier/de-minimis threshold remains UNVERIFIED (carried from so-0001/so-0002) - Supervisor/Pricing to confirm with SARS before any bulk split-shipment strategy.",
+            "battery_cargo": "Lithium: carrier restrictions apply (dutiable.io: >100Wh checked-luggage restriction; 20,000mAh ~74Wh is below it, but courier DG rules still bind)."
+          }
         }
       },
       {
         "id": "so-0004",
         "timestamp": "2026-09-30T09:41:07+02:00",
         "agent": "sourcing",
-        "confidence": 6,
-        "source": "fetch_page on: https://www.aliexpress.com/w/wholesale-rechargeable-led-emergency-light.html (all fetched & read 2026-09-30). FX: x-rates.com USD/ZAR table 16.345073 (page-dated 2026-01-01 - STALE, disclosed).",
+        "confidence": 7,
+        "source": "fetch_page, all fetched & read 2026-09-30: https://www.aliexpress.com/w/wholesale-rechargeable-led-emergency-light.html; https://electronics.alibaba.com/supplier/rechargeable-light-bulbs-wholesaler; https://www.alibaba.com/product-detail/China-Factory-Good-Quality-PC-T8_1601687944055.html. FX: Google Finance USD/ZAR 16.3460 @ 2026-09-30 07:33 UTC.",
         "verified": true,
         "verified_scope": "verified=true applies ONLY to the fetched-quote fields marked verified in each supplier entry; every not-observable field is UNVERIFIED_-prefixed",
         "data": {
@@ -2194,13 +2234,70 @@
           ],
           "fx_note": "unit_cost_zar conversions deferred until a CURRENT USD/ZAR rate is fetched; stale-rate indicative conversions are labelled, never silently used",
           "target_note": "Session target: landed cost <= R120 at CPA R150 / R349 retail. Interim observation only (Pricing owns landed-cost math): fetched unit cost $1.09 (pack-basis UNVERIFIED) sits far below the target BEFORE shipping/VAT - target plausible; formal computation deferred to Pricing/tools/landed_cost.py.",
-          "recommended_supplier": null,
-          "UNVERIFIED_recommended_supplier": "final recommendation withheld until 3rd supplier + SA-shipping data lands",
-          "sample_order_recommended": null,
-          "UNVERIFIED_sample_order_recommended": "not yet determinable - supplier set incomplete this push (incremental push per quote per HARD-STOP-adjacent push rule)",
+          "recommended_supplier": "Zhongshan Jinboli Lighting Co., Ltd. (Alibaba) - provisional: Verified Manufacturer, 5 yrs, <=2h response, 92.9% on-time, 'Overseas warehousing available' (location UNVERIFIED); rating 4.3/5.0(68) is BELOW the 4.5 preference bar - flagged. Retail-path alternative for samples: the AliExpress item (1-unit purchase possible). Jiangxi HeLi EXCLUDED from sampling: on-time dispatch >=33%, MOQ 5,000, weak product fit.",
+          "sample_order_recommended": true,
+          "UNVERIFIED_sample_order_recommended": "RECOMMENDATION ONLY - HARD STOP: no order placed; requires human approval at the HITL gate (README section 5 gate 2)",
           "awaiting_human_approval": "sample_order",
-          "next_action": "negotiate",
-          "no_order_placed": "HARD STOP #1 honoured: no sample ordered, no purchase committed; recommendation only"
+          "next_action": "order_sample",
+          "no_order_placed": "HARD STOP #1 honoured: no sample ordered, no purchase committed; recommendation only",
+          "sample_plan": [
+            {
+              "supplier": "Zhongshan Jinboli Lighting Co., Ltd.",
+              "sample": "1-2 sets of LED Emergency Bulb B8 (solar-assisted rechargeable, $1.40-1.44/set, MOQ 20 sets -> smallest order ~$28-29 (~R460)); request DDP ZA with RFQ"
+            },
+            {
+              "supplier": "AliExpress item 3256812349912434 (store UNVERIFIED)",
+              "sample": "1 pack @ $1.09 (~R17.82, pack basis UNVERIFIED) - cheap retail-path validation of the bulb format before the Alibaba MOQ"
+            }
+          ],
+          "sample_budget_note": "Indicative sample spend < ~R500 combined - cited FX 16.3460. FOR HUMAN APPROVAL; Sourcing places no orders.",
+          "target_finding": "Session target: landed cost <= R120 at CPA R150 / R349 retail. Interim verifiable observation (Pricing owns the computation): fetched unit costs ($1.09 AliExpress ~R17.82 indicative pack-basis; $1.40-1.44 Jinboli ~R22.88-23.54) sit far below R120 BEFORE shipping/VAT, so the target is PLAUSIBLE - plausible, not proven: shipping to SA is the open variable on every quote.",
+          "sa_specifics": {
+            "ddp": "None of the three displays DDP-to-SA; RFQ required (SA-specific rule priority).",
+            "sa_warehouse": "Jinboli claims 'Overseas warehousing available' - location not stated; SA warehouse UNVERIFIED.",
+            "customs_time": "README 5-15 business-day clearance applies to every supplier; no fetched quote includes an SA lane, so no 21-day breach can be asserted yet - none can be cleared either.",
+            "product_fit_flags": "All three fetched quotes are bulb/tube-format emergency lights, not lantern-style units like the Takealot comparators in mr-0003's evidence (3-pack multifunction, tubes). Format decision escalated to Supervisor/Listing before any sample."
+          }
+        }
+      },
+      {
+        "id": "so-0005",
+        "timestamp": "2026-09-30T09:42:57+02:00",
+        "agent": "sourcing",
+        "confidence": 7,
+        "source": "This session: 8 successful fetch_page supplier/quote pages + 4 cross-check pages + 1 FX page (all 2026-09-30); 3 pushes to origin/arena/01a0f13e-okay (one per quote batch); CJ blocked by bot-wall (documented).",
+        "verified": true,
+        "data": {
+          "record_type": "session_summary_for_supervisor",
+          "task": "DDP-to-SA supplier quotes for mr-0002 (20,000mAh solar power bank) and mr-0003 (LED emergency light); 3 supplier pages each; SARS 8507.60 primary retry; 8541.43 composite investigation.",
+          "scope_honoured": "State-only changes (shared_state.json). No orders placed or committed (HARD STOP #1). No prices set, no listings, no ads, no landed-cost math (Pricing's tools). No new candidate research. One PR.",
+          "counts": {
+            "suppliers_quoted": {
+              "mr-0002": 3,
+              "mr-0003": 3
+            },
+            "supplier_pages_fetched_and_read": 6,
+            "extra corroborating pages": 2
+          },
+          "platform_gap": "CJ Dropshipping: 2 fetch attempts (list + product URL patterns) -> human-verification bot wall; no CJ quotes obtainable this session. mr-0002 therefore carries 2 Alibaba suppliers + 1 AliExpress; mr-0003 carries 2 Alibaba + 1 AliExpress. Recorded as a platform gap, not concealed.",
+          "key_findings": [
+            "mr-0002: R90 landed target UNREACHABLE on fetched quotes (lowest entry-tier unit cost ~R86.80 BEFORE shipping/VAT; deep tier ~R68.49 only at >=500 boxes with box contents UNVERIFIED). Reported to Pricing as a finding.",
+            "mr-0002 cross-check 1: SARS primary line rate still unreachable (gap recorded; proceeded per brief). NEW primary-source facts gained: SARS index-to-tariff-book PDF fetched; SARS prohibited/restricted page fetched confirming 8507.60 exists and needs NO NRCS LoA (31 Jan 2025). jlog.co.za 8507.60 page fetched: 0% duty / 15% VAT on ATV (incl. 10% uplift) - second independent secondary source agreeing with mr-0034's Tradecaravan 0%.",
+            "mr-0002 cross-check 2: composite question substantially resolved - solar-panel power banks classify 8507.60 (dutiable.io fetched, explicit; CBP N180696 + HQ H136116 GRI 3(c) fallback also -> 8507). Residual risk: not binding on SARS; advance tariff determination recommended before scale. 8541.43 contradiction stays recorded as a source defect.",
+            "mr-0003: R120 target PLAUSIBLE on fetched unit costs (R8-R24 range); blocked only on SA-lane shipping quotes. Product-fit caveat: fetched quotes are bulb/tube formats, not the lantern formats in mr-0003's Takealot evidence.",
+            "DDP-to-SA: not displayed by ANY of the six suppliers - the SA-specific DDP priority rule can only be satisfied by RFQ. Sample RFQs must explicitly request DDP ZA.",
+            "21-day flag: Coremax's fetched guaranteed delivery window (Oct 11 - Nov 19) breaches the flag at its upper bound BEFORE SA customs (5-15 business days). No other SA lane observed.",
+            "Reliability bars: NO supplier could be verified at >500 orders (platform order-counts not exposed); response-time <24h met by all four Alibaba suppliers (<=1h/<=2h); rating >4.5 met by Quark (5/5 on 63) and Coremax product page has no reviews; Jinboli 4.3(68) BELOW bar; HeLi on-time >=33% - excluded."
+          ],
+          "recommendation_to_supervisor": [
+            "Approve/decline SAMPLE ORDERS (HITL gate 2 - README section 5): mr-0002 via Quark + Coremax (~$35-40 indicative); mr-0003 via Jinboli smallest MOQ + AliExpress retail unit (< ~R500 combined). Sourcing places NO orders.",
+            "Route landed-cost computation to Pricing with the R90-infeasibility finding for mr-0002; R120 plausible for mr-0003 pending shipping data.",
+            "Commission SA-lane DDP RFQs (e-mail/Alibaba chat) - outside this session's sandbox reach.",
+            "Consider a SARS advance tariff determination request for the solar power bank before ad spend (8541.43 residual risk).",
+            "CJ Dropshipping coverage gap stands until a non-bot-walled route (manual browse by human, or CJ API with credentials - paid-API gate applies) is available."
+          ],
+          "shipping_carrier_note": "Carrier-level e-Packet/DHL/Aramex comparison for SA was delivered in so-0001 (previously sourced); this session adds the only fresh lane datapoint: Alibaba Standard Logistics $19.80/2 boxes, Oct 11 - Nov 19 guaranteed window (destination country UNVERIFIED in fetch). No new carrier claims made.",
+          "hard_stop_compliance": "No purchase commitments; no invented supplier/metric/rate - every quoted number carries its fetched URL and fetch date; unobservable fields are UNVERIFIED_-prefixed and listed in unverified_fields; no direct-to-human briefing beyond this state record + PR description (README-required PR contents); no destructive git ops; no secrets; no unrelated files touched; shared_state.json pre-existed on main (verified) and was only appended to under state.sourcing."
         }
       }
     ],
@@ -2215,8 +2312,12 @@
       "so-0003/so-0004: per-supplier order volume (>500 check) - platform order-COUNT not exposed on fetched pages (Alibaba exposes US$ transaction totals, AliExpress exposes per-item sold counts only); MUST NOT be invented (HARD STOP #2).",
       "so-0003/so-0004: AliExpress store names for the quoted items - item pages JS-gated in sandbox; store attribution UNVERIFIED.",
       "so-0003/so-0004: shipping_to_sa_days, shipping_cost_per_unit_zar, ddp_available for every quoted supplier - no SA lane rendered to this sandbox session; requires supplier RFQ. Do NOT infer from platform marketing pages.",
-      "so-0003: SARS primary-source retry for 8507.60 and the 8541.43 composite-classification question - see cross_checks in so-0003; open until resolved this session.",
-      "fx_rate: current USD/ZAR rate not yet obtained; x-rates.com table fetched but page-dated 2026-01-01 (stale). ZAR figures converted with it must be labelled stale."
+      "fx_rate: current USD/ZAR rate not yet obtained; x-rates.com table fetched but page-dated 2026-01-01 (stale). ZAR figures converted with it must be labelled stale.",
+      "so-0003 (final): SARS PRIMARY line-level rate for 8507.60 still UNREAD (index PDF fetched = index only; consolidated PDF truncates ~Ch.3; tariff.sars.gov.za down). Duty rests on two agreeing secondary sources (Tradecaravan via mr-0034; jlog.co.za fetched 2026-09-30) + SARS primary corroboration of heading existence / no-LoA. NOT primary-confirmed - Pricing must use with the gap attached.",
+      "so-0003 (final): 8541.43 composite question SUBSTANTIALLY RESOLVED (8507.60 prevails per dutiable.io + CBP N180696/H136116) but NOT binding on SARS - advance tariff determination recommended; 8541.43 source contradiction stays recorded as a defect.",
+      "so-0003/so-0004 (final): DDP-to-SA availability, SA-lane transit days, SA warehouse locations - not displayed by any fetched supplier; RFQ required. Coremax fetched shipping window's DESTINATION COUNTRY unconfirmed.",
+      "so-0002 carry-over: Alibaba DDP forwarder directory metrics remain aggregated marketing claims - leads only. SARS de-minimis courier threshold still UNVERIFIED - needed for split-shipment rule.",
+      "so-0004: AliExpress mr-0003 quote's per-unit pack basis and store identity UNVERIFIED; Jinboli 'overseas warehousing' location UNVERIFIED; HeLi certificate types unreadable in fetch."
     ],
     "verified_scope": "namespace-level verified=true refers ONLY to quote fields actually fetched and read this session (each supplier entry carries its own verified + verified_scope); all store-level/SA-lane fields that could not be observed are UNVERIFIED_-prefixed and listed in unverified_fields"
   },
