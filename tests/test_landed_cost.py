@@ -207,6 +207,59 @@ class TestMaxCustomsBase(unittest.TestCase):
         self.assertAlmostEqual(m["net_margin_pct"], target, delta=0.1)
 
 
+class TestVatBasisThreading(unittest.TestCase):
+    """The ATV basis must be reachable but never verdict-bearing (pr-0004)."""
+
+    def test_default_is_the_readme_contract(self):
+        self.assertEqual(lc.VAT_BASIS_FOR_VERDICTS, customs.VAT_BASIS_README)
+        self.assertEqual(calculate_landed_cost(100.0, 50.0, 0.0, 500.0)[
+            "vat_basis"], customs.VAT_BASIS_README)
+
+    def test_atv_raises_landed_cost_and_lowers_margin(self):
+        flat = calculate_landed_cost(86.80, 161.83, 0.0, 599.0)
+        atv = calculate_landed_cost(
+            86.80, 161.83, 0.0, 599.0, vat_basis=customs.VAT_BASIS_SARS_ATV
+        )
+        self.assertEqual(flat["vat_basis"], customs.VAT_BASIS_README)
+        self.assertEqual(atv["vat_basis"], customs.VAT_BASIS_SARS_ATV)
+        self.assertGreater(atv["total_landed_cost_zar"], flat["total_landed_cost_zar"])
+        self.assertLess(
+            net_margin(599.0, atv["total_landed_cost_zar"], 150.0)["net_margin_pct"],
+            net_margin(599.0, flat["total_landed_cost_zar"], 150.0)["net_margin_pct"],
+        )
+
+    def test_unknown_basis_rejected(self):
+        with self.assertRaises(ValueError):
+            calculate_landed_cost(10.0, 10.0, 0.0, 100.0, vat_basis="guess")
+
+    def test_inverse_math_round_trips_on_both_bases(self):
+        # The ceiling must reproduce its target margin on BOTH bases, or the
+        # inverse and forward formulas have drifted apart.
+        for basis in customs.VAT_BASIS_CHOICES:
+            for fees in (0.0, 30.0):
+                with self.subTest(basis=basis, fees=fees):
+                    r = max_customs_base_for_margin(
+                        599.0, 0.0, 150.0, 25.0,
+                        platform_fees_zar=fees, vat_basis=basis,
+                    )
+                    base = r["max_customs_base_zar"]
+                    landed = calculate_landed_cost(
+                        base, 0.0, 0.0, 599.0, vat_basis=basis
+                    )["total_landed_cost_zar"]
+                    m = net_margin(599.0, landed, 150.0, fees)
+                    self.assertAlmostEqual(m["net_margin_pct"], 25.0, delta=0.05)
+
+    def test_atv_ceiling_is_lower_than_flat_ceiling(self):
+        flat = max_customs_base_for_margin(599.0, 20.0, 150.0, 25.0)
+        atv = max_customs_base_for_margin(
+            599.0, 20.0, 150.0, 25.0, vat_basis=customs.VAT_BASIS_SARS_ATV
+        )
+        self.assertLess(
+            atv["max_customs_base_zar"], flat["max_customs_base_zar"]
+        )
+        self.assertIn("vat_basis=", atv["formula"])
+
+
 class TestEvaluatePricing(unittest.TestCase):
     def test_blocks_unverified_inputs(self):
         out = evaluate_pricing(50.0, 50.0, 0.0, inputs_verified=False)
@@ -255,6 +308,16 @@ class TestEvaluatePricing(unittest.TestCase):
         self.assertTrue(
             any("platform_fees" in w for w in out["warnings"])
         )
+
+    def test_verdict_path_refuses_the_unapproved_atv_basis(self):
+        # A verdict must not rest on the ATV basis until HITL gate 5 lands.
+        with self.assertRaises(ValueError):
+            evaluate_pricing(
+                20.0, 20.0, 0.0, inputs_verified=True,
+                vat_basis=customs.VAT_BASIS_SARS_ATV,
+            )
+        out = evaluate_pricing(20.0, 20.0, 0.0, inputs_verified=True)
+        self.assertEqual(out["vat_basis"], customs.VAT_BASIS_README)
 
     def test_unknown_buy_type_rejected(self):
         with self.assertRaises(KeyError):

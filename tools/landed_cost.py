@@ -1,4 +1,4 @@
-"""Landed cost, margin and price math. tools/landed_cost.py v1.0.0.
+"""Landed cost, margin and price math. tools/landed_cost.py v1.1.0.
 
 Scope (README section 6): together with tools/customs.py this is the ONLY
 place cost math may live. agents/pricing.py (and every later agent) calls
@@ -19,7 +19,14 @@ session brief:
 
 SA-specific rules encoded here (README section 4):
   * VAT is charged on the customs value, NEVER on the retail price —
-    tools/customs.calculate_vat is the only VAT implementation.
+    tools/customs is the only VAT implementation.
+  * VAT BASIS (v1.1.0): the README contract formula (customs_value x 0.15)
+    is the DEFAULT everywhere. ``vat_basis=customs.VAT_BASIS_SARS_ATV``
+    computes the SARS ATV variant (VAT on customs value + duty + 10%
+    uplift) as an OPT-IN sensitivity for pricing pr-0003/pr-0004; it is
+    UNAPPROVED, needs a README amendment + HITL gate 5, and no verdict may
+    rest on it. Every breakdown carries ``vat_basis`` so it can never be
+    applied silently.
   * Net margin < 20% is an automatic reject (README section 2 HARD STOP
     #3). The Pricing session minimum for an ACCEPT is 25%; 20-25% is the
     escalation band, not an approval. Target band 35-40%.
@@ -52,7 +59,7 @@ from typing import Dict, Optional
 from tools import customs
 from tools.customs import VAT_RATE  # re-exported: single definition
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 # ---------------------------------------------------------------------------
 # Constants — each cites its authority. README wins on any conflict.
@@ -94,6 +101,11 @@ COMPETITOR_BAND_DEFAULT = 0.125
 #: while the unit, payment fee and ad spend stay sunk).
 RETURN_RATE_RANGE_PCT = (5.0, 10.0)
 RETURN_RATE_WORST_CASE_PCT = 10.0
+
+#: The ONLY VAT basis a verdict may rest on (README section 1: the README
+#: wins conflicts). tools/customs.VAT_BASIS_SARS_ATV is an unapproved
+#: sensitivity pending HITL gate 5 — see evaluate_pricing(), which refuses it.
+VAT_BASIS_FOR_VERDICTS: str = customs.VAT_BASIS_README
 
 #: The contract formula, for embedding in reports (README section 4).
 FORMULA_TEXT: str = (
@@ -147,6 +159,7 @@ def calculate_landed_cost(
     duty_rate_pct: float,
     selling_price_zar: float,
     payment_fee_pct: float = PAYMENT_FEE_PCT_WORST_CASE,
+    vat_basis: str = customs.DEFAULT_VAT_BASIS,
 ) -> Dict[str, float]:
     """Full landed cost (ZAR) per the README section 4 formula.
 
@@ -155,12 +168,16 @@ def calculate_landed_cost(
     payment fee is a percentage OF THE SELLING PRICE, so the selling
     price is required even though it is not itself a cost.
 
+    ``vat_basis`` selects the VAT formula in tools/customs.py; the default
+    is the README contract formula (HARD STOP #4). See the module docstring
+    for the unapproved status of the ATV alternative.
+
     Returns the ``cost_breakdown`` schema used by the pricing output
     format, plus the customs value for auditability.
     """
     _validate_payment_fee_pct(payment_fee_pct)
     breakdown = customs.customs_breakdown(
-        product_cost_zar, shipping_to_sa_zar, duty_rate_pct
+        product_cost_zar, shipping_to_sa_zar, duty_rate_pct, vat_basis
     )
     price = _money(selling_price_zar, "selling_price_zar")
     payment_fees = round(price * payment_fee_pct / 100.0, 2)
@@ -181,6 +198,7 @@ def calculate_landed_cost(
         "vat_zar": breakdown["vat_zar"],
         "payment_fee_pct": payment_fee_pct,
         "payment_fees_zar": payment_fees,
+        "vat_basis": breakdown["vat_basis"],
         "total_landed_cost_zar": total,
     }
 
@@ -327,13 +345,16 @@ def max_customs_base_for_margin(
     payment_fee_pct: float = PAYMENT_FEE_PCT_WORST_CASE,
     platform_fees_zar: float = 0.0,
     return_rate_pct: float = RETURN_RATE_WORST_CASE_PCT,
+    vat_basis: str = customs.DEFAULT_VAT_BASIS,
 ) -> Dict:
     """Maximum product+shipping (= customs base) that still clears a
     target net margin at a given competitive price.
 
     Inverse of the contract formula:
         base_max = (P(1 - r - f - t) - CPA - platform_fees) / (1 + d + VAT)
-    where t is the target margin. Needs NO supplier quote, so it is the
+    where t is the target margin and (1 + d + VAT) is taken from
+    tools/customs.duty_and_vat_multiplier for the requested ``vat_basis``,
+    so the inverse can never disagree with the forward calculation. Needs NO supplier quote, so it is the
     only pricing output publishable while supplier costs are unverified
     (it constrains Sourcing instead of guessing a cost — HARD STOP #2).
 
@@ -358,7 +379,7 @@ def max_customs_base_for_margin(
     r = return_rate_pct / 100.0
     f = payment_fee_pct / 100.0
     numerator = price * (1.0 - r - f - t / 100.0) - cpa - pf
-    denominator = 1.0 + d / 100.0 + VAT_RATE
+    denominator = customs.duty_and_vat_multiplier(d, vat_basis)
     base_max = numerator / denominator
     feasible = base_max >= 0
     return {
@@ -371,9 +392,11 @@ def max_customs_base_for_margin(
         "target_net_margin_pct": t,
         "max_customs_base_zar": round(base_max, 2) if feasible else None,
         "feasible": feasible,
+        "vat_basis": vat_basis,
+        "duty_and_vat_multiplier": denominator,
         "formula": (
             "base_max = (P(1 - r - f - t) - CPA - platform_fees) "
-            "/ (1 + d + 0.15)"
+            f"/ {denominator:g}  [vat_basis={vat_basis}]"
         ),
     }
 
@@ -397,6 +420,7 @@ def evaluate_pricing(
     return_rate_pct: float = RETURN_RATE_WORST_CASE_PCT,
     competitor_band: float = COMPETITOR_BAND_DEFAULT,
     input_sources: Optional[dict] = None,
+    vat_basis: str = customs.DEFAULT_VAT_BASIS,
 ) -> Dict:
     """Evaluate one product and return the session's pricing output block.
 
@@ -405,13 +429,28 @@ def evaluate_pricing(
     ``"blocked"`` and NO accept/reject is issued — a margin from guessed
     costs must never be published (HARD STOP #2; schema section 4).
 
+    This is the VERDICT-BEARING path, so it refuses the unapproved SARS
+    ATV VAT basis outright (:class:`ValueError`): a verdict may rest only
+    on the README contract formula until a README amendment + HITL gate 5
+    change the contract (pricing pr-0003, pr-0004). Use
+    tools/customs.calculate_vat_sars_atv for sensitivity bounds instead —
+    never for a verdict.
+
     When ``selling_price_zar`` is None, a price is recommended from the
     session multipliers for ``buy_type``, clamped into the competitor
     band when a median is given; the verdict uses the WORST-case price of
     the resulting range (low end) so an accept is robust, never lucky.
     """
+    if customs.validate_vat_basis(vat_basis) != VAT_BASIS_FOR_VERDICTS:
+        raise ValueError(
+            "evaluate_pricing() may not issue a verdict on vat_basis="
+            f"{vat_basis!r}: the SARS ATV basis is an unapproved "
+            "sensitivity (README amendment + HITL gate 5 outstanding). "
+            "Verdicts rest on the README contract formula only."
+        )
     result: Dict = {
         "agent": "pricing",
+        "vat_basis": vat_basis,
         "product_input": {
             "product_cost_zar": product_cost_zar,
             "shipping_to_sa_zar": shipping_to_sa_zar,

@@ -11,15 +11,23 @@ import unittest
 
 from tools import customs
 from tools.customs import (
+    DEFAULT_VAT_BASIS,
     REGISTRY_SOURCE,
+    SARS_ATV_UPLIFT_PCT,
     UnknownHsCodeError,
+    VAT_BASIS_CHOICES,
+    VAT_BASIS_README,
+    VAT_BASIS_SARS_ATV,
     VERIFIED_DUTY_LINES,
     VAT_RATE,
     calculate_duty,
     calculate_vat,
+    calculate_vat_sars_atv,
     customs_breakdown,
     customs_value,
+    duty_and_vat_multiplier,
     lookup_duty_rate_pct,
+    validate_vat_basis,
 )
 
 
@@ -141,11 +149,94 @@ class TestCustomsBreakdown(unittest.TestCase):
         self.assertEqual(out["vat_zar"], 22.5)
 
 
+class TestAtvVatBasis(unittest.TestCase):
+    """SARS ATV method — OPT-IN, unapproved, never the default (pr-0004).
+
+    The README contract formula stays authoritative (README section 1), so
+    these tests pin both the ATV arithmetic AND the fact that the default
+    cannot drift to it without a HITL gate 5 amendment.
+    """
+
+    def test_default_basis_is_the_readme_contract(self):
+        self.assertEqual(DEFAULT_VAT_BASIS, VAT_BASIS_README)
+        self.assertEqual(VAT_BASIS_CHOICES, (VAT_BASIS_README, VAT_BASIS_SARS_ATV))
+
+    def test_worked_example_matches_the_cited_source(self):
+        # jlog.co.za 8507.60 worked example: R2,000 FOB, duty-free
+        # -> R330 duty + VAT  =>  VAT = 15% x (2000 + 200) = 330.
+        self.assertEqual(calculate_vat_sars_atv(2000.0, 0.0), 330.0)
+
+    def test_uplift_and_duty_are_both_in_the_base(self):
+        # 100 CV + 20 duty + 10 uplift = 130 -> VAT 19.50 (vs 15.00 flat)
+        self.assertEqual(calculate_vat_sars_atv(100.0, 20.0), 19.5)
+        # uplift of 0 collapses to the flat formula for a duty-free line
+        self.assertEqual(
+            calculate_vat_sars_atv(100.0, 0.0, uplift_pct=0.0),
+            calculate_vat(100.0),
+        )
+
+    def test_atv_never_lowers_vat(self):
+        for cv in (0.0, 10.0, 86.8, 1000.0):
+            for duty in (0.0, cv * 0.1, cv * 0.2):
+                with self.subTest(cv=cv, duty=duty):
+                    self.assertGreaterEqual(
+                        calculate_vat_sars_atv(cv, duty), calculate_vat(cv)
+                    )
+
+    def test_validation(self):
+        self.assertEqual(SARS_ATV_UPLIFT_PCT, 10.0)
+        with self.assertRaises(ValueError):
+            calculate_vat_sars_atv(-1.0)
+        with self.assertRaises(ValueError):
+            calculate_vat_sars_atv(100.0, -1.0)
+        with self.assertRaises(ValueError):
+            calculate_vat_sars_atv(100.0, 0.0, uplift_pct=-0.1)
+        with self.assertRaises(ValueError):
+            calculate_vat_sars_atv(100.0, 0.0, uplift_pct=100.1)
+
+    def test_unknown_basis_raises_never_guesses(self):
+        self.assertEqual(validate_vat_basis(VAT_BASIS_README), VAT_BASIS_README)
+        with self.assertRaises(ValueError):
+            validate_vat_basis("maybe_atv")
+
+    def test_breakdown_records_the_basis_used(self):
+        flat = customs_breakdown(100.0, 50.0, 0.0)
+        self.assertEqual(flat["vat_basis"], VAT_BASIS_README)
+        self.assertEqual(flat["vat_zar"], 22.5)
+        self.assertIsNone(flat["atv_uplift_pct"])
+
+        atv = customs_breakdown(100.0, 50.0, 0.0, VAT_BASIS_SARS_ATV)
+        self.assertEqual(atv["vat_basis"], VAT_BASIS_SARS_ATV)
+        self.assertEqual(atv["vat_zar"], 24.75)  # 15% of 150 x 1.10
+        self.assertEqual(atv["atv_uplift_pct"], SARS_ATV_UPLIFT_PCT)
+        with self.assertRaises(ValueError):
+            customs_breakdown(100.0, 50.0, 0.0, "atv_ish")
+
+    def test_multiplier_matches_forward_breakdown(self):
+        for duty in (0.0, 10.0, 45.0):
+            for basis in VAT_BASIS_CHOICES:
+                with self.subTest(duty=duty, basis=basis):
+                    m = duty_and_vat_multiplier(duty, basis)
+                    out = customs_breakdown(800.0, 200.0, duty, basis)
+                    self.assertAlmostEqual(
+                        m, 1.0 + out["duty_zar"] / 1000.0 + out["vat_zar"] / 1000.0, 6
+                    )
+
+    def test_multiplier_known_values(self):
+        self.assertEqual(duty_and_vat_multiplier(0.0), 1.15)
+        self.assertEqual(duty_and_vat_multiplier(0.0, VAT_BASIS_SARS_ATV), 1.165)
+        self.assertEqual(duty_and_vat_multiplier(20.0), 1.35)
+        self.assertEqual(duty_and_vat_multiplier(20.0, VAT_BASIS_SARS_ATV), 1.395)
+        with self.assertRaises(ValueError):
+            duty_and_vat_multiplier(0.0, "nope")
+
+
 class TestModuleVersion(unittest.TestCase):
     def test_versions_stamp_both_modules(self):
         stamp = customs.module_versions()
         self.assertIn("tools/landed_cost.py v", stamp)
         self.assertIn("tools/customs.py v", stamp)
+        self.assertIn("v1.1.0", stamp)  # ATV basis added as opt-in in 1.1.0
 
 
 if __name__ == "__main__":
