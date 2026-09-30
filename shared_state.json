@@ -162,10 +162,10 @@
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
       }
     },
-    "timestamp": "2026-09-29T22:04:57+02:00",
+    "timestamp": "2026-09-30T08:51:33+02:00",
     "agent": "market_research",
     "confidence": 4,
-    "source": "27 findings appended this session (mr-0001..mr-0027); finding confidence range 4-8; namespace roll-up takes the minimum (conservative — the weakest file bounds the set).",
+    "source": "30 findings accumulated (mr-0001..mr-0030); roll-up confidence is the minimum of the findings (conservative). Latest batch: mr-0028, mr-0029, mr-0030.",
     "verified": false,
     "findings": [
       {
@@ -1015,19 +1015,134 @@
           ],
           "hard_stops_status": "No HARD STOP violated. #2 enforced (UNVERIFIED + stop, 4 duties + all margins + all seller counts), #3 enforced mechanically (rank_candidates refuses unscored), #4 untouched (no cost math exists to omit VAT from), #6/#7 clean (no force-push, no secrets), #8/#9 respected (state exists on main; one PR)."
         }
+      },
+      {
+        "id": "mr-0028",
+        "timestamp": "2026-09-30T08:51:33+02:00",
+        "agent": "market_research",
+        "confidence": 9,
+        "source": "https://tradecaravan.co.za/hs-codes/8513-10-torches-portable-lamps/ (duty page: 'General customs duty 0%', 'Import VAT 15%', data current as of 2026-08-06) fetched 2026-09-30; line listing corroborated at https://tradecaravan.co.za/hs-codes/?q=8513 ('8513.10 ... 0% duty') fetched 2026-09-30. SARS primary attempt this session: https://www.sars.gov.za/legal-lprim-ce-sch1p1chpt1-to-99-schedule-no-1-part-1-chapters-1-to-99/ (Schedule No. 1 Part 1, SARS page updated 2026-08-28) - the consolidated PDF is truncated by the fetch tool around Chapter 3, so Chapter 85 is not reachable by this method; the older deep link https://www.sars.gov.za/legal-counsel/primary-legislation/schedules-to-the-customs-and-excise-act-1964-tariff-book/ returns 404 (verified 2026-09-30).",
+        "verified": true,
+        "data": {
+          "record_type": "supersedes",
+          "supersedes": "mr-0003",
+          "field_resolved": "UNVERIFIED_duty_rate_pct",
+          "product_name": "Rechargeable LED / solar emergency light (portable)",
+          "hs_code": "8513.10",
+          "hs_code_level": "6-digit subheading (SA classifies to 8 digits at clearance)",
+          "duty_rate_pct": 0.0,
+          "duty_rate_display": "0% general (MFN)",
+          "duty_rate_source_url": "https://tradecaravan.co.za/hs-codes/8513-10-torches-portable-lamps/",
+          "hs_source": "https://tradecaravan.co.za/hs-codes/8513-10-torches-portable-lamps/",
+          "source_dataset_date": "2026-08-06",
+          "fetch_date": "2026-09-30",
+          "vat_applicable": true,
+          "vat_rate_pct": 15.0,
+          "classification_note": "8513 covers portable electric lamps designed to function by their own energy source (dry batteries, accumulators, magnetos). 8513.90 covers parts of those lamps; 9405.11 (fixed LED luminaires) is a different, dutiable line at 20% and must not be substituted.",
+          "customs_risk": "low",
+          "customs_verdict": {
+            "risk": "low",
+            "eliminate": false,
+            "reason": "verified 0% general duty - the highest-priority customs band per README section 4; no duty-elimination trigger."
+          },
+          "recommendation": "investigate",
+          "recommendation_change": "none - duty blocker cleared, margin blocker remains",
+          "reasoning": "mr-0003's only customs blocker was the missing SA line rate; it is 0%. The candidate still cannot proceed: net margin is UNVERIFIED (Pricing/tools/landed_cost.py owns that) and the established-seller count is unobserved.",
+          "UNVERIFIED_net_margin_pct": null,
+          "UNVERIFIED_estimated_ad_cpa_zar": null,
+          "UNVERIFIED_landed_cost_zar": null,
+          "UNVERIFIED_established_seller_count": null
+        }
+      },
+      {
+        "id": "mr-0029",
+        "timestamp": "2026-09-30T08:51:33+02:00",
+        "agent": "market_research",
+        "confidence": 7,
+        "source": "Line-listing fetch https://tradecaravan.co.za/hs-codes/?q=7007 (2026-09-30, dataset current 2026-08-06): 7007.11, 7007.19, 7007.21 carry no SA duty page; only 7007.29 (laminated, non-vehicle) is rated, at 15%. Chapter page https://tradecaravan.co.za/hs-codes/chapter/70/ states the chapter-wide general duty range is 10%-20% and lists 6 rated lines, none of them 7007.19. Risk checker https://tradecaravan.co.za/tools/import-risk-checker/?q=7007.19 returns 'Code not in our dataset - verify manually' (fetched 2026-09-30). SARS primary attempt: Schedule No. 1 Part 1 consolidated PDF fetch truncates before Chapter 70 (see mr-0028 source note).",
+        "verified": false,
+        "data": {
+          "record_type": "supersedes",
+          "supersedes": "mr-0005",
+          "field_attempted": "UNVERIFIED_duty_rate_pct",
+          "product_name": "Tempered glass screen protector",
+          "hs_code": "7007.19",
+          "hs_code_level": "6-digit subheading; code string confirmed in the SARS-derived nomenclature listing (the line exists in the tariff tree)",
+          "UNVERIFIED_duty_rate_pct": null,
+          "duty_rate_display": "UNVERIFIED at line level",
+          "adjacent_line_context_only": "7007.29 (laminated safety glass, non-vehicle) = 15% verified on the same dataset. This is NOT the tempered line and must not be used for 7007.19.",
+          "chapter_range_context_only": "Chapter 70 general duty range 10%-20% (chapter page). A range is not a line rate and must not be used in any landed-cost calculation.",
+          "hs_source": "https://tradecaravan.co.za/hs-codes/?q=7007",
+          "fetch_date": "2026-09-30",
+          "vat_applicable": true,
+          "vat_rate_pct": 15.0,
+          "customs_risk": "unknown",
+          "customs_verdict": {
+            "risk": "unknown",
+            "eliminate": false,
+            "reason": "SA line rate not published in the reachable sources this session - HARD STOP #2: mark UNVERIFIED and stop; the candidate cannot proceed to margin screening."
+          },
+          "recommendation": "investigate",
+          "recommendation_change": "none - still blocked on the same unknown",
+          "what_would_verify": "Read the 7007.19 line in SARS Schedule No. 1 Part 1 (Chapter 70) directly, or obtain a section 47(9) tariff determination. Sourcing (or a licensed clearing agent) is the correct owner of that confirmation step.",
+          "reasoning": "Second attempt at this line across two sessions and two methods (duty-page index and risk-checker database) still yields no published SA rate for tempered safety glass. Recording the negative result rather than substituting the laminated line's rate - the README ranks correctness over speed.",
+          "UNVERIFIED_net_margin_pct": null,
+          "UNVERIFIED_landed_cost_zar": null,
+          "UNVERIFIED_estimated_ad_cpa_zar": null,
+          "UNVERIFIED_established_seller_count": null
+        }
+      },
+      {
+        "id": "mr-0030",
+        "timestamp": "2026-09-30T08:51:33+02:00",
+        "agent": "market_research",
+        "confidence": 7,
+        "source": "Line-listing fetch https://tradecaravan.co.za/hs-codes/?q=9603 (2026-09-30, dataset current 2026-08-06): 9603.10, 9603.29, 9603.30, 9603.40 and 9603.50 carry no SA duty page; only 9603.21 (toothbrushes, 15%) and 9603.90 (brooms/brushes/mops, 15%) are rated. Chapter page https://tradecaravan.co.za/hs-codes/chapter/96/ states the chapter-wide general duty range is 0%-20%. Risk checker https://tradecaravan.co.za/tools/import-risk-checker/?q=9603.30 returns 'Code not in our dataset - verify manually' (fetched 2026-09-30). SARS primary attempt blocked as in mr-0028.",
+        "verified": false,
+        "data": {
+          "record_type": "supersedes",
+          "supersedes": "mr-0006",
+          "field_attempted": "UNVERIFIED_duty_rate_pct",
+          "product_name": "Makeup brush set (8-20 pc, unpowered)",
+          "hs_code": "9603.30",
+          "hs_code_level": "6-digit subheading; code string confirmed in the SARS-derived nomenclature listing",
+          "UNVERIFIED_duty_rate_pct": null,
+          "duty_rate_display": "UNVERIFIED at line level",
+          "adjacent_line_context_only": "9603.21 toothbrushes = 15% and 9603.90 brooms/brushes = 15% on the same dataset. Neither is the cosmetic-brush line; not usable for 9603.30.",
+          "chapter_range_context_only": "Chapter 96 general duty range 0%-20% (chapter page). Not a line rate.",
+          "hs_source": "https://tradecaravan.co.za/hs-codes/?q=9603",
+          "fetch_date": "2026-09-30",
+          "vat_applicable": true,
+          "vat_rate_pct": 15.0,
+          "classification_note": "Cosmetic application brushes sit in 9603.30 only if they are 'artists', writing or similar brushes for the application of cosmetics'. Brush sets sold WITH cosmetic product in the same pack could raise a composite-classification question - flag for Sourcing, not decided here.",
+          "customs_risk": "unknown",
+          "customs_verdict": {
+            "risk": "unknown",
+            "eliminate": false,
+            "reason": "SA line rate not published in the reachable sources this session - HARD STOP #2: mark UNVERIFIED and stop."
+          },
+          "recommendation": "investigate",
+          "recommendation_change": "none - still blocked on the same unknown",
+          "what_would_verify": "Read the 9603.30 line in SARS Schedule No. 1 Part 1 (Chapter 96), or a section 47(9) determination.",
+          "reasoning": "The cosmetic-brush line is unrated in both reachable SARS-derived datasets. Negative result recorded; no substitution with 9603.21/9603.90 rates and no inline cost math.",
+          "UNVERIFIED_net_margin_pct": null,
+          "UNVERIFIED_landed_cost_zar": null,
+          "UNVERIFIED_estimated_ad_cpa_zar": null,
+          "UNVERIFIED_established_seller_count": null
+        }
       }
     ],
     "unverified_fields": [
-      "UNVERIFIED_duty_rate_pct for 8513.10 (portable lamps), 7117.19/7117.90 (imitation jewellery), 7007.19 (toughened glass), 9603.30 (cosmetic brushes), 8518.30 (earphones): verify against SARS Schedule 1 Part 1 (sars.gov.za Customs and Excise > Tariff) or binding section 47(9) determination. Two web attempts each exhausted for the deep-screened four.",
-      "UNVERIFIED_duty_rate_pct for trend-only candidates (wigs, sunglasses, pet GPS, flasks, hot comb, sports bands, perfume line, air fryer, mouth tape, shower filter): no lookup performed — classify only if Supervisor routes them.",
-      "UNVERIFIED_net_margin_pct for ALL 26 candidates: blocked until Pricing builds tools/landed_cost.py (requires human APPROVED at HITL gate 5). No inline computation was performed.",
-      "UNVERIFIED_established_seller_count for ALL candidates: Takealot server-side search ignores ?q= for bots (verified this session); needs JS-rendered browsing or official seller data. Competition grades are listing-proxy judgements with method labels.",
-      "Cosmetics duty conflict: 3304.99 @20% (Tradecaravan) vs 3304 @15% (JLog) — SARS line check required before use.",
-      "4202.32 (leather/folio phone cases) SA line rate UNVERIFIED — 4202.92 @30% is a heading proxy only; leather variants excluded from scope regardless.",
-      "Solar-integrated power banks: 8507.60 @0% vs 8541.43 @10% essential-character question — tariff determination required.",
-      "Charger+cable bundle: composite-GRI treatment UNVERIFIED — rated at highest line (cable 15%) conservatively.",
-      "Metal-dominant car mounts may classify under 8302/7616, not 3926.90 — plastic construction assumed; Sourcing to confirm.",
-      "README landed-cost formula vs SARS ATV method (10% uplift on non-SACU value): discrepancy flagged for Supervisor/Pricing; MR takes no position (cost math is Pricing-owned)."
+      "UNVERIFIED_duty_rate_pct for 7117.90 (imitation jewellery, non-base metal), 7007.19 (toughened safety glass, non-vehicle) and 9603.30 (cosmetic/artist brushes): these lines carry no duty page in the reachable SARS-derived index (https://tradecaravan.co.za/hs-codes/, data current 2026-08-06) and the risk-checker database returns 'Code not in our dataset'. Evidence recorded in mr-0029 (7007.19) and mr-0030 (9603.30) as negative results. Verify by reading the line in SARS Schedule No. 1 Part 1 or via a section 47(9) determination.",
+      "MR SARS primary-source method limit (new this session): the SARS Schedule No. 1 Part 1 consolidated PDF (https://www.sars.gov.za/legal-lprim-ce-sch1p1chpt1-to-99-schedule-no-1-part-1-chapters-1-to-99/, page updated 2026-08-28) is fetchable only up to roughly Chapter 3 before the fetch tool truncates, so Chapters 33/67/70/71/85/90/96 cannot be read directly by this method; https://www.sars.gov.za/legal-counsel/primary-legislation/schedules-to-the-customs-and-excise-act-1964-tariff-book/ 404s and https://tariff.sars.gov.za/ did not load (all attempted 2026-09-30). Duty lines verified this session therefore rest on Tradecaravan's SARS-derived index (dataset dated 2026-08-06, page cites SARS Tariff Book Schedule 1 Part 1). Primary-source line confirmation remains outstanding for every duty line.",
+      "UNVERIFIED_duty_rate_pct for trend-only candidates not re-verified this session (wigs, pet GPS, mouth tape, shower filter, sunglasses, yoga mats, hot comb, air fryer): classify only if Supervisor routes them.",
+      "UNVERIFIED_net_margin_pct for ALL candidates: still blocked - Pricing's pr-0003 states supplier unit costs are UNVERIFIED (so-0002 halt) and requests an ATV-formula decision before any verdict-bearing margin run. No inline computation was performed and none is permitted here.",
+      "UNVERIFIED_established_seller_count for ALL candidates: Takealot server-side search ignores ?q= for bots (verified 2026-09-29); needs JS-rendered browsing or official seller data. Competition grades remain listing-proxy judgements with method labels.",
+      "4202.32 (leather/folio phone cases) SA line rate UNVERIFIED - 4202.92 @30% is a heading proxy only; leather variants excluded from scope regardless.",
+      "Solar-integrated power banks: 8507.60 @0% vs 8541.43 @10% essential-character question - both rates now verified as lines; the choice between them is a classification determination, not a rate question (see mr-0034).",
+      "Charger+cable bundle: composite-GRI treatment UNVERIFIED - rated at highest line (cable 8544.42 @15%) conservatively; carried forward for Sourcing.",
+      "Metal-dominant car mounts may classify under 8302/7616, not 3926.90 - plastic construction assumed; Sourcing to confirm.",
+      "README landed-cost formula vs SARS ATV method (customs value + duty + 10% uplift) x 15%: discrepancy flagged for Supervisor/Pricing (pr-0003 request). MR takes no position - cost math is Pricing-owned."
     ]
   },
   "sourcing": {
