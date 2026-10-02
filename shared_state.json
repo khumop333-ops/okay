@@ -517,6 +517,67 @@
           "hard_stops_status": "No HARD STOP violated. #1 no spend; #2 nothing invented \u2014 all 12 candidates verified via fetched URLs with cited prices, creators, and (where available) reviews; #3 no product verdict issued (recommendation field is market_research screening, not pricing verdict); #4 no pricing; #5 Market Research session, reports to Supervisor; #6 no force-push, no branch deletion; #7 no secrets; #8 shared_state.json exists on main; #9 one PR (arena/01a0fddd-okay), pushed before session end.",
           "push_status": "Pushed to remote: arena/01a0fddd-okay -> khumop333-ops/okay.git (commit f557160)"
         }
+      },
+      {
+        "id": "sup-0006",
+        "timestamp": "2026-10-02T20:49:35+02:00",
+        "agent": "supervisor",
+        "confidence": 9,
+        "source": "this session (arena/01a0fdf1-okay) - README.md and shared_state.json read at base commit 14bd99d9b50ec056f4c94bc0a68ece9e0bb9dbb2 (merge of PR #15); gh pr list --state open returned zero open PRs at session open; sandbox audit of state.market_research.findings mr-0043..mr-0054 (12 candidates, 8 distinct verified sellers, 6 proceed / 6 investigate, 6 with an explicit NOT VERIFIED reviews marker, price range R45.00-R4,594.02) and mr-0055; operator instructions in this session, quoted verbatim in data.operator_direction.",
+        "verified": true,
+        "data": {
+          "record_type": "premise_repair",
+          "session_id": "01a0fdf1",
+          "branch": "arena/01a0fdf1-okay",
+          "base_commit": "14bd99d9b50ec056f4c94bc0a68ece9e0bb9dbb2",
+          "active_model": "DIGITAL (sup-0002, operator-confirmed)",
+          "task": "Premise repair after PR #15: amend README section 1 (the four legitimate digital product models; 'digital dropshipping' is not a coherent model), amend README section 4 (every digital candidate must declare its model or it is not actionable), and record this finding. The Market Research prompt is deliberately NOT amended in this PR - that is the follow-up session.",
+          "premise_gap": {
+            "what_pr15_did": "PR #15 (branch arena/01a0fddd-okay, merge commit 14bd99d9b50ec056f4c94bc0a68ece9e0bb9dbb2; session record sup-0005) ran the first digital discovery pass and recorded 12 SA tax/legal template candidates (mr-0043..mr-0054) plus a market gap analysis (mr-0055).",
+            "what_was_missing": "The run never examined the premise of 'digital dropshipping'. The pipeline was inherited from the retired import model, where a supplier holds stock, ships to the customer and the reseller keeps a mark-up. For a file, none of those three assumptions holds. The candidates are not sellable inventory: each is the product of a South African business (verified sellers: NetLawman SA, The Online Agreements Shop cc / AgreementsOnline, Contracts4Biz / SchoemanLaw Inc., Business Templates, Access to Info, LabourSmart / Johanette Rheeder, Property Reality, Ink Legal). Those businesses are not suppliers to us - without a verified licence, reseller-rights grant, affiliate programme or white-label right, they are competitors.",
+            "why_the_label_persisted": "README section 1 said 'digital products' without defining the legitimate models, and section 4 said only that the import math does not apply. Nothing in the contract required a candidate to say what kind of digital product it was, so the run reported other companies' products as if a supplier relationship existed.",
+            "not_a_fabrication_record": "This is a premise gap, not invented data: PR #15 recorded real, fetched, cited products and honestly flagged its own review-verification gaps (sup-0005). No finding from PR #15 is deleted, edited or re-labelled; they stay in state.market_research."
+          },
+          "candidate_status": {
+            "ids": "mr-0043..mr-0054",
+            "count": 12,
+            "status": "RECORDED_NOT_ACTIONABLE",
+            "effect": "The 12 candidates remain in state as reference material. They are NOT actionable until a Market Research session matches each to one of the four models (ORIGINAL, LICENSED, AFFILIATE, WHITE-LABEL) and records that declaration in the candidate record's digital_model field (README section 4). The six 'proceed' and six 'investigate' screening recommendations from PR #15 cannot be routed to Sourcing, Pricing, Listing or AdGrowth before then. The Supervisor does not perform that classification - it is Market Research work (README section 3).",
+            "precedent": "Same pattern as the archived import research (sup-0002): recorded, not deleted, not live pipeline input."
+          },
+          "mr_0055_status": {
+            "status": "RETAINED_AS_LEAD_SIGNAL",
+            "finding": "mr-0055 (market_gap_analysis, verified true, confidence 9): no sold provisional tax calculation worksheets or CIPC annual return checklist templates exist as paid digital products; the free SARS / CIPC / professional-body alternatives are good.",
+            "why_it_is_the_lead": "It identifies a gap in functionality, not a product to source: a paid product would have to do calculation, tracking, automation or workflow beyond the free forms. The natural fit is ORIGINAL (build), not LICENSED/AFFILIATE/WHITE-LABEL. This is a direction signal for the follow-up Market Research session; it is not a verified market-size, demand or revenue claim, and none is recorded.",
+            "constraints_carried": [
+              "Not tax advice without a registered tax practitioner.",
+              "Must not reproduce copyrighted material.",
+              "Any pricing verdict must still satisfy HARD STOP 3 (digital margin gate) on sourced inputs."
+            ]
+          },
+          "operator_direction": {
+            "status": "RECORDED (operator instruction, not a verified finding of fact)",
+            "verbatim_quotes": [
+              "Pick ORIGINAL as the digital model. It is the only one where you own the margin, control quality, and can build a brand that compounds. Licensed and white-label are license-dependent and rarely available in SA. Affiliate produces no brand asset - you are renting traffic.",
+              "The mr-0055 gap is the lead: an SA tax compliance toolkit that does calculation, not just formatting. That is a build project, not a sourcing project."
+            ],
+            "effect": "Future digital discovery and screening work targets ORIGINAL candidates, and mr-0055 is the lead signal. Not yet encoded in the Market Research prompt - the prompt amendment is explicitly deferred to a follow-up session (operator scope instruction). The four models remain defined in README section 1; the choice of active digital sub-model lives in state, mirroring README section 1's rule that the operator's starting-model choice is recorded in shared_state.json.",
+            "expectation_to_watch": "ORIGINAL candidates are build projects: they route to Sourcing for rights/contractor verification and Pricing for cost/margin, and they carry development cost and time-to-market risk that physical dropship candidates do not."
+          },
+          "verification_gate_observation": {
+            "observation": "6 of the 12 candidates carry an explicit 'NOT VERIFIED' / 'NOT DIRECTLY VERIFIED' marker in their reviews field (mr-0047, mr-0048, mr-0049, mr-0050, mr-0053, mr-0054), while all 12 are recorded with verified: true. The sup-0005 summary records unverified_reviews: 7 and price_range_zar R113-R4,594; the findings themselves yield 6 explicit markers and a price range of R45.00-R4,594.02 (mr-0053 is R45). The likely seventh review gap is mr-0045, whose counter reads '0+ Downloads, 0+ Entrepreneurs Impacted' (counters not populated). No value was changed in this session.",
+            "why_it_matters": "The per-finding verified: true flag currently does not mean 'all four verification fields verified' for these candidates, and the session summary does not reconcile with its own findings. If an unverified reviews field is acceptable, the gate should say so; if not, those candidates should be re-marked verified: false. Either way the record should be internally consistent.",
+            "action": "Follow-up Market Research prompt session must define the rule (drop the candidate, or record verified: false) and re-mark the 12 candidates accordingly. Not fixed in this PR: it is prompt/agent work, out of this PR's declared scope (README + one Supervisor finding)."
+          },
+          "readme_amendments": {
+            "section_1_mission": "'Digital products' now names the four legitimate models - ORIGINAL, LICENSED, AFFILIATE, WHITE-LABEL - and states plainly that 'digital dropshipping' is not a coherent model: you cannot dropship a file.",
+            "section_4_digital": "Every future digital candidate must declare one of the four models in a required digital_model field; a candidate without a declaration is not actionable and may not be routed to any other agent.",
+            "not_amended": "agents/market_research.py (the Market Research prompt) is unchanged, per the operator's scope instruction. The prompt still emits the pre-amendment shape; the next Market Research session must carry the digital_model requirement, and the existing 12 candidates remain not actionable until re-marked."
+          },
+          "scope": "README.md (sections 1 and 4) and this single finding in shared_state.json. No code, no tools, no cost math, no other namespace, no other state field changed.",
+          "hard_stops_status": "No HARD STOP violated. #1 no spend; #2 nothing invented - every number in this finding is computed from state in this session's sandbox audit or quoted verbatim from the operator; #3 no product verdict issued; #4 no pricing or VAT; #5 Supervisor session, reports to the human; #6 no force-push, branch deletion or history rewrite; #7 no secrets; #8 shared_state.json exists on main; #9 zero open PRs at session open, one PR this session, pushed before session end.",
+          "hitl_gates": "None crossed. No paid service, sample order, launch recommendation, ad campaign, pricing/customs math change, or customer-facing commitment."
+        }
       }
     ]
   },
