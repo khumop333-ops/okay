@@ -603,6 +603,30 @@
           "merge_action": "Merge commit only, performed by the Supervisor on the operator's explicit instruction; no squash, no rebase, no branch deletion (HARD STOP 6). Repo setting delete_branch_on_merge is false, checked before merging, so the branch survives the merge.",
           "approval_provenance": "Hand-authored event record, deliberately NOT part of any agent build function: approvals are events, so re-running an agent CLI can never regenerate, re-stamp or fabricate one. Only reachable by an explicit append to state - same provenance rule as sup-0003."
         }
+      },
+      {
+        "id": "sup-0008",
+        "timestamp": "2026-10-02T21:36:25+02:00",
+        "agent": "supervisor",
+        "confidence": 9,
+        "source": "this session (arena/01a0fdf1-okay) - observed in the sandbox: git status --porcelain, git log --oneline origin/arena/01a0fdf1-okay, git diff origin/arena/01a0fdf1-okay -- README.md (empty: working file byte-identical to the pushed commit's version), git diff origin/arena/01a0fdf1-okay --stat -- shared_state.json (+25 lines: the sup-0007 insert only), and the rejected push (non-fast-forward) that surfaced the divergence.",
+        "verified": true,
+        "data": {
+          "record_type": "harness_anomaly",
+          "session_id": "01a0fdf1",
+          "branch": "arena/01a0fdf1-okay",
+          "observed_effect": "Between two turns of this session the sandbox restored the local branch pointer to the base commit (14bd99d, the merge of PR #15) while keeping the working-tree files from the previous turn. The next commit (c562224, the sup-0007 record) was therefore built on 14bd99d instead of on the already-pushed session commit 01c4773 (README sections 1 and 4 plus sup-0006). The two commits are siblings with the same parent, so the push was rejected as non-fast-forward.",
+          "nothing_lost": "The pushed commit 01c4773 held the README amendment and sup-0006; the local commit c562224 held sup-0006 and sup-0007. Working files were verified before any action: working README was byte-identical to the pushed version, and working shared_state.json differed from the pushed version only by the sup-0007 insert. No content existed in only one place unrecoverably.",
+          "reconciliation": "By merge, not force-push and not rebase (HARD STOP 6): the diverged commits were merged, resolving shared_state.json in favour of the fuller local file (sup-0006 + sup-0007) and taking README from the pushed commit. Duplicate additions of sup-0006 across the two lineages are visible in the merge history; the merged tree contains it exactly once. Nothing was deleted, no branch was removed, no published history was rewritten.",
+          "root_cause_status": "UNKNOWN and not inferred. The sandbox environment restored the branch pointer; why is not observable from inside the session. No agent behaviour is implicated.",
+          "guidance_for_future_sessions": [
+            "The remote branch is the source of truth for session state, not the local HEAD after a turn boundary.",
+            "Before committing, compare against the remote: git log --oneline origin/<branch> and git diff origin/<branch>.",
+            "If a push is rejected, fetch and inspect. Never force-push (HARD STOP 6) - reconcile by merge.",
+            "This is the second session-discipline incident recorded (see sup-0001, lost unpushed work). Here the push-before-session-end rule from sup-0001's mitigation is what made full recovery possible."
+          ],
+          "hard_stops_status": "No HARD STOP violated. #6 in particular: no force-push, no branch deletion, no published history rewritten."
+        }
       }
     ]
   },

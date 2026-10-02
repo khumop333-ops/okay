@@ -19,6 +19,25 @@ the South African market**, under one of three viable business models:
 2. **High-ticket items.** Few, high-value sales where one order carries the
    margin.
 3. **Digital products.** Delivered electronically, with no physical stock.
+   There is no such thing as "digital dropshipping": you cannot dropship a
+   file. Every digital product must be one of exactly four legitimate models:
+   1. **ORIGINAL** — we (or a contractor we commission) create the product
+      and own the intellectual property.
+   2. **LICENSED** — the creator grants us resale rights under a verified
+      licence.
+   3. **AFFILIATE** — we promote someone else's product for a commission; we
+      own no product and control neither delivery nor quality.
+   4. **WHITE-LABEL** — we license the creator's product and sell it under
+      our own brand, which is only legitimate with explicit rebranding
+      rights.
+
+**"Digital dropshipping" is not a coherent model.** Physical dropshipping
+works because a supplier holds stock, ships to our customer on our behalf, and
+we keep a mark-up. A file has none of those properties: no stock is held,
+nothing is shipped, and there is no per-unit supplier cost for a third party
+to absorb. Every digital product is created (ORIGINAL), licensed (LICENSED or
+WHITE-LABEL), or promoted (AFFILIATE) — the four models above. A digital
+candidate that has not declared one of the four models is not actionable (§4).
 
 The order above is not a priority order. The operator chooses the starting
 model; the current choice is recorded in `shared_state.json`
@@ -134,7 +153,18 @@ customer. We do not import, so the import math above does not apply.
 import math above applies only if the item is imported.
 
 **Digital.** Products delivered electronically, with no physical stock,
-shipping, or customs. The import math above does not apply.
+shipping, or customs. The import math above does not apply, and no agent may
+apply supplier-shipment or landed-cost logic to a digital product.
+
+Every digital product candidate must declare which of the four legitimate
+digital models it belongs to — ORIGINAL, LICENSED, AFFILIATE, or WHITE-LABEL
+(§1). The declaration is a required field on the candidate record
+(`digital_model`), with exactly one of those four values. **A candidate
+without a model declaration is not actionable:** it may be recorded in
+`shared_state.json`, but it must not be routed to Sourcing, Pricing, Listing,
+AdGrowth, or Support until the declaration is present. There is no "digital
+dropshipping" category to default to — a digital candidate that names no model
+sits in a holding state, not in a pipeline.
 
 ---
 
