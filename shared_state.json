@@ -25,10 +25,10 @@
       "must_never": "Execute sub-agent tasks directly (README section 3)",
       "append_key": "sessions"
     },
-    "timestamp": "2026-10-02T19:22:54+02:00",
+    "timestamp": "2026-10-02T19:33:52+02:00",
     "agent": "supervisor",
     "confidence": 9,
-    "source": "Session 01a0fd84 (Supervisor, README contract amendment): appended to supervisor.sessions. Operator decisions quoted verbatim in operator_decisions; SARS ATV rule verified from https://www.sars.gov.za/customs-and-excise/duties-and-taxes/duties-and-taxes-for-importers/ fetched 2026-10-02.",
+    "source": "Session 01a0fd84 (Supervisor): sup-0003 HITL gate 5 approval record appended to supervisor.findings; operator instruction recorded verbatim on PR #13 (https://github.com/khumop333-ops/okay/pull/13#issuecomment-5957829104).",
     "verified": true,
     "sessions": [
       {
@@ -363,6 +363,32 @@
           ],
           "hard_stops_status": "No HARD STOP violated. #1 no spend (no paid API, sample order or ad); #2 nothing invented: every id and count here was read from shared_state.json at the base commit and the operator's words are quoted verbatim; #3 and #4 no product approved and no cost math touched; #5 Supervisor session, no sub-agent output; #6 no force-push or history rewrite; #7 no secrets; #8 shared_state.json is on main; #9 the previous PR (#10) was merged before this session.",
           "hitl_gates_note": "No HITL gate crossed: no paid service, sample order, launch recommendation, ad campaign or customer-facing commitment. Gate 5 (merging a PR that touches pricing logic or customs math) is not triggered on this reading: no code, formula or rate changed, and the section 4 text only scopes where the existing import math applies, as the operator directed. Flagged so the operator can overrule that reading before merge."
+        }
+      },
+      {
+        "id": "sup-0003",
+        "timestamp": "2026-10-02T19:33:52+02:00",
+        "agent": "supervisor",
+        "confidence": 9,
+        "source": "Operator instruction in this session (2026-10-02), recorded verbatim on PR #13: https://github.com/khumop333-ops/okay/pull/13#issuecomment-5957829104 ; resolves the HITL gate 5 flag recorded in supervisor.sessions entry 01a0fd84 (README section 5, gate 5). Pre-merge state at the decision: gh pr list --state open = only PR #13, mergeStateStatus CLEAN, checks pass (CodeRabbit).",
+        "verified": true,
+        "data": {
+          "record_type": "hitl_gate_record",
+          "gate": "HITL gate 5 (README section 5) - merging a PR that touches pricing logic or customs math",
+          "subject_pr": "https://github.com/khumop333-ops/okay/pull/13",
+          "request_being_resolved": "supervisor.sessions[01a0fd84].hitl_gates (gate 5 flagged for the operator's merge decision: README section 2 #4 changes contract VAT wording for imports; no code, formula or rate touched).",
+          "operator_instruction_verbatim": "Please merge the pull request.",
+          "decision": "APPROVED BY IN-SESSION INSTRUCTION - the operator is the gate holder; the literal token 'APPROVED' was NOT used, and this record does not claim it was. The verbatim instruction is an explicit operator direction to perform exactly the action the gate governs (same reading as pricing pr-0007). If that reading is wrong, it must be corrected by a new finding and by reverting the merge - not by editing this record.",
+          "scope_approved": [
+            "README section 2 #3 - model-conditional margin floor and the digital gate definition (20% after payment fees, platform fees, ad CPA and a sourced refund/chargeback allowance; unverified input -> UNVERIFIED and halt)",
+            "README section 2 #4 - import VAT = 15% on the ATV (customs value + 10% upliftment + non-rebated duty) per SARS; import pricing verdicts blocked until section 4 and the tools align; other models -> UNVERIFIED and halt",
+            "README section 3 - MarketResearch, Sourcing and Pricing must-never cells restated per model",
+            "README section 8 - pre-merge open-PR collision check",
+            "The operator-approved shared_state.json session record in the same PR (README section 8 / section 10)"
+          ],
+          "scope_NOT_approved": "Any change to README section 4 or to tools/customs.py or tools/landed_cost.py. Import pricing verdicts remain blocked by README section 2 #4 until a separate HITL gate 5 PR aligns section 4 and the tools' default VAT basis with the SARS ATV method.",
+          "merge_action": "Merge commit only, performed by the Supervisor on the operator's explicit instruction; no squash, no rebase, no branch deletion (HARD STOP 6).",
+          "approval_provenance": "Hand-authored event record, deliberately NOT part of any agent build function: approvals are events, so re-running an agent CLI can never regenerate, re-stamp or fabricate one. Only reachable by an explicit append to state."
         }
       }
     ]
