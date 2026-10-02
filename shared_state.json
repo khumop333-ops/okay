@@ -517,6 +517,48 @@
           "hard_stops_status": "No HARD STOP violated. #1 no spend; #2 nothing invented \u2014 all 12 candidates verified via fetched URLs with cited prices, creators, and (where available) reviews; #3 no product verdict issued (recommendation field is market_research screening, not pricing verdict); #4 no pricing; #5 Market Research session, reports to Supervisor; #6 no force-push, no branch deletion; #7 no secrets; #8 shared_state.json exists on main; #9 one PR (arena/01a0fddd-okay), pushed before session end.",
           "push_status": "Pushed to remote: arena/01a0fddd-okay -> khumop333-ops/okay.git (commit f557160)"
         }
+      },
+      {
+        "id": "sup-0006",
+        "timestamp": "2026-10-02T18:42:49+02:00",
+        "agent": "supervisor",
+        "confidence": 10,
+        "source": "PR #15 merge: https://github.com/khumop333-ops/okay/pull/15 ; merge commit 14bd99d9b50ec056f4c94bc0a68ece9e0bb9dbb2 ; mergedAt 2026-10-02T18:42:49Z. Operator instruction: 'Please merge the pull request.'",
+        "verified": true,
+        "data": {
+          "record_type": "merge_record",
+          "subject_pr": "https://github.com/khumop333-ops/okay/pull/15",
+          "merge_commit": "14bd99d9b50ec056f4c94bc0a68ece9e0bb9dbb2",
+          "merged_at": "2026-10-02T18:42:49Z",
+          "merge_method": "merge (not squash, not rebase) - README section 6 respected",
+          "merge_state_status": "CLEAN",
+          "mergeable": "MERGEABLE",
+          "operator_instruction_verbatim": "Please merge the pull request.",
+          "what_was_merged": {
+            "files_changed": 1,
+            "additions": 1098,
+            "deletions": 235,
+            "commits": 3,
+            "description": "state.market_research.findings: 12 verified SA tax/legal template candidates (mr-0043..mr-0054) + 1 market gap analysis (mr-0055). state.supervisor.findings: 1 session record (sup-0005)."
+          },
+          "gate_5_applicability": {
+            "touches_pricing_logic_or_customs_math": false,
+            "reason": "PR touches only shared_state.json - no code, no tools/, no README changes. README section 5 gate 5 (merging a PR that touches pricing logic or customs math) does NOT apply.",
+            "gate_5_record_needed": false
+          },
+          "session_collision_check": {
+            "open_prs_at_merge": "zero (only PR #15 existed and is now merged)",
+            "collision": false,
+            "method": "gh pr list --state open (verified zero open PRs beside #15)"
+          },
+          "post_merge_state": {
+            "main_has_shared_state_json": true,
+            "market_research_findings_count": 55,
+            "supervisor_findings_count": 6,
+            "newest_mr_id": "mr-0055",
+            "newest_sup_id": "sup-0006"
+          }
+        }
       }
     ]
   },
