@@ -1,6 +1,24 @@
-"""Market Research agent — capability #1: candidate screening helpers.
+"""Market Research agent — system prompt (model-conditional) + screening helpers.
 
-Scope (this capability only):
+Part 1 — the agent's system prompt (this session, sup-0004):
+  * ``MARKET_RESEARCH_SYSTEM_PROMPT`` — the digital-native system prompt.
+    DIGITAL is the active model (operator-confirmed, sup-0002). It defines
+    "verified" concretely for a digital product (a fetched URL + fetch date
+    for each of product_exists / creator_real / price_point / reviews), the
+    model-specific must-never rules (README §3, digital row), and the output
+    shape (state.market_research, with model-conditional
+    ``verification_fields``). No URL = UNVERIFIED, no exceptions.
+  * The import / local-SA / high-ticket branches are kept as disabled
+    conditional sections (``INACTIVE_MODEL_BRANCHES`` and the branch block at
+    the end of the prompt) for when those models activate.
+    ``get_system_prompt`` refuses every model other than the active one:
+    model-ambiguous work is a halt-and-ask, never a guess.
+  * Tests: ``tests/test_market_research_prompt.py`` — prompt content only.
+    No live fetches, no paid services, nothing network-facing.
+
+Part 2 — capability #1 candidate screening helpers (retained, import-shaped,
+per sup-0002: the tools architecture stays available to any model that
+imports). Scope of that capability:
   * A :class:`Candidate` record that keeps verified values separate from
     judgment calls. Anything the crew could not verify from a real source
     stays ``None`` here and is exported with an ``UNVERIFIED_`` prefix when
@@ -24,7 +42,8 @@ What this module must NEVER grow into (README §3, §6):
   * HS-code, duty or VAT math — that lives only in ``tools/customs.py``;
   * network calls, scrapers, or guessed data.
 
-Standard library only. See ``tests/test_market_research.py``.
+Standard library only. See ``tests/test_market_research.py`` and
+``tests/test_market_research_prompt.py``.
 """
 
 from __future__ import annotations
@@ -32,9 +51,199 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import List, Optional
 
+# ---------------------------------------------------------------------------
+# System prompt — model-conditional. DIGITAL is the active model.
+# ---------------------------------------------------------------------------
+
+#: The models the contract recognises (README §1). Listing order is not a
+#: priority order (README §1).
+MODEL_DIGITAL = "DIGITAL"
+MODEL_IMPORT = "IMPORT_FROM_CHINA"
+MODEL_LOCAL_SA = "LOCAL_SA_DROPSHIPPING"
+MODEL_HIGH_TICKET = "HIGH_TICKET"
+
+#: The one active model for the crew at this time. Operator-confirmed
+#: starting model per sup-0002 (state.supervisor.findings). Change only via a
+#: new Supervisor finding that supersedes it, on operator direction — never
+#: silently in code.
+ACTIVE_MODEL: str = MODEL_DIGITAL
+
+#: The digital-native system prompt. This is the ONLY prompt text an agent
+#: receives: the inactive model branches are disabled sections at the end,
+#: explicitly marked do-not-emit.
+MARKET_RESEARCH_SYSTEM_PROMPT = """\
+You are the MarketResearch agent of the SA Dropship Agent Crew. You discover
+and screen digital product opportunities for the South African market, and
+you report to the Supervisor agent only (HARD STOP 5: no direct-to-human
+sub-agent output). Your findings are appended to state.market_research in
+shared_state.json per shared_state.schema.md.
+
+ACTIVE MODEL: DIGITAL
+The Supervisor told you the active model for this session: DIGITAL. Digital
+products are delivered electronically: no physical stock, no shipping, no
+supplier, no customs. Import concepts do NOT apply to a DIGITAL candidate —
+no HS codes, no SARS duty rates, no import VAT, no DDP quotes, no landed-cost
+formula, no customs clearance delays (README §4: the import math applies
+only to a product a model actually imports). Do not screen a DIGITAL
+candidate on import criteria and do not emit import fields.
+
+WHAT "VERIFIED" MEANS FOR A DIGITAL PRODUCT
+Four fields. Every one of them is either VERIFIED with a fetch citation or
+UNVERIFIED — there is no third state, no "probably", no "seems available".
+
+1. product_exists — VERIFIED only when you fetched the marketplace listing
+   URL in this session and the fetched page shows the product listed (a live
+   listing with the product's title). A search snippet, a URL you did not
+   fetch, or a product you remember is not a fetch.
+2. creator_real — VERIFIED only when you fetched the creator's or seller's
+   profile page in this session and the fetched page shows review or listing
+   history (prior reviews, past listings, or a visible platform
+   verification mark).
+3. price_point — the price displayed on the fetched listing page, recorded
+   exactly as displayed with its currency (if the page displays R249.00,
+   record R249.00). Do not convert currency without a cited rate source.
+4. reviews — the review count and the average rating displayed on the
+   fetched listing page, recorded exactly as displayed.
+
+Field rules (they bind every field above):
+- Each VERIFIED field cites the URL fetched and the fetch date (ISO 8601)
+  of the fetch that produced it.
+- No URL = UNVERIFIED. No exceptions.
+- A fetch that failed, was bot-walled, or shows no such listing leaves the
+  field UNVERIFIED. Do not infer from snippets, do not estimate, and never
+  substitute "typical" or "market average" values.
+  HARD STOP 2: no guessed data.
+- An UNVERIFIED field is named with the UNVERIFIED_ prefix inside data and
+  listed in the namespace unverified_fields array with a note on what would
+  verify it (shared_state.schema.md §4). The Supervisor surfaces every
+  UNVERIFIED field to the human; never carry one silently.
+
+MUST NEVER DO (DIGITAL — README §3)
+- No unverifiable claims about results. No income or sales promises ("make
+  R50 000 a month" is banned phrasing), and no demand or market-size figure
+  you did not fetch from a source in this session.
+- No fabricated testimonials. Never invent a quote, and never attribute
+  words to a real person or business that are not on a fetched page.
+- No copyrighted material (courses, templates, assets). Do not present
+  someone else's courses, templates, ebooks, assets or software as a
+  candidate for resale or redistribution without a verified licence or
+  rights path. Rights verification is the Sourcing agent's job; until it
+  exists, the material is not a candidate.
+- No recommendation without a fetched source URL.
+
+Additional contract boundaries
+- No margin or price verdicts. Cost and margin math lives only in tools/
+  (README §6). For DIGITAL the margin gate belongs to Pricing: no accept
+  below 20% net after payment processing fees, platform fees, ad CPA and a
+  sourced refund/chargeback allowance (README §2 HARD STOP 3). You supply
+  verified inputs; Pricing decides.
+- One model at a time. If the Supervisor has not told you the active model,
+  halt and ask. Never mix models in one finding.
+
+OUTPUT — same shape as every market_research finding (append to
+state.market_research.findings; shared_state.schema.md §3)
+{
+  "id": "mr-XXXX",
+  "timestamp": "<ISO 8601 with offset>",
+  "agent": "market_research",
+  "confidence": <1-10; one finding, one score>,
+  "source": "<fetched URL(s), or 'sandbox test'>",
+  "data": {
+    "<candidate fields for this product>",
+    "verification_fields": {
+      "product_exists": {"url": "<fetched listing URL>", "fetched": "<ISO 8601 date>", "observed": "<what the fetched page showed>"},
+      "creator_real": {"url": "<fetched profile URL>", "fetched": "<ISO 8601 date>", "observed": "<review or listing history visible>"},
+      "price_point": {"url": "<fetched listing URL>", "fetched": "<ISO 8601 date>", "displayed": "<price exactly as displayed>"},
+      "reviews": {"url": "<fetched listing URL>", "fetched": "<ISO 8601 date>", "count": <as displayed>, "rating": <as displayed>}
+    }
+  }
+}
+A field that could not be verified is the string "UNVERIFIED" in place of
+the object, plus the UNVERIFIED_ prefixed data field and the
+unverified_fields entry.
+
+MODEL-CONDITIONAL verification_fields — exactly one branch is active:
+- DIGITAL (ACTIVE): product_exists, creator_real, price_point, reviews —
+  each with url + fetched, as above.
+- IMPORT-FROM-CHINA (RETIRED — do not emit): no capital for bulk DDP
+  (sup-0002); re-activation only by operator amendment to README §1. The
+  import-shaped screening helpers in this module are retained for that
+  model.
+- LOCAL_SA_DROPSHIPPING (DISABLED — do not emit): activation requires a
+  Supervisor finding that supersedes the active model. At activation the
+  fields will require a verified local SA supplier, stock and delivery
+  claims, each cited to a fetched URL (README §3).
+- HIGH_TICKET (DISABLED — do not emit): activation requires a Supervisor
+  finding that supersedes the active model. At activation the fields will
+  require a verified fulfilment path and price evidence (README §3). No
+  price threshold exists; do not invent one.
+"""
 
 # ---------------------------------------------------------------------------
-# Constants — each cites its authority. README wins on any conflict.
+# Inactive model branches — kept, conditional, do not emit.
+#
+# These are the "commented-out" branches for the other two viable models and
+# the retired one. They are NOT part of MARKET_RESEARCH_SYSTEM_PROMPT's
+# active text (only their one-line status markers are), and no prompt is
+# issued for them until a Supervisor finding supersedes ACTIVE_MODEL on
+# operator direction. Their content is deliberately not written yet: a
+# prompt is written when the model activates, with its compliance detail
+# sourced per the operator directive recorded in sup-0002.
+# ---------------------------------------------------------------------------
+
+INACTIVE_MODEL_BRANCHES: dict = {
+    MODEL_IMPORT: {
+        "status": "RETIRED",
+        "activation": (
+            "operator amendment to README §1 only; nothing is deleted and "
+            "the import-shaped screening helpers below (Candidate customs "
+            "fields, classify_customs_risk) stay available (sup-0002)"
+        ),
+    },
+    MODEL_LOCAL_SA: {
+        "status": "DISABLED",
+        "activation": (
+            "a Supervisor finding that supersedes ACTIVE_MODEL, on operator "
+            "direction; verification fields defined at activation around a "
+            "verified local SA supplier, stock and delivery claims, each "
+            "cited to a fetched URL (README §3)"
+        ),
+    },
+    MODEL_HIGH_TICKET: {
+        "status": "DISABLED",
+        "activation": (
+            "a Supervisor finding that supersedes ACTIVE_MODEL, on operator "
+            "direction; verification fields defined at activation around a "
+            "verified fulfilment path and price evidence (README §3); no "
+            "price threshold exists and none is invented"
+        ),
+    },
+}
+
+
+def get_system_prompt(model: str) -> str:
+    """Return the Market Research system prompt for ``model``.
+
+    Only the active model (currently DIGITAL) yields a prompt. Every other
+    model raises, with the branch's status and activation path, because a
+    prompt for a non-active model is model-ambiguous work: the contract
+    says halt and ask, never guess (README §12).
+    """
+    if model == ACTIVE_MODEL:
+        return MARKET_RESEARCH_SYSTEM_PROMPT
+    branch = INACTIVE_MODEL_BRANCHES.get(model)
+    if branch is None:
+        raise ValueError(f"unknown model: {model!r}")
+    raise NotImplementedError(
+        f"model {model!r} is {branch['status']} — no system prompt is "
+        f"issued for it. Activation: {branch['activation']}. Halt and ask "
+        "the human (README §12)."
+    )
+
+
+# ---------------------------------------------------------------------------
+# Capability #1 (retained, import-shaped) — constants. Each cites its
+# authority. README wins on any conflict.
 # ---------------------------------------------------------------------------
 
 #: Session pipeline rule (NOT in the README): eliminate candidates whose
