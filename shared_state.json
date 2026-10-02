@@ -1746,10 +1746,10 @@
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
       }
     },
-    "timestamp": "2026-09-30T09:42:57+02:00",
+    "timestamp": "2026-10-02T13:08:00+00:00",
     "agent": "sourcing",
     "confidence": 7,
-    "source": "so-0003 (mr-0002 quotes + both mandatory cross-checks), so-0004 (mr-0003 quotes), so-0005 (session summary for Supervisor). 6 supplier quotes + 4 cross-check pages fetched & read 2026-09-30; FX Google Finance 16.3460.",
+    "source": "so-0006 (2026-10-02 DDP-to-SA shipping quote sweep across Sweet Protrading, ZHTX, Yiwu Eway, Wingspeed, Coremax, Honour Ocean, Merpower, Kaixida; USD/ZAR 16.6654 Google Finance 2026-10-02) + so-0005 (2026-09-30 supplier + forwarder discovery) + so-0003/so-0004 (2026-09-30 Coremax & C.s. Power verification) + so-0001/so-0002.",
     "verified": true,
     "findings": [
       {
@@ -2299,6 +2299,277 @@
           "shipping_carrier_note": "Carrier-level e-Packet/DHL/Aramex comparison for SA was delivered in so-0001 (previously sourced); this session adds the only fresh lane datapoint: Alibaba Standard Logistics $19.80/2 boxes, Oct 11 - Nov 19 guaranteed window (destination country UNVERIFIED in fetch). No new carrier claims made.",
           "hard_stop_compliance": "No purchase commitments; no invented supplier/metric/rate - every quoted number carries its fetched URL and fetch date; unobservable fields are UNVERIFIED_-prefixed and listed in unverified_fields; no direct-to-human briefing beyond this state record + PR description (README-required PR contents); no destructive git ops; no secrets; no unrelated files touched; shared_state.json pre-existed on main (verified) and was only appended to under state.sourcing."
         }
+      },
+      {
+        "id": "so-0006",
+        "timestamp": "2026-10-02T13:08:00+00:00",
+        "agent": "sourcing",
+        "confidence": 7,
+        "source": "fetch_page, all fetched & read 2026-10-02: https://www.google.com/finance/quote/USD-ZAR (USD/ZAR 16.6654 @ 2026-10-02 12:30:19 UTC); https://cntrsm.en.alibaba.com/; https://cntrsm.en.alibaba.com/productgrouplist-822293600/High_inquiry_products.html; https://www.alibaba.com/product-detail/1688-Purchasing-Shipping-Agent-Logistics-Service_1601356070201.html; https://www.alibaba.com/product-detail/door-to-door-delivery-service-ems_60703892641.html; https://zhtxsz.en.alibaba.com/; https://zhtxsz.en.alibaba.com/productgrouplist-963600634/TOP_SALE.html; https://www.alibaba.com/product-detail/China-door-to-door-service-ups_1601256645326.html; https://www.alibaba.com/product-detail/freight-forwarder-china-to-Democratic-Algeria_1601255677117.html; https://suppliers.alibaba.com/yiwu-eway-international-logistics-co-ltd_2218910837169; https://yiwuyiwei.en.alibaba.com/; https://www.alibaba.com/product-detail/Shopify-Dropshipping-Agent-US-AU-EU_1601379475240.html; https://www.alibaba.com/product-detail/Shopify-Dropshipping-Smart-Projector-Outdoor-Screen_1601597321214.html; https://bonmedshipping.en.alibaba.com/; https://cnwingspeed.en.alibaba.com/; https://www.alibaba.com/product-detail/Container-Dropshipping-Agent-Fast-Shipping-to_1600713628003.html; https://www.alibaba.com/product-detail/WINGSPEED-Freight-Forwarder-Logistics-Service-Cargo_62091984207.html; https://www.alibaba.com/product-detail/ddp-air-freight-forwarder-Sea-shipping_1601193797824.html; https://www.alibaba.com/product-detail/New-Trending-Waterproof-20000Mah-Solar-Charger_1601727591668.html; https://kms9.en.alibaba.com/; https://www.alibaba.com/product-detail/Agent-China-ddp-To-South-Africa_1601253467871.html; https://www.alibaba.com/product-detail/South-Africa-Sea-DDP-Shipping-Service_1601435129328.html; https://www.alibaba.com/product-detail/Cheapest-China-Taobao-Door-To-Door_1601039978158.html; https://www.alibaba.com/product-detail/Powerbank-Portable-Charger-20000mAh-QC-3_1600094133059.html; https://www.alibaba.com/product-detail/Guangzhou-Logistics-Services-Sensitive-Goods-Freight_1601696506627.html",
+        "verified": true,
+        "verified_scope": "verified=true applies ONLY to pages actually fetched and read via fetch_page on 2026-10-02 and the literal figures/attributes displayed on them. Where a forwarder displays a generic per-kg headline placeholder without a confirmed South Africa (ZA) battery/small-electronics DDP tariff table, the exact fetched numbers are reported alongside UNVERIFIED_ markers per HARD STOP #2.",
+        "data": {
+          "record_type": "ddp_to_sa_shipping_quotes",
+          "product_id": "mr-0002",
+          "product": "20,000mAh solar power bank (HS 8507.60, 0% duty, ~400-500g per unit; lithium-ion battery cargo ~74Wh)",
+          "target_shipping_ceiling_zar": 147.46,
+          "target_context": "R147.46/unit shipping ceiling at R699 retail, R150 CPA, R0 platform fees, 25% net margin, Coremax entry unit cost R86.80 (from pricing.pr-0008)",
+          "fx_rates_referenced": {
+            "live_2026_10_02_usd_zar": 16.6654,
+            "live_fx_source": "https://www.google.com/finance/quote/USD-ZAR (fetched 2026-10-02, timestamped 2 Oct 12:30:19 UTC)",
+            "pr_0008_baseline_usd_zar": 16.346,
+            "pr_0008_fx_source": "Google Finance USD/ZAR 16.3460 @ 2026-09-30 07:33 UTC (used in so-0003 and pr-0008)"
+          },
+          "quotes_fetched_count": 7,
+          "quotes": [
+            {
+              "quote_index": 1,
+              "lead_category": "prior_session_forwarder_lead",
+              "forwarder_name": "Shenzhen Sweet Protrading Co., Ltd.",
+              "listing_title": "1688 Purchasing Shipping Agent Logistics Service Freight Forwarder Purchasing-agent Taobao 1688 Buying Sourcing Agent in China (#11 hot selling in Air+Express)",
+              "fetched_rate_usd": "$1.00 - $2.00 per kg (Minimum order quantity: 1 kilogram)",
+              "per_unit_rate_zar": null,
+              "UNVERIFIED_per_unit_rate_zar": "Headline rate is $1-2/kg (MOQ 1 kg) -> R16.67-R33.33 at 1 kg minimum billing (@16.6654; or R16.35-R32.69 @16.3460), or R8.33-R16.67 if pro-rated at 0.4-0.5 kg, BUT page explicitly states: \"Shipping fee and delivery date to be negotiated\" and FAQ #1: \"The exact price can be offered when the details of your goods finalized, like weight, volume, loaded city and destination city.\" South Africa (ZA) is NOT in the listing's 45-country Shipment destination attribute.",
+              "fetched_headline_rate_zar_at_1kg_moq": "R16.67 - R33.33 (@16.6654 live FX) / R16.35 - R32.69 (@16.3460 pr-0008 FX)",
+              "transit_time": "7 - 12 Days (Air+Express attribute on 1601356070201; dispatch 3 days, lead time 2 days). Secondary listing 60703892641 shows 30 - 40 Days (LCL+Express) and embedded service table lists \"other country\": express 4-5 days, FBA Amazon \"no services\", sea freight \"port to port or shipping and delivery\".",
+              "UNVERIFIED_sa_transit_time": "No South Africa-specific (ZA) transit time confirmed on fetched pages; 7-12 days is generic Air+Express headline before SA customs (5-15 business days if non-DDP).",
+              "ddp_vs_dap": "DDU / DDP (both listed in Trading Term attribute; Seller listed as Destination customs clearance party; description claims \"DDP door-to-door solutions\" and battery/dangerous goods handling, while embedded service table on 60703892641 shows DDP only for America/Europe/Canada/Australia/Japan and \"no services\" / \"port to port\" for \"other country\").",
+              "UNVERIFIED_ddp_to_sa": "DDP to South Africa (ZA) is NOT confirmed on the fetched pages (ZA absent from Shipment destination list and service table).",
+              "small_electronics_under_1kg_fit": "MOQ is 1 kilogram; accepts Special (Dangerous) Goods including batteries per fetched description, but single-unit 400-500g parcel incurs at least the 1 kg MOQ and requires bespoke quote.",
+              "supplier_metrics_observed": {
+                "tenure": "10 yrs on Alibaba (Verified by TuVRheinland)",
+                "store_rating": "4.8/5 (6,157 / 9,432 reviews)",
+                "product_rating": "4.9/5 (56 reviews, 18,447 sold on 1601356070201)",
+                "response_time": "<=3h",
+                "on_time_dispatch": "100.0%",
+                "reorder_rate": "53%",
+                "online_revenue": "US$840,000+",
+                "main_markets": "United States (41%), United Kingdom (14%), France (10%), Spain (6%), Canada (6%), Other (24%) — South Africa not listed"
+              },
+              "source_url": "https://www.alibaba.com/product-detail/1688-Purchasing-Shipping-Agent-Logistics-Service_1601356070201.html (corroborated by store https://cntrsm.en.alibaba.com/, https://cntrsm.en.alibaba.com/productgrouplist-822293600/High_inquiry_products.html, and https://www.alibaba.com/product-detail/door-to-door-delivery-service-ems_60703892641.html)",
+              "fetch_date": "2026-10-02",
+              "verified": true,
+              "verified_scope": "Forwarder identity, store metrics, $1-2/kg headline rate, 1 kg MOQ, 7-12 days Air+Express attribute, DDU/DDP trading term, Seller clearance attribute, battery/DG text, and absence of ZA in destination list — all directly read via fetch_page on 2026-10-02."
+            },
+            {
+              "quote_index": 2,
+              "lead_category": "prior_session_forwarder_lead",
+              "forwarder_name": "Shenzhen ZHTX International Freight Forwarding Co., LTD.",
+              "listing_title": "China Door to Door Service From China to Belgium Ireland Poland FBA Shipping Special Transportation (1601256645326) + Freight Forwarder China to DE Germany France Canada America Fedex Dhl Air Express (1601255677117)",
+              "fetched_rate_usd": "$0.03 - $0.85 per kg (MOQ 1 kg on 1601256645326); $0.57 - $0.84 per kg (MOQ 1 kg on 1601255677117); TOP_SALE main products $0.35 - $0.82 per kg (MOQ 1 kg)",
+              "per_unit_rate_zar": null,
+              "UNVERIFIED_per_unit_rate_zar": "Headline rates ($0.03-$0.85/kg -> R0.50-R14.17/kg @16.6654 or R0.49-R13.89/kg @16.3460; $0.57-$0.84/kg -> R9.50-R14.00/kg @16.6654 or R9.32-R13.73/kg @16.3460) are generic per-kg teaser ranges requiring bespoke quote (\"Shipping fee and delivery date to be negotiated\"; FAQ requires departure/destination city, CTN, KG, CBM, and trade term selection). Moreover, Destination customs clearance party is set to Buyer on both fetched product pages.",
+              "fetched_headline_rate_zar_at_1kg_moq": "R0.50 - R14.17 (1601256645326) / R9.50 - R14.00 (1601255677117) @16.6654 live FX (R0.49 - R13.89 / R9.32 - R13.73 @16.3460 pr-0008 FX)",
+              "transit_time": "Africa row in embedded \"Logistics Transport Time\" table (1601256645326): Express 4 - 7 Days, Air 8 - 12 Days, Truck/Sea/Railway marked \"***\" (not offered). Listing attribute shows 4 - 9 days (1601256645326, dispatch 30 days, lead time 5 days) and 22 - 28 Days (1601255677117, >21-day flag).",
+              "UNVERIFIED_sa_transit_time": "Africa regional table gives 4-7 days (Express) and 8-12 days (Air), but South Africa-specific customs clearance (+5-15 business days if Buyer clears) and 30-day dispatch attribute on 1601256645326 make total SA delivery time unverified.",
+              "ddp_vs_dap": "DAP / Buyer-cleared conflict: structured Key attribute \"Destination customs clearance party\" is explicitly \"Buyer\" on both 1601256645326 and 1601255677117 (DAP/DDU), whereas free-text fields list \"Trading Term: FOB EXW CIF DDU DDP\" and \"Advantage: DDP Shipping, Delivered to the door\", and FBA DDP list omits Africa (\"USA, Canada, Australia, Mexico, Europe, Japan, UAE\").",
+              "UNVERIFIED_ddp_to_sa": "DDP to South Africa is NOT confirmed on ZHTX's fetched pages; structured attribute assigns destination customs clearance to Buyer, and FBA DDP country list excludes Africa.",
+              "small_electronics_under_1kg_fit": "MOQ is 1 kilogram; accepts Special (Dangerous) Goods on both fetched listings, but actual per-parcel rate for a 400-500g lithium power bank to ZA is negotiated off-page.",
+              "supplier_metrics_observed": {
+                "tenure": "3 yrs on Alibaba (Trusted service provider, Verified by SGS Group, #2 top-selling supplier in Express)",
+                "store_rating": "4.8/5 (579 / 1,202 reviews)",
+                "product_rating": "5.0/5 (13 reviews on 1601255677117); 0 reviews on 1601256645326",
+                "response_time": "<=2h",
+                "on_time_dispatch": "100.0%",
+                "reorder_rate": "34%",
+                "online_revenue": "US$630,000+",
+                "main_markets": "United States (42%), Czechia (11%), Spain (11%), Australia (7%), France (5%), Other (25%) — South Africa not listed"
+              },
+              "source_url": "https://www.alibaba.com/product-detail/China-door-to-door-service-ups_1601256645326.html; https://www.alibaba.com/product-detail/freight-forwarder-china-to-Democratic-Algeria_1601255677117.html; https://zhtxsz.en.alibaba.com/; https://zhtxsz.en.alibaba.com/productgrouplist-963600634/TOP_SALE.html",
+              "fetch_date": "2026-10-02",
+              "verified": true,
+              "verified_scope": "Forwarder identity, SGS verification, store metrics, $0.03-$0.85/kg and $0.57-$0.84/kg headline rates, 1 kg MOQ, Africa transport table (Express 4-7d, Air 8-12d, Sea ***), Buyer customs-clearance attribute, and \"to be negotiated\" shipping block — all directly read via fetch_page on 2026-10-02."
+            },
+            {
+              "quote_index": 3,
+              "lead_category": "prior_session_forwarder_lead",
+              "forwarder_name": "Yiwu Eway International Logistics Co., Ltd.",
+              "listing_title": "Shopify Dropshipping Agent US/AU/EU Worldwide 1688 SHOPPING AGENT Door to Door DDP with Low Rate Air+Express (1601379475240) + Shopify Dropshipping Smart Projector DDP Service (1601597321214)",
+              "fetched_rate_usd": "$1.00/piece (1-99 pcs), $0.90/piece (100-999 pcs), $0.80/piece (1,000-9,999 pcs), $0.70/piece (>=10,000 pcs); CN¥4.72-6.74/piece on SGS supplier profile cards; Shipping total: \"To be negotiated\"",
+              "per_unit_rate_zar": null,
+              "UNVERIFIED_per_unit_rate_zar": "Displayed $0.70-$1.00/piece (R11.67-R16.67 @16.6654 or R11.44-R16.35 @16.3460) is an agent fulfillment/sourcing placeholder, NOT international freight to South Africa; page explicitly states \"Shipping fee and delivery date to be negotiated... Shipping total: To be negotiated.\" Furthermore, verified export market distribution is 60% Western Europe, 30% North America, 10% Oceania (0% Africa), and Product Type is restricted to General (Non-dangerous) Goods (excludes lithium batteries).",
+              "fetched_headline_rate_zar_at_1pc_moq": "R16.67 (@16.6654 live FX) / R16.35 (@16.3460 pr-0008 FX) for 1-99 pcs fulfillment placeholder; actual shipping total \"To be negotiated\"",
+              "transit_time": "4 - 7 Days (Express attribute on 1601379475240 to France via Colissimo and 1601597321214 to Sweden; description text specifies \"3-5 days to UK, 6-9 days to US/Europe\", dispatch 3 days, lead time 3 days for 1-1,000 pcs).",
+              "UNVERIFIED_sa_transit_time": "No South Africa or Africa lane exists on Yiwu Eway's fetched pages; transit times are exclusively for UK/US/Europe (France/Sweden).",
+              "ddp_vs_dap": "DAP / Buyer-cleared conflict: despite \"DDP\" in listing titles, structured Key attribute \"Destination customs clearance party\" on 1601379475240 is explicitly set to \"Buyer\" (DAP/DDU).",
+              "UNVERIFIED_ddp_to_sa": "DDP to South Africa is NOT offered on fetched pages (0% Africa market distribution; France/Sweden destinations; Buyer customs clearance attribute).",
+              "small_electronics_under_1kg_fit": "INELIGIBLE on fetched attributes: Product Type is \"General(Non-dangerous) Goods\" only on both fetched listings (does not cover Special/Dangerous Goods lithium-ion power banks), and carrier is Colissimo (France).",
+              "supplier_metrics_observed": {
+                "tenure": "2 yrs on Alibaba (Established 2018-07-10, Verified by SGS Group Report 485024251_T valid 2026-01-05 to 2027-01-04)",
+                "store_rating": "No reviews yet (0 store reviews on yiwuyiwei.en.alibaba.com)",
+                "product_rating": "No reviews yet (100 sold on 1601379475240; 10 sold on 1601597321214)",
+                "response_time": "<=3h",
+                "on_time_dispatch": "100.0%",
+                "online_revenue": "US$1,000+",
+                "main_markets": "Western Europe 60%, North America 30%, Oceania 10% (store page: Germany 100%, United States) — 0% Africa"
+              },
+              "source_url": "https://www.alibaba.com/product-detail/Shopify-Dropshipping-Agent-US-AU-EU_1601379475240.html; https://www.alibaba.com/product-detail/Shopify-Dropshipping-Smart-Projector-Outdoor-Screen_1601597321214.html; https://yiwuyiwei.en.alibaba.com/; https://suppliers.alibaba.com/yiwu-eway-international-logistics-co-ltd_2218910837169",
+              "fetch_date": "2026-10-02",
+              "verified": true,
+              "verified_scope": "Forwarder identity, SGS report 485024251_T, $0.70-$1.00/pc tier table, \"Shipping total: To be negotiated\", Buyer customs-clearance attribute, General (Non-dangerous) Goods restriction, Colissimo/France & Sweden destination attributes, and 60% WE / 30% NA / 10% Oceania market split — all directly read via fetch_page on 2026-10-02."
+            },
+            {
+              "quote_index": 4,
+              "lead_category": "prior_session_forwarder_lead",
+              "forwarder_name": "Shenzhen Wingspeed International Forwarding Co., Ltd.",
+              "listing_title": "Container Dropshipping Agent Fast Shipping to Us Au Eu Worldwide Supplier Door to Door Dropshipping With Low Rate (1600713628003, MOQ 1 kg) + WINGSPEED Freight Forwarder DDP/DDU (62091984207, MOQ 100 kg) + Ddp air Freight Forwarder (1601193797824, MOQ 100 kg)",
+              "fetched_rate_usd": "$1.00/kg (1-99 kg), $0.80/kg (>=100 kg) on 1600713628003 (MOQ 1 kg); $1.00/kg (100-299 kg), $0.90/kg (300-499 kg), $0.85/kg (500-999 kg), $0.80/kg (>=1,000 kg) on 62091984207 & 1601193797824 (MOQ 100 kg); Shipping total: \"To be negotiated\"",
+              "per_unit_rate_zar": null,
+              "UNVERIFIED_per_unit_rate_zar": "Displayed $1.00/kg at 1-99 kg tier (R16.67/kg @16.6654 or R16.35/kg @16.3460) is a placeholder tier with \"Shipping fee and delivery date to be negotiated... Shipping total: To be negotiated.\" Moreover, all three fetched product pages set Destination customs clearance party = Buyer (DAP/DDU), 62091984207 lists Trading Term = \"CIF DDU FOB EXW\" (omitting DDP), and South Africa (ZA) is absent from all Shipment destination lists (note: SA in ISO list is Saudi Arabia).",
+              "fetched_headline_rate_zar_at_1kg_moq": "R16.67 (@16.6654 live FX) / R16.35 (@16.3460 pr-0008 FX) for 1-99 kg placeholder tier on 1600713628003; actual shipping total \"To be negotiated\"",
+              "transit_time": "5 - 15 Days (Air+Express on 1600713628003, dispatch 2 days, lead time 7 days for 1 kg; average store dispatch 11 days); 2 - 9 Days (Air+Express on 1601193797824, dispatch 5 days); 5 - 25 Days (International Trucking+Express on 62091984207, dispatch 5 days, average store dispatch 15 days — >21-day flag).",
+              "UNVERIFIED_sa_transit_time": "South Africa (ZA) is not in the Shipment destination attribute on any of the three fetched listings; transit times are generic non-ZA lanes.",
+              "ddp_vs_dap": "DAP / DDU (Buyer-cleared): all three fetched product pages explicitly set structured Key attribute \"Destination customs clearance party: Buyer\", and 62091984207 sets \"Trading Term: CIF DDU FOB EXW\" (excluding DDP despite \"DDP /DDU\" in the title).",
+              "UNVERIFIED_ddp_to_sa": "DDP to South Africa is NOT offered on the fetched pages (Buyer customs clearance attribute on all 3 pages; Trading Term excludes DDP on 62091984207; ZA absent from destination lists).",
+              "small_electronics_under_1kg_fit": "1600713628003 has 1 kg MOQ and accepts Special (Dangerous) Goods, whereas 62091984207 and 1601193797824 require a 100 kg MOQ (bulk cargo only). Even on 1600713628003, shipping total is \"To be negotiated\" and clearance is Buyer (DDU).",
+              "supplier_metrics_observed": {
+                "tenure": "8-12 yrs across 4 SGS-verified Alibaba storefronts (bonmedshipping 9 yrs, cnwingspeed 9 yrs, chinawingspeed 8 yrs, wingspeed 12 yrs)",
+                "store_rating": "5.0/5 (1,152 reviews on chinawingspeed; 538 reviews on bonmedshipping); 4.4/5 (1,542 reviews on wingspeed — below 4.5 bar)",
+                "product_rating": "19 reviews on 62091984207; 7 reviews on 1600713628003 (3,393 sold); 10,476 sold on 1601193797824",
+                "response_time": "<=5h to <=6h",
+                "on_time_dispatch": "100.0% (chinawingspeed/bonmedshipping/cnwingspeed); >=99% (wingspeed)",
+                "online_revenue": "$500K-$1M (chinawingspeed); $50K-$100K (bonmedshipping)"
+              },
+              "source_url": "https://www.alibaba.com/product-detail/Container-Dropshipping-Agent-Fast-Shipping-to_1600713628003.html; https://www.alibaba.com/product-detail/WINGSPEED-Freight-Forwarder-Logistics-Service-Cargo_62091984207.html; https://www.alibaba.com/product-detail/ddp-air-freight-forwarder-Sea-shipping_1601193797824.html; https://bonmedshipping.en.alibaba.com/; https://cnwingspeed.en.alibaba.com/",
+              "fetch_date": "2026-10-02",
+              "verified": true,
+              "verified_scope": "Forwarder identity across storefronts, SGS verification, store ratings, $0.80-$1.00/kg tier tables (1 kg MOQ on 1600713628003; 100 kg MOQ on 62091984207 & 1601193797824), Buyer customs-clearance attribute on all 3 listings, CIF/DDU/FOB/EXW trading term on 62091984207, Special (Dangerous) Goods attribute, and absence of ZA from destination lists — all directly read via fetch_page on 2026-10-02."
+            },
+            {
+              "quote_index": 5,
+              "lead_category": "coremax_direct_recheck",
+              "forwarder_name": "Guangzhou Coremax New Energy Technology Co., Ltd. (via Standard Alibaba.com Logistics)",
+              "listing_title": "New Trending Waterproof 20000Mah Solar Charger Outdoor Travel Solar Charger Power Bank (model 30A, 1601727591668)",
+              "fetched_rate_usd": "Standard (Alibaba.com Logistics): $19.81 (struck $39.81) for 2 boxes = $9.905 per box (on 2026-09-30 it was $19.80 / 2 boxes = $9.90/box)",
+              "per_unit_rate_zar": 165.07,
+              "per_unit_rate_zar_at_pr0008_fx": 161.91,
+              "prior_so0003_per_unit_rate_zar": 161.83,
+              "UNVERIFIED_per_unit_rate_zar": "Fetched rate is $19.81 for 2 boxes = $9.905/box = R165.07/box (@16.6654 live 2026-10-02 FX) or R161.91/box (@16.3460 pr-0008 FX; was R161.83 on 2026-09-30 at $19.80/2 boxes). However: (1) this quote is NOT DDP (\"*Taxes and import charges will be calculated at checkout\"), (2) destination country rendered in sandbox is unconfirmed for ZA (store header defaulted to GB), and (3) \"box\" unit vs single item (1.000 kg gross) remains unverified. Even if treated as per-unit shipping, R165.07 (and R161.83/R161.91) EXCEEDS the R147.46 target ceiling by R17.61 (or R14.37/R14.45).",
+              "transit_time": "Guaranteed delivery: Oct 20 - Nov 29 (18 - 58 calendar days from 2026-10-02 fetch date; average dispatch time 12 days; lead time 3 days for 1-200 boxes). FLAGGED: upper bound 58 days breaches the 21-day SA delivery limit before adding 5-15 business days customs clearance.",
+              "UNVERIFIED_sa_transit_time": "Destination country for the Oct 20 - Nov 29 window is not confirmed as South Africa (ZA).",
+              "ddp_vs_dap": "DAP / DDU (NOT DDP) — page explicitly states \"*Taxes and import charges will be calculated at checkout\"; no DDP option exists on the product page or store hub (kms9.en.alibaba.com). Interactive Alibaba chat is login-gated and no negotiation drafts are permitted under session rules.",
+              "UNVERIFIED_ddp_to_sa": "No DDP option is displayed on Coremax's public pages.",
+              "small_electronics_under_1kg_fit": "Direct product listing for mr-0002 (20,000mAh solar power bank; page lists Single package size 13.35x7x3 cm, Single gross weight 1.000 kg, Selling Units: Single item).",
+              "supplier_metrics_observed": {
+                "tenure": "1 yr on Alibaba (Manufacturer, Trading Company)",
+                "store_rating": "No reviews yet (0 product reviews, 0 store reviews)",
+                "response_time": "<=2h (response rate 99.65% on store hub)",
+                "on_time_dispatch": "83.3% (product page, average dispatch time 12 days)",
+                "online_revenue": "$5K-$10K (7 top buyers served)"
+              },
+              "source_url": "https://www.alibaba.com/product-detail/New-Trending-Waterproof-20000Mah-Solar-Charger_1601727591668.html; https://kms9.en.alibaba.com/",
+              "fetch_date": "2026-10-02",
+              "verified": true,
+              "verified_scope": "Product price tiers ($5.31/$5.04/$4.59/$4.19), Standard (Alibaba.com Logistics) shipping fee $19.81 (struck $39.81) for 2 boxes, guaranteed delivery Oct 20 - Nov 29, \"*Taxes and import charges will be calculated at checkout\" (non-DDP), 1.000 kg gross weight, and store metrics — all directly read via fetch_page on 2026-10-02."
+            },
+            {
+              "quote_index": 6,
+              "lead_category": "alibaba_ddp_to_south_africa_forwarder",
+              "forwarder_name": "Shenzhen Honour Ocean Shipping Co., Ltd.",
+              "listing_title": "Agent China Ddp to South Africa Kenya Nigeria air Sea Freight Forwarder International Courier DDP Door to Door Forwarding (1601253467871, MOQ 1 kg) + Freight Forwarder Shipping Agent From China to South Africa DDP Door to Door Air Sea Freight FCL LCL Johannesburg Delivery (1601435129328, MOQ 21 kg) + Shipping Agent Freight Forwarder Delivery Companies China to Saudi Arabia Oman Qatar UAE South Africa Ghana Nigeria Kuwait DDP (1601039978158, MOQ 1 kg)",
+              "fetched_rate_usd": "$0.90 - $1.00/kg (MOQ: 1 kilogram, 2,225 sold) on ZA LCL+Trucking DDP listing 1601039978158; $1.00 - $3.00/kg (MOQ: 1 kilogram) on Air+Express DG listing 1601253467871; $1.10 - $2.00/kg (MOQ: 21 kilograms) on Sea LCL+Express ZA listing 1601435129328; Shipping total: \"To be negotiated\" / \"contact us now\"",
+              "per_unit_rate_zar": null,
+              "UNVERIFIED_per_unit_rate_zar": "Displayed $1.00-$3.00/kg on 1601253467871 (R16.67-R50.00 at 1 kg MOQ @16.6654 or R16.35-R49.04 @16.3460) and $1.10-$2.00/kg on 1601435129328 (R18.33-R33.33/kg @16.6654, MOQ 21 kg = R384.97-R699.95 minimum shipment) are placeholder per-kg bands; both pages state \"Shipping fee and delivery date to be negotiated... Item subtotal $0.00 - $0.00, Shipping total: To be negotiated\" and \"shipping cost: Depend on cargo name, weight, shipping way ,etc\". Furthermore, the body text of 1601253467871 explicitly notes under \"3. Air cargo DDP shipping\": \"it's door to door including custom clearance and tax. Min order is 21kg.\" Thus a single-unit (<1 kg) DDP rate is NOT published on-page.",
+              "fetched_headline_rate_zar_at_1kg_moq": "R15.00 - R16.67 (@16.6654 live FX) / R14.71 - R16.35 (@16.3460 pr-0008 FX) on 1601039978158 ($0.90-$1.00/kg, MOQ 1 kg); R16.67 - R50.00 (@16.6654) on 1601253467871 ($1.00-$3.00/kg, MOQ 1 kg header but 21 kg Air DDP min in description); actual shipping total \"To be negotiated\"",
+              "transit_time": "8 - 15 Days (Air+Express attribute on 1601253467871; description table lists Fast Air Door-to-Door 2-4 workdays + 3-5 workdays delivery = 5-9 workdays, Slower Air DDP transfer 6-8 workdays + 3-5 workdays delivery = 9-13 workdays, Express 2-5 days; dispatch 6 days); 25 - 35 Days (Sea LCL+Express attribute on 1601435129328, dispatch 5 days; FAQ says Sea 30-45 days — breaches 21-day limit).; 20 - 40 Days (LCL+Trucking attribute on 1601039978158, dispatch 10 days — breaches 21-day limit).",
+              "ddp_vs_dap": "DDP (Seller-cleared): both 1601253467871 and 1601435129328 explicitly set structured Key attribute \"Destination customs clearance party: Seller\", Trading Term \"DDP\", and \"Advantage: Tax Included, SARS Customs Clearance, SABS Support\" (on 1601435129328).",
+              "UNVERIFIED_ddp_to_sa": "While DDP to South Africa (SARS Customs Clearance, Tax Included) is explicitly advertised and Seller-cleared in structured attributes, both listings require off-page quotation (\"To be negotiated\") and state a 21 kg minimum order for Air Cargo DDP (in 1601253467871 body text) and Sea DDP (in 1601435129328 MOQ), leaving <1 kg single-unit DDP pricing unverified.",
+              "small_electronics_under_1kg_fit": "1601253467871 covers Special (Dangerous) Goods and lists a 1 kg header MOQ and \"6. Small packages delivery to USA, Canada, Europe, Middle-East, Africa, Australia\", but its \"3. Air cargo DDP shipping\" section specifies \"Min order is 21kg\". 1601435129328 has a 21 kg MOQ and is restricted to General (Non-dangerous) Goods.",
+              "supplier_metrics_observed": {
+                "tenure": "10 yrs on Alibaba (founded 2013, NVOCC NO: MOC-NV 09832, Verified by TuVRheinland)",
+                "store_rating": "4.6/5 (1,506 / 1,852 verified reviews; Service 4.6, Shipping 4.6, Quality 4.6)",
+                "product_rating": "0 product reviews on 1601253467871 and 1601435129328",
+                "response_time": "<=3h",
+                "on_time_dispatch": "99.1% (>=99%)",
+                "reorder_rate": "26%",
+                "online_revenue": "US$ 670,000+ (Africa 2.00% of export split)"
+              },
+              "source_url": "https://www.alibaba.com/product-detail/Agent-China-ddp-To-South-Africa_1601253467871.html; https://www.alibaba.com/product-detail/South-Africa-Sea-DDP-Shipping-Service_1601435129328.html; https://www.alibaba.com/product-detail/Cheapest-China-Taobao-Door-To-Door_1601039978158.html",
+              "fetch_date": "2026-10-02",
+              "verified": true,
+              "verified_scope": "Forwarder identity, TuVRheinland verification, 4.6/5 store rating (1,852 reviews), Seller customs-clearance attribute, ZA(South Africa) destination and SARS Customs Clearance attribute on 1601435129328, Special (Dangerous) Goods capability on 1601253467871, $1-$3/kg (1 kg MOQ) and $1.10-$2/kg (21 kg MOQ) placeholder bands, 8-15d Air / 25-35d Sea transit times, 21 kg Air DDP minimum note in description, and \"Shipping total: To be negotiated\" — all directly read via fetch_page on 2026-10-02."
+            },
+            {
+              "quote_index": 7,
+              "lead_category": "comparable_product_and_sensitive_goods_forwarder_check",
+              "forwarder_name": "ShenZhen Merpower Electronic Co.,Ltd (product supplier, 1600094133059) & Changsha Kaixida Import & Export Trading Co., Ltd. (sensitive-goods forwarder, 1601696506627)",
+              "listing_title": "Portable Ultra Slim 20000mAh Power Bank with 65W PD Type-C Fast Charging QC 3.0 Solar Source (1600094133059, 390g) + Guangzhou Logistics Services Sensitive Goods Freight Forwarder Alibaba Shipping Agent (1601696506627, MOQ 1 kg)",
+              "fetched_rate_usd": "Merpower (1600094133059): Seller's Shipping Method 1 = $8,085 for 500 pieces ($16.17/piece) at 500 pcs MOQ; Kaixida (1601696506627): $0.10 - $0.90/kg (MOQ: 1 kilogram) placeholder with \"Shipping total: To be negotiated\"",
+              "per_unit_rate_zar": 269.48,
+              "per_unit_rate_zar_at_pr0008_fx": 264.31,
+              "UNVERIFIED_per_unit_rate_zar": "Merpower's fetched checkout shipping rate of $16.17/piece = R269.48/unit (@16.6654 live FX) or R264.31/unit (@16.3460 pr-0008 FX) is non-DDP (\"*Taxes and import charges will be calculated at checkout\"), requires a 500-piece MOQ ($29/unit product cost), and exceeds the R147.46 ceiling by R122.02/unit. Kaixida's $0.10-$0.90/kg (R1.67-R15.00/kg @16.6654) is an unquoted placeholder (\"Shipping total: To be negotiated\") with Destination City = GB and ZA absent from Shipment destination.",
+              "transit_time": "Merpower (1600094133059): Guaranteed delivery by Nov 20 (49 calendar days from 2026-10-02 — breaches 21-day limit); Kaixida (1601696506627): 3 - 5 Days (Express attribute, dispatch 1 day, non-ZA).",
+              "ddp_vs_dap": "Merpower (1600094133059): DAP / DDU (\"*Taxes and import charges will be calculated at checkout\"); Kaixida (1601696506627): Seller customs clearance attribute (\"Trading Term: FOB EXW CIF DDU DDP\"), but ZA is not in Shipment destination.",
+              "UNVERIFIED_ddp_to_sa": "Neither listing provides a verified DDP-to-South-Africa per-unit rate.",
+              "small_electronics_under_1kg_fit": "Merpower 1600094133059 is a 390g 20,000mAh solar-source power bank (500 pcs MOQ); Kaixida 1601696506627 handles Special (Dangerous) Goods with 1 kg MOQ and dropshipping customization.",
+              "supplier_metrics_observed": {
+                "merpower": "12 yrs Custom Manufacturer, <=3h response, >=100% on-time dispatch, 9% reorder rate, 0 product reviews",
+                "kaixida": "5 yrs Trusted service provider (Verified by TuVRheinland), 4.6/5 store rating (2,115 / 3,008 reviews), <=2h response, 100.0% on-time dispatch, 34% reorder rate, US$ 420,000+ online revenue"
+              },
+              "source_url": "https://www.alibaba.com/product-detail/Powerbank-Portable-Charger-20000mAh-QC-3_1600094133059.html; https://www.alibaba.com/product-detail/Guangzhou-Logistics-Services-Sensitive-Goods-Freight_1601696506627.html",
+              "fetch_date": "2026-10-02",
+              "verified": true,
+              "verified_scope": "Merpower $8,085/500 pcs ($16.17/pc) shipping fee, Nov 20 delivery date, 390g weight, non-DDP checkout notice; Kaixida $0.10-$0.90/kg (1 kg MOQ), Seller clearance attribute, Special (Dangerous) Goods attribute, 3-5d Express transit, and \"Shipping total: To be negotiated\" — all directly read via fetch_page on 2026-10-02."
+            }
+          ],
+          "session_status": "completed — all 7 quote groups (18 Alibaba URLs + 1 Google Finance FX page) fetched, read, and pushed sequentially on 2026-10-02",
+          "ceiling_outcome": {
+            "target_ceiling_zar": 147.46,
+            "ceiling_beaten_by_verified_checkout_quote": false,
+            "verified_ddp_per_unit_quote_available_on_public_pages": false,
+            "lowest_achievable_checkout_shipping_figure_fetched": {
+              "supplier": "Guangzhou Coremax New Energy Technology Co., Ltd. (via Standard Alibaba.com Logistics)",
+              "source_url": "https://www.alibaba.com/product-detail/New-Trending-Waterproof-20000Mah-Solar-Charger_1601727591668.html",
+              "fetched_2026_10_02_usd": "$19.81 for 2 boxes ($9.905 / box)",
+              "fetched_2026_10_02_zar_at_16_6654_fx": 165.07,
+              "fetched_2026_10_02_zar_at_16_3460_fx": 161.91,
+              "fetched_2026_09_30_usd_so0003": "$19.80 for 2 boxes ($9.90 / box)",
+              "fetched_2026_09_30_zar_at_16_3460_fx_so0003": 161.83,
+              "overage_vs_147_46_ceiling_zar": "+R17.61/unit (@16.6654 live 2026-10-02 FX) / +R14.45/unit (@16.3460 FX for $19.81) / +R14.37/unit (so-0003 R161.83 baseline)",
+              "ddp_vs_dap": "DAP / DDU (NOT DDP — \"*Taxes and import charges will be calculated at checkout\")",
+              "transit_time": "Guaranteed delivery Oct 20 - Nov 29 (18 - 58 calendar days from 2026-10-02; average dispatch 12 days — exceeds 21-day limit)"
+            },
+            "lowest_forwarder_placeholder_headline_bands_fetched_not_executable_quotes": [
+              {
+                "forwarder": "Shenzhen ZHTX International Freight Forwarding Co., LTD.",
+                "headline_usd": "$0.03 - $0.85/kg (1601256645326, MOQ 1 kg) / $0.57 - $0.84/kg (1601255677117, MOQ 1 kg)",
+                "headline_zar_at_16_6654": "R0.50 - R14.17/kg (1601256645326) / R9.50 - R14.00/kg (1601255677117)",
+                "why_unverified_for_ddp_per_unit": "Shipping total = \"To be negotiated\"; structured Destination customs clearance party = Buyer (DAP/DDU)."
+              },
+              {
+                "forwarder": "Changsha Kaixida Import & Export Trading Co., Ltd.",
+                "headline_usd": "$0.10 - $0.90/kg (1601696506627, MOQ 1 kg)",
+                "headline_zar_at_16_6654": "R1.67 - R15.00/kg",
+                "why_unverified_for_ddp_per_unit": "Shipping total = \"To be negotiated\"; ZA not in Shipment destination."
+              },
+              {
+                "forwarder": "Shenzhen Honour Ocean Shipping Co., Ltd.",
+                "headline_usd": "$0.90 - $1.00/kg (1601039978158, MOQ 1 kg, LCL+Trucking ZA DDP) / $1.00 - $3.00/kg (1601253467871, MOQ 1 kg header, Air+Express DG DDP to SA)",
+                "headline_zar_at_16_6654": "R15.00 - R16.67/kg (1601039978158) / R16.67 - R50.00/kg (1601253467871)",
+                "why_unverified_for_ddp_per_unit": "Only forwarder with verified Seller customs clearance + ZA(South Africa) destination, but Shipping total = \"To be negotiated\" and 1601253467871 body text states \"3. Air cargo DDP shipping... Min order is 21kg\" (1601039978158 is General Goods only, 20-40d transit)."
+              },
+              {
+                "forwarder": "Shenzhen Wingspeed International Forwarding Co., Ltd.",
+                "headline_usd": "$1.00/kg (1-99 kg), $0.80/kg (>=100 kg) on 1600713628003 (MOQ 1 kg)",
+                "headline_zar_at_16_6654": "R16.67/kg (1-99 kg tier)",
+                "why_unverified_for_ddp_per_unit": "Shipping total = \"To be negotiated\"; structured Destination customs clearance party = Buyer (DAP/DDU); ZA absent."
+              },
+              {
+                "forwarder": "Yiwu Eway International Logistics Co., Ltd.",
+                "headline_usd": "$1.00/pc (1-99 pcs) .. $0.70/pc (>=10,000 pcs) on 1601379475240 & 1601597321214",
+                "headline_zar_at_16_6654": "R16.67/pc (1-99 pcs tier)",
+                "why_unverified_for_ddp_per_unit": "Shipping total = \"To be negotiated\"; Buyer clearance (DAP/DDU); General (Non-dangerous) Goods only; 0% Africa market split."
+              },
+              {
+                "forwarder": "Shenzhen Sweet Protrading Co., Ltd.",
+                "headline_usd": "$1.00 - $2.00/kg (60703892641 & 1601356070201, MOQ 1 kg)",
+                "headline_zar_at_16_6654": "R16.67 - R33.33/kg",
+                "why_unverified_for_ddp_per_unit": "Shipping total = \"To be negotiated\"; embedded destination table marks \"other country = no services\" for FBA DDP; ZA absent."
+              }
+            ]
+          }
+        },
+        "summary": "Fetched and read 18 public Alibaba URLs across 7 forwarder/supplier groups plus live USD/ZAR FX (16.6654 on 2026-10-02 via Google Finance) to test whether a verified DDP-to-South-Africa per-unit shipping quote for mr-0002 (20,000mAh solar power bank, HS 8507.60, ~400-500g) can beat the pr-0008 ceiling of R147.46/unit. Result: R147.46 is NOT reached by any verified checkout-executable shipping quote on public Alibaba pages, and NO public forwarder page publishes a binding single-unit (<1 kg) DDP-to-SA rate without off-page interactive negotiation (\"Shipping total: To be negotiated\"). Specifically: (1) Among the 4 prior-session forwarder leads, ZHTX ($0.03-$0.85/kg, Africa Express 4-7d / Air 8-12d), Yiwu Eway ($0.70-$1.00/pc, 4-7d, 0% Africa, General Goods only), and Wingspeed ($1.00/kg at 1-99 kg, 5-15d) all set structured Key attribute Destination customs clearance party = Buyer (DAP/DDU), while Sweet Protrading ($1.00-$2.00/kg, 7-12d Air) sets Seller clearance but marks \"other country = no services\" for FBA DDP in its destination table. (2) Shenzhen Honour Ocean Shipping Co., Ltd. (1601253467871, 1601435129328, 1601039978158; 10 yrs, TuVRheinland verified, 4.6/5 on 1,852 reviews) explicitly advertises Seller-cleared DDP to ZA(South Africa) (\"Tax Included, SARS Customs Clearance\") with headline placeholder bands of $0.90-$1.00/kg (1601039978158, LCL+Trucking 20-40d, General Goods) and $1.00-$3.00/kg (1601253467871, Air+Express 8-15d, Special/Dangerous Goods), but its checkout block states \"Shipping total: To be negotiated\" and body section \"3. Air cargo DDP shipping\" specifies \"Min order is 21kg\". (3) The LOWEST achievable fetched checkout per-unit shipping figure remains Guangzhou Coremax New Energy Technology Co., Ltd. (1601727591668) via Standard (Alibaba.com Logistics) at $19.81 for 2 boxes ($9.905/box) on 2026-10-02 = R165.07/unit (@16.6654 live FX) or R161.91/unit (@16.3460 pr-0008 FX; was $19.80/2 boxes = R161.83/unit on 2026-09-30 in so-0003) — which is DAP/DDU (not DDP), has an 18-58 day delivery window (Oct 20 - Nov 29, breaching the 21-day limit), and still exceeds the R147.46 ceiling by R17.61/unit (@16.6654) or R14.37-R14.45/unit (@16.3460)."
       }
     ],
     "unverified_fields": [
@@ -2317,7 +2588,8 @@
       "so-0003 (final): 8541.43 composite question SUBSTANTIALLY RESOLVED (8507.60 prevails per dutiable.io + CBP N180696/H136116) but NOT binding on SARS - advance tariff determination recommended; 8541.43 source contradiction stays recorded as a defect.",
       "so-0003/so-0004 (final): DDP-to-SA availability, SA-lane transit days, SA warehouse locations - not displayed by any fetched supplier; RFQ required. Coremax fetched shipping window's DESTINATION COUNTRY unconfirmed.",
       "so-0002 carry-over: Alibaba DDP forwarder directory metrics remain aggregated marketing claims - leads only. SARS de-minimis courier threshold still UNVERIFIED - needed for split-shipment rule.",
-      "so-0004: AliExpress mr-0003 quote's per-unit pack basis and store identity UNVERIFIED; Jinboli 'overseas warehousing' location UNVERIFIED; HeLi certificate types unreadable in fetch."
+      "so-0004: AliExpress mr-0003 quote's per-unit pack basis and store identity UNVERIFIED; Jinboli 'overseas warehousing' location UNVERIFIED; HeLi certificate types unreadable in fetch.",
+      "so-0006 (2026-10-02): UNVERIFIED_per_unit_rate_zar & UNVERIFIED_ddp_to_sa — all 4 prior-session forwarder leads (Sweet Protrading, ZHTX, Yiwu Eway, Wingspeed) plus Honour Ocean and Kaixida render \"Shipping total: To be negotiated\" on public Alibaba pages; ZHTX, Yiwu Eway, and Wingspeed set structured Destination customs clearance party = Buyer (DAP/DDU); Sweet Protrading sets \"other country = no services\" for FBA DDP; Honour Ocean sets Seller clearance + ZA(South Africa) destination but specifies a 21 kg minimum order for Air Cargo DDP and Sea DDP. Coremax ($19.81/2 boxes = R165.07/unit @16.6654 or R161.91/unit @16.3460; R161.83/unit on 2026-09-30) and Merpower ($8,085/500 pcs = R269.48/unit @16.6654) are both non-DDP (\"*Taxes and import charges will be calculated at checkout\")."
     ],
     "verified_scope": "namespace-level verified=true refers ONLY to quote fields actually fetched and read this session (each supplier entry carries its own verified + verified_scope); all store-level/SA-lane fields that could not be observed are UNVERIFIED_-prefixed and listed in unverified_fields"
   },
