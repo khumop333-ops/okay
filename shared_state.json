@@ -390,6 +390,29 @@
           "merge_action": "Merge commit only, performed by the Supervisor on the operator's explicit instruction; no squash, no rebase, no branch deletion (HARD STOP 6).",
           "approval_provenance": "Hand-authored event record, deliberately NOT part of any agent build function: approvals are events, so re-running an agent CLI can never regenerate, re-stamp or fabricate one. Only reachable by an explicit append to state."
         }
+      },
+      {
+        "id": "sup-0004",
+        "timestamp": "2026-10-02T19:43:18+02:00",
+        "agent": "supervisor",
+        "confidence": 9,
+        "source": "this session (sandbox) — README.md read in full at base commit abba681; shared_state.json read; gh pr list --state open returned zero open PRs at session open and before PR; python3 -m unittest discover -s tests = Ran 144 tests, OK (121 pre-existing + 23 new prompt tests).",
+        "verified": true,
+        "data": {
+          "type": "session_record",
+          "session_id": "01a0fdb2",
+          "branch": "arena/01a0fdb2-okay",
+          "task": "Rewrite the Market Research agent prompt for DIGITAL (digital-native): system prompt constant in agents/market_research.py with a concrete 'verified' definition (product_exists, creator_real, price_point, reviews — each a fetched URL + fetch date; no URL = UNVERIFIED, no exceptions), the README section 3 digital must-never rules, and the same state.market_research output shape with model-conditional verification_fields. Import/local-SA/high-ticket branches kept as disabled conditional sections for later activation. Prompt-content tests added; no behavioural tests, no live fetches.",
+          "active_model": "DIGITAL (sup-0002, operator-confirmed)",
+          "scope": "agents/market_research.py updated (prompt, INACTIVE_MODEL_BRANCHES and get_system_prompt added; the retained import-shaped capability #1 helpers are unmodified), tests/test_market_research_prompt.py new, this record appended. README.md, tools/, shared_state.schema.md and all other namespaces untouched.",
+          "outputs": [
+            "agents/market_research.py — MARKET_RESEARCH_SYSTEM_PROMPT (digital-native), ACTIVE_MODEL, INACTIVE_MODEL_BRANCHES, get_system_prompt",
+            "tests/test_market_research_prompt.py — 23 content tests (no network, no paid services)",
+            "shared_state.json — this record (one minimal session record, per the session brief)"
+          ],
+          "hitl_gates": "None crossed: no paid service, sample order, launch recommendation, ad campaign, pricing/customs math change, or customer-facing commitment. No cost math touched (tools/ unmodified), so gate 5 is not triggered on the code side.",
+          "hard_stops_status": "No HARD STOP violated. #1 no spend; #2 nothing invented — the prompt defines a verification process and records no market data, no new figures; #3 no product verdict issued; #4 no pricing; #5 Supervisor session, no direct sub-agent output; #6 no force-push, branch deletion or history rewrite; #7 no secrets; #8 shared_state.json exists on main; #9 PR #13 was merged before this session opened (zero open PRs at open)."
+        }
       }
     ]
   },
