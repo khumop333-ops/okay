@@ -1746,10 +1746,10 @@
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
       }
     },
-    "timestamp": "2026-10-02T12:49:00+00:00",
+    "timestamp": "2026-10-02T12:52:00+00:00",
     "agent": "sourcing",
     "confidence": 7,
-    "source": "so-0006 (push 2: Sweet Protrading + ZHTX fetched & read 2026-10-02; USD/ZAR 16.6654 Google Finance 2026-10-02) + prior so-0001..so-0005.",
+    "source": "so-0006 (push 3: Sweet Protrading + ZHTX + Yiwu Eway fetched & read 2026-10-02; USD/ZAR 16.6654 Google Finance 2026-10-02) + prior so-0001..so-0005.",
     "verified": true,
     "findings": [
       {
@@ -2302,10 +2302,10 @@
       },
       {
         "id": "so-0006",
-        "timestamp": "2026-10-02T12:49:00+00:00",
+        "timestamp": "2026-10-02T12:52:00+00:00",
         "agent": "sourcing",
         "confidence": 7,
-        "source": "fetch_page, all fetched & read 2026-10-02: https://www.google.com/finance/quote/USD-ZAR (USD/ZAR 16.6654 @ 2026-10-02 12:30:19 UTC); https://cntrsm.en.alibaba.com/; https://cntrsm.en.alibaba.com/productgrouplist-822293600/High_inquiry_products.html; https://www.alibaba.com/product-detail/1688-Purchasing-Shipping-Agent-Logistics-Service_1601356070201.html; https://www.alibaba.com/product-detail/door-to-door-delivery-service-ems_60703892641.html; https://zhtxsz.en.alibaba.com/; https://zhtxsz.en.alibaba.com/productgrouplist-963600634/TOP_SALE.html; https://www.alibaba.com/product-detail/China-door-to-door-service-ups_1601256645326.html; https://www.alibaba.com/product-detail/freight-forwarder-china-to-Democratic-Algeria_1601255677117.html",
+        "source": "fetch_page, all fetched & read 2026-10-02: https://www.google.com/finance/quote/USD-ZAR (USD/ZAR 16.6654 @ 2026-10-02 12:30:19 UTC); https://cntrsm.en.alibaba.com/; https://cntrsm.en.alibaba.com/productgrouplist-822293600/High_inquiry_products.html; https://www.alibaba.com/product-detail/1688-Purchasing-Shipping-Agent-Logistics-Service_1601356070201.html; https://www.alibaba.com/product-detail/door-to-door-delivery-service-ems_60703892641.html; https://zhtxsz.en.alibaba.com/; https://zhtxsz.en.alibaba.com/productgrouplist-963600634/TOP_SALE.html; https://www.alibaba.com/product-detail/China-door-to-door-service-ups_1601256645326.html; https://www.alibaba.com/product-detail/freight-forwarder-china-to-Democratic-Algeria_1601255677117.html; https://suppliers.alibaba.com/yiwu-eway-international-logistics-co-ltd_2218910837169; https://yiwuyiwei.en.alibaba.com/; https://www.alibaba.com/product-detail/Shopify-Dropshipping-Agent-US-AU-EU_1601379475240.html; https://www.alibaba.com/product-detail/Shopify-Dropshipping-Smart-Projector-Outdoor-Screen_1601597321214.html",
         "verified": true,
         "verified_scope": "verified=true applies ONLY to pages actually fetched and read via fetch_page on 2026-10-02 and the literal figures/attributes displayed on them. Where a forwarder displays a generic per-kg headline placeholder without a confirmed South Africa (ZA) battery/small-electronics DDP tariff table, the exact fetched numbers are reported alongside UNVERIFIED_ markers per HARD STOP #2.",
         "data": {
@@ -2320,7 +2320,7 @@
             "pr_0008_baseline_usd_zar": 16.346,
             "pr_0008_fx_source": "Google Finance USD/ZAR 16.3460 @ 2026-09-30 07:33 UTC (used in so-0003 and pr-0008)"
           },
-          "quotes_fetched_count": 2,
+          "quotes_fetched_count": 3,
           "quotes": [
             {
               "quote_index": 1,
@@ -2379,9 +2379,37 @@
               "fetch_date": "2026-10-02",
               "verified": true,
               "verified_scope": "Forwarder identity, SGS verification, store metrics, $0.03-$0.85/kg and $0.57-$0.84/kg headline rates, 1 kg MOQ, Africa transport table (Express 4-7d, Air 8-12d, Sea ***), Buyer customs-clearance attribute, and \"to be negotiated\" shipping block — all directly read via fetch_page on 2026-10-02."
+            },
+            {
+              "quote_index": 3,
+              "lead_category": "prior_session_forwarder_lead",
+              "forwarder_name": "Yiwu Eway International Logistics Co., Ltd.",
+              "listing_title": "Shopify Dropshipping Agent US/AU/EU Worldwide 1688 SHOPPING AGENT Door to Door DDP with Low Rate Air+Express (1601379475240) + Shopify Dropshipping Smart Projector DDP Service (1601597321214)",
+              "fetched_rate_usd": "$1.00/piece (1-99 pcs), $0.90/piece (100-999 pcs), $0.80/piece (1,000-9,999 pcs), $0.70/piece (>=10,000 pcs); CN¥4.72-6.74/piece on SGS supplier profile cards; Shipping total: \"To be negotiated\"",
+              "per_unit_rate_zar": null,
+              "UNVERIFIED_per_unit_rate_zar": "Displayed $0.70-$1.00/piece (R11.67-R16.67 @16.6654 or R11.44-R16.35 @16.3460) is an agent fulfillment/sourcing placeholder, NOT international freight to South Africa; page explicitly states \"Shipping fee and delivery date to be negotiated... Shipping total: To be negotiated.\" Furthermore, verified export market distribution is 60% Western Europe, 30% North America, 10% Oceania (0% Africa), and Product Type is restricted to General (Non-dangerous) Goods (excludes lithium batteries).",
+              "fetched_headline_rate_zar_at_1pc_moq": "R16.67 (@16.6654 live FX) / R16.35 (@16.3460 pr-0008 FX) for 1-99 pcs fulfillment placeholder; actual shipping total \"To be negotiated\"",
+              "transit_time": "4 - 7 Days (Express attribute on 1601379475240 to France via Colissimo and 1601597321214 to Sweden; description text specifies \"3-5 days to UK, 6-9 days to US/Europe\", dispatch 3 days, lead time 3 days for 1-1,000 pcs).",
+              "UNVERIFIED_sa_transit_time": "No South Africa or Africa lane exists on Yiwu Eway's fetched pages; transit times are exclusively for UK/US/Europe (France/Sweden).",
+              "ddp_vs_dap": "DAP / Buyer-cleared conflict: despite \"DDP\" in listing titles, structured Key attribute \"Destination customs clearance party\" on 1601379475240 is explicitly set to \"Buyer\" (DAP/DDU).",
+              "UNVERIFIED_ddp_to_sa": "DDP to South Africa is NOT offered on fetched pages (0% Africa market distribution; France/Sweden destinations; Buyer customs clearance attribute).",
+              "small_electronics_under_1kg_fit": "INELIGIBLE on fetched attributes: Product Type is \"General(Non-dangerous) Goods\" only on both fetched listings (does not cover Special/Dangerous Goods lithium-ion power banks), and carrier is Colissimo (France).",
+              "supplier_metrics_observed": {
+                "tenure": "2 yrs on Alibaba (Established 2018-07-10, Verified by SGS Group Report 485024251_T valid 2026-01-05 to 2027-01-04)",
+                "store_rating": "No reviews yet (0 store reviews on yiwuyiwei.en.alibaba.com)",
+                "product_rating": "No reviews yet (100 sold on 1601379475240; 10 sold on 1601597321214)",
+                "response_time": "<=3h",
+                "on_time_dispatch": "100.0%",
+                "online_revenue": "US$1,000+",
+                "main_markets": "Western Europe 60%, North America 30%, Oceania 10% (store page: Germany 100%, United States) — 0% Africa"
+              },
+              "source_url": "https://www.alibaba.com/product-detail/Shopify-Dropshipping-Agent-US-AU-EU_1601379475240.html; https://www.alibaba.com/product-detail/Shopify-Dropshipping-Smart-Projector-Outdoor-Screen_1601597321214.html; https://yiwuyiwei.en.alibaba.com/; https://suppliers.alibaba.com/yiwu-eway-international-logistics-co-ltd_2218910837169",
+              "fetch_date": "2026-10-02",
+              "verified": true,
+              "verified_scope": "Forwarder identity, SGS report 485024251_T, $0.70-$1.00/pc tier table, \"Shipping total: To be negotiated\", Buyer customs-clearance attribute, General (Non-dangerous) Goods restriction, Colissimo/France & Sweden destination attributes, and 60% WE / 30% NA / 10% Oceania market split — all directly read via fetch_page on 2026-10-02."
             }
           ],
-          "session_status": "in_progress — push 2 after verified quote #2 (ZHTX)"
+          "session_status": "in_progress — push 3 after verified quote #3 (Yiwu Eway)"
         }
       }
     ],
