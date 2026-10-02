@@ -25,10 +25,10 @@
       "must_never": "Execute sub-agent tasks directly (README section 3)",
       "append_key": "sessions"
     },
-    "timestamp": "2026-09-30T08:15:38+02:00",
+    "timestamp": "2026-10-02T16:32:13+00:00",
     "agent": "supervisor",
     "confidence": 9,
-    "source": "Session 01a0f0e5 (Supervisor, operator-directed close-out): process-failure record sup-0001 appended to supervisor.findings. Facts verified directly this session against primary sources: git log --all (full 15-commit history; NEXT_SESSION_HANDOFF.md never existed in any commit; mr-0028+ appears in no version of this file), git branch -a + git ls-remote origin (main + 4 arena branches, all merged), gh pr list --state all (4 PRs, all MERGED, none contains the handoff), git cat-file -t 21b39b6 + git fsck --lost-found (not a valid object; no dangling objects). The root_cause narrative in sup-0001 is operator-provided; the absence facts it rests on were directly verified.",
+    "source": "Roll-up header, regenerated on every append. sup-0002 (session 01a0fd68, Supervisor, operator-directed strategic pivot): operator written direction; archive and closing-state facts verified against shared_state.json at bbee341 and gh pr list --state all. sup-0001 (session 01a0f0e5, process-failure record): facts verified directly against git log --all, git branch -a, git ls-remote origin, gh pr list --state all, git cat-file and git fsck; its root_cause narrative is operator-provided.",
     "verified": true,
     "sessions": [
       {
@@ -139,6 +139,262 @@
           "root_cause": "Agent committed locally but did not push before session ended. HARD STOP #9 requires merge before next session, but does not explicitly require push before session end.",
           "impact": "Nine candidates (mr-0003/0005/0006/0008/0012/0002/0021/0023/0025) revert to unverified in state on main. Sourcing remains blocked.",
           "mitigation": "Amend README §8 to add: 'A session MUST push its commit to a remote branch before ending. Work that exists only in the local sandbox is lost. Push early, push often.'"
+        }
+      },
+      {
+        "id": "sup-0002",
+        "timestamp": "2026-10-02T16:32:13+00:00",
+        "agent": "supervisor",
+        "confidence": 9,
+        "source": "Operator written direction, session 01a0fd68: first message (strategic-pivot scope, constraint change, three viable models) and second message ('Decision confirmed: DIGITAL is the starting model.'). Archive and closing-state facts read directly from shared_state.json at base commit bbee341 (id cross-check run in the sandbox) and from gh pr list --state all (PRs #1-#10 MERGED, none open).",
+        "verified": true,
+        "verified_scope": "VERIFIED: every id under archived_findings and not_archived exists in shared_state.json at bbee341, and the archived plus not-archived ids partition the 57 findings already in state with no overlap (script); closing-state figures were read from pr-0006, pr-0008 and so-0003..so-0006; PR state was read via gh. NOT INDEPENDENTLY CHECKABLE: the operator's capital position (operator-declared; no figure was given). SUPERVISOR JUDGMENT, not operator-stated: the id-level grouping of findings under the operator's archive categories (see open_flags).",
+        "data": {
+          "type": "strategic_pivot",
+          "summary": "Operator constraint change: no capital for bulk import. Import-from-China dropshipping is RETIRED. Three models are viable: local South African dropshipping, high-ticket items, digital products. DIGITAL is the starting model (operator-confirmed). 54 of the 57 earlier findings are archived as read-only background; the contract, state structure, session discipline and tools architecture carry over. README section 1 and a new section 4 subsection (Model-Specific Rules) were amended in the same PR. No code or agent change, no sub-agent routed.",
+          "session": {
+            "session_id": "01a0fd68",
+            "branch": "arena/01a0fd68-okay",
+            "base_commit": "bbee341918b14ad052259b7521c6fa1ce03d6505",
+            "acting_as": "Supervisor",
+            "task": "Strategic pivot",
+            "first_action_declaration": "Acting as Supervisor. Task: strategic pivot. No HARD STOP rules violated.",
+            "first_action_note": "README section 8, 'At the Start of Every Session' steps 3 and 4 (state the acting agent and task; confirm no HARD STOP violated) were not stated at session open. The operator flagged the omission and the declaration was added verbatim to the PR body before the PR was opened. A process lapse, not a HARD STOP breach."
+          },
+          "constraint_change": {
+            "constraint": "No capital for bulk import.",
+            "declared_by": "human operator",
+            "provenance": "Operator written direction, session 01a0fd68, first message: 'no capital for bulk import'.",
+            "previous_assumption": "Products would be imported from China and shipped to South Africa. The pipeline merged in PRs #1-#10 was built for that.",
+            "amount": "The operator gave no capital figure or budget. None is recorded or assumed here. HARD STOP #1 (no autonomous spending) governs any future spend."
+          },
+          "retired_model": {
+            "id": "import_from_china_dropship",
+            "name": "Import-from-China dropshipping",
+            "status": "RETIRED",
+            "description": "Selecting physical products, sourcing them from China-based suppliers and forwarders (AliExpress and Alibaba listings), shipping them to South Africa, and pricing them through SARS duty, VAT on customs value and the README section 4 landed-cost formula.",
+            "reason": "The constraint change above (no capital for bulk import).",
+            "retired_by": "human operator (decision), recorded here by the Supervisor",
+            "reversal": "Reinstating it would need a new operator decision, recorded as a superseding Supervisor finding (shared_state.schema.md section 3).",
+            "pipeline_state_at_retirement": {
+              "note": "Closing context only. The stated reason for retirement is the capital constraint, not these results.",
+              "furthest_candidate": "mr-0002 (20,000 mAh solar power bank, HS 8507.60, 0% duty)",
+              "pricing": "pr-0006 formal verdict REJECT: all 96 matrix cells reject at the fetched shipping figure, and 80 still reject at zero shipping. pr-0008 extended the matrix to R699/R849: 2 accept, 3 investigate, 13 reject of 18 cells. Those are scenario verdicts on a destination-UNVERIFIED shipping figure of R161.83/unit; pr-0008 states an accept is not launch approval.",
+              "sourcing": "so-0006 (2026-10-02): no verified DDP-to-SA per-unit shipping quote at or under the R147.46/unit ceiling was found on public pages. The lowest fetched checkout figure was R165.07/unit at USD/ZAR 16.6654, DAP/DDU rather than DDP, with an 18-58 day delivery window.",
+              "orders_and_launch": "No sample order or purchase commitment is recorded: so-0003 and so-0004 record 'no sample ordered, no purchase committed' with the sample order left awaiting human approval, and so-0005 records 'No purchase commitments'. The listing, ad_growth and support namespaces are empty."
+            }
+          },
+          "viable_models": [
+            {
+              "id": "local_dropship",
+              "label": "Local South African dropshipping",
+              "status": "viable",
+              "sequence": "Not the starting model. Not started."
+            },
+            {
+              "id": "high_ticket",
+              "label": "High-ticket items",
+              "status": "viable",
+              "sequence": "Not the starting model. Not started."
+            },
+            {
+              "id": "digital",
+              "label": "Digital products",
+              "status": "viable",
+              "sequence": "STARTING MODEL (operator-confirmed)."
+            }
+          ],
+          "starting_model_decision": {
+            "question": "Confirm the recommended starting model: DIGITAL.",
+            "decision": "digital",
+            "status": "CONFIRMED",
+            "decided_by": "human operator",
+            "operator_message_verbatim": "Decision confirmed: DIGITAL is the starting model.",
+            "alternatives_not_selected": [
+              "local_dropship",
+              "high_ticket"
+            ],
+            "if_changed": "Choosing local dropship or high-ticket as the starting model would be a new operator decision, recorded as a superseding Supervisor finding; the follow-up scope below would change accordingly."
+          },
+          "archived_findings": {
+            "status": "ARCHIVED_BACKGROUND",
+            "meaning": "Retained in place as read-only background. This record deletes, edits and re-verifies nothing: each archived finding keeps its own source, date and verified flag. Archived findings are not a work queue and none is a launch approval. To un-archive, append a superseding Supervisor finding (shared_state.schema.md section 3).",
+            "operator_named_categories": [
+              "mr-0002",
+              "mr-0003",
+              "SARS rates",
+              "DDP quotes"
+            ],
+            "total_archived": 54,
+            "groups": [
+              {
+                "namespace": "market_research",
+                "category": "Product research: the two candidates the operator named",
+                "ids": [
+                  "mr-0002",
+                  "mr-0003"
+                ],
+                "basis": "Named by the operator. Both went on to sourcing quotes (mr-0002 in so-0003, mr-0003 in so-0004); mr-0002 also went through pricing (the archived pr-0002 to pr-0006 and pr-0008 records). Their duty lines are superseded by mr-0034 and mr-0028, which sit in the next group."
+              },
+              {
+                "namespace": "market_research",
+                "category": "SARS rates: duty-rate verification records",
+                "ids": [
+                  "mr-0028",
+                  "mr-0029",
+                  "mr-0030",
+                  "mr-0031",
+                  "mr-0032",
+                  "mr-0033",
+                  "mr-0034",
+                  "mr-0035",
+                  "mr-0036",
+                  "mr-0037",
+                  "mr-0038",
+                  "mr-0039",
+                  "mr-0040",
+                  "mr-0041"
+                ],
+                "basis": "Each supersedes a duty-UNVERIFIED or conflicting screening entry (see its data.supersedes). Each keeps its own verified flag, source_dataset_date and fetch_date. Relevant only to a model that imports (README section 4)."
+              },
+              {
+                "namespace": "market_research",
+                "category": "Product research: all other screened and trend-captured candidates, rejections, and the two Market Research session summaries",
+                "ids": [
+                  "mr-0001",
+                  "mr-0004",
+                  "mr-0005",
+                  "mr-0006",
+                  "mr-0007",
+                  "mr-0008",
+                  "mr-0009",
+                  "mr-0010",
+                  "mr-0011",
+                  "mr-0012",
+                  "mr-0013",
+                  "mr-0014",
+                  "mr-0015",
+                  "mr-0016",
+                  "mr-0017",
+                  "mr-0018",
+                  "mr-0019",
+                  "mr-0020",
+                  "mr-0021",
+                  "mr-0022",
+                  "mr-0023",
+                  "mr-0024",
+                  "mr-0025",
+                  "mr-0026",
+                  "mr-0027",
+                  "mr-0042"
+                ],
+                "basis": "Candidate screening for import (HS code, duty, customs risk), plus session summaries mr-0027 and mr-0042. Any SA demand or Takealot price observations in them are background only and keep their original source and date."
+              },
+              {
+                "namespace": "sourcing",
+                "category": "DDP quotes and supplier/shipping research",
+                "ids": [
+                  "so-0001",
+                  "so-0002",
+                  "so-0003",
+                  "so-0004",
+                  "so-0005",
+                  "so-0006"
+                ],
+                "basis": "Supplier and forwarder discovery, DDP-to-SA quote sweeps and SA shipping analysis for mr-0002 and mr-0003 (so-0001 to so-0006)."
+              },
+              {
+                "namespace": "pricing",
+                "category": "Import landed-cost verdicts and VAT-basis escalations on mr-0002",
+                "ids": [
+                  "pr-0002",
+                  "pr-0003",
+                  "pr-0004",
+                  "pr-0005",
+                  "pr-0006",
+                  "pr-0008"
+                ],
+                "basis": "Break-even, verdict matrices, the formal REJECT and the ATV VAT-basis escalation, all computed for an imported unit (duty, VAT on customs value, DDP/DAP shipping)."
+              }
+            ],
+            "not_archived": [
+              {
+                "id": "pr-0001",
+                "reason": "Capability record for tools/customs.py, tools/landed_cost.py and agents/pricing.py. The tools architecture carries over (operator)."
+              },
+              {
+                "id": "pr-0007",
+                "reason": "HITL gate 5 record covering tools v1.1.0. Carries the standing condition that adopting the ATV VAT basis into README section 4 needs a README amendment plus a fresh gate 5 approval. Its mr-0002 verdict scope is covered by the archive of pr-0006."
+              },
+              {
+                "id": "sup-0001",
+                "reason": "Session-discipline record (push before the session ends). Session discipline carries over (operator)."
+              }
+            ]
+          },
+          "carries_over": {
+            "stated_by": "human operator, session 01a0fd68, first message",
+            "items": [
+              {
+                "area": "contract",
+                "where": "README.md (amended by this PR in section 1 and section 4 only)"
+              },
+              {
+                "area": "state structure",
+                "where": "shared_state.json namespaces and write contract; shared_state.schema.md"
+              },
+              {
+                "area": "session discipline",
+                "where": "README section 8; HARD STOPS 8 and 9; the push-before-end rule (sup-0001 mitigation)"
+              },
+              {
+                "area": "tools architecture",
+                "where": "README section 6: cost math lives only in tools/. tools/customs.py and tools/landed_cost.py stay in the repository, untouched by this PR, and apply only to a model that imports (README section 4, Model-Specific Rules)."
+              }
+            ]
+          },
+          "readme_amendments": {
+            "file": "README.md",
+            "section_1_mission": "Restated across the three viable models; import-from-China dropshipping marked Retired with the operator's stated reason; archive and carry-over sentence; pointer to where the starting-model decision is recorded.",
+            "section_4_new_subsection": "'Model-Specific Rules': one paragraph scoping import math to models that import, then one short paragraph each for local dropship, high-ticket and digital. Per the operator's reminder, no model-specific compliance detail is in the contract; it is deferred to future agent prompts.",
+            "sections_not_amended": "README title and sections 2, 3, 5-12 (scope: sections 1 and 4 only)."
+          },
+          "next_session": {
+            "scope": "Rewrite the Market Research prompt for digital product discovery (operator-stated).",
+            "status": "NOT STARTED. A separate session; not begun or routed in this one.",
+            "precondition": "The operator merges this PR to main first (HARD STOP #9).",
+            "not_done_here": "Agent prompts and agent code were not touched."
+          },
+          "sub_agents_routed": [],
+          "hitl_gates_crossed": [],
+          "hitl_gates_note": "No gate crossed: no paid service, sample order, product-launch recommendation (the operator confirmed a model, not a product), ad campaign or customer-facing commitment. Gate 5 (merging a PR that touches pricing logic or customs math): no code, formula, rate or VAT basis changed. The README section 4 formula, VAT rule and duty rule are not edited; the new subsection only scopes which models import math applies to, as the operator directed. Flagged so the gate question is explicit rather than assumed; the merge remains the operator's decision.",
+          "hard_stops_triggered": [],
+          "hard_stops_note": "None triggered. #1 no spend or paid API. #2 every figure is read from state or stated by the operator, none invented. #3 and #4 no margin or VAT calculation performed. #5 no sub-agent routed. #6 no force-push, branch deletion or history rewrite. #7 no secrets (diff scanned). #8 shared_state.json exists on main. #9 PRs #1-#10 are MERGED, none is open, and this branch is based on main (bbee341).",
+          "deliberately_not_changed": [
+            "agents/*.py, tools/*.py, tests/*.py (no code; agent prompts are the follow-up session)",
+            "README title and sections 2, 3, 5-12",
+            "shared_state.json outside supervisor: every other namespace, _conventions, every _meta block, _schema_version",
+            "shared_state.schema.md"
+          ],
+          "open_flags": [
+            "HARD STOP #9: the operator must merge this PR to main before the next session (the Market Research prompt rewrite) opens.",
+            "UNRESOLVED CONTRACT GAP: README section 2 rules 3 and 4 and the section 4 VAT bullet are worded around customs value and duty. The new Model-Specific Rules subsection scopes those inputs to importing models, but nothing yet says which VAT basis a non-importing model's margin uses. No basis was invented here. It needs an operator decision (agent prompt plus tools, or a later README amendment) before any margin verdict on local dropship, high-ticket or digital.",
+            "Import-model wording deliberately left in place (scope was README sections 1 and 4 plus this finding): README title; section 2 rules 3-4; section 3 roster (MarketResearch 'customs viability' and 'Recommend without verified HS code', Pricing 'Landed cost'); section 6 tool descriptions; shared_state.json _conventions description and _conventions.rules[6] to [8] (0-based array indexes); market_research._meta.must_never ('verified HS code') and pricing._meta; shared_state.schema.md header and section 6. The new section 4 subsection scopes HS-code and customs rules to importing models, so the HS-code boundary should not bind a digital Market Research agent, but the texts are not yet reconciled. The follow-up should reconcile them.",
+            "High-ticket: the operator has not stated a price band or whether any sourcing route may import. Neither is guessed; README section 4 defers the band to the agent prompt.",
+            "Capital: no figure or budget was stated and none is recorded. HARD STOP #1 still governs any spend, including ad spend.",
+            "SARS ATV VAT-basis question (pr-0003, pr-0004, pr-0007) is unresolved and now dormant. The ATV basis stays an unapproved, non-default sensitivity in tools/. Adopting it into README section 4 would still need a README amendment plus a fresh HITL gate 5 approval (pr-0007), and only matters if an importing model is reinstated.",
+            "The archive grouping is the Supervisor's reading of the operator's categories (mr-0002, mr-0003, SARS rates, DDP quotes). If the operator intended a different boundary (for example keeping pr-0001 or pr-0007 archived, or keeping some demand/price observations live), correct it with a superseding finding."
+          ],
+          "tests_run": [
+            "python3 -m json.tool shared_state.json: valid JSON",
+            "Round-trip: json.dumps(indent=2, ensure_ascii=False) reproduces shared_state.json byte-for-byte before and after the edit, so the diff is confined to the intended change",
+            "Structure diff against base bbee341: only supervisor.timestamp, supervisor.source and supervisor.findings changed; all 57 earlier findings, every other namespace, _conventions and _schema_version are identical",
+            "Archive partition: 54 archived + 3 not archived = the 57 earlier findings; no id in both lists; every id exists",
+            "Finding contract (schema sections 2-3): id sup-0002 sequential and unique; ISO 8601 timestamp with offset; agent supervisor; integer confidence 1-10; non-empty source; boolean verified",
+            "python3 -m unittest discover -s tests: 121 tests OK before and after (no code changed)",
+            "Secret scan of the diff: clean",
+            "git diff --name-only: README.md and shared_state.json only"
+          ]
         }
       }
     ]
