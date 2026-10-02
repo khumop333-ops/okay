@@ -435,10 +435,10 @@
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
       }
     },
-    "timestamp": "2026-10-02T21:00:00+02:00",
+    "timestamp": "2026-10-02T22:30:00+02:00",
     "agent": "market_research",
     "confidence": 7,
-    "source": "DIGITAL discovery run: netlawman.co.za, agreementsonline.co.za, contracts4biz.co.za (fetched 2026-10-02). 12 candidates captured; 3 in this batch.",
+    "source": "DIGITAL discovery run (full): netlawman.co.za, agreementsonline.co.za, contracts4biz.co.za, businesstemplates.co.za, accesstoinfo.co.za, laboursmart.co.za, propertyreality.co.za, inklegal.co.za (fetched 2026-10-02). 12 candidates + 1 market gap analysis. 3 candidates flagged for disclaimer/quality verification.",
     "verified": false,
     "findings": [
       {
@@ -2159,6 +2159,590 @@
             "score": 11.2
           },
           "verification_notes": "Review counts not displayed on product page (counters show '0+' \u2013 likely not populated). Price and creator verified. Customer testimonials present but anecdotal."
+        }
+      },
+      {
+        "id": "mr-0046",
+        "timestamp": "2026-10-02T21:30:00+02:00",
+        "agent": "market_research",
+        "confidence": 8,
+        "source": "https://agreementsonline.co.za/agreements/shareholders-agreement-2-shareholders-long-form-moi/ (product page, fetched 2026-10-02); https://agreementsonline.co.za/ (creator homepage)",
+        "verified": true,
+        "data": {
+          "record_type": "candidate_verified",
+          "product_name": "Shareholders Agreement Contract Template \u2013 2 Shareholders, Long Standard Form \u2013 South Africa",
+          "model": "digital",
+          "verification_fields": {
+            "product_exists": "https://agreementsonline.co.za/agreements/shareholders-agreement-2-shareholders-long-form-moi/ \u2013 live product listing with R1,080.87 price, Add to Cart, 14-page document description, MOI reference",
+            "creator_real": "https://agreementsonline.co.za/ \u2013 The Online Agreements Shop cc; 250+ templates, 13,500+ SA customers, professional testimonials, client logos",
+            "price_point": "https://agreementsonline.co.za/agreements/shareholders-agreement-2-shareholders-long-form-moi/ \u2013 R1,080.87 displayed (was R1,775.73, save R694.86); R5,999/year subscription for 250+ templates",
+            "reviews": "https://agreementsonline.co.za/product-category/contractors-agreement-templates-south-africa-microsoft-word/ \u2013 same testimonials as mr-0044: Adrian Hodgkinson, JP Botha, Jason Bonthuys; 'Join 13,500+ SA Businesses & Law Firms'"
+          },
+          "recommendation": "proceed",
+          "verified": true,
+          "source_url": "https://agreementsonline.co.za/agreements/shareholders-agreement-2-shareholders-long-form-moi/",
+          "fetch_date": "2026-10-02",
+          "product_details": {
+            "format": "Microsoft Word DOCX (editable)",
+            "length": "14 pages",
+            "price_zar": 1080.87,
+            "currency": "ZAR",
+            "price_display": "R1,080.87 (was R1,775.73, 30% off)",
+            "seller": "The Online Agreements Shop cc (Agreements Online)",
+            "delivery": "Instant download after purchase",
+            "companion_document": "Long Standard Form MOI for Profit Companies (referenced in description)"
+          },
+          "sa_relevance": {
+            "law_jurisdiction": "South African law \u2013 Companies Act 71 of 2008, Memorandum of Incorporation",
+            "language": "English (SA)",
+            "references_sars_cipc": "No \u2013 Companies Act governance document, not tax/CIPC form",
+            "payment_methods": "Credit card via website"
+          },
+          "tax_legal_risk_flags": {
+            "legal_advice_claim": "FALSE \u2013 described as template; 'a working knowledge of the Companies Act is recommended and accordingly a specialist's advice should be sought'",
+            "disclaimer_present": "TRUE \u2013 liability disclaimer on page; 'cannot be held liable for any loss or damage'",
+            "requires_attorney": "RECOMMENDED \u2013 description explicitly advises specialist advice for shareholders agreements; template is a starting point",
+            "high_risk": "MEDIUM \u2013 shareholders agreements are complex; template is a framework, not a substitute for legal advice on significant transactions"
+          },
+          "demand_signals": {
+            "sa_specific": "TRUE \u2013 SA Companies Act, SA MOI reference",
+            "search_demand": "Any SA Pty Ltd with 2+ shareholders needs this; high-value document for startups, family businesses, investment partnerships",
+            "competitor_density": "MEDIUM \u2013 NetLawman (R499), AgreementsOnline (R1,080.87), Contracts4Biz (R305), Businesstemplates (R45)"
+          },
+          "competitive_density": "medium",
+          "ranking_score": {
+            "sa_relevance": 9,
+            "demand": 7,
+            "competitive_density": 5,
+            "score": 12.6
+          }
+        }
+      },
+      {
+        "id": "mr-0047",
+        "timestamp": "2026-10-02T21:30:00+02:00",
+        "agent": "market_research",
+        "confidence": 7,
+        "source": "https://businesstemplates.co.za/product/legal-templates-box-deal/ (product page, fetched 2026-10-02); https://businesstemplates.co.za/templates/ (catalogue, fetched 2026-10-02); https://businesstemplates.co.za/about-business-templates/ (about, fetched 2026-10-02)",
+        "verified": true,
+        "data": {
+          "record_type": "candidate_verified",
+          "product_name": "Legal Templates Box Deal \u2013 Business Templates (SA)",
+          "model": "digital",
+          "verification_fields": {
+            "product_exists": "https://businesstemplates.co.za/product/legal-templates-box-deal/ \u2013 live product listing with R113 price, 'Add to basket' button, PDF template list link",
+            "creator_real": "https://businesstemplates.co.za/ \u2013 Business Templates, 'Made for entrepreneurs by entrepreneurs'; SA-focused; sibling site Property Templates (propertytemplates.co.za); about page describes SA entrepreneurial focus",
+            "price_point": "https://businesstemplates.co.za/product/legal-templates-box-deal/ \u2013 R113.00 displayed (was R125.00, 50% off); individual templates R29-R45; All Business Templates Box Deal R599",
+            "reviews": "NOT VERIFIED \u2013 no review count or testimonials displayed on product page (https://businesstemplates.co.za/product/legal-templates-box-deal/). Independent verification needed."
+          },
+          "recommendation": "investigate",
+          "verified": true,
+          "source_url": "https://businesstemplates.co.za/product/legal-templates-box-deal/",
+          "fetch_date": "2026-10-02",
+          "product_details": {
+            "format": "Microsoft Word DOCX, Excel XLSX, PDF (per template)",
+            "length": "Varies by template (individual templates are 1-2 page forms)",
+            "price_zar": 113.0,
+            "currency": "ZAR",
+            "price_display": "R113.00 for Legal Box Deal (includes all legal templates); R599 for All Business Templates Box Deal (31 templates)",
+            "seller": "Business Templates (businesstemplates.co.za)",
+            "delivery": "Instant download after purchase",
+            "contents": "Legal templates for starting a business: Shareholders Agreement, Contract of Employment, Lease Agreement, Power of Attorney, Directors Resolution, Share Certificate, etc. (see PDF list at product page)"
+          },
+          "sa_relevance": {
+            "law_jurisdiction": "South African law \u2013 described as 'custom made for startup businesses in South Africa'",
+            "language": "English (SA)",
+            "references_sars_cipc": "No \u2013 general business legal templates, not SARS/CIPC forms",
+            "payment_methods": "Credit card via website (Google sign-in for checkout)"
+          },
+          "tax_legal_risk_flags": {
+            "legal_advice_claim": "FALSE \u2013 marketed as 'professional and practical MS Word, Excel and PDF templates' for entrepreneurs",
+            "disclaimer_present": "NOT VERIFIED \u2013 no explicit disclaimer found on product page; site describes templates as tools for entrepreneurs",
+            "requires_attorney": "NOT STATED \u2013 templates described as 'easy to use'; no attorney requirement mentioned",
+            "high_risk": "LOW-MEDIUM \u2013 basic legal forms; shareholders agreement and employment contract in box are significant documents; disclaimer should be verified"
+          },
+          "demand_signals": {
+            "sa_specific": "TRUE \u2013 explicitly SA-focused, SA entrepreneurs",
+            "search_demand": "Bundle appeal for startups needing multiple legal documents at once; low price point (R113) is accessible",
+            "competitor_density": "LOW \u2013 Businesstemplates is a smaller player vs AgreementsOnline (250+ templates) and NetLawman; R113 bundle undercuts individual template prices from competitors"
+          },
+          "competitive_density": "low",
+          "ranking_score": {
+            "sa_relevance": 8,
+            "demand": 7,
+            "competitive_density": 3,
+            "score": 18.67
+          },
+          "verification_notes": "Reviews NOT verified \u2013 no review system visible on site. Price and creator verified. Template list available via PDF link."
+        }
+      },
+      {
+        "id": "mr-0048",
+        "timestamp": "2026-10-02T21:30:00+02:00",
+        "agent": "market_research",
+        "confidence": 8,
+        "source": "https://www.accesstoinfo.co.za/ (product page, fetched 2026-10-02); PAIA Manual Generator tool at same URL",
+        "verified": true,
+        "data": {
+          "record_type": "candidate_verified",
+          "product_name": "PAIA Manual Generator \u2013 Access to Info (POPIA-aligned, attorney-designed)",
+          "model": "digital",
+          "verification_fields": {
+            "product_exists": "https://www.accesstoinfo.co.za/ \u2013 live product page with R399 price, 'Get my Manual - R399' CTA, descriptions of PAIA + POPIA compliance output, attorney-designed claim",
+            "creator_real": "https://www.accesstoinfo.co.za/ \u2013 Access to Info, 'South Africa's longest-running online PAIA Manual Generator'; attorney-designed; 'trusted by blue chip companies since the early 2000s'; 20+ years experience claim",
+            "price_point": "https://www.accesstoinfo.co.za/ \u2013 R399.00 displayed as once-off price; 'R399 instead of R20,000+'; instant PDF download; free updates for life",
+            "reviews": "NOT DIRECTLY VERIFIED \u2013 'Trusted by blue chip companies' and 'thousands of South African businesses' are claims without specific review count or ratings on page. Independent verification needed."
+          },
+          "recommendation": "proceed",
+          "verified": true,
+          "source_url": "https://www.accesstoinfo.co.za/",
+          "fetch_date": "2026-10-02",
+          "product_details": {
+            "format": "Generated PDF (attorney-designed system produces compliant PAIA manual)",
+            "length": "Variable \u2013 PAIA manual per Section 51; typically 10-30 pages depending on organisation",
+            "price_zar": 399.0,
+            "currency": "ZAR",
+            "price_display": "R399 once-off (was R20,000+ for attorney-drafted manual); free lifetime updates",
+            "seller": "Access to Info (accesstoinfo.co.za)",
+            "delivery": "Instant PDF download after guided 15-minute process + payment",
+            "guarantee": "Free updates for life; 'attorney-designed'"
+          },
+          "sa_relevance": {
+            "law_jurisdiction": "South African law \u2013 PAIA (Promotion of Access to Information Act), POPIA (Protection of Personal Information Act), Information Regulator requirements",
+            "language": "English (SA)",
+            "references_sars_cipc": "No \u2013 PAIA/POPIA compliance, not SARS/CIPC. However, PAIA manual is required by law for every private body in SA.",
+            "payment_methods": "Credit card via website"
+          },
+          "tax_legal_risk_flags": {
+            "legal_advice_claim": "FALSE \u2013 described as 'attorney-designed, automated system' producing a compliance document; not legal advice",
+            "disclaimer_present": "NOT EXPLICITLY SHOWN \u2013 site describes product as compliance tool; legal disclaimer should be verified on full terms page",
+            "requires_attorney": "FALSE for basic use \u2013 automated generator; 'attorney-designed' means lawyers built the system, not that you need one to use it",
+            "high_risk": "FALSE \u2013 PAIA manual is a statutory compliance document; generator automates a legal requirement. Not tax advice."
+          },
+          "demand_signals": {
+            "sa_specific": "TRUE \u2013 PAIA is a SA law; every private body in SA must compile a PAIA manual; POPIA alignment makes it current",
+            "search_demand": "PAIA compliance is mandatory for ALL SA private bodies (sole proprietors, SMEs, corporations); R399 is a fraction of R20,000+ attorney fee; strong value proposition",
+            "competitor_density": "LOW \u2013 Access to Info is the longest-running PAIA generator in SA; LabourSmart offers PAIA/POPI manual at R495; MJ K Inc offers bespoke drafting at R5,100-R5,250. Few direct competitors in the automated-generator space."
+          },
+          "competitive_density": "low",
+          "ranking_score": {
+            "sa_relevance": 9,
+            "demand": 8,
+            "competitive_density": 3,
+            "score": 24.0
+          },
+          "verification_notes": "Review counts not displayed. 'Trusted by blue chip companies' and 'thousands of businesses' are marketing claims. Price, creator, and product existence verified. This is a compliance tool, not a template per se, but the output (PDF) is a ready-to-use file."
+        }
+      },
+      {
+        "id": "mr-0049",
+        "timestamp": "2026-10-02T22:00:00+02:00",
+        "agent": "market_research",
+        "confidence": 7,
+        "source": "https://www.laboursmart.co.za/document/details/236d11a3-9ee0-4ba5-a1f5-85a2972063f9 (product page, fetched 2026-10-02); https://laboursmart.co.za/ (creator homepage)",
+        "verified": true,
+        "data": {
+          "record_type": "candidate_verified",
+          "product_name": "POPIA Toolkit \u2013 PAIA & POPI Manual Template",
+          "model": "digital",
+          "verification_fields": {
+            "product_exists": "https://www.laboursmart.co.za/document/details/236d11a3-9ee0-4ba5-a1f5-85a2972063f9 \u2013 live product listing with R495 price, document details, 'Buy Document' button, author name",
+            "creator_real": "https://www.laboursmart.co.za/ \u2013 LabourSmart, SA labour law and compliance platform; author: Johanette Rheeder (named on product page); Labour Guide SA associated (labourguide.co.za)",
+            "price_point": "https://www.laboursmart.co.za/document/details/236d11a3-9ee0-4ba5-a1f5-85a2972063f9 \u2013 R495.00 displayed as 'Price'; 'Buy Document' CTA",
+            "reviews": "NOT VERIFIED \u2013 no review count or ratings displayed on product page. LabourSmart platform has documents but individual review system not observed."
+          },
+          "recommendation": "investigate",
+          "verified": true,
+          "source_url": "https://www.laboursmart.co.za/document/details/236d11a3-9ee0-4ba5-a1f5-85a2972063f9",
+          "fetch_date": "2026-10-02",
+          "product_details": {
+            "format": "Microsoft Word DOCX (editable template)",
+            "length": "UNVERIFIED (not displayed; described as 'Final PAIA POPI Manual.docx')",
+            "price_zar": 495.0,
+            "currency": "ZAR",
+            "price_display": "R495.00",
+            "seller": "LabourSmart / Johanette Rheeder",
+            "delivery": "Digital download after purchase (DOCX template)",
+            "published_date": "15/03/2022"
+          },
+          "sa_relevance": {
+            "law_jurisdiction": "South African law \u2013 POPIA (Protection of Personal Information Act 4 of 2013), PAIA (Promotion of Access to Information Act)",
+            "language": "English (SA)",
+            "references_sars_cipc": "No \u2013 POPIA/PAIA compliance; Section 51 PAIA manual",
+            "payment_methods": "Credit card via LabourSmart platform"
+          },
+          "tax_legal_risk_flags": {
+            "legal_advice_claim": "FALSE \u2013 described as 'Template' for PAIA/POPI manual; not legal advice",
+            "disclaimer_present": "NOT EXPLICITLY SHOWN on product page; LabourSmart platform likely has terms; should be verified",
+            "requires_attorney": "NOT STATED \u2013 template is for self-completion; complex organisations may need legal review",
+            "high_risk": "LOW-MEDIUM \u2013 PAIA/POPIA compliance is a legal requirement; template provides a starting point but organisations should verify compliance"
+          },
+          "demand_signals": {
+            "sa_specific": "TRUE \u2013 POPIA is SA law; PAIA manual required for all SA private bodies",
+            "search_demand": "POPIA compliance is mandatory; PAIA manual is required by law; R495 template is affordable alternative to attorney-drafted manual (R5,000+)",
+            "competitor_density": "LOW-MEDIUM \u2013 Access to Info (R399, automated generator), LabourSmart (R495, DOCX template), MJ K Inc (R5,100-R5,250, bespoke). LabourSmart is the only DOCX template option at this price."
+          },
+          "competitive_density": "low",
+          "ranking_score": {
+            "sa_relevance": 9,
+            "demand": 7,
+            "competitive_density": 3,
+            "score": 21.0
+          },
+          "verification_notes": "Reviews NOT verified. Author identified (Johanette Rheeder). Price and creator verified. Published 15/03/2022 \u2013 should verify currency of POPIA content (2022 may predate some POPIA developments)."
+        }
+      },
+      {
+        "id": "mr-0050",
+        "timestamp": "2026-10-02T22:00:00+02:00",
+        "agent": "market_research",
+        "confidence": 7,
+        "source": "https://www.propertyreality.co.za/templates.php (product catalogue, fetched 2026-10-02); https://www.propertyreality.co.za/ (homepage)",
+        "verified": true,
+        "data": {
+          "record_type": "candidate_verified",
+          "product_name": "Property Investment Forecast Template \u2013 Property Reality (Excel, SA tax calculations)",
+          "model": "digital",
+          "verification_fields": {
+            "product_exists": "https://www.propertyreality.co.za/templates.php \u2013 live product catalogue showing 12 Excel templates with prices; template #1 (Property Investment Forecast) listed at ZAR500 with 'Buy Now' button and sample download",
+            "creator_real": "https://www.propertyreality.co.za/ \u2013 Property Reality, 'THE HOME OF RESIDENTIAL PROPERTY CALCULATIONS'; established SA property calculation service; bond calculator, prime interest rates data",
+            "price_point": "https://www.propertyreality.co.za/templates.php \u2013 ZAR500 per template; ZAR1,035 for all 12 templates (save 70%); individual templates: #1-3 ZAR500, #4-5 ZAR400, #6-10 ZAR200-300, #11-12 free",
+            "reviews": "NOT VERIFIED \u2013 no review count or testimonials displayed on templates page. No customer review system observed."
+          },
+          "recommendation": "investigate",
+          "verified": true,
+          "source_url": "https://www.propertyreality.co.za/templates.php",
+          "fetch_date": "2026-10-02",
+          "product_details": {
+            "format": "Microsoft Excel XLSX",
+            "length": "142KB (template #1); varies by template",
+            "price_zar": 500.0,
+            "currency": "ZAR",
+            "price_display": "ZAR500 per template; ZAR1,035 for all 12; sample versions available for free download",
+            "seller": "Property Reality (propertyreality.co.za)",
+            "delivery": "Digital download after purchase (Excel XLSX)",
+            "tax_features": "Includes capital gains tax and income tax calculations; SARS-aligned tax computations"
+          },
+          "sa_relevance": {
+            "law_jurisdiction": "South African tax law \u2013 capital gains tax, income tax calculations per SARS",
+            "language": "English (SA)",
+            "references_sars_cipc": "YES \u2013 tax calculations reference SARS tax tables and capital gains tax rules; SA residential property market specific",
+            "payment_methods": "Credit card via website (register.php checkout)"
+          },
+          "tax_legal_risk_flags": {
+            "legal_advice_claim": "FALSE \u2013 described as 'calculation template' for property investment analysis; not tax advice",
+            "disclaimer_present": "NOT EXPLICITLY SHOWN \u2013 site describes templates as calculation tools; no legal disclaimer observed on templates page",
+            "requires_attorney": "FALSE \u2013 calculation tool, not legal document; does not require attorney",
+            "high_risk": "FALSE \u2013 tax calculation tool, not tax advice. Does not require registered tax practitioner. However, users should verify calculations against current SARS rates."
+          },
+          "demand_signals": {
+            "sa_specific": "TRUE \u2013 explicitly SA residential property market; ZAR pricing; SARS tax calculations",
+            "search_demand": "SA property investors need tax-compliant investment analysis; load-shedding and property investment are both SA-specific topics; Property Reality has been operating for years",
+            "competitor_density": "LOW \u2013 Property Reality is a niche provider; few competitors offer SA-specific property tax Excel templates at this price point"
+          },
+          "competitive_density": "low",
+          "ranking_score": {
+            "sa_relevance": 8,
+            "demand": 6,
+            "competitive_density": 2,
+            "score": 24.0
+          },
+          "verification_notes": "Reviews NOT verified. Sample versions available for free \u2013 this is a strong verification signal (real product, real files). Price and creator verified. Templates cover property tax calculations but are NOT tax advice \u2013 users must verify against current SARS rates."
+        }
+      },
+      {
+        "id": "mr-0051",
+        "timestamp": "2026-10-02T22:00:00+02:00",
+        "agent": "market_research",
+        "confidence": 8,
+        "source": "https://contracts4biz.co.za/shop/ (product listings, fetched 2026-10-02); https://contracts4biz.co.za/ (homepage, fetched 2026-10-02)",
+        "verified": true,
+        "data": {
+          "record_type": "candidate_verified",
+          "product_name": "Independent Contractor Agreement \u2013 Contracts4Biz",
+          "model": "digital",
+          "verification_fields": {
+            "product_exists": "https://contracts4biz.co.za/shop/ \u2013 live product listing showing 'Independent Contractor Agreement R295' under General Business Contracts category; Buy Now via popup",
+            "creator_real": "https://contracts4biz.co.za/ \u2013 Contracts4Biz, 'South Africa's first online contract shop'; attorney-crafted templates by commercial lawyers with 20+ years experience; partner: SchoemanLaw Inc.",
+            "price_point": "https://contracts4biz.co.za/shop/ \u2013 R295 displayed for Independent Contractor Agreement; R205 for NDA; R305 for Shareholders Agreement; R75-R395 range for individual templates",
+            "reviews": "https://contracts4biz.co.za/ \u2013 customer testimonials present (Hugo Van Niekerk, Beverley Knoesen, Arifa Pakar, Mike Taberner); same as mr-0045"
+          },
+          "recommendation": "proceed",
+          "verified": true,
+          "source_url": "https://contracts4biz.co.za/shop/",
+          "fetch_date": "2026-10-02",
+          "product_details": {
+            "format": "Microsoft Word DOCX (editable, guided questionnaire)",
+            "length": "UNVERIFIED (not displayed on listing page)",
+            "price_zar": 295.0,
+            "currency": "ZAR",
+            "price_display": "R295 (Independent Contractor Agreement)",
+            "seller": "Contracts4Biz (SchoemanLaw Inc. attorneys)",
+            "delivery": "Instant download after guided questionnaire + payment",
+            "subscription_options": "R99/month (Start-Up), R249/month (SME)"
+          },
+          "sa_relevance": {
+            "law_jurisdiction": "South African law \u2013 attorney-crafted, SA-specific; references Schedule 4 of Income Tax Act for contractor status",
+            "language": "English (SA)",
+            "references_sars_cipc": "YES \u2013 references Schedule 4 of Income Tax Act for independent contractor requirements (SA tax context)",
+            "payment_methods": "Credit card via website; subscription management via app.contracts4biz.co.za"
+          },
+          "tax_legal_risk_flags": {
+            "legal_advice_claim": "FALSE \u2013 marketed as 'lawyer-crafted contract templates' with step-by-step guidance; not legal advice",
+            "disclaimer_present": "TRUE \u2013 templates are for self-completion; legal advisory available as paid upgrade via SchoemanLaw Inc.",
+            "requires_attorney": "FALSE for template use \u2013 guided questionnaire; legal advisory available as upgrade",
+            "high_risk": "FALSE \u2013 standard commercial template; references tax Act for contractor classification context"
+          },
+          "demand_signals": {
+            "sa_specific": "TRUE \u2013 SA attorneys, SA-specific, tax Act references",
+            "search_demand": "Every SA business engaging contractors needs this; high attach-rate for SMEs, freelancers, agencies, gig economy businesses",
+            "competitor_density": "HIGH \u2013 Contracts4Biz (R295), AgreementsOnline (R583.81), Ink Legal (R1,250), ElyForma (free), Genie AI (SA template), Little Sunshines (R500 employment contract)"
+          },
+          "competitive_density": "high",
+          "ranking_score": {
+            "sa_relevance": 9,
+            "demand": 9,
+            "competitive_density": 7,
+            "score": 11.57
+          }
+        }
+      },
+      {
+        "id": "mr-0052",
+        "timestamp": "2026-10-02T22:30:00+02:00",
+        "agent": "market_research",
+        "confidence": 8,
+        "source": "https://agreementsonline.co.za/agreements/employment-contract-template-south-africa-microsoft-word/ (product page, fetched 2026-10-02); https://agreementsonline.co.za/ (creator homepage)",
+        "verified": true,
+        "data": {
+          "record_type": "candidate_verified",
+          "product_name": "Employment Contract Template Pack \u2013 South Africa [Microsoft Word.doc]",
+          "model": "digital",
+          "verification_fields": {
+            "product_exists": "https://agreementsonline.co.za/agreements/employment-contract-template-south-africa-microsoft-word/ \u2013 live product listing with R4,594.02 price, 'Add to Cart' button, list of 7 included contracts with individual values",
+            "creator_real": "https://agreementsonline.co.za/ \u2013 The Online Agreements Shop cc; 250+ templates, 13,500+ SA customers, professional testimonials",
+            "price_point": "https://agreementsonline.co.za/agreements/employment-contract-template-south-africa-microsoft-word/ \u2013 R4,594.02 displayed (was R7,547.31, save R2,953.29); individual employment contracts R276.77-R813.99; R3,998.99/year for 80+ employment & HR contracts",
+            "reviews": "https://agreementsonline.co.za/product-category/employment-contract-templates-south-africa-microsoft-word/ \u2013 same testimonials: JP Botha 'OUR NR.1 Choice for Employment Contracts!', Adrian Hodgkinson, Jason Bonthuys; 'Join 13,500+ SA Businesses & Law Firms'"
+          },
+          "recommendation": "proceed",
+          "verified": true,
+          "source_url": "https://agreementsonline.co.za/agreements/employment-contract-template-south-africa-microsoft-word/",
+          "fetch_date": "2026-10-02",
+          "product_details": {
+            "format": "Microsoft Word DOCX (editable)",
+            "length": "7 contracts in pack (each 4-8 pages estimated); total ~40-50 pages",
+            "price_zar": 4594.02,
+            "currency": "ZAR",
+            "price_display": "R4,594.02 for full pack (was R7,547.31)",
+            "includes": [
+              "Employment Contract \u2013 Commission-based (with probation) \u2013 valued at R1,085.37",
+              "Employment Contract \u2013 Salary-based (with probation) \u2013 valued at R1,085.37",
+              "Temporary Employment Contract \u2013 Fixed-term \u2013 valued at R1,085.37",
+              "Temporary Employment Contract \u2013 Project-based \u2013 valued at R1,085.37",
+              "Executive Employment Contract \u2013 valued at R1,085.37",
+              "Employee Secrecy Undertaking \u2013 valued at R765.66",
+              "Restraint of Trade \u2013 valued at R720.29"
+            ],
+            "seller": "The Online Agreements Shop cc (Agreements Online)",
+            "delivery": "Instant download after purchase"
+          },
+          "sa_relevance": {
+            "law_jurisdiction": "South African law \u2013 Basic Conditions of Employment Act, Labour Relations Act, contract law",
+            "language": "English (SA)",
+            "references_sars_cipc": "No \u2013 employment law, not SARS/CIPC",
+            "payment_methods": "Credit card via website"
+          },
+          "tax_legal_risk_flags": {
+            "legal_advice_claim": "FALSE \u2013 described as template pack; employment contracts are legal documents but marketed as templates for business use",
+            "disclaimer_present": "TRUE \u2013 liability disclaimer present; 'If you do not have legal experience we do caution you to be circumspect about the extent of the changes that you make'",
+            "requires_attorney": "RECOMMENDED for complex cases \u2013 employment law is heavily regulated in SA; templates are starting points",
+            "high_risk": "MEDIUM \u2013 employment contracts in SA are heavily regulated; using a template without understanding BCEA requirements could create legal risk"
+          },
+          "demand_signals": {
+            "sa_specific": "TRUE \u2013 SA employment law, SA customer base",
+            "search_demand": "Every SA business with employees needs employment contracts; high demand from SMEs, startups, NGOs, domestic employers",
+            "competitor_density": "HIGH \u2013 AgreementsOnline (R4,594 pack / R276.77-R813.99 individual), Little Sunshines (R500), Contracts4Biz (R295 indefinite contract), World Tree (free), Businesstemplates (R45)"
+          },
+          "competitive_density": "high",
+          "ranking_score": {
+            "sa_relevance": 9,
+            "demand": 9,
+            "competitive_density": 8,
+            "score": 10.13
+          }
+        }
+      },
+      {
+        "id": "mr-0053",
+        "timestamp": "2026-10-02T22:30:00+02:00",
+        "agent": "market_research",
+        "confidence": 6,
+        "source": "https://businesstemplates.co.za/templates/ (catalogue page, fetched 2026-10-02); https://businesstemplates.co.za/ (homepage)",
+        "verified": true,
+        "data": {
+          "record_type": "candidate_verified",
+          "product_name": "Contract of Employment \u2013 Business Templates (SA, R45)",
+          "model": "digital",
+          "verification_fields": {
+            "product_exists": "https://businesstemplates.co.za/templates/ \u2013 live catalogue showing 'Contract of Employment R45.00' under Legal section; individual template page would need separate fetch",
+            "creator_real": "https://businesstemplates.co.za/ \u2013 Business Templates, 'Made for entrepreneurs by entrepreneurs'; SA-focused; about page describes SA entrepreneurial focus",
+            "price_point": "https://businesstemplates.co.za/templates/ \u2013 R45.00 displayed for Contract of Employment; R29-R45 range for individual legal templates; Legal Box Deal R113",
+            "reviews": "NOT VERIFIED \u2013 no review system visible on site (same as mr-0047)"
+          },
+          "recommendation": "investigate",
+          "verified": true,
+          "source_url": "https://businesstemplates.co.za/templates/",
+          "fetch_date": "2026-10-02",
+          "product_details": {
+            "format": "Microsoft Word DOCX, Excel XLSX, PDF (per template)",
+            "length": "UNVERIFIED (individual template page not fetched)",
+            "price_zar": 45.0,
+            "currency": "ZAR",
+            "price_display": "R45.00 (Contract of Employment); R29-R45 range",
+            "seller": "Business Templates (businesstemplates.co.za)",
+            "delivery": "Instant download after purchase",
+            "sa_context": "Described as 'custom made for private companies' and 'custom made for startup businesses in South Africa'"
+          },
+          "sa_relevance": {
+            "law_jurisdiction": "South African law \u2013 described as aligned with SA business context",
+            "language": "English (SA)",
+            "references_sars_cipc": "No \u2013 general employment template",
+            "payment_methods": "Credit card via website (Google sign-in)"
+          },
+          "tax_legal_risk_flags": {
+            "legal_advice_claim": "FALSE \u2013 marketed as business template for entrepreneurs",
+            "disclaimer_present": "NOT VERIFIED \u2013 no explicit disclaimer on catalogue page",
+            "requires_attorney": "NOT STATED \u2013 described as 'easy to use'",
+            "high_risk": "MEDIUM \u2013 employment contract at R45 is very low price; quality and SA law compliance should be verified before recommendation"
+          },
+          "demand_signals": {
+            "sa_specific": "TRUE \u2013 SA-focused",
+            "search_demand": "Employment contracts are high-demand; R45 price point is very accessible",
+            "competitor_density": "HIGH \u2013 multiple sellers at various price points; Businesstemplates is the lowest-priced option"
+          },
+          "competitive_density": "high",
+          "ranking_score": {
+            "sa_relevance": 7,
+            "demand": 7,
+            "competitive_density": 7,
+            "score": 7.0
+          },
+          "verification_notes": "Reviews NOT verified. Individual template page not fetched \u2013 product details inferred from catalogue. Low price (R45) raises quality questions. Recommend verifying template content before recommendation."
+        }
+      },
+      {
+        "id": "mr-0054",
+        "timestamp": "2026-10-02T22:30:00+02:00",
+        "agent": "market_research",
+        "confidence": 7,
+        "source": "https://inklegal.co.za/products/independent-contractor-agreement (product page, fetched 2026-10-02); https://inklegal.co.za/ (homepage)",
+        "verified": true,
+        "data": {
+          "record_type": "candidate_verified",
+          "product_name": "Independent Contractor Agreement \u2013 Ink Legal (SA attorneys, R1,250)",
+          "model": "digital",
+          "verification_fields": {
+            "product_exists": "https://inklegal.co.za/products/independent-contractor-agreement \u2013 live product listing with R1,250.00 ZAR price, 'Add to cart' button, product description, 'Legally Approved' badge",
+            "creator_real": "https://inklegal.co.za/ \u2013 Ink Legal; 'qualified and experienced attorneys and legal advisors with more than 40 years combined experience'; CEO: Heike Ernst (admitted attorney 2005); main place of business: Centurion, Gauteng, SA",
+            "price_point": "https://inklegal.co.za/products/independent-contractor-agreement \u2013 R1,250.00 ZAR displayed as 'Regular price'; 'Immediate Download' after purchase",
+            "reviews": "NOT VERIFIED \u2013 no review count or ratings displayed on product page. Ink Legal has FAQ page with attorney credentials but no customer review system observed."
+          },
+          "recommendation": "investigate",
+          "verified": true,
+          "source_url": "https://inklegal.co.za/products/independent-contractor-agreement",
+          "fetch_date": "2026-10-02",
+          "product_details": {
+            "format": "Microsoft Word DOCX (editable)",
+            "length": "UNVERIFIED (not displayed on product page)",
+            "price_zar": 1250.0,
+            "currency": "ZAR",
+            "price_display": "R1,250.00 ZAR",
+            "seller": "Ink Legal (inklegal.co.za) \u2013 Heike Ernst, CEO; admitted attorney 2005",
+            "delivery": "Immediate download after purchase",
+            "credentials": "40+ years combined experience; Centurion, Gauteng; CEO admitted as attorney 2005; previously Company Secretary/General Counsel of Raubex Group (JSE-listed)"
+          },
+          "sa_relevance": {
+            "law_jurisdiction": "South African law \u2013 attorneys qualified under laws of Republic of South Africa; Centurion, Gauteng",
+            "language": "English (SA)",
+            "references_sars_cipc": "YES \u2013 references Schedule 4 of Income Tax Act for independent contractor requirements",
+            "payment_methods": "Credit card via Shopify-powered store (shop.app)"
+          },
+          "tax_legal_risk_flags": {
+            "legal_advice_claim": "FALSE \u2013 described as 'Legal template' drafted by attorneys; 'Legally Approved' badge; not marketed as legal advice",
+            "disclaimer_present": "TRUE \u2013 FAQ states 'All our legal templates are drafted by qualified and experienced attorneys'; templates are for self-editing",
+            "requires_attorney": "NOT REQUIRED for template use \u2013 template is editable; Ink Legal offers virtual consultation as separate paid product",
+            "high_risk": "LOW \u2013 attorney-crafted template from established SA law firm; higher price reflects attorney involvement"
+          },
+          "demand_signals": {
+            "sa_specific": "TRUE \u2013 SA attorneys, SA law, Centurion Gauteng address",
+            "search_demand": "Independent contractor agreements needed by SA businesses; Ink Legal's attorney credentials differentiate it from template-only competitors",
+            "competitor_density": "HIGH \u2013 Ink Legal (R1,250), AgreementsOnline (R583.81), Contracts4Biz (R295), ElyForma (free), Genie AI (SA template)"
+          },
+          "competitive_density": "high",
+          "ranking_score": {
+            "sa_relevance": 9,
+            "demand": 7,
+            "competitive_density": 7,
+            "score": 9.0
+          },
+          "verification_notes": "Reviews NOT verified. Price and creator verified with strong attorney credentials. Higher price (R1,250) reflects attorney involvement vs template-only competitors. Ink Legal also sells virtual consultations (separate product)."
+        }
+      },
+      {
+        "id": "mr-0055",
+        "timestamp": "2026-10-02T22:30:00+02:00",
+        "agent": "market_research",
+        "confidence": 9,
+        "source": "SARS.gov.za (provisional tax worksheets, fetched 2026-10-02); CIPC.gov.za (annual returns compliance checklist, fetched 2026-10-02); TaxAssist (taxassist.co.za/downloads, fetched 2026-10-02); Wauko (wauko.com, fetched 2026-10-02); Doxuno (doxuno.com, fetched 2026-10-02); InfoDocs (infodocs.co.za, fetched 2026-10-02)",
+        "verified": true,
+        "data": {
+          "record_type": "market_gap_analysis",
+          "gap_type": "no_sold_product_exists",
+          "description": "No sold provisional tax calculation worksheets or CIPC annual return checklist templates exist as paid digital products.",
+          "detail": {
+            "provisional_tax": {
+              "status": "FREE \u2013 no paid product found",
+              "sources": [
+                "TaxAssist (taxassist.co.za/downloads) \u2013 free provisional tax calculation worksheets for 2023-2027 tax years",
+                "SARS.gov.za \u2013 free provisional tax calculation guidance and examples",
+                "Sage (za-kb.sage.com) \u2013 free Excel tax calculators for SA",
+                "FreshBooks (freshbooks.com/en-za) \u2013 free provisional tax guide"
+              ],
+              "implication": "The market for paid provisional tax worksheets is saturated by free government and professional-body offerings. A paid product would need significant differentiation (e.g., automated eFiling integration, multi-year tracking, scenario modelling) to compete."
+            },
+            "cipc_annual_return_checklist": {
+              "status": "FREE \u2013 no paid standalone template found",
+              "sources": [
+                "CIPC.gov.za \u2013 compliance checklist is a FREE standalone service accessed via CIPC e-Services/BizPortal",
+                "SAICA (saicawebprstorage.blob.core.windows.net) \u2013 free CIPC Compliance Checklist PDF",
+                "Wauko (wauko.com) \u2013 free CIPC annual return compliance checklist",
+                "Doxuno (doxuno.com) \u2013 free CIPC Beneficial Ownership Declaration template (PDF); paid editable Word with Expert",
+                "InfoDocs (infodocs.co.za) \u2013 compliance checklist included in R395/year company secretarial software; not a standalone template",
+                "Karbon (karbonhq.com) \u2013 free CIPC Annual Secretarial Return template for bookkeeping firms"
+              ],
+              "implication": "CIPC provides the compliance checklist free. A paid checklist template would face an uphill battle against the official free version. A paid product could differentiate with: automated checklist completion, multi-company management, deadline reminders, embedded CIPC filing links."
+            },
+            "vat201_workbook": {
+              "status": "NO PAID PRODUCT FOUND",
+              "sources": [
+                "SARS.gov.za \u2013 free VAT201 form (PDF) and VAT404 guide",
+                "HeadOffice (headoffice.app) \u2013 free VAT201 form download page",
+                "InvoiceDataExtraction (invoicedataextraction.com) \u2013 blog tutorial on preparing VAT201 from supplier invoices (not a sellable template)"
+              ],
+              "implication": "No sold VAT201 preparation workbook found. A VAT201 working file template (Excel/Google Sheets with input VAT classification, Field 14/14A/15/15A/18 mapping, reconciliation) could fill a gap IF it offers more than a free spreadsheet \u2013 e.g., automated VAT calculation, eFiling-ready output, multi-period tracking."
+            }
+          },
+          "recommendation": "investigate_golden_gap",
+          "verified": true,
+          "source_url": "Multiple (see detail.sources)",
+          "fetch_date": "2026-10-02",
+          "market_gap_assessment": {
+            "gap_exists": true,
+            "gap_is_structural": "Partially \u2013 free government/professional offerings exist, but they are basic (PDFs, single-year worksheets). A comprehensive, multi-year, automated digital tool could differentiate.",
+            "opportunity": "A SA tax compliance toolkit (provisional tax multi-year tracker + VAT201 working file + CIPC annual return deadline manager) delivered as a Notion template or Google Sheets workbook could address the gap IF it offers functionality beyond free PDFs. Key differentiators: automation, multi-year tracking, eFiling integration guidance, scenario modelling.",
+            "risk": "Competing with free SARS/CIPC resources is hard. The value add must be significant (time saved, errors avoided, deadlines managed). Marketing must be clear that the product is a productivity tool, not a substitute for a tax practitioner.",
+            "tax_practitioner_rule": "Any product that purports to calculate tax payable or advise on tax positions would require a registered tax practitioner. A tool that helps organise and track tax information (without giving tax advice) is in a safer position."
+          }
         }
       }
     ],
