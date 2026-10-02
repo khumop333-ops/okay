@@ -113,5 +113,50 @@
       "definition": "Owner cannot judge whether the install/configuration is correct or whether the system performs as sold; relies on the installer's word or pays for a second opinion; problems found only after months or years.",
       "provisional": true
     }
-  }
+  },
+  "clusters": {
+    "after_sales_and_warranty": [
+      "warranty_repair_delay_runaround",
+      "installer_aftersales_unresponsive",
+      "repeat_callout_fees",
+      "repair_downtime_no_fallback",
+      "replacement_unit_quality",
+      "warranty_claim_rejected",
+      "warranty_verification_serial",
+      "refund_returns_refused"
+    ],
+    "equipment_faults": [
+      "inverter_fault_recurring",
+      "battery_failure_degradation",
+      "firmware_update_failure",
+      "inverter_battery_compat_config",
+      "grid_voltage_issues"
+    ],
+    "install_quality_and_verification": [
+      "workmanship_defects",
+      "installer_misconfiguration_settings",
+      "cannot_verify_installation_quality",
+      "coc_compliance_integrity",
+      "system_overpromised_mismatch",
+      "installation_delays_lead_time"
+    ],
+    "savings_and_billing": [
+      "savings_below_expectation",
+      "municipal_billing_metering_mismatch",
+      "municipal_fixed_charge_solar_owners",
+      "grid_connection_cost_delay"
+    ],
+    "financing_and_provider_trust": [
+      "financing_rent_to_own_terms",
+      "billing_debit_order_errors",
+      "installer_trust_scam_fear"
+    ],
+    "regulation_and_registration": [
+      "sseg_registration_burden"
+    ],
+    "monitoring_and_alerts": [
+      "monitoring_app_issues"
+    ]
+  },
+  "_clusters_note": "POST-HOC grouping (made after seeing the tag counts) for interpretation only. The pre-committed ranking is tag-level; clusters never change it."
 }

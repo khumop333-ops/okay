@@ -25,7 +25,7 @@
       "must_never": "Execute sub-agent tasks directly (README section 3)",
       "append_key": "sessions"
     },
-    "timestamp": "2026-10-02T19:33:52+02:00",
+    "timestamp": "2026-10-02T22:27:57+02:00",
     "agent": "supervisor",
     "confidence": 9,
     "source": "Session 01a0fd84 (Supervisor): sup-0003 HITL gate 5 approval record appended to supervisor.findings; operator instruction recorded verbatim on PR #13 (https://github.com/khumop333-ops/okay/pull/13#issuecomment-5957829104).",
@@ -248,6 +248,72 @@
           },
           "hard_stops_status": "No HARD STOP violated. #1 no spend; #2 nothing invented \u2014 all 12 candidates verified via fetched URLs with cited prices, creators, and (where available) reviews; #3 no product verdict issued (recommendation field is market_research screening, not pricing verdict); #4 no pricing; #5 Market Research session, reports to Supervisor; #6 no force-push, no branch deletion; #7 no secrets; #8 shared_state.json exists on main; #9 one PR (arena/01a0fddd-okay), pushed before session end.",
           "push_status": "Pushed to remote: arena/01a0fddd-okay -> khumop333-ops/okay.git (commit f557160)"
+        }
+      },
+      {
+        "id": "sup-0009",
+        "timestamp": "2026-10-02T22:27:57+02:00",
+        "agent": "supervisor",
+        "confidence": 8,
+        "verified": true,
+        "source": "this session (arena/01a0fe1f-okay): research/solar-complaint-mining/REPORT.md and logs; tests: python3 -m unittest discover -s tests (180 tests OK); fetched pages listed in context.jsonl and queries.jsonl",
+        "data": {
+          "record_type": "session_record",
+          "session_id": "01a0fe1f",
+          "branch": "arena/01a0fe1f-okay",
+          "task": "COMPLAINT MINING - people with solar installations in South Africa: three communities, 30-50 recent items each across Facebook, Reddit, X and product reviews; ranked top-10 pains with who/workaround/willingness-to-pay/existing-solution. Pain findings only; no product ideas.",
+          "why": "User-requested research session (niche chosen via ask_user). The brief's niche was an unfilled placeholder.",
+          "scope_authority": "User brief for this session; README contract applies (no spend, no guessed data, UNVERIFIED marking, one PR).",
+          "operator_directives": [
+            "Niche = solar (ask_user answer)",
+            "Access question answered '.' (no option picked): default assumed and disclosed",
+            "Output = ranked pains with demand evidence, not product ideas"
+          ],
+          "sub_agents_routed": [
+            "market_research (mr-0056 to mr-0066)"
+          ],
+          "hitl_gates_crossed": [],
+          "hitl_gates_note": "ask_user was used for the niche and access questions only; no spend, no listing, no supplier contact.",
+          "hard_stops_triggered": [],
+          "findings": [
+            "mr-0056",
+            "mr-0057",
+            "mr-0058",
+            "mr-0059",
+            "mr-0060",
+            "mr-0061",
+            "mr-0062",
+            "mr-0063",
+            "mr-0064",
+            "mr-0065",
+            "mr-0066"
+          ],
+          "outputs": [
+            "research/solar-complaint-mining/REPORT.md (ranked top 10 with five questions each)",
+            "evidence.jsonl (67 rows), scanned.jsonl, queries.jsonl, context.jsonl, codebook.json, tally.json, tally.md",
+            "tools/complaint_tally.py + tests/test_complaint_tally.py (36 tests)",
+            "research/solar-complaint-mining/make_report.py"
+          ],
+          "decisions": [
+            "Third community changed from small-business/farm to rent-to-own/financed customers after evidence tests",
+            "24-month ranking window applied by the pre-committed rule because C2 had 17 strict-window scanned items",
+            "Post-hoc theme clusters labelled interpretation-only",
+            "App-store reviews sampled by first chunk only to avoid inflating one pain"
+          ],
+          "deliberately_excluded": [
+            "Product ideas and proposed solutions",
+            "Facebook and X (unreachable)",
+            "Out-of-window items (pre 2024-10-02)",
+            "Bystander and trade voices from ranking (logged, excluded)"
+          ],
+          "tests_run": "python3 -m unittest discover -s tests: 180 tests OK (144 existing + 36 new)",
+          "open_flags": [
+            "research/ directory, tools/complaint_tally.py and tests/test_complaint_tally.py are not listed in README section 6 - human to confirm they may stay",
+            "UNVERIFIED items listed in market_research.unverified_fields (willingness to pay for most pains; vendor claims; Eskom waiver after 30 Sep 2026; CGSO coverage)",
+            "Coverage gaps: Facebook, X and product reviews returned no usable items",
+            "Sandbox clock was used for timestamps (UTC 2026-10-02T20:2x at write time)"
+          ],
+          "digital_model": "not applicable: this is a pain finding, not a product candidate. No digital_model value, no product idea and no solution is proposed."
         }
       }
     ],
@@ -627,6 +693,72 @@
           ],
           "hard_stops_status": "No HARD STOP violated. #6 in particular: no force-push, no branch deletion, no published history rewritten."
         }
+      },
+      {
+        "id": "sup-0009",
+        "timestamp": "2026-10-02T22:27:57+02:00",
+        "agent": "supervisor",
+        "confidence": 8,
+        "verified": true,
+        "source": "this session (arena/01a0fe1f-okay): research/solar-complaint-mining/REPORT.md and logs; tests: python3 -m unittest discover -s tests (180 tests OK); fetched pages listed in context.jsonl and queries.jsonl",
+        "data": {
+          "record_type": "session_record",
+          "session_id": "01a0fe1f",
+          "branch": "arena/01a0fe1f-okay",
+          "task": "COMPLAINT MINING - people with solar installations in South Africa: three communities, 30-50 recent items each across Facebook, Reddit, X and product reviews; ranked top-10 pains with who/workaround/willingness-to-pay/existing-solution. Pain findings only; no product ideas.",
+          "why": "User-requested research session (niche chosen via ask_user). The brief's niche was an unfilled placeholder.",
+          "scope_authority": "User brief for this session; README contract applies (no spend, no guessed data, UNVERIFIED marking, one PR).",
+          "operator_directives": [
+            "Niche = solar (ask_user answer)",
+            "Access question answered '.' (no option picked): default assumed and disclosed",
+            "Output = ranked pains with demand evidence, not product ideas"
+          ],
+          "sub_agents_routed": [
+            "market_research (mr-0056 to mr-0066)"
+          ],
+          "hitl_gates_crossed": [],
+          "hitl_gates_note": "ask_user was used for the niche and access questions only; no spend, no listing, no supplier contact.",
+          "hard_stops_triggered": [],
+          "findings": [
+            "mr-0056",
+            "mr-0057",
+            "mr-0058",
+            "mr-0059",
+            "mr-0060",
+            "mr-0061",
+            "mr-0062",
+            "mr-0063",
+            "mr-0064",
+            "mr-0065",
+            "mr-0066"
+          ],
+          "outputs": [
+            "research/solar-complaint-mining/REPORT.md (ranked top 10 with five questions each)",
+            "evidence.jsonl (67 rows), scanned.jsonl, queries.jsonl, context.jsonl, codebook.json, tally.json, tally.md",
+            "tools/complaint_tally.py + tests/test_complaint_tally.py (36 tests)",
+            "research/solar-complaint-mining/make_report.py"
+          ],
+          "decisions": [
+            "Third community changed from small-business/farm to rent-to-own/financed customers after evidence tests",
+            "24-month ranking window applied by the pre-committed rule because C2 had 17 strict-window scanned items",
+            "Post-hoc theme clusters labelled interpretation-only",
+            "App-store reviews sampled by first chunk only to avoid inflating one pain"
+          ],
+          "deliberately_excluded": [
+            "Product ideas and proposed solutions",
+            "Facebook and X (unreachable)",
+            "Out-of-window items (pre 2024-10-02)",
+            "Bystander and trade voices from ranking (logged, excluded)"
+          ],
+          "tests_run": "python3 -m unittest discover -s tests: 180 tests OK (144 existing + 36 new)",
+          "open_flags": [
+            "research/ directory, tools/complaint_tally.py and tests/test_complaint_tally.py are not listed in README section 6 - human to confirm they may stay",
+            "UNVERIFIED items listed in market_research.unverified_fields (willingness to pay for most pains; vendor claims; Eskom waiver after 30 Sep 2026; CGSO coverage)",
+            "Coverage gaps: Facebook, X and product reviews returned no usable items",
+            "Sandbox clock was used for timestamps (UTC 2026-10-02T20:2x at write time)"
+          ],
+          "digital_model": "not applicable: this is a pain finding, not a product candidate. No digital_model value, no product idea and no solution is proposed."
+        }
       }
     ]
   },
@@ -649,7 +781,7 @@
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
       }
     },
-    "timestamp": "2026-10-02T22:30:00+02:00",
+    "timestamp": "2026-10-02T22:27:57+02:00",
     "agent": "market_research",
     "confidence": 7,
     "source": "DIGITAL discovery run (full): netlawman.co.za, agreementsonline.co.za, contracts4biz.co.za, businesstemplates.co.za, accesstoinfo.co.za, laboursmart.co.za, propertyreality.co.za, inklegal.co.za (fetched 2026-10-02). 12 candidates + 1 market gap analysis. 3 candidates flagged for disclaimer/quality verification.",
@@ -2958,6 +3090,879 @@
             "tax_practitioner_rule": "Any product that purports to calculate tax payable or advise on tax positions would require a registered tax practitioner. A tool that helps organise and track tax information (without giving tax advice) is in a safer position."
           }
         }
+      },
+      {
+        "id": "mr-0056",
+        "timestamp": "2026-10-02T22:27:57+02:00",
+        "agent": "market_research",
+        "confidence": 6,
+        "verified": false,
+        "source": "research/solar-complaint-mining/REPORT.md, evidence.jsonl, scanned.jsonl, queries.jsonl, context.jsonl (all rows carry source URL and retrieval date 2026-10-02); tools/complaint_tally.py",
+        "data": {
+          "record_type": "pain_mining_method_and_coverage",
+          "niche": "People with solar installations (South Africa); chosen by the user via ask_user (the brief's niche was an unfilled placeholder)",
+          "access_assumption": "The user's answer to the access question was '.' (no option picked); proceeded with the stated default: use reachable sources, report real coverage, never pad.",
+          "communities": {
+            "C1": "Homeowners with installer-installed systems (default when a post gave no role cue)",
+            "C2": "DIY, self-install and enthusiast owners",
+            "C3": "Rent-to-own / financed / subscription customers"
+          },
+          "rejected_alternatives": [
+            "Small businesses/farms: 3 searches, no usable owner complaints (installer marketing and pre-2025 homeowner threads only)",
+            "Body-corporate/estate residents: 5 SA Reddit threads, all before the window, one solar-related"
+          ],
+          "window_rule": "24-month window used because C2 had < 30 scanned items in the strict 12-month window",
+          "window_used": "extended",
+          "scanned_items_strict_window": {
+            "C1": 73,
+            "C2": 17,
+            "C3": 59
+          },
+          "scanned_items_24_month_window": {
+            "C1": 73,
+            "C2": 35,
+            "C3": 65
+          },
+          "counted_rows": {
+            "total": 59,
+            "by_community": {
+              "C1": 38,
+              "C3": 12,
+              "C2": 9
+            },
+            "excluded_by_voice": {
+              "bystander": 7,
+              "trade": 1
+            }
+          },
+          "coverage_items_read_24_month": {
+            "C1": {
+              "reddit": 22,
+              "forum": 14,
+              "review_site": 29,
+              "facebook": 0,
+              "x": 0,
+              "app_review": 8,
+              "product_review": 0
+            },
+            "C2": {
+              "reddit": 0,
+              "forum": 31,
+              "review_site": 3,
+              "facebook": 0,
+              "x": 0,
+              "app_review": 1,
+              "product_review": 0
+            },
+            "C3": {
+              "reddit": 29,
+              "forum": 25,
+              "review_site": 11,
+              "facebook": 0,
+              "x": 0,
+              "app_review": 0,
+              "product_review": 0
+            }
+          },
+          "coverage_gaps": [
+            "Public Facebook groups: 0 usable items (facebook.com 403; search surfaces no public SA posts)",
+            "Twitter/X: 0 usable items (x.com 403; searches return organisation accounts; XCancel mirror suspended)",
+            "Product reviews: only one app (Sunsynk Connect, Apple App Store ZA storefront, newest 9 reviews); Takealot pages show ratings only; Google Play ratings are global and not counted",
+            "Small businesses/farms and body corporates could not be sampled"
+          ],
+          "ranking_top10": [
+            {
+              "rank": 1,
+              "tag": "warranty_repair_delay_runaround",
+              "items": 17,
+              "sources": 6,
+              "community_counts": {
+                "C1": 14,
+                "C2": 3
+              },
+              "strict_share": 1.0,
+              "equal_weight_rank": 1,
+              "concentration_flag": true
+            },
+            {
+              "rank": 2,
+              "tag": "monitoring_app_issues",
+              "items": 12,
+              "sources": 3,
+              "community_counts": {
+                "C1": 9,
+                "C2": 3
+              },
+              "strict_share": 1.0,
+              "equal_weight_rank": 3,
+              "concentration_flag": true
+            },
+            {
+              "rank": 3,
+              "tag": "installer_aftersales_unresponsive",
+              "items": 9,
+              "sources": 5,
+              "community_counts": {
+                "C1": 6,
+                "C3": 3
+              },
+              "strict_share": 0.78,
+              "equal_weight_rank": 4,
+              "concentration_flag": false
+            },
+            {
+              "rank": 4,
+              "tag": "financing_rent_to_own_terms",
+              "items": 8,
+              "sources": 5,
+              "community_counts": {
+                "C1": 1,
+                "C3": 7
+              },
+              "strict_share": 0.5,
+              "equal_weight_rank": 2,
+              "concentration_flag": false
+            },
+            {
+              "rank": 5,
+              "tag": "inverter_fault_recurring",
+              "items": 5,
+              "sources": 4,
+              "community_counts": {
+                "C1": 5
+              },
+              "strict_share": 1.0,
+              "equal_weight_rank": 12,
+              "concentration_flag": false
+            },
+            {
+              "rank": 6,
+              "tag": "battery_failure_degradation",
+              "items": 4,
+              "sources": 3,
+              "community_counts": {
+                "C1": 3,
+                "C2": 1
+              },
+              "strict_share": 0.75,
+              "equal_weight_rank": 8,
+              "concentration_flag": true
+            },
+            {
+              "rank": 7,
+              "tag": "savings_below_expectation",
+              "items": 4,
+              "sources": 3,
+              "community_counts": {
+                "C1": 3,
+                "C3": 1
+              },
+              "strict_share": 1.0,
+              "equal_weight_rank": 10,
+              "concentration_flag": true
+            },
+            {
+              "rank": 8,
+              "tag": "workmanship_defects",
+              "items": 4,
+              "sources": 3,
+              "community_counts": {
+                "C1": 1,
+                "C3": 3
+              },
+              "strict_share": 0.75,
+              "equal_weight_rank": 5,
+              "concentration_flag": true
+            },
+            {
+              "rank": 9,
+              "tag": "sseg_registration_burden",
+              "items": 4,
+              "sources": 2,
+              "community_counts": {
+                "C1": 3,
+                "C2": 1
+              },
+              "strict_share": 1.0,
+              "equal_weight_rank": 9,
+              "concentration_flag": true
+            },
+            {
+              "rank": 10,
+              "tag": "installer_trust_scam_fear",
+              "items": 3,
+              "sources": 2,
+              "community_counts": {
+                "C1": 1,
+                "C3": 2
+              },
+              "strict_share": 1.0,
+              "equal_weight_rank": 7,
+              "concentration_flag": true
+            }
+          ],
+          "robustness": "Equal-community-weight top 10 differs by one tag (out inverter_fault_recurring, in inverter_battery_compat_config); strict-12-month-only top 10 is the same set; 7 of 10 pains are flagged for >40% from one source; counts are sample counts, not prevalence.",
+          "tooling": "tools/complaint_tally.py v1.0.0 with tests/test_complaint_tally.py (36 tests); full suite 180 tests OK",
+          "artifacts": [
+            "research/solar-complaint-mining/REPORT.md",
+            "research/solar-complaint-mining/tally.json",
+            "research/solar-complaint-mining/tally.md",
+            "research/solar-complaint-mining/make_report.py"
+          ],
+          "digital_model": "not applicable: this is a pain finding, not a product candidate. No digital_model value, no product idea and no solution is proposed.",
+          "no_product_idea": true,
+          "note": "mr-0055 (SA tax-compliance gap) is unrelated to this study and was not steered toward."
+        }
+      },
+      {
+        "id": "mr-0057",
+        "timestamp": "2026-10-02T22:27:57+02:00",
+        "agent": "market_research",
+        "confidence": 7,
+        "verified": false,
+        "source": "research/solar-complaint-mining/evidence.jsonl rows E014, E015, E016, E017, E018, E019, E020, E022, E037, E039, E040, E048, E049, E050, E054, E055, E067 (each row carries its own source URL, date and retrieval date 2026-10-02); fetched 2026-10-02: https://solardeity.co.za/pylontech-servicesupport/, https://thencc.org.za/wp-content/uploads/2023/11/Explanatory-Note-7-of-2023.pdf, https://www.cgso.org.za/",
+        "data": {
+          "record_type": "pain_point",
+          "rank": 1,
+          "tag": "warranty_repair_delay_runaround",
+          "title": "Brand/distributor warranty repair drags on for months with no answers",
+          "window_used": "extended",
+          "items": 17,
+          "distinct_sources": 6,
+          "community_counts": {
+            "C1": 14,
+            "C2": 3
+          },
+          "source_counts": {
+            "review_site": 16,
+            "app_review": 1
+          },
+          "voice_counts": {
+            "owner": 17
+          },
+          "strict_12_month_share": 1.0,
+          "concentration_flag": true,
+          "top_source": "hp:sunsynk",
+          "top_source_share": 0.41,
+          "equal_weight_rank": 1,
+          "what_the_pain_is": "After an inverter or battery fails under warranty, the brand or distributor repair/replacement stretches to months: parts are 'awaited', job numbers cannot be traced, emails and WhatsApps go unanswered, and claims are handed between installer, distributor and brand. Examples: a swollen battery with no replacement after 7 months (E015); a unit not heard about for almost 3 months (E016); three failed repairs in five months (E014); a 10-year-warranty system defective in year 3 with no acknowledgement even after escalation to the global CEO (E019).",
+          "who_is_complaining": "Installer-installed homeowners (C1) and hands-on/enthusiast owners (C2). Brands named: Sunsynk (most), Deye, Pylontech; installers named: Solar Advice, NCSP. 16 of the items are Hello Peter reviews, one is an app review; all are inside the last 12 months.",
+          "what_they_do_now": "Owners route everything through their installer, who chases the brand; accept an installer-supplied loan unit where one exists (E014); escalate to senior staff or the CEO (E015, E019); and post public reviews. One owner was told testing an in-warranty inverter would cost labour and could leave them on Eskom power for up to 21 days (E040).",
+          "existing_solutions": [
+            {
+              "name": "Consumer Protection Act s56 (six-month right to repair/replace/refund at the consumer's election, supplier's risk and expense)",
+              "url": "https://thencc.org.za/wp-content/uploads/2023/11/Explanatory-Note-7-of-2023.pdf",
+              "fetched": true,
+              "fetch_date": "2026-10-02",
+              "status": "Fetched. National Consumer Commission note quotes s56(2). It covers only the first six months after delivery; later failures rest on the manufacturer's contractual warranty."
+            },
+            {
+              "name": "Consumer Goods and Services Ombud (free escalation after a supplier complaint)",
+              "url": "https://www.cgso.org.za/",
+              "fetched": true,
+              "fetch_date": "2026-10-02",
+              "status": "Fetched. Whether a given solar supplier is a registered participant is UNVERIFIED; only one counted row (E044) reports using it, and no outcome is reported."
+            },
+            {
+              "name": "Solar Deity 'Pylontech Official Repair Center' (claims under-7-day turnaround and a loan battery)",
+              "url": "https://solardeity.co.za/pylontech-servicesupport/",
+              "fetched": true,
+              "fetch_date": "2026-10-02",
+              "status": "Fetched. Vendor claims only; unverified. Hello Peter 'Pylontech' reviews (E047-E050) describe a claim open for more than six months (E048), a month-plus wait for stock (E050) and rejections for 'misuse' (E047, E049), via a different local agent."
+            }
+          ],
+          "solves_well": "No on this evidence. A legal right and an ombud exist, but 16 Hello Peter reviews from the last 12 months describe the same months-long pattern; Hello Peter shows Sunsynk NPS -67 (14-15 reviews; page fetched), Deye -100 (8) and Pylontech -100 (5) (the last two from search excerpts of their pages).",
+          "evidence_ids": [
+            "E014",
+            "E015",
+            "E016",
+            "E017",
+            "E018",
+            "E019",
+            "E020",
+            "E022",
+            "E037",
+            "E039",
+            "E040",
+            "E048",
+            "E049",
+            "E050",
+            "E054",
+            "E055",
+            "E067"
+          ],
+          "evidence_file": "research/solar-complaint-mining/evidence.jsonl",
+          "digital_model": "not applicable: this is a pain finding, not a product candidate. No digital_model value, no product idea and no solution is proposed.",
+          "no_product_idea": true,
+          "UNVERIFIED_willingness_to_pay": "UNVERIFIED: no row states what an owner would pay for faster repair. Observed spend is being charged, not offering to pay: a labour quote of R6,000 to test an in-warranty inverter plus about R2,000 for a WiFi-controller job (E040, quoted_price) and repeated installer call-out fees with no amount stated (E014)."
+        }
+      },
+      {
+        "id": "mr-0058",
+        "timestamp": "2026-10-02T22:27:57+02:00",
+        "agent": "market_research",
+        "confidence": 6,
+        "verified": false,
+        "source": "research/solar-complaint-mining/evidence.jsonl rows E054, E055, E056, E059, E060, E061, E062, E063, E064, E065, E066, E067 (each row carries its own source URL, date and retrieval date 2026-10-02); fetched 2026-10-02: https://solar-assistant.io/",
+        "data": {
+          "record_type": "pain_point",
+          "rank": 2,
+          "tag": "monitoring_app_issues",
+          "title": "Monitoring app/portal is unreliable or too complex (concentrated on one vendor app)",
+          "window_used": "extended",
+          "items": 12,
+          "distinct_sources": 3,
+          "community_counts": {
+            "C1": 9,
+            "C2": 3
+          },
+          "source_counts": {
+            "review_site": 2,
+            "forum": 1,
+            "app_review": 9
+          },
+          "voice_counts": {
+            "owner": 12
+          },
+          "strict_12_month_share": 1.0,
+          "concentration_flag": true,
+          "top_source": "app:sunsynk-connect-ios-za",
+          "top_source_share": 0.75,
+          "equal_weight_rank": 3,
+          "what_the_pain_is": "The inverter vendor's monitoring app is unreliable or hard to use: 'service error' screens, previous days' numbers gone after an update (E066), sign-in broken after updates in July 2026 (E061, E063), grid-outage notifications not working for 'more than a month' (E065), an electrical engineer calling it 'incredibly complex' (E054), and a WiFi dongle that stopped in week one (E055). One enthusiast did not notice for three weeks that their batteries never reached 100% (E056). An undated review on the same ZA listing (not counted) adds 'service error' screens and daily statistics resetting to 0.",
+          "who_is_complaining": "Sunsynk owners. 9 of 12 items are Apple App Store reviews from the South African storefront (that listing: 2.2/5 from 243 ratings, fetched 2026-10-02), plus two Hello Peter reviews and one forum post. C1 and C2. Because 75% of the items come from one app listing this is a single-product finding, not an industry-wide one.",
+          "what_they_do_now": "Wait for the next update, create a new account (E067), read figures off the inverter's own display (said by an undated ZA App Store review, not counted), or add third-party monitoring and automations (Solar Assistant, Home Assistant). One forum owner says Home Assistant is 'too complicated to run for the end user'.",
+          "existing_solutions": [
+            {
+              "name": "SolarAssistant (local Raspberry-Pi monitoring/automation; Deye listed as supported; remote inverter-setting changes)",
+              "url": "https://solar-assistant.io/",
+              "fetched": true,
+              "fetch_date": "2026-10-02",
+              "status": "Fetched, plus its shop page (South Africa local shipping in ZAR). Price not visible in the fetched chunk; R990 and USD14/yr are user-reported."
+            },
+            {
+              "name": "SMH 'Solar Management Hub' by Centurion Solar (Pi-based; app with Telegram fault/outage alerts)",
+              "url": "https://centurionsolar.co.za/solar-management-hub/",
+              "fetched": false,
+              "fetch_date": null,
+              "status": "NOT fetched (search excerpt, 2023 crawl). An App Store ZA reviewer names it as better than the vendor app. Current availability and price UNVERIFIED."
+            }
+          ],
+          "solves_well": "Partly. Third-party tools are used and praised by enthusiasts, but they need a Raspberry Pi and set-up; no app-store reviewer in the sample says they use one. Fit for non-technical owners: UNVERIFIED.",
+          "evidence_ids": [
+            "E054",
+            "E055",
+            "E056",
+            "E059",
+            "E060",
+            "E061",
+            "E062",
+            "E063",
+            "E064",
+            "E065",
+            "E066",
+            "E067"
+          ],
+          "evidence_file": "research/solar-complaint-mining/evidence.jsonl",
+          "digital_model": "not applicable: this is a pain finding, not a product candidate. No digital_model value, no product idea and no solution is proposed.",
+          "no_product_idea": true,
+          "willingness_to_pay_evidence": "Stated spend exists for the workaround, not for a fixed app: one owner paid R990 once-off for Solar Assistant (self-reported, MyBroadband Aug 2025); a vendor change to USD14/year for updates was called 'not too bad' by the thread opener while several owners opted out to keep free lifetime updates; two enthusiasts said they would subscribe if specific features were added (conditional, no amount). Enthusiasts only and outside the strict window; UNVERIFIED for mainstream owners.",
+          "UNVERIFIED_willingness_to_pay_for_improvement": "No source row states what owners would pay for an improvement; the evidence above is indirect (workaround spend, sunk payments, or stated unwillingness)."
+        }
+      },
+      {
+        "id": "mr-0059",
+        "timestamp": "2026-10-02T22:27:57+02:00",
+        "agent": "market_research",
+        "confidence": 6,
+        "verified": false,
+        "source": "research/solar-complaint-mining/evidence.jsonl rows E011, E022, E024, E025, E035, E038, E039, E041, E043 (each row carries its own source URL, date and retrieval date 2026-10-02); fetched 2026-10-02: https://pvgreencard.co.za/, https://www.hellopeter.com/gosolr",
+        "data": {
+          "record_type": "pain_point",
+          "rank": 3,
+          "tag": "installer_aftersales_unresponsive",
+          "title": "Installer stops answering after payment",
+          "window_used": "extended",
+          "items": 9,
+          "distinct_sources": 5,
+          "community_counts": {
+            "C1": 6,
+            "C3": 3
+          },
+          "source_counts": {
+            "reddit": 1,
+            "review_site": 8
+          },
+          "voice_counts": {
+            "owner": 9
+          },
+          "strict_12_month_share": 0.78,
+          "concentration_flag": false,
+          "top_source": "hp:solaradvice",
+          "top_source_share": 0.33,
+          "equal_weight_rank": 4,
+          "what_the_pain_is": "After payment and installation the installer or seller stops answering: calls and WhatsApps unanswered (E022), warranty repairs 'handed off to someone else' with no updates (E039), tickets signed off as complete while the fault remains (E043), blame placed on the owner (E024). One owner is 'still paying for the solar system while also having to purchase electricity when the system is not operating properly' (E022).",
+          "who_is_complaining": "C1 and C3. Named: Solar Advice, NCSP, Invert Solar, GoSolr (two rows) and one GoSolr customer on Reddit. 8 of 9 items are Hello Peter reviews; 78% fall in the last 12 months.",
+          "what_they_do_now": "Chase by call, WhatsApp, email and app tickets; post public reviews; keep paying while the system is down; one GoSolr customer took two days of leave around a cancelled-then-rescheduled visit (E041).",
+          "existing_solutions": [
+            {
+              "name": "Hello Peter public reviews (GoSolr replies to 99% of negative reviews in about 13 hours; Sunsynk 54%)",
+              "url": "https://www.hellopeter.com/gosolr",
+              "fetched": true,
+              "fetch_date": "2026-10-02",
+              "status": "Fetched (GoSolr page; Sunsynk page also fetched). A reply is not a resolution; reply rates are the platform's own."
+            },
+            {
+              "name": "PV GreenCard (voluntary SAPVIA programme: as-built report, directory of certified companies, 'third party system check available', 'dispute resolution service')",
+              "url": "https://pvgreencard.co.za/",
+              "fetched": true,
+              "fetch_date": "2026-10-02",
+              "status": "Fetched. States 442 certified installation companies. Effectiveness for owners UNVERIFIED: no row in this study mentions it."
+            }
+          ],
+          "solves_well": "Unclear. A vetted-installer directory and ombud channels exist, but owners in the sample rely on public reviews instead; no row reports using the directory.",
+          "evidence_ids": [
+            "E011",
+            "E022",
+            "E024",
+            "E025",
+            "E035",
+            "E038",
+            "E039",
+            "E041",
+            "E043"
+          ],
+          "evidence_file": "research/solar-complaint-mining/evidence.jsonl",
+          "digital_model": "not applicable: this is a pain finding, not a product candidate. No digital_model value, no product idea and no solution is proposed.",
+          "no_product_idea": true,
+          "UNVERIFIED_willingness_to_pay": "UNVERIFIED. Sunk amounts are stated (R100,000 system price in E038; R20,700 paid to cancel a rental contract in E041) but they are what owners paid, not what they would pay to fix the problem."
+        }
+      },
+      {
+        "id": "mr-0060",
+        "timestamp": "2026-10-02T22:27:57+02:00",
+        "agent": "market_research",
+        "confidence": 6,
+        "verified": false,
+        "source": "research/solar-complaint-mining/evidence.jsonl rows E003, E004, E005, E009, E010, E041, E042, E044 (each row carries its own source URL, date and retrieval date 2026-10-02); fetched 2026-10-02: https://alumo.co.za/plans-pricing/",
+        "data": {
+          "record_type": "pain_point",
+          "rank": 4,
+          "tag": "financing_rent_to_own_terms",
+          "title": "Rent-to-own / subscription terms: price, escalation, buy-out and exit fees",
+          "window_used": "extended",
+          "items": 8,
+          "distinct_sources": 5,
+          "community_counts": {
+            "C1": 1,
+            "C3": 7
+          },
+          "source_counts": {
+            "reddit": 5,
+            "review_site": 2,
+            "forum": 1
+          },
+          "voice_counts": {
+            "prospective": 3,
+            "owner": 5
+          },
+          "strict_12_month_share": 0.5,
+          "concentration_flag": false,
+          "top_source": "reddit:1v1cfnj",
+          "top_source_share": 0.25,
+          "equal_weight_rank": 2,
+          "what_the_pain_is": "People on or considering rent-to-own solar describe a monthly price above the bill it replaces (R1,700 quoted, E003), escalation (about R1,740 to R1,830, E005), buy-outs priced at '300+% markup' (E005) or R340,000 for a two-year-old system (E042), exit fees (R20,700 paid, E041; 'a 40k uninstall fee', E010; R35,400 charged against a R30,000 tier, E042), minimum terms, and 'fine print' they distrust (E004).",
+          "who_is_complaining": "C3 (7 of 8: rent-to-own customers and prospects, mostly GoSolr/'GoSolar') plus one cash buyer in C1. Reddit 5, Hello Peter 2, MyBroadband 1; only half of the items fall in the last 12 months.",
+          "what_they_do_now": "Buy outright after research (E004); extend the bond and pay upfront (advice in the same thread); a landlord installed systems for all tenants at his own cost (E003); install your own (E010); for exit disputes, legal advice, a CGSO complaint and a consumer-journalist referral (E044); one customer declined a R340,000 buy-out and bought a new R225,000 system (E042).",
+          "existing_solutions": [
+            {
+              "name": "Alumo rent-to-own and subscription plans",
+              "url": "https://alumo.co.za/plans-pricing/",
+              "fetched": true,
+              "fetch_date": "2026-10-02",
+              "status": "Fetched. Rent-to-own from R1,449 p/m + R700 initiation fee (3/5/7 years; buy out and upgrade anytime; maintenance and insurance included); subscription from R1,499 p/m with option to cancel after 24 months. Vendor shows 4.9 Google / 9.2 Hello Peter: NOT verified."
+            },
+            {
+              "name": "Bank solar loans / home-loan top-up (named by commenters)",
+              "url": "https://energybee.co.za/tools/solar-financing-calculator",
+              "fetched": false,
+              "fetch_date": null,
+              "status": "NOT verified at source. A commercial comparison site quotes 2026 rates (Nedbank Prime-0.5, FNB Prime+1, Absa Prime+2) - treat as UNVERIFIED."
+            }
+          ],
+          "solves_well": "Partly/unclear. Offers with different published terms exist (buy out anytime; cancel after 24 months). I found no dated customer evidence on how they work out in practice; one Reddit commenter (read, not logged as a complaint) calls Alumo's after-sales good (r/askSouthAfrica 1v1cfnj, 2026-07-20).",
+          "evidence_ids": [
+            "E003",
+            "E004",
+            "E005",
+            "E009",
+            "E010",
+            "E041",
+            "E042",
+            "E044"
+          ],
+          "evidence_file": "research/solar-complaint-mining/evidence.jsonl",
+          "digital_model": "not applicable: this is a pain finding, not a product candidate. No digital_model value, no product idea and no solution is proposed.",
+          "no_product_idea": true,
+          "willingness_to_pay_evidence": "Stated spend: R1,830/month paid (E005), a R1,700/month quote (E003), R20,700 paid to exit (E041, revealed willingness to pay to leave). A R340,000 buy-out was declined (E042). Willingness to pay for better terms: UNVERIFIED.",
+          "UNVERIFIED_willingness_to_pay_for_improvement": "No source row states what owners would pay for an improvement; the evidence above is indirect (workaround spend, sunk payments, or stated unwillingness)."
+        }
+      },
+      {
+        "id": "mr-0061",
+        "timestamp": "2026-10-02T22:27:57+02:00",
+        "agent": "market_research",
+        "confidence": 5,
+        "verified": false,
+        "source": "research/solar-complaint-mining/evidence.jsonl rows E014, E021, E022, E037, E038 (each row carries its own source URL, date and retrieval date 2026-10-02)",
+        "data": {
+          "record_type": "pain_point",
+          "rank": 5,
+          "tag": "inverter_fault_recurring",
+          "title": "Inverter faults that recur after repair",
+          "window_used": "extended",
+          "items": 5,
+          "distinct_sources": 4,
+          "community_counts": {
+            "C1": 5
+          },
+          "source_counts": {
+            "review_site": 5
+          },
+          "voice_counts": {
+            "owner": 5
+          },
+          "strict_12_month_share": 1.0,
+          "concentration_flag": false,
+          "top_source": "hp:solaradvice",
+          "top_source_share": 0.4,
+          "equal_weight_rank": 12,
+          "what_the_pain_is": "Inverters that keep faulting: error codes (F20 on an 8 kW unit, E23 on a 12 kW unit), unstable power, flickering lights and unexpected shutdowns (E014), a unit 'sent away for repairs four times' (E022), and repair visits that are charged but do not fix the fault (E037).",
+          "who_is_complaining": "C1 only (5 of 5 are Hello Peter reviews): Sunsynk, Deye (two), NCSP and Solar Advice customers.",
+          "what_they_do_now": "Installer loan units where available (E014), repeated call-outs, returns to the brand; owners keep paying for the system while buying grid power (E022).",
+          "existing_solutions": [
+            {
+              "name": "Manufacturer warranty plus installer loan units (as described by reviewers; no independent diagnostic service verified)",
+              "url": "https://www.hellopeter.com/deye-inverters",
+              "fetched": false,
+              "fetch_date": null,
+              "status": "Search excerpt of Hello Peter 'Ningbo Deye' only (NPS -100, 8 reviews in 12 months; one review praises an in-warranty repair at a service centre). Not fetched."
+            }
+          ],
+          "solves_well": "No evidence that it is solved: all five describe a fault that stayed unresolved after at least one repair or visit, or no action at all (E038).",
+          "evidence_ids": [
+            "E014",
+            "E021",
+            "E022",
+            "E037",
+            "E038"
+          ],
+          "evidence_file": "research/solar-complaint-mining/evidence.jsonl",
+          "digital_model": "not applicable: this is a pain finding, not a product candidate. No digital_model value, no product idea and no solution is proposed.",
+          "no_product_idea": true,
+          "UNVERIFIED_willingness_to_pay": "UNVERIFIED. Call-out charges appear (E014, E037) but no amount is stated and none is framed as willingness to pay."
+        }
+      },
+      {
+        "id": "mr-0062",
+        "timestamp": "2026-10-02T22:27:57+02:00",
+        "agent": "market_research",
+        "confidence": 5,
+        "verified": false,
+        "source": "research/solar-complaint-mining/evidence.jsonl rows E015, E026, E048, E050 (each row carries its own source URL, date and retrieval date 2026-10-02); fetched 2026-10-02: https://solardeity.co.za/pylontech-servicesupport/, https://thencc.org.za/wp-content/uploads/2023/11/Explanatory-Note-7-of-2023.pdf",
+        "data": {
+          "record_type": "pain_point",
+          "rank": 6,
+          "tag": "battery_failure_degradation",
+          "title": "Batteries that swell, lose BMS communication or fail early",
+          "window_used": "extended",
+          "items": 4,
+          "distinct_sources": 3,
+          "community_counts": {
+            "C1": 3,
+            "C2": 1
+          },
+          "source_counts": {
+            "review_site": 4
+          },
+          "voice_counts": {
+            "owner": 4
+          },
+          "strict_12_month_share": 0.75,
+          "concentration_flag": true,
+          "top_source": "hp:pylontech",
+          "top_source_share": 0.5,
+          "equal_weight_rank": 8,
+          "what_the_pain_is": "Batteries that swell or fail early and then take months to replace: one swollen 5 kWh battery with no replacement after 7 months (E015), two swollen 5 kWh batteries awaiting replacement for more than 6 months (E048), two of four batteries dead within about five years with a month-plus wait and a higher electricity bill meanwhile (E050), and a retail-bought battery with BMS problems and a refused refund (E026, Oct 2024).",
+          "who_is_complaining": "C1 (3) and C2 (1); all Hello Peter; Sunsynk, Pylontech and a CFE-brand battery bought from a retailer.",
+          "what_they_do_now": "Installer escalation and waiting; one owner bought another battery elsewhere after refusal of a refund (E026).",
+          "existing_solutions": [
+            {
+              "name": "Solar Deity Pylontech repair centre (vendor claims under 7 days and a loan battery)",
+              "url": "https://solardeity.co.za/pylontech-servicesupport/",
+              "fetched": true,
+              "fetch_date": "2026-10-02",
+              "status": "Fetched; vendor claims are unverified and not borne out by 2026 Hello Peter reviews of the brand's local warranty channel (waits of one to six-plus months)."
+            },
+            {
+              "name": "Consumer Protection Act s56",
+              "url": "https://thencc.org.za/wp-content/uploads/2023/11/Explanatory-Note-7-of-2023.pdf",
+              "fetched": true,
+              "fetch_date": "2026-10-02",
+              "status": "Fetched. Six-month window only, so it does not reach failures in year 2-5."
+            }
+          ],
+          "solves_well": "No on this evidence: claims were still open after 6-7 months in 2026 (E015, E048).",
+          "evidence_ids": [
+            "E015",
+            "E026",
+            "E048",
+            "E050"
+          ],
+          "evidence_file": "research/solar-complaint-mining/evidence.jsonl",
+          "digital_model": "not applicable: this is a pain finding, not a product candidate. No digital_model value, no product idea and no solution is proposed.",
+          "no_product_idea": true,
+          "UNVERIFIED_willingness_to_pay": "UNVERIFIED."
+        }
+      },
+      {
+        "id": "mr-0063",
+        "timestamp": "2026-10-02T22:27:57+02:00",
+        "agent": "market_research",
+        "confidence": 5,
+        "verified": false,
+        "source": "research/solar-complaint-mining/evidence.jsonl rows E001, E027, E035, E044 (each row carries its own source URL, date and retrieval date 2026-10-02); fetched 2026-10-02: https://solar-assistant.io/",
+        "data": {
+          "record_type": "pain_point",
+          "rank": 7,
+          "tag": "savings_below_expectation",
+          "title": "Owners do not see the bill fall",
+          "window_used": "extended",
+          "items": 4,
+          "distinct_sources": 3,
+          "community_counts": {
+            "C1": 3,
+            "C3": 1
+          },
+          "source_counts": {
+            "reddit": 2,
+            "review_site": 1,
+            "forum": 1
+          },
+          "voice_counts": {
+            "owner": 4
+          },
+          "strict_12_month_share": 1.0,
+          "concentration_flag": true,
+          "top_source": "reddit:1uejsus",
+          "top_source_share": 0.5,
+          "equal_weight_rank": 10,
+          "what_the_pain_is": "Owners cannot see the saving: 'still buying the same amount of unit... all I have managed to do is add an expense' (E001); a Solar Advice customer whose system 'was costing me way more money than I was paying without the oversize...' (the excerpt is cut off, E035); installer-set discharge and overnight grid-charge settings that removed the saving (E027); and a rental customer whose municipal bill treated generation as consumption, with a self-estimated overpayment of about R30,000 (E044).",
+          "who_is_complaining": "C1 (3) and C3 (1); Reddit 2, Hello Peter 1, MyBroadband 1; 100% inside the last 12 months.",
+          "what_they_do_now": "Geyser timers, an ET-12 load meter feeding the inverter or an inverter per phase (advice in E001's thread); changing settings oneself (E027); switching from post-paid to prepaid, legal advice and a CGSO complaint (E044).",
+          "existing_solutions": [
+            {
+              "name": "No product verified. Commenters name geyser controllers (Geyserwise, Sonoff, CBI), the ET-12 meter and Solar Assistant / Home Assistant.",
+              "url": "https://solar-assistant.io/",
+              "fetched": true,
+              "fetch_date": "2026-10-02",
+              "status": "Only SolarAssistant's page was fetched (see monitoring row); the others are named by commenters and not verified."
+            }
+          ],
+          "solves_well": "Unclear. Fixes described are DIY and depend on owner skill; none verified as effective.",
+          "evidence_ids": [
+            "E001",
+            "E027",
+            "E035",
+            "E044"
+          ],
+          "evidence_file": "research/solar-complaint-mining/evidence.jsonl",
+          "digital_model": "not applicable: this is a pain finding, not a product candidate. No digital_model value, no product idea and no solution is proposed.",
+          "no_product_idea": true,
+          "UNVERIFIED_willingness_to_pay": "UNVERIFIED. The R30,000 is the poster's own estimate of overpayment (stated_spend), not a willingness to pay."
+        }
+      },
+      {
+        "id": "mr-0064",
+        "timestamp": "2026-10-02T22:27:57+02:00",
+        "agent": "market_research",
+        "confidence": 5,
+        "verified": false,
+        "source": "research/solar-complaint-mining/evidence.jsonl rows E005, E023, E041, E043 (each row carries its own source URL, date and retrieval date 2026-10-02); fetched 2026-10-02: https://pvgreencard.co.za/, https://www.eskom.co.za/solar-pv-registration-legal-compliance-campaign-update-act-now-stay-legal-stay-safe-eskom-continues-to-provide-up-to-r10000-assistance/",
+        "data": {
+          "record_type": "pain_point",
+          "rank": 8,
+          "tag": "workmanship_defects",
+          "title": "Installation defects with safety consequences",
+          "window_used": "extended",
+          "items": 4,
+          "distinct_sources": 3,
+          "community_counts": {
+            "C1": 1,
+            "C3": 3
+          },
+          "source_counts": {
+            "reddit": 1,
+            "review_site": 3
+          },
+          "voice_counts": {
+            "owner": 4
+          },
+          "strict_12_month_share": 0.75,
+          "concentration_flag": true,
+          "top_source": "hp:gosolr",
+          "top_source_share": 0.5,
+          "equal_weight_rank": 5,
+          "what_the_pain_is": "Defects with safety consequences: an array 'left ungrounded for over a month' causing a DC fuse to catch fire on a R159,000 job (E023); wiring that burned on installation with the repair done wrongly and tickets 'signed off as complete' (E043); a main-DB switch rated for 3-phase on a single-phase home (E005); walls left damaged and an oven and stove not working after a de-installation (E041).",
+          "who_is_complaining": "C3 (3, rent/subscription customers) and C1 (1); Hello Peter 3, Reddit 1.",
+          "what_they_do_now": "Second electricians, escalation and public warnings.",
+          "existing_solutions": [
+            {
+              "name": "Certificate of Compliance for the wiring (required for registration per Eskom's page)",
+              "url": "https://www.eskom.co.za/solar-pv-registration-legal-compliance-campaign-update-act-now-stay-legal-stay-safe-eskom-continues-to-provide-up-to-r10000-assistance/",
+              "fetched": true,
+              "fetch_date": "2026-10-02",
+              "status": "Fetched. Yet E023 says the independent CoC electrician 'didn't even check the work'."
+            },
+            {
+              "name": "PV GreenCard as-built report and 'third party system check available'",
+              "url": "https://pvgreencard.co.za/",
+              "fetched": true,
+              "fetch_date": "2026-10-02",
+              "status": "Fetched; no row shows an owner using it to resolve a defect."
+            }
+          ],
+          "solves_well": "Unclear to no: the compliance paperwork exists, but the cited failure is that it was not checked.",
+          "evidence_ids": [
+            "E005",
+            "E023",
+            "E041",
+            "E043"
+          ],
+          "evidence_file": "research/solar-complaint-mining/evidence.jsonl",
+          "digital_model": "not applicable: this is a pain finding, not a product candidate. No digital_model value, no product idea and no solution is proposed.",
+          "no_product_idea": true,
+          "UNVERIFIED_willingness_to_pay": "UNVERIFIED (R159,000 and R20,700 are amounts already paid)."
+        }
+      },
+      {
+        "id": "mr-0065",
+        "timestamp": "2026-10-02T22:27:57+02:00",
+        "agent": "market_research",
+        "confidence": 6,
+        "verified": false,
+        "source": "research/solar-complaint-mining/evidence.jsonl rows E029, E030, E031, E032 (each row carries its own source URL, date and retrieval date 2026-10-02); fetched 2026-10-02: https://www.eskom.co.za/solar-pv-registration-legal-compliance-campaign-update-act-now-stay-legal-stay-safe-eskom-continues-to-provide-up-to-r10000-assistance/",
+        "data": {
+          "record_type": "pain_point",
+          "rank": 9,
+          "tag": "sseg_registration_burden",
+          "title": "Grid-registration (SSEG) is seen as costly, pointless or unenforced",
+          "window_used": "extended",
+          "items": 4,
+          "distinct_sources": 2,
+          "community_counts": {
+            "C1": 3,
+            "C2": 1
+          },
+          "source_counts": {
+            "forum": 4
+          },
+          "voice_counts": {
+            "owner": 4
+          },
+          "strict_12_month_share": 1.0,
+          "concentration_flag": true,
+          "top_source": "mb:1347774",
+          "top_source_share": 0.75,
+          "equal_weight_rank": 9,
+          "what_the_pain_is": "Owners treat SSEG registration as costly, pointless or unenforced and many do not do it. In a MyBroadband poll (74 voters, self-selected) 45 of the 46 voters who have home solar had not registered. Owner comments: 'I tried at the time, they ignored me' (E029), 'I will rather upgrade my small system than register' (E030), 'Eskom must pay us R5000.00 to reg' (E031), 'Just don't register if you are in JHB' (E032). Two bystander Reddit comments on the August 2026 R30,000-fines story are excluded from the count.",
+          "who_is_complaining": "C1 (3) and C2 (1); all forum posts from Sep-Oct 2026; 75% of the items come from one thread.",
+          "what_they_do_now": "Do not register; fit an NRS-approved inverter and get a CoC only (advice in the same PowerForum thread as E032/E034); expand the system or go off-grid to avoid the grid (E030, E032); on Cape Town, one owner says the municipality is strict (E032) while a bystander says none of about 15 Cape Town owners they know is registered (E034, excluded).",
+          "existing_solutions": [
+            {
+              "name": "Eskom registration: online Customer Application Tool, fee waiver, simplified sign-off by a DoEL-registered person since 1 Oct 2025",
+              "url": "https://www.eskom.co.za/solar-pv-registration-legal-compliance-campaign-update-act-now-stay-legal-stay-safe-eskom-continues-to-provide-up-to-r10000-assistance/",
+              "fetched": true,
+              "fetch_date": "2026-10-02",
+              "status": "Fetched (statement dated 14 Jan 2026). Municipal customers must use their municipality; penalties are described inconsistently by secondary sources (UNVERIFIED)."
+            }
+          ],
+          "solves_well": "Not on this evidence. The process, tool and a fee waiver exist, yet the poll shows 45 of 46 solar owners unregistered (self-selected) and owners describe not trusting or not bothering.",
+          "evidence_ids": [
+            "E029",
+            "E030",
+            "E031",
+            "E032"
+          ],
+          "evidence_file": "research/solar-complaint-mining/evidence.jsonl",
+          "digital_model": "not applicable: this is a pain finding, not a product candidate. No digital_model value, no product idea and no solution is proposed.",
+          "no_product_idea": true,
+          "willingness_to_pay_evidence": "Evidence points to unwillingness: no owner states a price they would pay and one expects to be paid R5,000 (E031). Eskom waived fees of up to R10,000 until 31 Mar 2026 (fetched); a waiver to 30 Sep 2026 appears only in secondary sources, and the position after 30 Sep 2026 is UNVERIFIED.",
+          "UNVERIFIED_willingness_to_pay_for_improvement": "No source row states what owners would pay for an improvement; the evidence above is indirect (workaround spend, sunk payments, or stated unwillingness)."
+        }
+      },
+      {
+        "id": "mr-0066",
+        "timestamp": "2026-10-02T22:27:57+02:00",
+        "agent": "market_research",
+        "confidence": 4,
+        "verified": false,
+        "source": "research/solar-complaint-mining/evidence.jsonl rows E002, E004, E036 (each row carries its own source URL, date and retrieval date 2026-10-02); fetched 2026-10-02: https://pvgreencard.co.za/, https://www.hellopeter.com/gosolr",
+        "data": {
+          "record_type": "pain_point",
+          "rank": 10,
+          "tag": "installer_trust_scam_fear",
+          "title": "Buyers cannot tell which installer or finance provider to trust",
+          "window_used": "extended",
+          "items": 3,
+          "distinct_sources": 2,
+          "community_counts": {
+            "C1": 1,
+            "C3": 2
+          },
+          "source_counts": {
+            "reddit": 2,
+            "review_site": 1
+          },
+          "voice_counts": {
+            "prospective": 1,
+            "owner": 2
+          },
+          "strict_12_month_share": 1.0,
+          "concentration_flag": true,
+          "top_source": "reddit:1v1cfnj",
+          "top_source_share": 0.67,
+          "equal_weight_rank": 7,
+          "what_the_pain_is": "Buyers cannot tell which installers or finance providers to trust: 'the reviews on Hello Peter make me suspicious' (E002), 'the fine print... just seems very suspicious' (E004), and a financed customer calling the experience 'dishonest' (E036).",
+          "who_is_complaining": "C3 (2) and C1 (1); Reddit 2, Hello Peter 1; 67% of the items come from the July 2026 rent-to-own thread.",
+          "what_they_do_now": "Read Hello Peter, ask Reddit, buy outright after research (E004).",
+          "existing_solutions": [
+            {
+              "name": "PV GreenCard directory of certified installation companies",
+              "url": "https://pvgreencard.co.za/",
+              "fetched": true,
+              "fetch_date": "2026-10-02",
+              "status": "Fetched (442 companies). No owner in the sample mentions using it."
+            },
+            {
+              "name": "Hello Peter reviews",
+              "url": "https://www.hellopeter.com/gosolr",
+              "fetched": true,
+              "fetch_date": "2026-10-02",
+              "status": "Fetched. The complaint is that the reviews themselves raise suspicion."
+            }
+          ],
+          "solves_well": "Unclear. Both exist; whether buyers use the directory is unverified.",
+          "evidence_ids": [
+            "E002",
+            "E004",
+            "E036"
+          ],
+          "evidence_file": "research/solar-complaint-mining/evidence.jsonl",
+          "digital_model": "not applicable: this is a pain finding, not a product candidate. No digital_model value, no product idea and no solution is proposed.",
+          "no_product_idea": true,
+          "UNVERIFIED_willingness_to_pay": "UNVERIFIED."
+        }
       }
     ],
     "unverified_fields": [
@@ -2970,7 +3975,14 @@
       "UNVERIFIED_established_seller_count for ALL candidates: Takealot server-side search ignores ?q= for bots (verified 2026-09-29); needs JS-rendered browsing or official seller data. Competition grades remain listing-proxy judgements with method labels.",
       "Candidates trend-captured but still not customs-screened (carried over, no rate attempted this session): mr-0016 pet GPS collar, mr-0017 mouth tape / sleep strips, mr-0018 hard-water shower filter. Also 4202.32 (leather/folio phone cases) SA line rate UNVERIFIED - 4202.92 @30% is a heading proxy only.",
       "Regulatory/IP flags carried forward: SAHPRA for cosmetics/skincare (mr-0032) and perfume (mr-0036); trademark/counterfeit adjacency on fragrance 'dupes' (mr-0036); heading 3304 excludes medicaments and sunscreen, so therapeutic-claim serums can move to Chapter 30 (mr-0032).",
-      "README landed-cost formula vs SARS ATV method (customs value + duty + 10% uplift) x 15%: discrepancy flagged for Supervisor/Pricing (pr-0003 request). MR takes no position - cost math is Pricing-owned."
+      "README landed-cost formula vs SARS ATV method (customs value + duty + 10% uplift) x 15%: discrepancy flagged for Supervisor/Pricing (pr-0003 request). MR takes no position - cost math is Pricing-owned.",
+      "mr-0057, mr-0059, mr-0061, mr-0062, mr-0063, mr-0064, mr-0066 UNVERIFIED_willingness_to_pay: no source row states what owners would pay to make the pain stop; only sunk or charged amounts appear (see each finding's evidence_ids).",
+      "mr-0058, mr-0060, mr-0065 UNVERIFIED_willingness_to_pay_for_improvement: indirect evidence only (Solar Assistant R990 self-reported; rent-to-own R1,830/month and R20,700 exit fee are sunk payments; registration: stated unwillingness).",
+      "mr-0056 coverage gaps: Facebook, X and product-review sections yielded no usable SA items; app reviews cover one app (Sunsynk Connect, iOS ZA storefront). Small businesses/farms and body corporates not sampled.",
+      "Eskom SSEG registration fee waiver: the Eskom page (fetched 2026-10-02) states waiver to 31 Mar 2026; an extension to 30 Sep 2026 appears only in secondary sources (Engineering News 21 Sep 2026, EcoFlow ZA, Energybee); the position after 30 Sep 2026 is UNVERIFIED (mr-0065).",
+      "CGSO coverage of solar suppliers UNVERIFIED: only that one MyBroadband poster lodged a CGSO complaint; no outcome reported (mr-0057, mr-0060).",
+      "Vendor claims not independently verified: Alumo ratings (4.9 Google / 9.2 Hello Peter), Solar Deity Pylontech repair turnaround (<7 days) and loan battery, Solar Assistant price (R990 once-off and USD14/yr are user-reported), SMH by Centurion Solar availability/price, bank solar-loan rates (Energybee, commercial comparison site).",
+      "Date basis: of 67 evidence rows, 11 are dated by inference (text weekday, attachment timestamp, or site year-omission convention) and 12 rely on Hello Peter's 'last 12 months' label without a per-review date (REPORT.md section 5, Dates)."
     ]
   },
   "sourcing": {

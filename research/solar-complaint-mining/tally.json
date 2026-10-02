@@ -1,0 +1,1607 @@
+{
+  "meta": {
+    "tool": "tools/complaint_tally.py v1.0.0",
+    "as_of": "2026-10-02",
+    "strict_start": "2025-10-02",
+    "extended_start": "2024-10-02",
+    "window_used": "extended",
+    "window_rule": "24-month window used because C2 had < 30 scanned items in the strict 12-month window",
+    "scanned_items_strict": {
+      "C1": 73,
+      "C2": 17,
+      "C3": 59
+    },
+    "scanned_items_extended": {
+      "C1": 73,
+      "C2": 35,
+      "C3": 65
+    },
+    "evidence_rows_total": 67,
+    "validation_problems": []
+  },
+  "coverage": {
+    "table": {
+      "C1": {
+        "reddit": {
+          "items_read": 22,
+          "evidence_rows": 9,
+          "counted_rows": 6
+        },
+        "forum": {
+          "items_read": 14,
+          "evidence_rows": 3,
+          "counted_rows": 3
+        },
+        "review_site": {
+          "items_read": 29,
+          "evidence_rows": 21,
+          "counted_rows": 21
+        },
+        "facebook": {
+          "items_read": 0,
+          "evidence_rows": 0,
+          "counted_rows": 0
+        },
+        "x": {
+          "items_read": 0,
+          "evidence_rows": 0,
+          "counted_rows": 0
+        },
+        "app_review": {
+          "items_read": 8,
+          "evidence_rows": 8,
+          "counted_rows": 8
+        },
+        "product_review": {
+          "items_read": 0,
+          "evidence_rows": 0,
+          "counted_rows": 0
+        }
+      },
+      "C2": {
+        "reddit": {
+          "items_read": 0,
+          "evidence_rows": 0,
+          "counted_rows": 0
+        },
+        "forum": {
+          "items_read": 31,
+          "evidence_rows": 7,
+          "counted_rows": 5
+        },
+        "review_site": {
+          "items_read": 3,
+          "evidence_rows": 3,
+          "counted_rows": 3
+        },
+        "facebook": {
+          "items_read": 0,
+          "evidence_rows": 0,
+          "counted_rows": 0
+        },
+        "x": {
+          "items_read": 0,
+          "evidence_rows": 0,
+          "counted_rows": 0
+        },
+        "app_review": {
+          "items_read": 1,
+          "evidence_rows": 1,
+          "counted_rows": 1
+        },
+        "product_review": {
+          "items_read": 0,
+          "evidence_rows": 0,
+          "counted_rows": 0
+        }
+      },
+      "C3": {
+        "reddit": {
+          "items_read": 29,
+          "evidence_rows": 6,
+          "counted_rows": 6
+        },
+        "forum": {
+          "items_read": 25,
+          "evidence_rows": 5,
+          "counted_rows": 2
+        },
+        "review_site": {
+          "items_read": 11,
+          "evidence_rows": 4,
+          "counted_rows": 4
+        },
+        "facebook": {
+          "items_read": 0,
+          "evidence_rows": 0,
+          "counted_rows": 0
+        },
+        "x": {
+          "items_read": 0,
+          "evidence_rows": 0,
+          "counted_rows": 0
+        },
+        "app_review": {
+          "items_read": 0,
+          "evidence_rows": 0,
+          "counted_rows": 0
+        },
+        "product_review": {
+          "items_read": 0,
+          "evidence_rows": 0,
+          "counted_rows": 0
+        }
+      }
+    },
+    "source_types_with_zero_items": {
+      "C1": [
+        "facebook",
+        "x",
+        "product_review"
+      ],
+      "C2": [
+        "reddit",
+        "facebook",
+        "x",
+        "product_review"
+      ],
+      "C3": [
+        "facebook",
+        "x",
+        "app_review",
+        "product_review"
+      ]
+    }
+  },
+  "ranking": {
+    "pains": [
+      {
+        "tag": "warranty_repair_delay_runaround",
+        "count": 17,
+        "distinct_threads": 6,
+        "communities": [
+          "C1",
+          "C2"
+        ],
+        "community_counts": {
+          "C1": 14,
+          "C2": 3
+        },
+        "voice_counts": {
+          "owner": 17
+        },
+        "source_counts": {
+          "review_site": 16,
+          "app_review": 1
+        },
+        "strict_count": 17,
+        "strict_share": 1.0,
+        "top_thread": "hp:sunsynk",
+        "top_thread_share": 0.41,
+        "concentration_flag": true,
+        "recurring": true,
+        "equal_weight_score": 0.2339,
+        "evidence_ids": [
+          "E014",
+          "E015",
+          "E016",
+          "E017",
+          "E018",
+          "E019",
+          "E020",
+          "E022",
+          "E037",
+          "E039",
+          "E040",
+          "E048",
+          "E049",
+          "E050",
+          "E054",
+          "E055",
+          "E067"
+        ],
+        "workarounds": [
+          "Escalated to Deye's Midrand office, Africa marketing manager and global CEO (near-identical reviews counted once)",
+          "Installer chasing Sunsynk; reviewer says 50+ Sunsynk installs in their retirement village",
+          "Installer escalated up to the CEO without an answer",
+          "Installer lent a loan unit that worked; reviewer still waiting for a replacement, refund or technical report",
+          "Tried creating a new account"
+        ],
+        "spend": [
+          {
+            "zar": 6000,
+            "kind": "quoted_price",
+            "what": "labour quoted to test inverter under warranty (plus about R2k for WiFi controller labour)",
+            "id": "E040",
+            "community": "C1"
+          }
+        ],
+        "solutions_mentioned": [],
+        "rank": 1,
+        "rank_equal_weight": 1
+      },
+      {
+        "tag": "monitoring_app_issues",
+        "count": 12,
+        "distinct_threads": 3,
+        "communities": [
+          "C1",
+          "C2"
+        ],
+        "community_counts": {
+          "C1": 9,
+          "C2": 3
+        },
+        "voice_counts": {
+          "owner": 12
+        },
+        "source_counts": {
+          "review_site": 2,
+          "forum": 1,
+          "app_review": 9
+        },
+        "strict_count": 12,
+        "strict_share": 1.0,
+        "top_thread": "app:sunsynk-connect-ios-za",
+        "top_thread_share": 0.75,
+        "concentration_flag": true,
+        "recurring": true,
+        "equal_weight_score": 0.1901,
+        "evidence_ids": [
+          "E054",
+          "E055",
+          "E056",
+          "E059",
+          "E060",
+          "E061",
+          "E062",
+          "E063",
+          "E064",
+          "E065",
+          "E066",
+          "E067"
+        ],
+        "workarounds": [
+          "Tried creating a new account",
+          "Uses Solar Assistant automations to get batteries to 100% once a week"
+        ],
+        "spend": [],
+        "solutions_mentioned": [],
+        "rank": 2,
+        "rank_equal_weight": 3
+      },
+      {
+        "tag": "installer_aftersales_unresponsive",
+        "count": 9,
+        "distinct_threads": 5,
+        "communities": [
+          "C1",
+          "C3"
+        ],
+        "community_counts": {
+          "C1": 6,
+          "C3": 3
+        },
+        "voice_counts": {
+          "owner": 9
+        },
+        "source_counts": {
+          "reddit": 1,
+          "review_site": 8
+        },
+        "strict_count": 7,
+        "strict_share": 0.78,
+        "top_thread": "hp:solaradvice",
+        "top_thread_share": 0.33,
+        "concentration_flag": false,
+        "recurring": true,
+        "equal_weight_score": 0.136,
+        "evidence_ids": [
+          "E011",
+          "E022",
+          "E024",
+          "E025",
+          "E035",
+          "E038",
+          "E039",
+          "E041",
+          "E043"
+        ],
+        "workarounds": [],
+        "spend": [
+          {
+            "zar": 100000,
+            "kind": "stated_spend",
+            "what": "system price paid",
+            "id": "E038",
+            "community": "C1"
+          },
+          {
+            "zar": 20700,
+            "kind": "stated_spend",
+            "what": "contract cancellation / de-installation fee paid",
+            "id": "E041",
+            "community": "C3"
+          }
+        ],
+        "solutions_mentioned": [],
+        "rank": 3,
+        "rank_equal_weight": 4
+      },
+      {
+        "tag": "financing_rent_to_own_terms",
+        "count": 8,
+        "distinct_threads": 5,
+        "communities": [
+          "C1",
+          "C3"
+        ],
+        "community_counts": {
+          "C1": 1,
+          "C3": 7
+        },
+        "voice_counts": {
+          "prospective": 3,
+          "owner": 5
+        },
+        "source_counts": {
+          "reddit": 5,
+          "review_site": 2,
+          "forum": 1
+        },
+        "strict_count": 4,
+        "strict_share": 0.5,
+        "top_thread": "reddit:1v1cfnj",
+        "top_thread_share": 0.25,
+        "concentration_flag": false,
+        "recurring": true,
+        "equal_weight_score": 0.2032,
+        "evidence_ids": [
+          "E003",
+          "E004",
+          "E005",
+          "E009",
+          "E010",
+          "E041",
+          "E042",
+          "E044"
+        ],
+        "workarounds": [
+          "Bought a system outright after research",
+          "Installed own system instead (said to be cheaper and better)",
+          "Landlord installed systems for all tenants at his cost (forklift batteries); commenter now saves over R1,000/month",
+          "Legal advice, CGSO complaint, consumer-journalist referral; plans to move to prepaid (provider told them prepaid would have avoided the problem)"
+        ],
+        "spend": [
+          {
+            "zar": 1700,
+            "kind": "quoted_price",
+            "what": "monthly rent-to-own quote, higher than commenter's electricity bill",
+            "id": "E003",
+            "community": "C3"
+          },
+          {
+            "zar": 1830,
+            "kind": "stated_spend",
+            "what": "monthly rent-to-own payment (about R1,740 at sign-up)",
+            "id": "E005",
+            "community": "C3"
+          },
+          {
+            "zar": 40000,
+            "kind": "quoted_price",
+            "what": "uninstall fee on cancellation, as stated by commenter",
+            "id": "E010",
+            "community": "C3"
+          },
+          {
+            "zar": 20700,
+            "kind": "stated_spend",
+            "what": "contract cancellation / de-installation fee paid",
+            "id": "E041",
+            "community": "C3"
+          },
+          {
+            "zar": 340000,
+            "kind": "quoted_price",
+            "what": "buy-out quote for a 2-year-old rented system (de-install fee R35,400; alternative new system R225,000)",
+            "id": "E042",
+            "community": "C3"
+          },
+          {
+            "zar": 30000,
+            "kind": "stated_spend",
+            "what": "poster's own estimate of overpayment to the municipality over the period (not independently verified)",
+            "id": "E044",
+            "community": "C3"
+          }
+        ],
+        "solutions_mentioned": [],
+        "rank": 4,
+        "rank_equal_weight": 2
+      },
+      {
+        "tag": "inverter_fault_recurring",
+        "count": 5,
+        "distinct_threads": 4,
+        "communities": [
+          "C1"
+        ],
+        "community_counts": {
+          "C1": 5
+        },
+        "voice_counts": {
+          "owner": 5
+        },
+        "source_counts": {
+          "review_site": 5
+        },
+        "strict_count": 5,
+        "strict_share": 1.0,
+        "top_thread": "hp:solaradvice",
+        "top_thread_share": 0.4,
+        "concentration_flag": false,
+        "recurring": true,
+        "equal_weight_score": 0.0439,
+        "evidence_ids": [
+          "E014",
+          "E021",
+          "E022",
+          "E037",
+          "E038"
+        ],
+        "workarounds": [
+          "Installer lent a loan unit that worked; reviewer still waiting for a replacement, refund or technical report"
+        ],
+        "spend": [
+          {
+            "zar": 100000,
+            "kind": "stated_spend",
+            "what": "system price paid",
+            "id": "E038",
+            "community": "C1"
+          }
+        ],
+        "solutions_mentioned": [],
+        "rank": 5,
+        "rank_equal_weight": 12
+      },
+      {
+        "tag": "battery_failure_degradation",
+        "count": 4,
+        "distinct_threads": 3,
+        "communities": [
+          "C1",
+          "C2"
+        ],
+        "community_counts": {
+          "C1": 3,
+          "C2": 1
+        },
+        "voice_counts": {
+          "owner": 4
+        },
+        "source_counts": {
+          "review_site": 4
+        },
+        "strict_count": 3,
+        "strict_share": 0.75,
+        "top_thread": "hp:pylontech",
+        "top_thread_share": 0.5,
+        "concentration_flag": true,
+        "recurring": true,
+        "equal_weight_score": 0.0634,
+        "evidence_ids": [
+          "E015",
+          "E026",
+          "E048",
+          "E050"
+        ],
+        "workarounds": [
+          "Installer escalated up to the CEO without an answer"
+        ],
+        "spend": [],
+        "solutions_mentioned": [],
+        "rank": 6,
+        "rank_equal_weight": 8
+      },
+      {
+        "tag": "savings_below_expectation",
+        "count": 4,
+        "distinct_threads": 3,
+        "communities": [
+          "C1",
+          "C3"
+        ],
+        "community_counts": {
+          "C1": 3,
+          "C3": 1
+        },
+        "voice_counts": {
+          "owner": 4
+        },
+        "source_counts": {
+          "reddit": 2,
+          "review_site": 1,
+          "forum": 1
+        },
+        "strict_count": 4,
+        "strict_share": 1.0,
+        "top_thread": "reddit:1uejsus",
+        "top_thread_share": 0.5,
+        "concentration_flag": true,
+        "recurring": true,
+        "equal_weight_score": 0.0541,
+        "evidence_ids": [
+          "E001",
+          "E027",
+          "E035",
+          "E044"
+        ],
+        "workarounds": [
+          "Legal advice, CGSO complaint, consumer-journalist referral; plans to move to prepaid (provider told them prepaid would have avoided the problem)",
+          "Owner considering a geyser timer; repliers suggest geyser timers, an ET-12 load meter feeding the inverter, or an inverter per phase",
+          "Owner lowered the deplete % and stopped overnight grid charging themselves"
+        ],
+        "spend": [
+          {
+            "zar": 30000,
+            "kind": "stated_spend",
+            "what": "poster's own estimate of overpayment to the municipality over the period (not independently verified)",
+            "id": "E044",
+            "community": "C3"
+          }
+        ],
+        "solutions_mentioned": [],
+        "rank": 7,
+        "rank_equal_weight": 10
+      },
+      {
+        "tag": "workmanship_defects",
+        "count": 4,
+        "distinct_threads": 3,
+        "communities": [
+          "C1",
+          "C3"
+        ],
+        "community_counts": {
+          "C1": 1,
+          "C3": 3
+        },
+        "voice_counts": {
+          "owner": 4
+        },
+        "source_counts": {
+          "reddit": 1,
+          "review_site": 3
+        },
+        "strict_count": 3,
+        "strict_share": 0.75,
+        "top_thread": "hp:gosolr",
+        "top_thread_share": 0.5,
+        "concentration_flag": true,
+        "recurring": true,
+        "equal_weight_score": 0.0921,
+        "evidence_ids": [
+          "E005",
+          "E023",
+          "E041",
+          "E043"
+        ],
+        "workarounds": [],
+        "spend": [
+          {
+            "zar": 1830,
+            "kind": "stated_spend",
+            "what": "monthly rent-to-own payment (about R1,740 at sign-up)",
+            "id": "E005",
+            "community": "C3"
+          },
+          {
+            "zar": 159000,
+            "kind": "stated_spend",
+            "what": "installation price paid",
+            "id": "E023",
+            "community": "C1"
+          },
+          {
+            "zar": 20700,
+            "kind": "stated_spend",
+            "what": "contract cancellation / de-installation fee paid",
+            "id": "E041",
+            "community": "C3"
+          }
+        ],
+        "solutions_mentioned": [],
+        "rank": 8,
+        "rank_equal_weight": 5
+      },
+      {
+        "tag": "sseg_registration_burden",
+        "count": 4,
+        "distinct_threads": 2,
+        "communities": [
+          "C1",
+          "C2"
+        ],
+        "community_counts": {
+          "C1": 3,
+          "C2": 1
+        },
+        "voice_counts": {
+          "owner": 4
+        },
+        "source_counts": {
+          "forum": 4
+        },
+        "strict_count": 4,
+        "strict_share": 1.0,
+        "top_thread": "mb:1347774",
+        "top_thread_share": 0.75,
+        "concentration_flag": true,
+        "recurring": true,
+        "equal_weight_score": 0.0634,
+        "evidence_ids": [
+          "E029",
+          "E030",
+          "E031",
+          "E032"
+        ],
+        "workarounds": [
+          "Does not register; when pressure rises 'the guys that can will just go offgrid'",
+          "Would rather expand the system than register it"
+        ],
+        "spend": [],
+        "solutions_mentioned": [],
+        "rank": 9,
+        "rank_equal_weight": 9
+      },
+      {
+        "tag": "installer_trust_scam_fear",
+        "count": 3,
+        "distinct_threads": 2,
+        "communities": [
+          "C1",
+          "C3"
+        ],
+        "community_counts": {
+          "C1": 1,
+          "C3": 2
+        },
+        "voice_counts": {
+          "prospective": 1,
+          "owner": 2
+        },
+        "source_counts": {
+          "reddit": 2,
+          "review_site": 1
+        },
+        "strict_count": 3,
+        "strict_share": 1.0,
+        "top_thread": "reddit:1v1cfnj",
+        "top_thread_share": 0.67,
+        "concentration_flag": true,
+        "recurring": true,
+        "equal_weight_score": 0.0643,
+        "evidence_ids": [
+          "E002",
+          "E004",
+          "E036"
+        ],
+        "workarounds": [
+          "Bought a system outright after research"
+        ],
+        "spend": [],
+        "solutions_mentioned": [],
+        "rank": 10,
+        "rank_equal_weight": 7
+      },
+      {
+        "tag": "repeat_callout_fees",
+        "count": 3,
+        "distinct_threads": 2,
+        "communities": [
+          "C1"
+        ],
+        "community_counts": {
+          "C1": 3
+        },
+        "voice_counts": {
+          "owner": 3
+        },
+        "source_counts": {
+          "review_site": 3
+        },
+        "strict_count": 3,
+        "strict_share": 1.0,
+        "top_thread": "hp:solaradvice",
+        "top_thread_share": 0.67,
+        "concentration_flag": true,
+        "recurring": true,
+        "equal_weight_score": 0.0263,
+        "evidence_ids": [
+          "E014",
+          "E037",
+          "E040"
+        ],
+        "workarounds": [
+          "Installer lent a loan unit that worked; reviewer still waiting for a replacement, refund or technical report"
+        ],
+        "spend": [
+          {
+            "zar": 6000,
+            "kind": "quoted_price",
+            "what": "labour quoted to test inverter under warranty (plus about R2k for WiFi controller labour)",
+            "id": "E040",
+            "community": "C1"
+          }
+        ],
+        "solutions_mentioned": [],
+        "rank": 11,
+        "rank_equal_weight": 20
+      },
+      {
+        "tag": "cannot_verify_installation_quality",
+        "count": 2,
+        "distinct_threads": 2,
+        "communities": [
+          "C1",
+          "C3"
+        ],
+        "community_counts": {
+          "C1": 1,
+          "C3": 1
+        },
+        "voice_counts": {
+          "owner": 2
+        },
+        "source_counts": {
+          "reddit": 1,
+          "forum": 1
+        },
+        "strict_count": 2,
+        "strict_share": 1.0,
+        "top_thread": "reddit:1uejsus",
+        "top_thread_share": 0.5,
+        "concentration_flag": true,
+        "recurring": true,
+        "equal_weight_score": 0.0365,
+        "evidence_ids": [
+          "E001",
+          "E057"
+        ],
+        "workarounds": [
+          "Owner considering a geyser timer; repliers suggest geyser timers, an ET-12 load meter feeding the inverter, or an inverter per phase"
+        ],
+        "spend": [],
+        "solutions_mentioned": [],
+        "rank": 12,
+        "rank_equal_weight": 15
+      },
+      {
+        "tag": "installation_delays_lead_time",
+        "count": 2,
+        "distinct_threads": 2,
+        "communities": [
+          "C1",
+          "C3"
+        ],
+        "community_counts": {
+          "C1": 1,
+          "C3": 1
+        },
+        "voice_counts": {
+          "owner": 2
+        },
+        "source_counts": {
+          "reddit": 1,
+          "review_site": 1
+        },
+        "strict_count": 1,
+        "strict_share": 0.5,
+        "top_thread": "reddit:1iw6oi7",
+        "top_thread_share": 0.5,
+        "concentration_flag": true,
+        "recurring": true,
+        "equal_weight_score": 0.0365,
+        "evidence_ids": [
+          "E011",
+          "E038"
+        ],
+        "workarounds": [],
+        "spend": [
+          {
+            "zar": 100000,
+            "kind": "stated_spend",
+            "what": "system price paid",
+            "id": "E038",
+            "community": "C1"
+          }
+        ],
+        "solutions_mentioned": [],
+        "rank": 13,
+        "rank_equal_weight": 16
+      },
+      {
+        "tag": "installer_misconfiguration_settings",
+        "count": 2,
+        "distinct_threads": 2,
+        "communities": [
+          "C1",
+          "C3"
+        ],
+        "community_counts": {
+          "C1": 1,
+          "C3": 1
+        },
+        "voice_counts": {
+          "owner": 2
+        },
+        "source_counts": {
+          "reddit": 1,
+          "forum": 1
+        },
+        "strict_count": 2,
+        "strict_share": 1.0,
+        "top_thread": "reddit:1uejsus",
+        "top_thread_share": 0.5,
+        "concentration_flag": true,
+        "recurring": true,
+        "equal_weight_score": 0.0365,
+        "evidence_ids": [
+          "E027",
+          "E044"
+        ],
+        "workarounds": [
+          "Legal advice, CGSO complaint, consumer-journalist referral; plans to move to prepaid (provider told them prepaid would have avoided the problem)",
+          "Owner lowered the deplete % and stopped overnight grid charging themselves"
+        ],
+        "spend": [
+          {
+            "zar": 30000,
+            "kind": "stated_spend",
+            "what": "poster's own estimate of overpayment to the municipality over the period (not independently verified)",
+            "id": "E044",
+            "community": "C3"
+          }
+        ],
+        "solutions_mentioned": [],
+        "rank": 14,
+        "rank_equal_weight": 17
+      },
+      {
+        "tag": "municipal_fixed_charge_solar_owners",
+        "count": 2,
+        "distinct_threads": 2,
+        "communities": [
+          "C1",
+          "C2"
+        ],
+        "community_counts": {
+          "C1": 1,
+          "C2": 1
+        },
+        "voice_counts": {
+          "owner": 2
+        },
+        "source_counts": {
+          "reddit": 1,
+          "forum": 1
+        },
+        "strict_count": 2,
+        "strict_share": 1.0,
+        "top_thread": "reddit:1tgmnhf",
+        "top_thread_share": 0.5,
+        "concentration_flag": true,
+        "recurring": true,
+        "equal_weight_score": 0.0458,
+        "evidence_ids": [
+          "E006",
+          "E033"
+        ],
+        "workarounds": [
+          "Planning to go fully off-grid and cancel the municipal account",
+          "Self-installing extra panels and batteries to be able to disconnect from the grid"
+        ],
+        "spend": [
+          {
+            "zar": 1000,
+            "kind": "stated_spend",
+            "what": "monthly municipal connection/fixed charge before any usage",
+            "id": "E006",
+            "community": "C1"
+          }
+        ],
+        "solutions_mentioned": [],
+        "rank": 15,
+        "rank_equal_weight": 11
+      },
+      {
+        "tag": "inverter_battery_compat_config",
+        "count": 2,
+        "distinct_threads": 2,
+        "communities": [
+          "C2"
+        ],
+        "community_counts": {
+          "C2": 2
+        },
+        "voice_counts": {
+          "owner": 2
+        },
+        "source_counts": {
+          "forum": 2
+        },
+        "strict_count": 2,
+        "strict_share": 1.0,
+        "top_thread": "pf:negative-load-reading-deye-12kw",
+        "top_thread_share": 0.5,
+        "concentration_flag": true,
+        "recurring": true,
+        "equal_weight_score": 0.0741,
+        "evidence_ids": [
+          "E051",
+          "E052"
+        ],
+        "workarounds": [],
+        "spend": [],
+        "solutions_mentioned": [],
+        "rank": 16,
+        "rank_equal_weight": 6
+      },
+      {
+        "tag": "repair_downtime_no_fallback",
+        "count": 2,
+        "distinct_threads": 2,
+        "communities": [
+          "C1"
+        ],
+        "community_counts": {
+          "C1": 2
+        },
+        "voice_counts": {
+          "owner": 2
+        },
+        "source_counts": {
+          "reddit": 1,
+          "review_site": 1
+        },
+        "strict_count": 2,
+        "strict_share": 1.0,
+        "top_thread": "reddit:1tgmnhf",
+        "top_thread_share": 0.5,
+        "concentration_flag": true,
+        "recurring": true,
+        "equal_weight_score": 0.0175,
+        "evidence_ids": [
+          "E008",
+          "E040"
+        ],
+        "workarounds": [],
+        "spend": [
+          {
+            "zar": 6000,
+            "kind": "quoted_price",
+            "what": "labour quoted to test inverter under warranty (plus about R2k for WiFi controller labour)",
+            "id": "E040",
+            "community": "C1"
+          }
+        ],
+        "solutions_mentioned": [],
+        "rank": 17,
+        "rank_equal_weight": 21
+      },
+      {
+        "tag": "warranty_claim_rejected",
+        "count": 2,
+        "distinct_threads": 1,
+        "communities": [
+          "C1"
+        ],
+        "community_counts": {
+          "C1": 2
+        },
+        "voice_counts": {
+          "owner": 2
+        },
+        "source_counts": {
+          "review_site": 2
+        },
+        "strict_count": 2,
+        "strict_share": 1.0,
+        "top_thread": "hp:pylontech",
+        "top_thread_share": 1.0,
+        "concentration_flag": true,
+        "recurring": false,
+        "equal_weight_score": 0.0175,
+        "evidence_ids": [
+          "E047",
+          "E049"
+        ],
+        "workarounds": [],
+        "spend": [],
+        "solutions_mentioned": [],
+        "rank": 18,
+        "rank_equal_weight": 22
+      },
+      {
+        "tag": "billing_debit_order_errors",
+        "count": 1,
+        "distinct_threads": 1,
+        "communities": [
+          "C3"
+        ],
+        "community_counts": {
+          "C3": 1
+        },
+        "voice_counts": {
+          "owner": 1
+        },
+        "source_counts": {
+          "review_site": 1
+        },
+        "strict_count": 0,
+        "strict_share": 0.0,
+        "top_thread": "hp:gosolr",
+        "top_thread_share": 1.0,
+        "concentration_flag": true,
+        "recurring": false,
+        "equal_weight_score": 0.0278,
+        "evidence_ids": [
+          "E042"
+        ],
+        "workarounds": [],
+        "spend": [
+          {
+            "zar": 340000,
+            "kind": "quoted_price",
+            "what": "buy-out quote for a 2-year-old rented system (de-install fee R35,400; alternative new system R225,000)",
+            "id": "E042",
+            "community": "C3"
+          }
+        ],
+        "solutions_mentioned": [],
+        "rank": 19,
+        "rank_equal_weight": 18
+      },
+      {
+        "tag": "coc_compliance_integrity",
+        "count": 1,
+        "distinct_threads": 1,
+        "communities": [
+          "C1"
+        ],
+        "community_counts": {
+          "C1": 1
+        },
+        "voice_counts": {
+          "owner": 1
+        },
+        "source_counts": {
+          "review_site": 1
+        },
+        "strict_count": 1,
+        "strict_share": 1.0,
+        "top_thread": "hp:ncsp",
+        "top_thread_share": 1.0,
+        "concentration_flag": true,
+        "recurring": false,
+        "equal_weight_score": 0.0088,
+        "evidence_ids": [
+          "E023"
+        ],
+        "workarounds": [],
+        "spend": [
+          {
+            "zar": 159000,
+            "kind": "stated_spend",
+            "what": "installation price paid",
+            "id": "E023",
+            "community": "C1"
+          }
+        ],
+        "solutions_mentioned": [],
+        "rank": 20,
+        "rank_equal_weight": 23
+      },
+      {
+        "tag": "firmware_update_failure",
+        "count": 1,
+        "distinct_threads": 1,
+        "communities": [
+          "C1"
+        ],
+        "community_counts": {
+          "C1": 1
+        },
+        "voice_counts": {
+          "owner": 1
+        },
+        "source_counts": {
+          "review_site": 1
+        },
+        "strict_count": 1,
+        "strict_share": 1.0,
+        "top_thread": "hp:sunsynk",
+        "top_thread_share": 1.0,
+        "concentration_flag": true,
+        "recurring": false,
+        "equal_weight_score": 0.0088,
+        "evidence_ids": [
+          "E017"
+        ],
+        "workarounds": [
+          "Installer chasing Sunsynk; reviewer says 50+ Sunsynk installs in their retirement village"
+        ],
+        "spend": [],
+        "solutions_mentioned": [],
+        "rank": 21,
+        "rank_equal_weight": 24
+      },
+      {
+        "tag": "grid_connection_cost_delay",
+        "count": 1,
+        "distinct_threads": 1,
+        "communities": [
+          "C1"
+        ],
+        "community_counts": {
+          "C1": 1
+        },
+        "voice_counts": {
+          "owner": 1
+        },
+        "source_counts": {
+          "reddit": 1
+        },
+        "strict_count": 1,
+        "strict_share": 1.0,
+        "top_thread": "reddit:1tgmnhf",
+        "top_thread_share": 1.0,
+        "concentration_flag": true,
+        "recurring": false,
+        "equal_weight_score": 0.0088,
+        "evidence_ids": [
+          "E007"
+        ],
+        "workarounds": [
+          "Built a full off-grid system (about R500k)"
+        ],
+        "spend": [
+          {
+            "zar": 150000,
+            "kind": "quoted_price",
+            "what": "new grid connection cost R150k-R200k (avoided; off-grid system cost about R500k)",
+            "id": "E007",
+            "community": "C1"
+          }
+        ],
+        "solutions_mentioned": [],
+        "rank": 22,
+        "rank_equal_weight": 25
+      },
+      {
+        "tag": "grid_voltage_issues",
+        "count": 1,
+        "distinct_threads": 1,
+        "communities": [
+          "C1"
+        ],
+        "community_counts": {
+          "C1": 1
+        },
+        "voice_counts": {
+          "owner": 1
+        },
+        "source_counts": {
+          "review_site": 1
+        },
+        "strict_count": 1,
+        "strict_share": 1.0,
+        "top_thread": "hp:ncsp",
+        "top_thread_share": 1.0,
+        "concentration_flag": true,
+        "recurring": false,
+        "equal_weight_score": 0.0088,
+        "evidence_ids": [
+          "E022"
+        ],
+        "workarounds": [],
+        "spend": [],
+        "solutions_mentioned": [],
+        "rank": 23,
+        "rank_equal_weight": 26
+      },
+      {
+        "tag": "municipal_billing_metering_mismatch",
+        "count": 1,
+        "distinct_threads": 1,
+        "communities": [
+          "C3"
+        ],
+        "community_counts": {
+          "C3": 1
+        },
+        "voice_counts": {
+          "owner": 1
+        },
+        "source_counts": {
+          "forum": 1
+        },
+        "strict_count": 1,
+        "strict_share": 1.0,
+        "top_thread": "mb:1334046",
+        "top_thread_share": 1.0,
+        "concentration_flag": true,
+        "recurring": false,
+        "equal_weight_score": 0.0278,
+        "evidence_ids": [
+          "E044"
+        ],
+        "workarounds": [
+          "Legal advice, CGSO complaint, consumer-journalist referral; plans to move to prepaid (provider told them prepaid would have avoided the problem)"
+        ],
+        "spend": [
+          {
+            "zar": 30000,
+            "kind": "stated_spend",
+            "what": "poster's own estimate of overpayment to the municipality over the period (not independently verified)",
+            "id": "E044",
+            "community": "C3"
+          }
+        ],
+        "solutions_mentioned": [],
+        "rank": 24,
+        "rank_equal_weight": 19
+      },
+      {
+        "tag": "refund_returns_refused",
+        "count": 1,
+        "distinct_threads": 1,
+        "communities": [
+          "C2"
+        ],
+        "community_counts": {
+          "C2": 1
+        },
+        "voice_counts": {
+          "owner": 1
+        },
+        "source_counts": {
+          "review_site": 1
+        },
+        "strict_count": 0,
+        "strict_share": 0.0,
+        "top_thread": "hp:solardeity",
+        "top_thread_share": 1.0,
+        "concentration_flag": true,
+        "recurring": false,
+        "equal_weight_score": 0.037,
+        "evidence_ids": [
+          "E026"
+        ],
+        "workarounds": [],
+        "spend": [],
+        "solutions_mentioned": [],
+        "rank": 25,
+        "rank_equal_weight": 13
+      },
+      {
+        "tag": "replacement_unit_quality",
+        "count": 1,
+        "distinct_threads": 1,
+        "communities": [
+          "C1"
+        ],
+        "community_counts": {
+          "C1": 1
+        },
+        "voice_counts": {
+          "owner": 1
+        },
+        "source_counts": {
+          "review_site": 1
+        },
+        "strict_count": 1,
+        "strict_share": 1.0,
+        "top_thread": "hp:invert",
+        "top_thread_share": 1.0,
+        "concentration_flag": true,
+        "recurring": false,
+        "equal_weight_score": 0.0088,
+        "evidence_ids": [
+          "E025"
+        ],
+        "workarounds": [],
+        "spend": [],
+        "solutions_mentioned": [],
+        "rank": 26,
+        "rank_equal_weight": 27
+      },
+      {
+        "tag": "system_overpromised_mismatch",
+        "count": 1,
+        "distinct_threads": 1,
+        "communities": [
+          "C1"
+        ],
+        "community_counts": {
+          "C1": 1
+        },
+        "voice_counts": {
+          "owner": 1
+        },
+        "source_counts": {
+          "review_site": 1
+        },
+        "strict_count": 1,
+        "strict_share": 1.0,
+        "top_thread": "hp:ncsp",
+        "top_thread_share": 1.0,
+        "concentration_flag": true,
+        "recurring": false,
+        "equal_weight_score": 0.0088,
+        "evidence_ids": [
+          "E023"
+        ],
+        "workarounds": [],
+        "spend": [
+          {
+            "zar": 159000,
+            "kind": "stated_spend",
+            "what": "installation price paid",
+            "id": "E023",
+            "community": "C1"
+          }
+        ],
+        "solutions_mentioned": [],
+        "rank": 27,
+        "rank_equal_weight": 28
+      },
+      {
+        "tag": "warranty_verification_serial",
+        "count": 1,
+        "distinct_threads": 1,
+        "communities": [
+          "C2"
+        ],
+        "community_counts": {
+          "C2": 1
+        },
+        "voice_counts": {
+          "owner": 1
+        },
+        "source_counts": {
+          "review_site": 1
+        },
+        "strict_count": 1,
+        "strict_share": 1.0,
+        "top_thread": "hp:deye",
+        "top_thread_share": 1.0,
+        "concentration_flag": true,
+        "recurring": false,
+        "equal_weight_score": 0.037,
+        "evidence_ids": [
+          "E020"
+        ],
+        "workarounds": [],
+        "spend": [],
+        "solutions_mentioned": [],
+        "rank": 28,
+        "rank_equal_weight": 14
+      }
+    ],
+    "counted_rows": 59,
+    "community_totals": {
+      "C1": 38,
+      "C3": 12,
+      "C2": 9
+    },
+    "excluded_by_voice": {
+      "bystander": 7,
+      "trade": 1
+    },
+    "dropped_by_window": {},
+    "bystander_or_trade_tags": [
+      {
+        "tag": "installer_misconfiguration_settings",
+        "voices": {
+          "bystander": 3
+        },
+        "owner_or_prospective_items": 2
+      },
+      {
+        "tag": "inverter_battery_compat_config",
+        "voices": {
+          "trade": 1
+        },
+        "owner_or_prospective_items": 2
+      },
+      {
+        "tag": "sseg_registration_burden",
+        "voices": {
+          "bystander": 3
+        },
+        "owner_or_prospective_items": 4
+      },
+      {
+        "tag": "system_overpromised_mismatch",
+        "voices": {
+          "bystander": 1
+        },
+        "owner_or_prospective_items": 1
+      }
+    ],
+    "clusters": [
+      {
+        "cluster": "after_sales_and_warranty",
+        "tags": [
+          "warranty_repair_delay_runaround",
+          "installer_aftersales_unresponsive",
+          "repeat_callout_fees",
+          "repair_downtime_no_fallback",
+          "replacement_unit_quality",
+          "warranty_claim_rejected",
+          "warranty_verification_serial",
+          "refund_returns_refused"
+        ],
+        "distinct_rows": 27,
+        "distinct_threads": 11,
+        "community_counts": {
+          "C1": 20,
+          "C2": 4,
+          "C3": 3
+        },
+        "source_counts": {
+          "app_review": 1,
+          "reddit": 2,
+          "review_site": 24
+        }
+      },
+      {
+        "cluster": "equipment_faults",
+        "tags": [
+          "inverter_fault_recurring",
+          "battery_failure_degradation",
+          "firmware_update_failure",
+          "inverter_battery_compat_config",
+          "grid_voltage_issues"
+        ],
+        "distinct_rows": 12,
+        "distinct_threads": 8,
+        "community_counts": {
+          "C1": 9,
+          "C2": 3
+        },
+        "source_counts": {
+          "forum": 2,
+          "review_site": 10
+        }
+      },
+      {
+        "cluster": "monitoring_and_alerts",
+        "tags": [
+          "monitoring_app_issues"
+        ],
+        "distinct_rows": 12,
+        "distinct_threads": 3,
+        "community_counts": {
+          "C1": 9,
+          "C2": 3
+        },
+        "source_counts": {
+          "app_review": 9,
+          "forum": 1,
+          "review_site": 2
+        }
+      },
+      {
+        "cluster": "financing_and_provider_trust",
+        "tags": [
+          "financing_rent_to_own_terms",
+          "billing_debit_order_errors",
+          "installer_trust_scam_fear"
+        ],
+        "distinct_rows": 10,
+        "distinct_threads": 6,
+        "community_counts": {
+          "C1": 1,
+          "C3": 9
+        },
+        "source_counts": {
+          "forum": 1,
+          "reddit": 6,
+          "review_site": 3
+        }
+      },
+      {
+        "cluster": "install_quality_and_verification",
+        "tags": [
+          "workmanship_defects",
+          "installer_misconfiguration_settings",
+          "cannot_verify_installation_quality",
+          "coc_compliance_integrity",
+          "system_overpromised_mismatch",
+          "installation_delays_lead_time"
+        ],
+        "distinct_rows": 10,
+        "distinct_threads": 7,
+        "community_counts": {
+          "C1": 4,
+          "C3": 6
+        },
+        "source_counts": {
+          "forum": 2,
+          "reddit": 4,
+          "review_site": 4
+        }
+      },
+      {
+        "cluster": "savings_and_billing",
+        "tags": [
+          "savings_below_expectation",
+          "municipal_billing_metering_mismatch",
+          "municipal_fixed_charge_solar_owners",
+          "grid_connection_cost_delay"
+        ],
+        "distinct_rows": 7,
+        "distinct_threads": 5,
+        "community_counts": {
+          "C1": 5,
+          "C2": 1,
+          "C3": 1
+        },
+        "source_counts": {
+          "forum": 2,
+          "reddit": 4,
+          "review_site": 1
+        }
+      },
+      {
+        "cluster": "regulation_and_registration",
+        "tags": [
+          "sseg_registration_burden"
+        ],
+        "distinct_rows": 4,
+        "distinct_threads": 2,
+        "community_counts": {
+          "C1": 3,
+          "C2": 1
+        },
+        "source_counts": {
+          "forum": 4
+        }
+      }
+    ]
+  },
+  "tag_definitions": {
+    "savings_below_expectation": "Owner reports electricity cost/units bought did not fall as expected after install, or system cost exceeds the saving.",
+    "installer_trust_scam_fear": "Prospective buyer or owner distrusts installers/financiers/pricing (scam fear, suspicious contract terms, bad review-site reputation) when choosing a provider.",
+    "financing_rent_to_own_terms": "Rent-to-own/financed solar: monthly cost vs saving, price escalation, buy-out markup, lock-in or exit fees, contract opacity.",
+    "workmanship_defects": "Installer workmanship or safety defects (wrong/non-spec DB parts, ungrounded system, fire hazard, unsealed roof penetrations).",
+    "municipal_fixed_charge_solar_owners": "Fixed/connection/tariff charges that remain or rise for homes with solar.",
+    "grid_connection_cost_delay": "High cost or long wait for a new grid connection/approvals, pushing owners off-grid.",
+    "repair_downtime_no_fallback": "Fear or experience of having no power while equipment fails and is repaired, esp. no grid fallback or no loan unit.",
+    "installer_aftersales_unresponsive": "Installer/seller unresponsive or deflects responsibility after payment/installation (unanswered calls/WhatsApps, hand-offs, blame-shifting).",
+    "warranty_repair_delay_runaround": "Brand/distributor support or warranty repair: months-long repairs, parts awaited, untraceable job numbers, unanswered escalations, claims bounced between parties, or unhelpful agents.",
+    "inverter_fault_recurring": "Inverter hardware/firmware faults that recur or are not fixed after repair (error codes, shutdowns, flicker).",
+    "battery_failure_degradation": "Battery swelling, BMS faults, premature failure or capacity problems.",
+    "repeat_callout_fees": "Paying repeated call-out/labour fees for faults that remain unresolved or should be under warranty.",
+    "firmware_update_failure": "Remote or firmware update bricks or destabilises a working system.",
+    "system_overpromised_mismatch": "Delivered system capacity/performance does not match what was sold or advertised.",
+    "coc_compliance_integrity": "Certificate-of-compliance process unreliable (CoC electrician did not inspect, approved-inverter list issues).",
+    "grid_voltage_issues": "High or unstable municipal voltage tripping or stressing equipment.",
+    "installation_delays_lead_time": "Installation scheduling delays, long lead times, late arrivals, repeated visits.",
+    "refund_returns_refused": "Seller refuses return/refund of defective goods despite consumer-protection rights.",
+    "replacement_unit_quality": "Loan/replacement units are used, a different brand, or also defective.",
+    "warranty_verification_serial": "Cannot verify serial number/warranty status; units supplied without warranty stickers.",
+    "sseg_registration_burden": "SSEG registration fees/penalties/sign-off/process confusion.",
+    "installer_misconfiguration_settings": "Owner discovers the installer configured the system incorrectly (CT coil position, discharge %, overnight grid-charge, phase layout) so expected savings do not materialise; fixing needs a second paid opinion.",
+    "billing_debit_order_errors": "Rent-to-own/finance billing problems: debits after cancellation, misallocated payments, unactioned debit-order changes, promised refunds not paid, no reachable accounts department.",
+    "municipal_billing_metering_mismatch": "Municipal billing/metering treats solar generation as grid consumption or needs a bidirectional/prepaid meter, undermining savings; not explained up front by the provider.",
+    "warranty_claim_rejected": "Warranty claim rejected with vague or contradictory reasons (e.g. 'misuse'), no failure explanation given.",
+    "inverter_battery_compat_config": "Inverter/battery/logger compatibility or configuration problems (BMS comms, current limits, odd readings, loggers) that owners must debug themselves.",
+    "monitoring_app_issues": "Monitoring/alerting gaps: apps or portals offline, inaccurate, too complex, or missing alerts; owners rely on extra tools or notice faults late.",
+    "cannot_verify_installation_quality": "Owner cannot judge whether the install/configuration is correct or whether the system performs as sold; relies on the installer's word or pays for a second opinion; problems found only after months or years."
+  }
+}
