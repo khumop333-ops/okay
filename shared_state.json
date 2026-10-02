@@ -1746,10 +1746,10 @@
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
       }
     },
-    "timestamp": "2026-10-02T12:46:00+00:00",
+    "timestamp": "2026-10-02T12:49:00+00:00",
     "agent": "sourcing",
     "confidence": 7,
-    "source": "so-0006 (push 1: Sweet Protrading fetched & read 2026-10-02; USD/ZAR 16.6654 Google Finance 2026-10-02) + prior so-0001..so-0005.",
+    "source": "so-0006 (push 2: Sweet Protrading + ZHTX fetched & read 2026-10-02; USD/ZAR 16.6654 Google Finance 2026-10-02) + prior so-0001..so-0005.",
     "verified": true,
     "findings": [
       {
@@ -2302,10 +2302,10 @@
       },
       {
         "id": "so-0006",
-        "timestamp": "2026-10-02T12:46:00+00:00",
+        "timestamp": "2026-10-02T12:49:00+00:00",
         "agent": "sourcing",
         "confidence": 7,
-        "source": "fetch_page, all fetched & read 2026-10-02: https://www.google.com/finance/quote/USD-ZAR (USD/ZAR 16.6654 @ 2026-10-02 12:30:19 UTC); https://cntrsm.en.alibaba.com/; https://cntrsm.en.alibaba.com/productgrouplist-822293600/High_inquiry_products.html; https://www.alibaba.com/product-detail/1688-Purchasing-Shipping-Agent-Logistics-Service_1601356070201.html; https://www.alibaba.com/product-detail/door-to-door-delivery-service-ems_60703892641.html",
+        "source": "fetch_page, all fetched & read 2026-10-02: https://www.google.com/finance/quote/USD-ZAR (USD/ZAR 16.6654 @ 2026-10-02 12:30:19 UTC); https://cntrsm.en.alibaba.com/; https://cntrsm.en.alibaba.com/productgrouplist-822293600/High_inquiry_products.html; https://www.alibaba.com/product-detail/1688-Purchasing-Shipping-Agent-Logistics-Service_1601356070201.html; https://www.alibaba.com/product-detail/door-to-door-delivery-service-ems_60703892641.html; https://zhtxsz.en.alibaba.com/; https://zhtxsz.en.alibaba.com/productgrouplist-963600634/TOP_SALE.html; https://www.alibaba.com/product-detail/China-door-to-door-service-ups_1601256645326.html; https://www.alibaba.com/product-detail/freight-forwarder-china-to-Democratic-Algeria_1601255677117.html",
         "verified": true,
         "verified_scope": "verified=true applies ONLY to pages actually fetched and read via fetch_page on 2026-10-02 and the literal figures/attributes displayed on them. Where a forwarder displays a generic per-kg headline placeholder without a confirmed South Africa (ZA) battery/small-electronics DDP tariff table, the exact fetched numbers are reported alongside UNVERIFIED_ markers per HARD STOP #2.",
         "data": {
@@ -2320,7 +2320,7 @@
             "pr_0008_baseline_usd_zar": 16.346,
             "pr_0008_fx_source": "Google Finance USD/ZAR 16.3460 @ 2026-09-30 07:33 UTC (used in so-0003 and pr-0008)"
           },
-          "quotes_fetched_count": 1,
+          "quotes_fetched_count": 2,
           "quotes": [
             {
               "quote_index": 1,
@@ -2350,9 +2350,38 @@
               "fetch_date": "2026-10-02",
               "verified": true,
               "verified_scope": "Forwarder identity, store metrics, $1-2/kg headline rate, 1 kg MOQ, 7-12 days Air+Express attribute, DDU/DDP trading term, Seller clearance attribute, battery/DG text, and absence of ZA in destination list — all directly read via fetch_page on 2026-10-02."
+            },
+            {
+              "quote_index": 2,
+              "lead_category": "prior_session_forwarder_lead",
+              "forwarder_name": "Shenzhen ZHTX International Freight Forwarding Co., LTD.",
+              "listing_title": "China Door to Door Service From China to Belgium Ireland Poland FBA Shipping Special Transportation (1601256645326) + Freight Forwarder China to DE Germany France Canada America Fedex Dhl Air Express (1601255677117)",
+              "fetched_rate_usd": "$0.03 - $0.85 per kg (MOQ 1 kg on 1601256645326); $0.57 - $0.84 per kg (MOQ 1 kg on 1601255677117); TOP_SALE main products $0.35 - $0.82 per kg (MOQ 1 kg)",
+              "per_unit_rate_zar": null,
+              "UNVERIFIED_per_unit_rate_zar": "Headline rates ($0.03-$0.85/kg -> R0.50-R14.17/kg @16.6654 or R0.49-R13.89/kg @16.3460; $0.57-$0.84/kg -> R9.50-R14.00/kg @16.6654 or R9.32-R13.73/kg @16.3460) are generic per-kg teaser ranges requiring bespoke quote (\"Shipping fee and delivery date to be negotiated\"; FAQ requires departure/destination city, CTN, KG, CBM, and trade term selection). Moreover, Destination customs clearance party is set to Buyer on both fetched product pages.",
+              "fetched_headline_rate_zar_at_1kg_moq": "R0.50 - R14.17 (1601256645326) / R9.50 - R14.00 (1601255677117) @16.6654 live FX (R0.49 - R13.89 / R9.32 - R13.73 @16.3460 pr-0008 FX)",
+              "transit_time": "Africa row in embedded \"Logistics Transport Time\" table (1601256645326): Express 4 - 7 Days, Air 8 - 12 Days, Truck/Sea/Railway marked \"***\" (not offered). Listing attribute shows 4 - 9 days (1601256645326, dispatch 30 days, lead time 5 days) and 22 - 28 Days (1601255677117, >21-day flag).",
+              "UNVERIFIED_sa_transit_time": "Africa regional table gives 4-7 days (Express) and 8-12 days (Air), but South Africa-specific customs clearance (+5-15 business days if Buyer clears) and 30-day dispatch attribute on 1601256645326 make total SA delivery time unverified.",
+              "ddp_vs_dap": "DAP / Buyer-cleared conflict: structured Key attribute \"Destination customs clearance party\" is explicitly \"Buyer\" on both 1601256645326 and 1601255677117 (DAP/DDU), whereas free-text fields list \"Trading Term: FOB EXW CIF DDU DDP\" and \"Advantage: DDP Shipping, Delivered to the door\", and FBA DDP list omits Africa (\"USA, Canada, Australia, Mexico, Europe, Japan, UAE\").",
+              "UNVERIFIED_ddp_to_sa": "DDP to South Africa is NOT confirmed on ZHTX's fetched pages; structured attribute assigns destination customs clearance to Buyer, and FBA DDP country list excludes Africa.",
+              "small_electronics_under_1kg_fit": "MOQ is 1 kilogram; accepts Special (Dangerous) Goods on both fetched listings, but actual per-parcel rate for a 400-500g lithium power bank to ZA is negotiated off-page.",
+              "supplier_metrics_observed": {
+                "tenure": "3 yrs on Alibaba (Trusted service provider, Verified by SGS Group, #2 top-selling supplier in Express)",
+                "store_rating": "4.8/5 (579 / 1,202 reviews)",
+                "product_rating": "5.0/5 (13 reviews on 1601255677117); 0 reviews on 1601256645326",
+                "response_time": "<=2h",
+                "on_time_dispatch": "100.0%",
+                "reorder_rate": "34%",
+                "online_revenue": "US$630,000+",
+                "main_markets": "United States (42%), Czechia (11%), Spain (11%), Australia (7%), France (5%), Other (25%) — South Africa not listed"
+              },
+              "source_url": "https://www.alibaba.com/product-detail/China-door-to-door-service-ups_1601256645326.html; https://www.alibaba.com/product-detail/freight-forwarder-china-to-Democratic-Algeria_1601255677117.html; https://zhtxsz.en.alibaba.com/; https://zhtxsz.en.alibaba.com/productgrouplist-963600634/TOP_SALE.html",
+              "fetch_date": "2026-10-02",
+              "verified": true,
+              "verified_scope": "Forwarder identity, SGS verification, store metrics, $0.03-$0.85/kg and $0.57-$0.84/kg headline rates, 1 kg MOQ, Africa transport table (Express 4-7d, Air 8-12d, Sea ***), Buyer customs-clearance attribute, and \"to be negotiated\" shipping block — all directly read via fetch_page on 2026-10-02."
             }
           ],
-          "session_status": "in_progress — push 1 after verified quote #1 (Sweet Protrading)"
+          "session_status": "in_progress — push 2 after verified quote #2 (ZHTX)"
         }
       }
     ],
