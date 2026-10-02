@@ -11,8 +11,24 @@
 ## 1. MISSION
 
 Build a modular, mostly-free multi-agent system that identifies, validates,
-sources, prices, lists, advertises, and supports dropshipping products
-**specifically for the South African market**.
+sources, prices, lists, advertises, and supports products **specifically for
+the South African market**, under three viable business models:
+
+1. **Local South African dropshipping** — South African suppliers, delivered
+   inside South Africa.
+2. **High-ticket items** — fewer, higher-value sales.
+3. **Digital products** — delivered electronically, with no physical stock.
+
+**Retired:** import-from-China dropshipping, the model this crew was first
+built for. The operator has confirmed there is no capital for bulk import, so
+no model in this contract assumes goods are imported from China. The product
+research, SARS duty rates and supplier/DDP quotes gathered for it are archived
+as background in `shared_state.json`, not deleted. The contract, state
+structure, session discipline and tools architecture carry over.
+
+Which model the crew works on first is a sequencing decision, recorded by the
+Supervisor in `shared_state.json` (`supervisor.findings`, starting at
+`sup-0002`), not in this contract.
 
 This is a **software engineering project**, not a get-rich-quick scheme.
 Optimize for correctness, verifiability, and reversibility — never for speed
@@ -89,6 +105,31 @@ product + shipping + (customs_value × duty) + (customs_value × 0.15)
   Takealot, WhatsApp, PayFast, SnapScan where relevant.
 - **Priority categories:** Unpowered accessories (often 0% duty) > everything
   else. Avoid high-duty categories unless margin is exceptional.
+
+### Model-Specific Rules
+
+**Import math applies only to models that import.** That covers every rule
+that exists because goods cross the South African border — for example,
+HS-code classification, SARS duty and duty-based category priorities,
+customs-value VAT, the SARS ATV method, customs-clearance timing and the
+landed-cost formula above. Every other rule in this contract binds every model
+unchanged. Model-specific compliance detail belongs in each model's agent
+prompt, not in this contract.
+
+**Local dropship.** Stock is held by South African suppliers, who deliver to
+the customer inside South Africa. Nothing is imported by this business, so
+import math does not apply; supplier price and delivery time are still
+verified, never guessed (§2 rule 2).
+
+**High-ticket.** Higher-priced items sold in small numbers, so each sale puts
+a lot of money at stake. The price band that counts as high-ticket is set by
+the operator in the agent prompt, not guessed here. Import math applies only
+if a given item's sourcing route imports it.
+
+**Digital.** Products delivered electronically, with no physical stock,
+shipping or customs, so import math does not apply and there is no landed
+cost. Listing and ad copy stay bound by §3 (no unverifiable claims) and §11
+(no promises of results).
 
 ---
 
