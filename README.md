@@ -11,8 +11,24 @@
 ## 1. MISSION
 
 Build a modular, mostly-free multi-agent system that identifies, validates,
-sources, prices, lists, advertises, and supports dropshipping products
-**specifically for the South African market**.
+sources, prices, lists, advertises, and supports products **specifically for
+the South African market**, under one of three viable business models:
+
+1. **Local SA dropshipping.** A South African supplier holds the stock and
+   ships to our customer.
+2. **High-ticket items.** Few, high-value sales where one order carries the
+   margin.
+3. **Digital products.** Delivered electronically, with no physical stock.
+
+The order above is not a priority order. The operator chooses the starting
+model; the current choice is recorded in `shared_state.json`
+(`state.supervisor.findings`), not in this contract.
+
+**Retired model: import-from-China dropshipping.** The operator has confirmed
+there is no capital for bulk import, so this model is retired and must not be
+revived without an operator amendment to this section. The research built for
+it is archived as background in `shared_state.json` and is not live pipeline
+input.
 
 This is a **software engineering project**, not a get-rich-quick scheme.
 Optimize for correctness, verifiability, and reversibility — never for speed
@@ -89,6 +105,24 @@ product + shipping + (customs_value × duty) + (customs_value × 0.15)
   Takealot, WhatsApp, PayFast, SnapScan where relevant.
 - **Priority categories:** Unpowered accessories (often 0% duty) > everything
   else. Avoid high-duty categories unless margin is exceptional.
+
+### Model-Specific Rules
+
+The import math in this README — HS-code lookup, SARS duty, import VAT
+(customs-value or ATV basis), the landed-cost formula, and the clearance-delay
+flag — applies only to a product a model actually imports. A product that is
+not imported is not subject to it, but §2 still binds every model, including
+the 20% margin floor and the no-guessed-data rule. Compliance detail for each
+model lives in that model's agent prompts, not here.
+
+**Local dropship.** A South African supplier holds the stock and ships to our
+customer. We do not import, so the import math above does not apply.
+
+**High-ticket.** Few, high-value sales where one order carries the margin. The
+import math above applies only if the item is imported.
+
+**Digital.** Products delivered electronically, with no physical stock,
+shipping, or customs. The import math above does not apply.
 
 ---
 
