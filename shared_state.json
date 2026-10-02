@@ -1746,10 +1746,10 @@
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
       }
     },
-    "timestamp": "2026-10-02T12:58:00+00:00",
+    "timestamp": "2026-10-02T13:02:00+00:00",
     "agent": "sourcing",
     "confidence": 7,
-    "source": "so-0006 (push 5: 4 forwarder leads + Coremax direct re-check fetched & read 2026-10-02; USD/ZAR 16.6654 Google Finance 2026-10-02) + prior so-0001..so-0005.",
+    "source": "so-0006 (push 6: 4 forwarder leads + Coremax direct + Honour Ocean SA DDP forwarder fetched & read 2026-10-02; USD/ZAR 16.6654 Google Finance 2026-10-02) + prior so-0001..so-0005.",
     "verified": true,
     "findings": [
       {
@@ -2302,10 +2302,10 @@
       },
       {
         "id": "so-0006",
-        "timestamp": "2026-10-02T12:58:00+00:00",
+        "timestamp": "2026-10-02T13:02:00+00:00",
         "agent": "sourcing",
         "confidence": 7,
-        "source": "fetch_page, all fetched & read 2026-10-02: https://www.google.com/finance/quote/USD-ZAR (USD/ZAR 16.6654 @ 2026-10-02 12:30:19 UTC); https://cntrsm.en.alibaba.com/; https://cntrsm.en.alibaba.com/productgrouplist-822293600/High_inquiry_products.html; https://www.alibaba.com/product-detail/1688-Purchasing-Shipping-Agent-Logistics-Service_1601356070201.html; https://www.alibaba.com/product-detail/door-to-door-delivery-service-ems_60703892641.html; https://zhtxsz.en.alibaba.com/; https://zhtxsz.en.alibaba.com/productgrouplist-963600634/TOP_SALE.html; https://www.alibaba.com/product-detail/China-door-to-door-service-ups_1601256645326.html; https://www.alibaba.com/product-detail/freight-forwarder-china-to-Democratic-Algeria_1601255677117.html; https://suppliers.alibaba.com/yiwu-eway-international-logistics-co-ltd_2218910837169; https://yiwuyiwei.en.alibaba.com/; https://www.alibaba.com/product-detail/Shopify-Dropshipping-Agent-US-AU-EU_1601379475240.html; https://www.alibaba.com/product-detail/Shopify-Dropshipping-Smart-Projector-Outdoor-Screen_1601597321214.html; https://bonmedshipping.en.alibaba.com/; https://cnwingspeed.en.alibaba.com/; https://www.alibaba.com/product-detail/Container-Dropshipping-Agent-Fast-Shipping-to_1600713628003.html; https://www.alibaba.com/product-detail/WINGSPEED-Freight-Forwarder-Logistics-Service-Cargo_62091984207.html; https://www.alibaba.com/product-detail/ddp-air-freight-forwarder-Sea-shipping_1601193797824.html; https://www.alibaba.com/product-detail/New-Trending-Waterproof-20000Mah-Solar-Charger_1601727591668.html; https://kms9.en.alibaba.com/",
+        "source": "fetch_page, all fetched & read 2026-10-02: https://www.google.com/finance/quote/USD-ZAR (USD/ZAR 16.6654 @ 2026-10-02 12:30:19 UTC); https://cntrsm.en.alibaba.com/; https://cntrsm.en.alibaba.com/productgrouplist-822293600/High_inquiry_products.html; https://www.alibaba.com/product-detail/1688-Purchasing-Shipping-Agent-Logistics-Service_1601356070201.html; https://www.alibaba.com/product-detail/door-to-door-delivery-service-ems_60703892641.html; https://zhtxsz.en.alibaba.com/; https://zhtxsz.en.alibaba.com/productgrouplist-963600634/TOP_SALE.html; https://www.alibaba.com/product-detail/China-door-to-door-service-ups_1601256645326.html; https://www.alibaba.com/product-detail/freight-forwarder-china-to-Democratic-Algeria_1601255677117.html; https://suppliers.alibaba.com/yiwu-eway-international-logistics-co-ltd_2218910837169; https://yiwuyiwei.en.alibaba.com/; https://www.alibaba.com/product-detail/Shopify-Dropshipping-Agent-US-AU-EU_1601379475240.html; https://www.alibaba.com/product-detail/Shopify-Dropshipping-Smart-Projector-Outdoor-Screen_1601597321214.html; https://bonmedshipping.en.alibaba.com/; https://cnwingspeed.en.alibaba.com/; https://www.alibaba.com/product-detail/Container-Dropshipping-Agent-Fast-Shipping-to_1600713628003.html; https://www.alibaba.com/product-detail/WINGSPEED-Freight-Forwarder-Logistics-Service-Cargo_62091984207.html; https://www.alibaba.com/product-detail/ddp-air-freight-forwarder-Sea-shipping_1601193797824.html; https://www.alibaba.com/product-detail/New-Trending-Waterproof-20000Mah-Solar-Charger_1601727591668.html; https://kms9.en.alibaba.com/; https://www.alibaba.com/product-detail/Agent-China-ddp-To-South-Africa_1601253467871.html; https://www.alibaba.com/product-detail/South-Africa-Sea-DDP-Shipping-Service_1601435129328.html",
         "verified": true,
         "verified_scope": "verified=true applies ONLY to pages actually fetched and read via fetch_page on 2026-10-02 and the literal figures/attributes displayed on them. Where a forwarder displays a generic per-kg headline placeholder without a confirmed South Africa (ZA) battery/small-electronics DDP tariff table, the exact fetched numbers are reported alongside UNVERIFIED_ markers per HARD STOP #2.",
         "data": {
@@ -2320,7 +2320,7 @@
             "pr_0008_baseline_usd_zar": 16.346,
             "pr_0008_fx_source": "Google Finance USD/ZAR 16.3460 @ 2026-09-30 07:33 UTC (used in so-0003 and pr-0008)"
           },
-          "quotes_fetched_count": 5,
+          "quotes_fetched_count": 6,
           "quotes": [
             {
               "quote_index": 1,
@@ -2461,9 +2461,36 @@
               "fetch_date": "2026-10-02",
               "verified": true,
               "verified_scope": "Product price tiers ($5.31/$5.04/$4.59/$4.19), Standard (Alibaba.com Logistics) shipping fee $19.81 (struck $39.81) for 2 boxes, guaranteed delivery Oct 20 - Nov 29, \"*Taxes and import charges will be calculated at checkout\" (non-DDP), 1.000 kg gross weight, and store metrics — all directly read via fetch_page on 2026-10-02."
+            },
+            {
+              "quote_index": 6,
+              "lead_category": "alibaba_ddp_to_south_africa_forwarder",
+              "forwarder_name": "Shenzhen Honour Ocean Shipping Co., Ltd.",
+              "listing_title": "Agent China Ddp to South Africa Kenya Nigeria air Sea Freight Forwarder International Courier DDP Door to Door Forwarding (1601253467871, MOQ 1 kg) + Freight Forwarder Shipping Agent From China to South Africa DDP Door to Door Air Sea Freight FCL LCL Johannesburg Delivery (1601435129328, MOQ 21 kg)",
+              "fetched_rate_usd": "$1.00 - $3.00/kg (MOQ: 1 kilogram) on Air+Express listing 1601253467871; $1.10 - $2.00/kg (MOQ: 21 kilograms) on Sea LCL+Express ZA listing 1601435129328; Shipping total: \"To be negotiated\"",
+              "per_unit_rate_zar": null,
+              "UNVERIFIED_per_unit_rate_zar": "Displayed $1.00-$3.00/kg on 1601253467871 (R16.67-R50.00 at 1 kg MOQ @16.6654 or R16.35-R49.04 @16.3460) and $1.10-$2.00/kg on 1601435129328 (R18.33-R33.33/kg @16.6654, MOQ 21 kg = R384.97-R699.95 minimum shipment) are placeholder per-kg bands; both pages state \"Shipping fee and delivery date to be negotiated... Item subtotal $0.00 - $0.00, Shipping total: To be negotiated\" and \"shipping cost: Depend on cargo name, weight, shipping way ,etc\". Furthermore, the body text of 1601253467871 explicitly notes under \"3. Air cargo DDP shipping\": \"it's door to door including custom clearance and tax. Min order is 21kg.\" Thus a single-unit (<1 kg) DDP rate is NOT published on-page.",
+              "fetched_headline_rate_zar_at_1kg_moq": "R16.67 - R50.00 (@16.6654 live FX) / R16.35 - R49.04 (@16.3460 pr-0008 FX) for $1.00-$3.00/kg headline placeholder on 1601253467871; actual shipping total \"To be negotiated\" and description text states Air cargo DDP min order is 21 kg",
+              "transit_time": "8 - 15 Days (Air+Express attribute on 1601253467871; description table lists Fast Air Door-to-Door 2-4 workdays + 3-5 workdays delivery = 5-9 workdays, Slower Air DDP transfer 6-8 workdays + 3-5 workdays delivery = 9-13 workdays, Express 2-5 days; dispatch 6 days); 25 - 35 Days (Sea LCL+Express attribute on 1601435129328, dispatch 5 days; FAQ says Sea 30-45 days — breaches 21-day limit).",
+              "ddp_vs_dap": "DDP (Seller-cleared): both 1601253467871 and 1601435129328 explicitly set structured Key attribute \"Destination customs clearance party: Seller\", Trading Term \"DDP\", and \"Advantage: Tax Included, SARS Customs Clearance, SABS Support\" (on 1601435129328).",
+              "UNVERIFIED_ddp_to_sa": "While DDP to South Africa (SARS Customs Clearance, Tax Included) is explicitly advertised and Seller-cleared in structured attributes, both listings require off-page quotation (\"To be negotiated\") and state a 21 kg minimum order for Air Cargo DDP (in 1601253467871 body text) and Sea DDP (in 1601435129328 MOQ), leaving <1 kg single-unit DDP pricing unverified.",
+              "small_electronics_under_1kg_fit": "1601253467871 covers Special (Dangerous) Goods and lists a 1 kg header MOQ and \"6. Small packages delivery to USA, Canada, Europe, Middle-East, Africa, Australia\", but its \"3. Air cargo DDP shipping\" section specifies \"Min order is 21kg\". 1601435129328 has a 21 kg MOQ and is restricted to General (Non-dangerous) Goods.",
+              "supplier_metrics_observed": {
+                "tenure": "10 yrs on Alibaba (founded 2013, NVOCC NO: MOC-NV 09832, Verified by TuVRheinland)",
+                "store_rating": "4.6/5 (1,506 / 1,852 verified reviews; Service 4.6, Shipping 4.6, Quality 4.6)",
+                "product_rating": "0 product reviews on 1601253467871 and 1601435129328",
+                "response_time": "<=3h",
+                "on_time_dispatch": "99.1% (>=99%)",
+                "reorder_rate": "26%",
+                "online_revenue": "US$ 670,000+ (Africa 2.00% of export split)"
+              },
+              "source_url": "https://www.alibaba.com/product-detail/Agent-China-ddp-To-South-Africa_1601253467871.html; https://www.alibaba.com/product-detail/South-Africa-Sea-DDP-Shipping-Service_1601435129328.html",
+              "fetch_date": "2026-10-02",
+              "verified": true,
+              "verified_scope": "Forwarder identity, TuVRheinland verification, 4.6/5 store rating (1,852 reviews), Seller customs-clearance attribute, ZA(South Africa) destination and SARS Customs Clearance attribute on 1601435129328, Special (Dangerous) Goods capability on 1601253467871, $1-$3/kg (1 kg MOQ) and $1.10-$2/kg (21 kg MOQ) placeholder bands, 8-15d Air / 25-35d Sea transit times, 21 kg Air DDP minimum note in description, and \"Shipping total: To be negotiated\" — all directly read via fetch_page on 2026-10-02."
             }
           ],
-          "session_status": "in_progress — push 5 after verified quote #5 (Coremax direct re-check)"
+          "session_status": "in_progress — push 6 after verified quote #6 (Honour Ocean SA DDP forwarder)"
         }
       }
     ],
