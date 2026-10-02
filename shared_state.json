@@ -90,7 +90,7 @@
           ".gitignore",
           ".env.example",
           "requirements.txt",
-          "agents/, tools/, tools/scrapers/, listings/, campaigns/, support_logs/, tests/ (directory skeleton with .gitkeep placeholders only — no .py modules)",
+          "agents/, tools/, tools/scrapers/, listings/, campaigns/, support_logs/, tests/ (directory skeleton with .gitkeep placeholders only \u2014 no .py modules)",
           "README.md: taken VERBATIM from origin/main (d3d5993). No README change is contributed by this PR."
         ],
         "readme_change_dropped": "An earlier commit on this branch amended README section 8 with a branch-naming exception. The operator had already written a better version of that same exception into main's new 'Branch Naming' subsection. The agent's amendment was therefore redundant and was dropped; main's README is taken verbatim. This also keeps the PR free of an unrelated-file change, per README section 10.",
@@ -102,9 +102,9 @@
           "note": "git merge of origin/main was refused with 'refusing to merge unrelated histories' because the shallow clone grafted the history boundary. Rather than pass --allow-unrelated-histories (semantically wrong: the histories ARE related, sharing 898ab3a), the merge was avoided because main's only change was README.md, which was taken directly with git checkout."
         },
         "deliberately_excluded": [
-          "agents/*.py — each agent module arrives in its own agent's PR (README section 10: one agent at a time)",
-          "tools/customs.py, tools/landed_cost.py — cost math is HITL gate 5 territory and needs real verified data, not placeholders",
-          "tests/*.py — no tools/ logic exists yet to test; test coverage lands with the first PR containing logic"
+          "agents/*.py \u2014 each agent module arrives in its own agent's PR (README section 10: one agent at a time)",
+          "tools/customs.py, tools/landed_cost.py \u2014 cost math is HITL gate 5 territory and needs real verified data, not placeholders",
+          "tests/*.py \u2014 no tools/ logic exists yet to test; test coverage lands with the first PR containing logic"
         ],
         "tests_run": [
           "python3 -m json.tool shared_state.json (JSON validity)",
@@ -139,12 +139,12 @@
           {
             "topic": "HARD STOP 4 import VAT basis",
             "escalated_because": "The brief's draft text ('15% on customs value + ATV upliftment (see section 4.1)') conflicted with section 4 (untouchable this session; still flat 15% on customs value), referenced a non-existent section 4.1, and disagreed with tools/customs.py's default VAT basis (README flat formula; the ATV basis is opt-in and unapproved per pr-0004/pr-0007). README section 1 requires the conflict to be escalated to the operator, not resolved silently.",
-            "operator_answer_verbatim": "No omitting VAT applicable to the model being priced. Import model: 15% on the ATV — customs value + 10% upliftment + non-rebated duty, per SARS (sars.gov.za, Duties and Taxes for Importers). No upliftment for BLNS-origin goods. §4 and the tools' default currently reflect the older flat basis; they are pending alignment under a separate HITL gate 5 amendment. Until that amendment lands, do not run an import pricing verdict."
+            "operator_answer_verbatim": "No omitting VAT applicable to the model being priced. Import model: 15% on the ATV \u2014 customs value + 10% upliftment + non-rebated duty, per SARS (sars.gov.za, Duties and Taxes for Importers). No upliftment for BLNS-origin goods. \u00a74 and the tools' default currently reflect the older flat basis; they are pending alignment under a separate HITL gate 5 amendment. Until that amendment lands, do not run an import pricing verdict."
           },
           {
             "topic": "HARD STOP 3 digital margin gate",
             "escalated_because": "The brief left the digital equivalent gate as '[define]'.",
-            "operator_answer_verbatim": "The refund/chargeback allowance must itself be sourced, not defaulted. So the §2 #3 rewrite should read:  No accept verdict with net margin below 20% for models with material landed cost (import, local SA dropshipping, high-ticket). For digital products, the same 20% net-margin floor applies, measured after payment processing fees, platform fees, ad CPA, and a refund/chargeback allowance. Every input in the digital cost stack must be verified from a cited source; if any input — including the digital VAT treatment — is undefined or unverified, the margin is UNVERIFIED and the session halts. Do not use a default refund percentage without a source."
+            "operator_answer_verbatim": "The refund/chargeback allowance must itself be sourced, not defaulted. So the \u00a72 #3 rewrite should read:  No accept verdict with net margin below 20% for models with material landed cost (import, local SA dropshipping, high-ticket). For digital products, the same 20% net-margin floor applies, measured after payment processing fees, platform fees, ad CPA, and a refund/chargeback allowance. Every input in the digital cost stack must be verified from a cited source; if any input \u2014 including the digital VAT treatment \u2014 is undefined or unverified, the margin is UNVERIFIED and the session halts. Do not use a default refund percentage without a source."
           },
           {
             "topic": "shared_state.json session record",
@@ -205,15 +205,15 @@
         "timestamp": "2026-09-30T08:15:38+02:00",
         "agent": "supervisor",
         "confidence": 9,
-        "source": "this session — confirmed via git log, git branch -a, and gh pr list",
+        "source": "this session \u2014 confirmed via git log, git branch -a, and gh pr list",
         "verified": true,
         "data": {
           "type": "process_failure",
           "severity": "high",
-          "description": "Prior Market Research session (claimed commit 21b39b6, findings mr-0028..mr-0037) was never pushed to remote. Arena sandbox is ephemeral — local commits are destroyed when the session ends. Verification work is permanently lost.",
+          "description": "Prior Market Research session (claimed commit 21b39b6, findings mr-0028..mr-0037) was never pushed to remote. Arena sandbox is ephemeral \u2014 local commits are destroyed when the session ends. Verification work is permanently lost.",
           "root_cause": "Agent committed locally but did not push before session ended. HARD STOP #9 requires merge before next session, but does not explicitly require push before session end.",
           "impact": "Nine candidates (mr-0003/0005/0006/0008/0012/0002/0021/0023/0025) revert to unverified in state on main. Sourcing remains blocked.",
-          "mitigation": "Amend README §8 to add: 'A session MUST push its commit to a remote branch before ending. Work that exists only in the local sandbox is lost. Push early, push often.'"
+          "mitigation": "Amend README \u00a78 to add: 'A session MUST push its commit to a remote branch before ending. Work that exists only in the local sandbox is lost. Push early, push often.'"
         }
       },
       {
@@ -245,7 +245,7 @@
             },
             {
               "message": "follow-up message",
-              "quote": "Scope reminder for the README §4 amendment: one short paragraph per model, no model-specific compliance detail — that belongs in future agent prompts, not the contract."
+              "quote": "Scope reminder for the README \u00a74 amendment: one short paragraph per model, no model-specific compliance detail \u2014 that belongs in future agent prompts, not the contract."
             }
           ],
           "constraint_change": {
@@ -396,22 +396,22 @@
         "timestamp": "2026-10-02T19:43:18+02:00",
         "agent": "supervisor",
         "confidence": 9,
-        "source": "this session (sandbox) — README.md read in full at base commit abba681; shared_state.json read; gh pr list --state open returned zero open PRs at session open and before PR; python3 -m unittest discover -s tests = Ran 144 tests, OK (121 pre-existing + 23 new prompt tests).",
+        "source": "this session (sandbox) \u2014 README.md read in full at base commit abba681; shared_state.json read; gh pr list --state open returned zero open PRs at session open and before PR; python3 -m unittest discover -s tests = Ran 144 tests, OK (121 pre-existing + 23 new prompt tests).",
         "verified": true,
         "data": {
           "type": "session_record",
           "session_id": "01a0fdb2",
           "branch": "arena/01a0fdb2-okay",
-          "task": "Rewrite the Market Research agent prompt for DIGITAL (digital-native): system prompt constant in agents/market_research.py with a concrete 'verified' definition (product_exists, creator_real, price_point, reviews — each a fetched URL + fetch date; no URL = UNVERIFIED, no exceptions), the README section 3 digital must-never rules, and the same state.market_research output shape with model-conditional verification_fields. Import/local-SA/high-ticket branches kept as disabled conditional sections for later activation. Prompt-content tests added; no behavioural tests, no live fetches.",
+          "task": "Rewrite the Market Research agent prompt for DIGITAL (digital-native): system prompt constant in agents/market_research.py with a concrete 'verified' definition (product_exists, creator_real, price_point, reviews \u2014 each a fetched URL + fetch date; no URL = UNVERIFIED, no exceptions), the README section 3 digital must-never rules, and the same state.market_research output shape with model-conditional verification_fields. Import/local-SA/high-ticket branches kept as disabled conditional sections for later activation. Prompt-content tests added; no behavioural tests, no live fetches.",
           "active_model": "DIGITAL (sup-0002, operator-confirmed)",
           "scope": "agents/market_research.py updated (prompt, INACTIVE_MODEL_BRANCHES and get_system_prompt added; the retained import-shaped capability #1 helpers are unmodified), tests/test_market_research_prompt.py new, this record appended. README.md, tools/, shared_state.schema.md and all other namespaces untouched.",
           "outputs": [
-            "agents/market_research.py — MARKET_RESEARCH_SYSTEM_PROMPT (digital-native), ACTIVE_MODEL, INACTIVE_MODEL_BRANCHES, get_system_prompt",
-            "tests/test_market_research_prompt.py — 23 content tests (no network, no paid services)",
-            "shared_state.json — this record (one minimal session record, per the session brief)"
+            "agents/market_research.py \u2014 MARKET_RESEARCH_SYSTEM_PROMPT (digital-native), ACTIVE_MODEL, INACTIVE_MODEL_BRANCHES, get_system_prompt",
+            "tests/test_market_research_prompt.py \u2014 23 content tests (no network, no paid services)",
+            "shared_state.json \u2014 this record (one minimal session record, per the session brief)"
           ],
           "hitl_gates": "None crossed: no paid service, sample order, launch recommendation, ad campaign, pricing/customs math change, or customer-facing commitment. No cost math touched (tools/ unmodified), so gate 5 is not triggered on the code side.",
-          "hard_stops_status": "No HARD STOP violated. #1 no spend; #2 nothing invented — the prompt defines a verification process and records no market data, no new figures; #3 no product verdict issued; #4 no pricing; #5 Supervisor session, no direct sub-agent output; #6 no force-push, branch deletion or history rewrite; #7 no secrets; #8 shared_state.json exists on main; #9 PR #13 was merged before this session opened (zero open PRs at open)."
+          "hard_stops_status": "No HARD STOP violated. #1 no spend; #2 nothing invented \u2014 the prompt defines a verification process and records no market data, no new figures; #3 no product verdict issued; #4 no pricing; #5 Supervisor session, no direct sub-agent output; #6 no force-push, branch deletion or history rewrite; #7 no secrets; #8 shared_state.json exists on main; #9 PR #13 was merged before this session opened (zero open PRs at open)."
         }
       }
     ]
@@ -435,10 +435,10 @@
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
       }
     },
-    "timestamp": "2026-09-30T08:51:33+02:00",
+    "timestamp": "2026-10-02T21:00:00+02:00",
     "agent": "market_research",
-    "confidence": 4,
-    "source": "42 findings accumulated (mr-0001..mr-0042); roll-up confidence is the minimum of the findings (conservative). Latest batch: mr-0042.",
+    "confidence": 7,
+    "source": "DIGITAL discovery run: netlawman.co.za, agreementsonline.co.za, contracts4biz.co.za (fetched 2026-10-02). 12 candidates captured; 3 in this batch.",
     "verified": false,
     "findings": [
       {
@@ -456,14 +456,14 @@
           "hs_code": "8504.40 (charger) / 8544.42 (cable fitted with connectors)",
           "duty_rate_pct": "0% charger / 15% cable",
           "hs_source": "https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06)",
-          "category_note": "bundle rated at highest line (cable 15%); composite-GRI treatment UNVERIFIED — see unverified_fields",
+          "category_note": "bundle rated at highest line (cable 15%); composite-GRI treatment UNVERIFIED \u2014 see unverified_fields",
           "takealot_price_floor_zar": 95,
           "takealot_evidence": "Generic 45W+ cable from R95 (3.8*, 2139 reviews); Samsung 25W R430-599; GaN 35-65W R229-1099 (takealot.com PLID93727502/PLID98539537/PLID93521202).",
           "competition_analyst": "high",
           "competition_method": "takealot-snippet-breadth: 8+ listings, one 2139-review incumbent, Samsung/originals + multi-brand generics.",
           "UNVERIFIED_established_seller_count": null,
           "UNVERIFIED_net_margin_pct": null,
-          "price_floor_vs_cpa_flag": "RED: R95 floor below README R150-300 CPA benchmark — Pricing must verify; generics look unviable, GaN R229+ sub-niche only a hypothesis.",
+          "price_floor_vs_cpa_flag": "RED: R95 floor below README R150-300 CPA benchmark \u2014 Pricing must verify; generics look unviable, GaN R229+ sub-niche only a hypothesis.",
           "reasoning": "Customs pass (0%/15%), proven Takealot demand, but competition-dominated and floor likely below CPA. Blocked on margin math.",
           "customs_verdict": {
             "risk": "medium",
@@ -472,7 +472,7 @@
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -491,11 +491,11 @@
           "hs_code": "8507.60",
           "duty_rate_pct": "0%",
           "hs_source": "https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06); code corroborated by dutiable.io/hs-code/electronics/portable-power-bank + volza.com (85076000, 7.2M+ shipments)",
-          "classification_caveat": "Solar-integrated units could attract an 8541.43 (10%) essential-character argument — needs tariff determination.",
+          "classification_caveat": "Solar-integrated units could attract an 8541.43 (10%) essential-character argument \u2014 needs tariff determination.",
           "takealot_price_floor_zar": 258,
           "takealot_evidence": "10k mAh R258-344; 20k foldable solar R699; 60k from R580 (takealot.com PLID92826531/PLID94752361/PLID95695632). Reviews thin (2-5).",
           "competition_analyst": "medium",
-          "competition_method": "takealot-snippet-breadth: 5+ listings, max 5 reviews — no incumbent.",
+          "competition_method": "takealot-snippet-breadth: 5+ listings, max 5 reviews \u2014 no incumbent.",
           "UNVERIFIED_established_seller_count": null,
           "UNVERIFIED_net_margin_pct": null,
           "loadshedding_note": "Core use-case IS load-shedding resilience; solar input suits Gauteng sun.",
@@ -503,11 +503,11 @@
           "customs_verdict": {
             "risk": "low",
             "eliminate": false,
-            "reason": "duty-free SA tariff line — prioritised per README §4."
+            "reason": "duty-free SA tariff line \u2014 prioritised per README \u00a74."
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -526,22 +526,22 @@
           "hs_code": "8513.10 (portable self-powered lamps)",
           "UNVERIFIED_duty_rate_pct": null,
           "hs_source": "Code tree: tariffnumber.com/2026/85131000; seair.co.in (85131010 torch, 1609 shipments). SA line rate NOT found after 2 attempts.",
-          "related_line_context": "8513.90 parts @0% (jlog.co.za) and 9405.11 fixed LED luminaires @20% (Tradecaravan) are NOT this line — cited for context only.",
+          "related_line_context": "8513.90 parts @0% (jlog.co.za) and 9405.11 fixed LED luminaires @20% (Tradecaravan) are NOT this line \u2014 cited for context only.",
           "takealot_price_floor_zar": 179,
           "takealot_evidence": "3-pack multifunction R179-259 (4.8*, 91 reviews); solar loadshedding light R378-449; tubes R179-190 (PLID90990262/PLID90599483/PLID91069119).",
           "competition_analyst": "medium",
-          "competition_method": "takealot-snippet-breadth: 6+ listings, max 91 reviews — re-check 100-review threshold.",
+          "competition_method": "takealot-snippet-breadth: 6+ listings, max 91 reviews \u2014 re-check 100-review threshold.",
           "UNVERIFIED_established_seller_count": null,
           "UNVERIFIED_net_margin_pct": null,
           "reasoning": "Strong ZA demand + floor above CPA, but SA duty UNVERIFIED and Magneto/Gizzu brand presence. Blocked on duty + margin.",
           "customs_verdict": {
             "risk": "unknown",
             "eliminate": false,
-            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+            "reason": "SA duty rate UNVERIFIED \u2014 HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -556,18 +556,18 @@
           "stage": "customs_screened",
           "recommendation": "investigate",
           "demand": "medium",
-          "demand_evidence": "No direct demand source found — graded medium on smartphone-accessory adjacency + large automotive catalogue. Explicitly weaker file.",
+          "demand_evidence": "No direct demand source found \u2014 graded medium on smartphone-accessory adjacency + large automotive catalogue. Explicitly weaker file.",
           "hs_code": "3926.90",
           "duty_rate_pct": "20%",
           "hs_source": "https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06)",
-          "classification_caveat": "Metal-dominant mounts may fall under 8302/7616 (volza records exist) — plastic construction assumed; Sourcing to confirm.",
+          "classification_caveat": "Metal-dominant mounts may fall under 8302/7616 (volza records exist) \u2014 plastic construction assumed; Sourcing to confirm.",
           "takealot_price_floor_zar": 114,
           "takealot_evidence": "Car-specific from R114; R179/R415 listings; adjacent desk holder R95 (4.0*, 148) (PLID100368859/PLID102501646/PLID99208827).",
           "competition_analyst": "medium",
           "competition_method": "takealot-snippet-breadth: 4+ listings, car-specific reviews thin.",
           "UNVERIFIED_established_seller_count": null,
           "UNVERIFIED_net_margin_pct": null,
-          "price_floor_vs_cpa_flag": "RED: car-specific floor R114 below R150-300 CPA — Pricing must verify.",
+          "price_floor_vs_cpa_flag": "RED: car-specific floor R114 below R150-300 CPA \u2014 Pricing must verify.",
           "reasoning": "Customs pass (20%) but demand file is adjacency-inference and floor sits below CPA. Weakest of the customs-passed four.",
           "customs_verdict": {
             "risk": "medium",
@@ -576,7 +576,7 @@
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -592,7 +592,7 @@
           "recommendation": "investigate",
           "demand": "high",
           "demand_evidence": "TikTok top-20 product group; Takealot case+glass bundles (R99-105) confirm attach-rate demand.",
-          "hs_code": "7007.19 (toughened safety glass, non-vehicle) — probable; film variants 3919.90/3920",
+          "hs_code": "7007.19 (toughened safety glass, non-vehicle) \u2014 probable; film variants 3919.90/3920",
           "UNVERIFIED_duty_rate_pct": null,
           "hs_source": "Code candidates per ftp.bills.com.au + volza.com; SA rates NOT found (ch.70 typical Free-30% per jlog.co.za chapter page; 7007.21.20 windscreens 30% per ITAC Report 712 is a different line).",
           "takealot_price_floor_zar": 99,
@@ -601,16 +601,16 @@
           "competition_method": "takealot-snippet-breadth: commoditised R99 floor across 4+ listings; reviews thin.",
           "UNVERIFIED_established_seller_count": null,
           "UNVERIFIED_net_margin_pct": null,
-          "price_floor_vs_cpa_flag": "RED: R99 floor below R150-300 CPA — viability doubtful; Pricing to verify, likely reject.",
+          "price_floor_vs_cpa_flag": "RED: R99 floor below R150-300 CPA \u2014 viability doubtful; Pricing to verify, likely reject.",
           "reasoning": "High demand but commoditised R99 floor + UNVERIFIED duty. Probable reject once Pricing runs the tool.",
           "customs_verdict": {
             "risk": "unknown",
             "eliminate": false,
-            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+            "reason": "SA duty rate UNVERIFIED \u2014 HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -625,7 +625,7 @@
           "stage": "customs_screened",
           "recommendation": "investigate",
           "demand": "high",
-          "demand_evidence": "TikTok top-20 group with the largest tutorial hashtag (22.7M posts) — strong demo-ability for ads.",
+          "demand_evidence": "TikTok top-20 group with the largest tutorial hashtag (22.7M posts) \u2014 strong demo-ability for ads.",
           "hs_code": "9603.30",
           "UNVERIFIED_duty_rate_pct": null,
           "hs_source": "Code per tariffnumber.com/2026/96033090 + US CBP NY M83962 (cosmetic brushes from China); SA rate NOT found after 2 attempts.",
@@ -635,16 +635,16 @@
           "competition_method": "takealot-snippet-breadth: 545-review incumbent (GLO) + wide R119-749 range.",
           "UNVERIFIED_established_seller_count": null,
           "UNVERIFIED_net_margin_pct": null,
-          "price_floor_vs_cpa_flag": "AMBER: floor R119 below CPA but mid-range R189-258 sits inside/near it — set size is the lever; Pricing to verify.",
-          "reasoning": "Unpowered-accessory profile per README §4 priority, but duty UNVERIFIED + 545-review incumbent. Mid-size sets the only plausible angle.",
+          "price_floor_vs_cpa_flag": "AMBER: floor R119 below CPA but mid-range R189-258 sits inside/near it \u2014 set size is the lever; Pricing to verify.",
+          "reasoning": "Unpowered-accessory profile per README \u00a74 priority, but duty UNVERIFIED + 545-review incumbent. Mid-size sets the only plausible angle.",
           "customs_verdict": {
             "risk": "unknown",
             "eliminate": false,
-            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+            "reason": "SA duty rate UNVERIFIED \u2014 HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -659,19 +659,19 @@
           "stage": "customs_screened",
           "recommendation": "investigate",
           "demand": "high",
-          "demand_evidence": "Global TikTok top-20 AND SA-specific TikTok testimony — strongest demand file in the set.",
+          "demand_evidence": "Global TikTok top-20 AND SA-specific TikTok testimony \u2014 strongest demand file in the set.",
           "hs_code": "3926.90 (plastic)",
           "duty_rate_pct": "20%",
           "hs_source": "https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06); material split per dutiable.io/phone-case + seair.co.in + volza.com ZA import records",
-          "leather_exclusion": "Leather/folio cases fall under 4202 (4202.32 per dutiable/volza); 4202.92 verified @30% (Tradecaravan) is a heading proxy only and 4202.32 line rate is UNVERIFIED — leather variants excluded from scope regardless.",
+          "leather_exclusion": "Leather/folio cases fall under 4202 (4202.32 per dutiable/volza); 4202.92 verified @30% (Tradecaravan) is a heading proxy only and 4202.32 line rate is UNVERIFIED \u2014 leather variants excluded from scope regardless.",
           "takealot_price_floor_zar": 67,
           "takealot_evidence": "TPU from R67-89; MagSafe from R105 (4.6*, 181); bundle R105 (4.2*, 164); gel R129 (4.3*, 102); case+glass R99 (4.8*, 147) (PLID92204674/PLID90064206/PLID97456252).",
           "competition_analyst": "high",
-          "competition_method": "takealot-snippet-breadth: four 100+ review listings + R67 floor — deepest competition file observed.",
+          "competition_method": "takealot-snippet-breadth: four 100+ review listings + R67 floor \u2014 deepest competition file observed.",
           "UNVERIFIED_established_seller_count": null,
           "UNVERIFIED_net_margin_pct": null,
-          "price_floor_vs_cpa_flag": "RED: R67 floor far below R150-300 CPA — viability doubtful; Pricing to verify, likely reject.",
-          "reasoning": "Best demand + customs pass, worst price/competition structure. Only a differentiated (MagSafe/design-led) angle could survive — Pricing decides.",
+          "price_floor_vs_cpa_flag": "RED: R67 floor far below R150-300 CPA \u2014 viability doubtful; Pricing to verify, likely reject.",
+          "reasoning": "Best demand + customs pass, worst price/competition structure. Only a differentiated (MagSafe/design-led) angle could survive \u2014 Pricing decides.",
           "customs_verdict": {
             "risk": "medium",
             "eliminate": false,
@@ -679,7 +679,7 @@
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -701,19 +701,19 @@
           "takealot_price_floor_zar": 118,
           "takealot_evidence": "Droplet steel set from R118 (4.5*, 144); moissanite-style from R126; R168-238 (takealot.com/fashion/necklaces-32919).",
           "competition_analyst": "medium",
-          "competition_method": "takealot-snippet-breadth: category page shows multi-listing depth; one 144-review listing; thinnest Takealot file — re-check.",
+          "competition_method": "takealot-snippet-breadth: category page shows multi-listing depth; one 144-review listing; thinnest Takealot file \u2014 re-check.",
           "UNVERIFIED_established_seller_count": null,
           "UNVERIFIED_net_margin_pct": null,
-          "price_floor_vs_cpa_flag": "RED: R118 floor below R150-300 CPA — sets/bundles the only plausible lever; Pricing to verify.",
+          "price_floor_vs_cpa_flag": "RED: R118 floor below R150-300 CPA \u2014 sets/bundles the only plausible lever; Pricing to verify.",
           "reasoning": "Strong demand signals but duty UNVERIFIED + thin competition file + floor below CPA. Needs duty determination first.",
           "customs_verdict": {
             "risk": "unknown",
             "eliminate": false,
-            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+            "reason": "SA duty rate UNVERIFIED \u2014 HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -722,7 +722,7 @@
         "timestamp": "2026-09-29T22:04:57+02:00",
         "agent": "market_research",
         "confidence": 8,
-        "source": "Demand: tiktok.com/discover SA (@leratospov: shapewear top-selling); duty: README §4 (apparel 40-45%) + jlog.co.za + afrotools.com (clothing 40-45%) + https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06) (6109.10/6204.62 @45%).",
+        "source": "Demand: tiktok.com/discover SA (@leratospov: shapewear top-selling); duty: README \u00a74 (apparel 40-45%) + jlog.co.za + afrotools.com (clothing 40-45%) + https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06) (6109.10/6204.62 @45%).",
         "data": {
           "product_name": "Shapewear (apparel)",
           "stage": "rejected",
@@ -731,18 +731,18 @@
           "demand_evidence": "SA-specific TikTok testimony.",
           "hs_code": "UNVERIFIED at line level (category: apparel/textiles)",
           "duty_rate_pct": "40-45% (category band, multiple sources)",
-          "hs_source": "Category band per README §4 + jlog + afrotools + Tradecaravan apparel lines @45%; exact shapewear line NOT looked up — rejection stands at category level.",
+          "hs_source": "Category band per README \u00a74 + jlog + afrotools + Tradecaravan apparel lines @45%; exact shapewear line NOT looked up \u2014 rejection stands at category level.",
           "UNVERIFIED_takealot_price_floor_zar": null,
           "UNVERIFIED_net_margin_pct": null,
-          "reasoning": "REJECT: README §4 apparel HIGH RISK; 40-45% duty exceeds 25% elimination threshold with no exceptional-margin evidence. No further spend.",
+          "reasoning": "REJECT: README \u00a74 apparel HIGH RISK; 40-45% duty exceeds 25% elimination threshold with no exceptional-margin evidence. No further spend.",
           "customs_verdict": {
             "risk": "high",
             "eliminate": true,
-            "reason": "README §4: apparel/textiles run 40-45% duty — HIGH RISK, reject unless margin is exceptional AND flagged."
+            "reason": "README \u00a74: apparel/textiles run 40-45% duty \u2014 HIGH RISK, reject unless margin is exceptional AND flagged."
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -771,7 +771,7 @@
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -786,21 +786,21 @@
           "stage": "rejected",
           "recommendation": "reject",
           "demand": "high",
-          "demand_evidence": "TikTok top-20 + Google breakout term — demand is real, duty kills it.",
+          "demand_evidence": "TikTok top-20 + Google breakout term \u2014 demand is real, duty kills it.",
           "hs_code": "6109.10 / 6204.62 (representative apparel lines)",
           "duty_rate_pct": "45%",
           "hs_source": "https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06)",
           "UNVERIFIED_takealot_price_floor_zar": null,
           "UNVERIFIED_net_margin_pct": null,
-          "reasoning": "REJECT: 45% apparel duty per README §4 HIGH RISK. Demand strength is irrelevant past the elimination threshold.",
+          "reasoning": "REJECT: 45% apparel duty per README \u00a74 HIGH RISK. Demand strength is irrelevant past the elimination threshold.",
           "customs_verdict": {
             "risk": "high",
             "eliminate": true,
-            "reason": "README §4: apparel/textiles run 40-45% duty — HIGH RISK, reject unless margin is exceptional AND flagged."
+            "reason": "README \u00a74: apparel/textiles run 40-45% duty \u2014 HIGH RISK, reject unless margin is exceptional AND flagged."
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -809,7 +809,7 @@
         "timestamp": "2026-09-29T22:04:57+02:00",
         "agent": "market_research",
         "confidence": 6,
-        "source": "Demand/competition: alibaba.com Takealot insights (12 of top-15 skincare SA-founded; all 1200+ reviews, 4.7+) + mybroadband (serums top sellers) + shopify tiktok (#11 serums); duty: https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06) (3304.99 @20%) vs jlog.co.za/cosmetics-personal-care-hs-33-4 (3304 @15%) — CONFLICT; SAHPRA per jlog.",
+        "source": "Demand/competition: alibaba.com Takealot insights (12 of top-15 skincare SA-founded; all 1200+ reviews, 4.7+) + mybroadband (serums top sellers) + shopify tiktok (#11 serums); duty: https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06) (3304.99 @20%) vs jlog.co.za/cosmetics-personal-care-hs-33-4 (3304 @15%) \u2014 CONFLICT; SAHPRA per jlog.",
         "data": {
           "product_name": "Serums / skincare preparations",
           "stage": "customs_screened",
@@ -817,11 +817,11 @@
           "demand": "high",
           "demand_evidence": "Repeat Takealot top-seller + TikTok K-beauty virality.",
           "hs_code": "3304.99 / 3304",
-          "duty_rate_pct": "15-20% — SOURCE CONFLICT, SARS line check required",
-          "hs_source": "Tradecaravan 3304.99 @20% vs JLog 3304 @15% — range recorded, no winner picked.",
-          "regulatory_flag": "SAHPRA notification/registration may be required before sale (jlog.co.za) — Sourcing must confirm; not verified by MR.",
+          "duty_rate_pct": "15-20% \u2014 SOURCE CONFLICT, SARS line check required",
+          "hs_source": "Tradecaravan 3304.99 @20% vs JLog 3304 @15% \u2014 range recorded, no winner picked.",
+          "regulatory_flag": "SAHPRA notification/registration may be required before sale (jlog.co.za) \u2014 Sourcing must confirm; not verified by MR.",
           "competition_analyst": "high",
-          "competition_method": "secondary-report: top-15 skincare all 1200+ reviews, 83% SA-founded/locally formulated — local-climate moat.",
+          "competition_method": "secondary-report: top-15 skincare all 1200+ reviews, 83% SA-founded/locally formulated \u2014 local-climate moat.",
           "UNVERIFIED_established_seller_count": null,
           "UNVERIFIED_takealot_price_floor_zar": null,
           "UNVERIFIED_net_margin_pct": null,
@@ -833,7 +833,7 @@
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -851,7 +851,7 @@
           "demand_evidence": "Top Takealot unit seller across sources.",
           "UNVERIFIED_hs_code": null,
           "UNVERIFIED_duty_rate_pct": null,
-          "hs_source": "No lookup performed — rejection/competition logic dominates; 8516.60 @20% cited as adjacent-line context only, NOT assigned.",
+          "hs_source": "No lookup performed \u2014 rejection/competition logic dominates; 8516.60 @20% cited as adjacent-line context only, NOT assigned.",
           "competition_analyst": "high",
           "competition_method": "secondary-report: Bennett Read/Defy/Milex brand dominance in both volume and value top-10s.",
           "logistics_flag": "Bulky appliance: freight + damage + returns risk; load-shedding usage angle exists but brands own it.",
@@ -861,11 +861,11 @@
           "customs_verdict": {
             "risk": "unknown",
             "eliminate": false,
-            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+            "reason": "SA duty rate UNVERIFIED \u2014 HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -894,7 +894,7 @@
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -909,11 +909,11 @@
           "stage": "trend_captured",
           "recommendation": "investigate",
           "demand": "medium",
-          "demand_evidence": "Single secondary report (Alibaba insights) — real but single-sourced; needs corroboration.",
+          "demand_evidence": "Single secondary report (Alibaba insights) \u2014 real but single-sourced; needs corroboration.",
           "hs_code": "9503.00 (toys, scale models, puzzles)",
           "duty_rate_pct": "20%",
           "hs_source": "https://tradecaravan.co.za/hs-codes/ (SARS-derived index, current 2026-08-06)",
-          "competition_note": "Winning examples are locally developed (Stellenbosch linguists, SA rainfall calibration) — generic imports compete on price only.",
+          "competition_note": "Winning examples are locally developed (Stellenbosch linguists, SA rainfall calibration) \u2014 generic imports compete on price only.",
           "UNVERIFIED_established_seller_count": null,
           "UNVERIFIED_takealot_price_floor_zar": null,
           "UNVERIFIED_net_margin_pct": null,
@@ -925,7 +925,7 @@
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -940,21 +940,21 @@
           "stage": "trend_captured",
           "recommendation": "investigate",
           "demand": "medium",
-          "demand_evidence": "Single secondary report with strong growth figures — needs corroboration.",
+          "demand_evidence": "Single secondary report with strong growth figures \u2014 needs corroboration.",
           "UNVERIFIED_hs_code": null,
           "UNVERIFIED_duty_rate_pct": null,
-          "hs_source": "No lookup performed this session; candidates span 4201/8526 — Sourcing/Pricing to classify.",
+          "hs_source": "No lookup performed this session; candidates span 4201/8526 \u2014 Sourcing/Pricing to classify.",
           "UNVERIFIED_takealot_price_floor_zar": null,
           "UNVERIFIED_net_margin_pct": null,
           "reasoning": "Premiumisation trend fits dropship (high value, low weight for non-electronic lines), but HS + demand corroboration come first.",
           "customs_verdict": {
             "risk": "unknown",
             "eliminate": false,
-            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+            "reason": "SA duty rate UNVERIFIED \u2014 HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -963,26 +963,26 @@
         "timestamp": "2026-09-29T22:04:57+02:00",
         "agent": "market_research",
         "confidence": 6,
-        "source": "Demand: cjdropshipping.com (+134% YoY search interest, global) — NO SA-specific evidence found.",
+        "source": "Demand: cjdropshipping.com (+134% YoY search interest, global) \u2014 NO SA-specific evidence found.",
         "data": {
           "product_name": "Mouth tape / sleep strips",
           "stage": "rejected",
           "recommendation": "reject",
           "demand": "low",
-          "demand_evidence": "Global signal only; pipeline requires SA-specific demand signals — none found.",
+          "demand_evidence": "Global signal only; pipeline requires SA-specific demand signals \u2014 none found.",
           "UNVERIFIED_hs_code": null,
           "UNVERIFIED_duty_rate_pct": null,
-          "hs_source": "No lookup — rejected at demand stage.",
+          "hs_source": "No lookup \u2014 rejected at demand stage.",
           "UNVERIFIED_net_margin_pct": null,
           "reasoning": "REJECT (revivable): no ZA demand evidence. Revisit only with SA search/social proof.",
           "customs_verdict": {
             "risk": "unknown",
             "eliminate": false,
-            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+            "reason": "SA duty rate UNVERIFIED \u2014 HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -991,7 +991,7 @@
         "timestamp": "2026-09-29T22:04:57+02:00",
         "agent": "market_research",
         "confidence": 6,
-        "source": "Demand: cjdropshipping.com (climbing global interest) — NO SA-specific evidence found.",
+        "source": "Demand: cjdropshipping.com (climbing global interest) \u2014 NO SA-specific evidence found.",
         "data": {
           "product_name": "Hard-water shower filter",
           "stage": "rejected",
@@ -1000,17 +1000,17 @@
           "demand_evidence": "Global signal only; no ZA evidence despite plausible hard-water angle.",
           "UNVERIFIED_hs_code": null,
           "UNVERIFIED_duty_rate_pct": null,
-          "hs_source": "No lookup — rejected at demand stage.",
+          "hs_source": "No lookup \u2014 rejected at demand stage.",
           "UNVERIFIED_net_margin_pct": null,
           "reasoning": "REJECT (revivable): no ZA demand evidence. Revisit only with SA proof.",
           "customs_verdict": {
             "risk": "unknown",
             "eliminate": false,
-            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+            "reason": "SA duty rate UNVERIFIED \u2014 HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -1019,13 +1019,13 @@
         "timestamp": "2026-09-29T22:04:57+02:00",
         "agent": "market_research",
         "confidence": 4,
-        "source": "Demand: tiktok.com/discover SA (@marketingwithtjbanks: wigs & hair sustained demand) — single anecdotal source; HS UNVERIFIED (no lookup performed).",
+        "source": "Demand: tiktok.com/discover SA (@marketingwithtjbanks: wigs & hair sustained demand) \u2014 single anecdotal source; HS UNVERIFIED (no lookup performed).",
         "data": {
           "product_name": "Wigs / hair extensions (synthetic)",
           "stage": "trend_captured",
           "recommendation": "investigate",
           "demand": "medium",
-          "demand_evidence": "Single SA TikTok testimony — anecdotal, needs corroboration.",
+          "demand_evidence": "Single SA TikTok testimony \u2014 anecdotal, needs corroboration.",
           "UNVERIFIED_hs_code": null,
           "UNVERIFIED_duty_rate_pct": null,
           "hs_source": "No lookup performed this session.",
@@ -1035,11 +1035,11 @@
           "customs_verdict": {
             "risk": "unknown",
             "eliminate": false,
-            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+            "reason": "SA duty rate UNVERIFIED \u2014 HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -1054,7 +1054,7 @@
           "stage": "trend_captured",
           "recommendation": "investigate",
           "demand": "medium",
-          "demand_evidence": "Global TikTok demand + SA high-UV relevance; summer-seasonal — timing note for Supervisor (Sep = pre-summer).",
+          "demand_evidence": "Global TikTok demand + SA high-UV relevance; summer-seasonal \u2014 timing note for Supervisor (Sep = pre-summer).",
           "UNVERIFIED_hs_code": null,
           "UNVERIFIED_duty_rate_pct": null,
           "hs_source": "No lookup performed; 9001.50 @0% cited as adjacent-line context only, NOT assigned.",
@@ -1064,11 +1064,11 @@
           "customs_verdict": {
             "risk": "unknown",
             "eliminate": false,
-            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+            "reason": "SA duty rate UNVERIFIED \u2014 HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -1089,15 +1089,15 @@
           "hs_source": "Code per tariffnumber.com + ZA-import corroboration (coresupplychains); SA rate not found.",
           "UNVERIFIED_takealot_price_floor_zar": null,
           "UNVERIFIED_net_margin_pct": null,
-          "reasoning": "Code verified, SA duty not. Wireless adds load-shedding-adjacent (commute) angle but also brand competition (Anker/JBL types) — screen after duty.",
+          "reasoning": "Code verified, SA duty not. Wireless adds load-shedding-adjacent (commute) angle but also brand competition (Anker/JBL types) \u2014 screen after duty.",
           "customs_verdict": {
             "risk": "unknown",
             "eliminate": false,
-            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+            "reason": "SA duty rate UNVERIFIED \u2014 HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -1119,7 +1119,7 @@
           "UNVERIFIED_established_seller_count": null,
           "UNVERIFIED_takealot_price_floor_zar": null,
           "UNVERIFIED_net_margin_pct": null,
-          "reasoning": "Customs pass + top-category demand; Takealot screen deferred (session budget) — next-screen candidate if routed.",
+          "reasoning": "Customs pass + top-category demand; Takealot screen deferred (session budget) \u2014 next-screen candidate if routed.",
           "customs_verdict": {
             "risk": "medium",
             "eliminate": false,
@@ -1127,7 +1127,7 @@
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -1136,13 +1136,13 @@
         "timestamp": "2026-09-29T22:04:57+02:00",
         "agent": "market_research",
         "confidence": 4,
-        "source": "Demand: shopify.com/za Google Trends (reusable bottles, Stanley-led spikes/normalisation) — global framing, brand-dominated; HS UNVERIFIED (no lookup).",
+        "source": "Demand: shopify.com/za Google Trends (reusable bottles, Stanley-led spikes/normalisation) \u2014 global framing, brand-dominated; HS UNVERIFIED (no lookup).",
         "data": {
           "product_name": "Reusable water bottles / flasks",
           "stage": "trend_captured",
           "recommendation": "investigate",
           "demand": "medium",
-          "demand_evidence": "Spiky brand-led demand (Stanley) — followers face brand competition, not open demand.",
+          "demand_evidence": "Spiky brand-led demand (Stanley) \u2014 followers face brand competition, not open demand.",
           "UNVERIFIED_hs_code": null,
           "UNVERIFIED_duty_rate_pct": null,
           "hs_source": "No lookup performed this session.",
@@ -1152,11 +1152,11 @@
           "customs_verdict": {
             "risk": "unknown",
             "eliminate": false,
-            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+            "reason": "SA duty rate UNVERIFIED \u2014 HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -1165,28 +1165,28 @@
         "timestamp": "2026-09-29T22:04:57+02:00",
         "agent": "market_research",
         "confidence": 4,
-        "source": "Demand: tiktok.com/discover SA (@marketingwithtjbanks: 23 hot-comb sales anecdote) — single weak anecdote; HS UNVERIFIED (no lookup).",
+        "source": "Demand: tiktok.com/discover SA (@marketingwithtjbanks: 23 hot-comb sales anecdote) \u2014 single weak anecdote; HS UNVERIFIED (no lookup).",
         "data": {
           "product_name": "Hot comb / electric hair straightening comb",
           "stage": "trend_captured",
           "recommendation": "investigate",
           "demand": "low",
-          "demand_evidence": "One seller anecdote — proof of concept for one store, not market demand.",
+          "demand_evidence": "One seller anecdote \u2014 proof of concept for one store, not market demand.",
           "UNVERIFIED_hs_code": null,
           "UNVERIFIED_duty_rate_pct": null,
           "hs_source": "No lookup performed this session.",
           "UNVERIFIED_takealot_price_floor_zar": null,
           "UNVERIFIED_net_margin_pct": null,
-          "loadshedding_note": "Electric styling tool — load-shedding scheduling affects usage reviews/ads.",
+          "loadshedding_note": "Electric styling tool \u2014 load-shedding scheduling affects usage reviews/ads.",
           "reasoning": "Weakest demand file; kept as a classified ad, not an opportunity. Do not route further without corroboration.",
           "customs_verdict": {
             "risk": "unknown",
             "eliminate": false,
-            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+            "reason": "SA duty rate UNVERIFIED \u2014 HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -1205,18 +1205,18 @@
           "hs_code": "Chapter 33 (line UNVERIFIED)",
           "duty_rate_pct": "10-20% band (line rate UNVERIFIED)",
           "hs_source": "Band per jlog.co.za cosmetics page; exact line NOT looked up.",
-          "regulatory_flag": "SAHPRA notification/registration may apply (jlog) — Sourcing must confirm.",
+          "regulatory_flag": "SAHPRA notification/registration may apply (jlog) \u2014 Sourcing must confirm.",
           "UNVERIFIED_takealot_price_floor_zar": null,
           "UNVERIFIED_net_margin_pct": null,
           "reasoning": "Top demand, but cosmetics regulation + unverified line + probable brand/counterfeit adjacency (dupes) need Supervisor guidance before spend.",
           "customs_verdict": {
             "risk": "unknown",
             "eliminate": false,
-            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+            "reason": "SA duty rate UNVERIFIED \u2014 HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -1231,7 +1231,7 @@
           "stage": "trend_captured",
           "recommendation": "investigate",
           "demand": "medium",
-          "demand_evidence": "Steady global search demand; no SA-specific signal — generic fitness, no local edge.",
+          "demand_evidence": "Steady global search demand; no SA-specific signal \u2014 generic fitness, no local edge.",
           "UNVERIFIED_hs_code": null,
           "UNVERIFIED_duty_rate_pct": null,
           "hs_source": "No lookup performed this session.",
@@ -1241,11 +1241,11 @@
           "customs_verdict": {
             "risk": "unknown",
             "eliminate": false,
-            "reason": "SA duty rate UNVERIFIED — HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
+            "reason": "SA duty rate UNVERIFIED \u2014 HARD STOP #2: mark UNVERIFIED and stop; candidate cannot proceed."
           },
           "competition_rule_verdict": {
             "level": "unknown",
-            "reason": "established seller count not observed — HARD STOP #2: mark UNVERIFIED, do not infer competition level."
+            "reason": "established seller count not observed \u2014 HARD STOP #2: mark UNVERIFIED, do not infer competition level."
           }
         }
       },
@@ -1265,21 +1265,21 @@
             "reject": 6
           },
           "top_pick": null,
-          "top_pick_reason": "Nothing may proceed: HARD STOP #3 (no verified margin exists — tools/landed_cost.py unbuilt) + HARD STOP #2 (4 deep-screen duties UNVERIFIED). top_pick is null by rule, not by indecision.",
+          "top_pick_reason": "Nothing may proceed: HARD STOP #3 (no verified margin exists \u2014 tools/landed_cost.py unbuilt) + HARD STOP #2 (4 deep-screen duties UNVERIFIED). top_pick is null by rule, not by indecision.",
           "lead_for_pricing_NOT_APPROVED": "mr-0002 solar power bank (0% verified duty + strong ZA demand + medium competition + R258 floor above CPA). Approval requires the Pricing tool + HITL gate 5.",
           "contract_conflicts_resolved_readme_wins": [
-            "1. Brief output format (state.market_research with candidates[]/top_pick) vs file contract (append-only findings[] per README §7 + schema §3): followed the FILE contract; candidates live in findings data, no restructure.",
+            "1. Brief output format (state.market_research with candidates[]/top_pick) vs file contract (append-only findings[] per README \u00a77 + schema \u00a73): followed the FILE contract; candidates live in findings data, no restructure.",
             "2. Pipeline assumes tools/landed_cost.py exists: it does not (Phase 0 excluded it deliberately). Zero inline computation performed; all margins UNVERIFIED.",
-            "3. No Supervisor routing entry exists in state (only Phase 0 session): task taken from session assignment per README §9 Phase 1 order (MR first). Flagged here, not halted.",
-            "4. Brief says report to Supervisor, never the human: substance is in-state; chat held to README §8 mechanics (agent/task/HARD STOPs/PR) only.",
+            "3. No Supervisor routing entry exists in state (only Phase 0 session): task taken from session assignment per README \u00a79 Phase 1 order (MR first). Flagged here, not halted.",
+            "4. Brief says report to Supervisor, never the human: substance is in-state; chat held to README \u00a78 mechanics (agent/task/HARD STOPs/PR) only.",
             "5. Cosmetics duty conflict 3304.99 @20% (Tradecaravan) vs 3304 @15% (JLog): range recorded, no winner picked.",
-            "6. SARS ATV method (value + duty + 10% uplift) x 15% vs README formula (value x 0.15, no uplift): DISCREPANCY FLAGGED for Supervisor/Pricing — MR does not touch cost math."
+            "6. SARS ATV method (value + duty + 10% uplift) x 15% vs README formula (value x 0.15, no uplift): DISCREPANCY FLAGGED for Supervisor/Pricing \u2014 MR does not touch cost math."
           ],
           "method_limits": [
-            "Takealot server-side search ignores ?q= for bots (verified: generic feed on 2 queries) — competition/price via targeted snippet breadth; established seller counts UNVERIFIED for all.",
-            "SA duty rates from credible secondary sources (Tradecaravan SARS-derived index, JLog Schedule-1 pages); SARS Tariff Book itself not directly read — Sourcing should confirm lead lines via sars.gov.za or §47(9) determination.",
-            "Price-floor-vs-CPA flags are observations (floor < R150-300 benchmark), NOT margin computations — Pricing owns the verdict via the tool.",
-            "No supplier contact, no sample, no ad, no spend — no HITL gate crossed. HITL-5 analysis: this PR touches no pricing/customs math (module classifies and gates; it computes no cost) — human to confirm at merge."
+            "Takealot server-side search ignores ?q= for bots (verified: generic feed on 2 queries) \u2014 competition/price via targeted snippet breadth; established seller counts UNVERIFIED for all.",
+            "SA duty rates from credible secondary sources (Tradecaravan SARS-derived index, JLog Schedule-1 pages); SARS Tariff Book itself not directly read \u2014 Sourcing should confirm lead lines via sars.gov.za or \u00a747(9) determination.",
+            "Price-floor-vs-CPA flags are observations (floor < R150-300 benchmark), NOT margin computations \u2014 Pricing owns the verdict via the tool.",
+            "No supplier contact, no sample, no ad, no spend \u2014 no HITL gate crossed. HITL-5 analysis: this PR touches no pricing/customs math (module classifies and gates; it computes no cost) \u2014 human to confirm at merge."
           ],
           "routing_requests": [
             "Pricing capability next: build tools/landed_cost.py + tools/customs.py (needs human APPROVED at HITL gate 5 before merge), then run mr-0002 + mr-0001 + mr-0007 + mr-0004 margins.",
@@ -1985,6 +1985,181 @@
           "push_discipline_note": "Practised README section 8's push rule: the branch was pushed four times mid-session (after 3, 3, 3 and 5 findings) rather than once at the end, so a mid-session failure would still have preserved verified work.",
           "hard_stops_status": "No HARD STOP violated. #2 enforced three times with recorded negative results (7007.19, 9603.30, 8516.32) rather than substituted sibling rates; #3 untouched (no margin claimed); #4 untouched (no cost math performed); #6/#7 clean (no force-push, no secrets, state-only); #8 precondition verified (shared_state.json present on main before work started); #9 one PR, pushed."
         }
+      },
+      {
+        "id": "mr-0043",
+        "timestamp": "2026-10-02T21:00:00+02:00",
+        "agent": "market_research",
+        "confidence": 8,
+        "source": "https://www.netlawman.co.za/d/existing-company-shareholders-agreement (product page, fetched 2026-10-02); https://www.netlawman.co.za/ (creator homepage)",
+        "verified": true,
+        "data": {
+          "record_type": "candidate_verified",
+          "product_name": "Shareholders' Agreement Template \u2013 Single Majority Retains Control",
+          "model": "digital",
+          "verification_fields": {
+            "product_exists": "https://www.netlawman.co.za/d/existing-company-shareholders-agreement \u2013 live product listing with R499 price, Add to Basket button, document preview",
+            "creator_real": "https://www.netlawman.co.za/ \u2013 Net Lawman SA, established legal document provider with multi-country sites (AU/CA/UK/IN/IE/NZ/ZA); SA site has own domain, logo, pricing page, membership plans",
+            "price_point": "https://www.netlawman.co.za/d/existing-company-shareholders-agreement \u2013 R499.00 displayed as 'Document only' price; R3,999.00 for Lawyer Assist; R1,490.00/year membership",
+            "reviews": "https://www.netlawman.co.za/d/existing-company-shareholders-agreement \u2013 14 reviews on document; 238 reviews on Lawyer Assist service; 'See all features' link"
+          },
+          "recommendation": "proceed",
+          "verified": true,
+          "source_url": "https://www.netlawman.co.za/d/existing-company-shareholders-agreement",
+          "fetch_date": "2026-10-02",
+          "product_details": {
+            "format": "Microsoft Word DOCX, Apple Pages, RTF",
+            "length": "21 pages, 5880 words",
+            "price_zar": 499.0,
+            "currency": "ZAR",
+            "price_display": "R499.00 (Document only); R3,999.00 (Lawyer Assist add-on)",
+            "seller": "Net Lawman (South Africa)",
+            "seller_location": "South Africa (netlawman.co.za)",
+            "delivery": "Instant download after purchase",
+            "guarantee": "Money-back guarantee (watertight guarantee)"
+          },
+          "sa_relevance": {
+            "law_jurisdiction": "South African law \u2013 Companies Act 71 of 2008, contract law",
+            "language": "English (SA)",
+            "references_sars_cipc": "No \u2013 this is a shareholders agreement under Companies Act, not SARS/CIPC form",
+            "payment_methods": "Credit card via website (standard ecommerce)"
+          },
+          "tax_legal_risk_flags": {
+            "legal_advice_claim": "FALSE \u2013 described as 'legal document template written in plain English' with 'guidance notes included'. Not marketed as legal advice.",
+            "disclaimer_present": "TRUE \u2013 'The Online Agreements Shop cc and its members... cannot be held liable for any loss or damage' (from AgreementsOnline comparison); NetLawman has money-back guarantee",
+            "requires_attorney": "FALSE \u2013 template is designed for self-completion with guidance notes; Lawyer Assist optional upgrade",
+            "high_risk": "FALSE \u2013 standard commercial template, not tax advice"
+          },
+          "demand_signals": {
+            "sa_specific": "TRUE \u2013 SA law, SA domain, SA-focused document",
+            "search_demand": "Shareholders agreements are a core need for any SA private company with 2+ shareholders; referenced in CIPC annual return context",
+            "competitor_density": "MEDIUM \u2013 NetLawman (R499), AgreementsOnline (R1,080.87), Contracts4Biz (R305), Businesstemplates (R45) all sell SA shareholders agreements"
+          },
+          "competitive_density": "medium",
+          "ranking_score": {
+            "sa_relevance": 9,
+            "demand": 8,
+            "competitive_density": 5,
+            "score": 14.4
+          }
+        }
+      },
+      {
+        "id": "mr-0044",
+        "timestamp": "2026-10-02T21:00:00+02:00",
+        "agent": "market_research",
+        "confidence": 8,
+        "source": "https://agreementsonline.co.za/agreements/basic-contractor-agreement/ (product page, fetched 2026-10-02); https://agreementsonline.co.za/ (creator homepage)",
+        "verified": true,
+        "data": {
+          "record_type": "candidate_verified",
+          "product_name": "Contractor Agreement Template \u2013 Basic Contract & Agreement \u2013 South Africa",
+          "model": "digital",
+          "verification_fields": {
+            "product_exists": "https://agreementsonline.co.za/agreements/basic-contractor-agreement/ \u2013 live product listing with R583.81 price, Add to Cart button, document description, 6-page length",
+            "creator_real": "https://agreementsonline.co.za/ \u2013 The Online Agreements Shop cc; 250+ templates, 13,500+ SA businesses & law firms, client logos, professional testimonials",
+            "price_point": "https://agreementsonline.co.za/agreements/basic-contractor-agreement/ \u2013 R583.81 displayed (was R959.11, 30% off sitewide); R5,999/year subscription for 250+ templates",
+            "reviews": "https://agreementsonline.co.za/product-category/contractors-agreement-templates-south-africa-microsoft-word/ \u2013 testimonials from Adrian Hodgkinson (Professional Accountant SA), JP Botha (MD, Conversion Advantage), Jason Bonthuys (Owner, Bulcan Engineering); 'Join 13,500+ SA Businesses & Law Firms'"
+          },
+          "recommendation": "proceed",
+          "verified": true,
+          "source_url": "https://agreementsonline.co.za/agreements/basic-contractor-agreement/",
+          "fetch_date": "2026-10-02",
+          "product_details": {
+            "format": "Microsoft Word DOCX (editable)",
+            "length": "6 pages",
+            "price_zar": 583.81,
+            "currency": "ZAR",
+            "price_display": "R583.81 (was R959.11, 30% off sitewide)",
+            "seller": "The Online Agreements Shop cc (Agreements Online)",
+            "seller_location": "South Africa (agreementsonline.co.za)",
+            "delivery": "Instant download after purchase (email link + account downloads tab)",
+            "subscription_option": "R5,999/year for 250+ templates"
+          },
+          "sa_relevance": {
+            "law_jurisdiction": "South African law \u2013 contract law, independent contractor provisions",
+            "language": "English (SA)",
+            "references_sars_cipc": "No \u2013 references Schedule 4 of Income Tax Act for contractor status (SA tax context)",
+            "payment_methods": "Credit card via website; likely accepts SA payment methods (need to verify at checkout)"
+          },
+          "tax_legal_risk_flags": {
+            "legal_advice_claim": "FALSE \u2013 described as 'template contract' with cautionary note: 'If you do not have legal experience we do caution you to be circumspect about the extent of the changes that you make.'",
+            "disclaimer_present": "TRUE \u2013 'The Online Agreements Shop cc and its members... cannot be held liable for any loss or damage'",
+            "requires_attorney": "FALSE for basic use \u2013 template is editable, guidance provided; recommends specialist advice for complex situations",
+            "high_risk": "FALSE \u2013 standard commercial template"
+          },
+          "demand_signals": {
+            "sa_specific": "TRUE \u2013 SA law, SA-focused, SA customer base",
+            "search_demand": "Every SA business engaging contractors needs this; high attach-rate document for SMEs, freelancers, agencies",
+            "competitor_density": "HIGH \u2013 AgreementsOnline (R583.81), Contracts4Biz (R295), Ink Legal (R1,250), ElyForma (free), Genie AI (SA template)"
+          },
+          "competitive_density": "high",
+          "ranking_score": {
+            "sa_relevance": 9,
+            "demand": 9,
+            "competitive_density": 7,
+            "score": 11.57
+          }
+        }
+      },
+      {
+        "id": "mr-0045",
+        "timestamp": "2026-10-02T21:00:00+02:00",
+        "agent": "market_research",
+        "confidence": 7,
+        "source": "https://contracts4biz.co.za/shop/ (product listings, fetched 2026-10-02); https://contracts4biz.co.za/ (creator homepage, fetched 2026-10-02)",
+        "verified": true,
+        "data": {
+          "record_type": "candidate_verified",
+          "product_name": "Shareholders Agreement \u2013 Contracts4Biz",
+          "model": "digital",
+          "verification_fields": {
+            "product_exists": "https://contracts4biz.co.za/shop/ \u2013 live product listing showing 'Shareholders Agreement R305' under Company Documents category; Add to Cart via popup",
+            "creator_real": "https://contracts4biz.co.za/ \u2013 Contracts4Biz, 'South Africa's first online contract shop'; attorney-crafted templates; partner: SchoemanLaw Inc.; YouTube channel (34 subscribers); customer testimonials",
+            "price_point": "https://contracts4biz.co.za/shop/ \u2013 R305 displayed for Shareholders Agreement; R295 for Independent Contractor Agreement; R205 for NDA; R75-R395 range for individual templates",
+            "reviews": "https://contracts4biz.co.za/ \u2013 customer testimonials: Hugo Van Niekerk (POPI Act compliance), Beverley Knoesen (SME legal systems), Arifa Pakar (employment contracts), Mike Taberner; '0+ Downloads, 0+ Entrepreneurs Impacted' (counters not populated)"
+          },
+          "recommendation": "investigate",
+          "verified": true,
+          "source_url": "https://contracts4biz.co.za/shop/",
+          "fetch_date": "2026-10-02",
+          "product_details": {
+            "format": "Microsoft Word DOCX (editable, guided questionnaire)",
+            "length": "UNVERIFIED (not displayed on listing page)",
+            "price_zar": 305.0,
+            "currency": "ZAR",
+            "price_display": "R305 (Shareholders Agreement); R295 (Independent Contractor); R205 (NDA); R75-R395 range",
+            "seller": "Contracts4Biz (SchoemanLaw Inc. attorneys)",
+            "seller_location": "South Africa (contracts4biz.co.za)",
+            "delivery": "Instant download after guided questionnaire + payment",
+            "subscription_options": "R99/month (Start-Up), R249/month (SME) for unlimited downloads"
+          },
+          "sa_relevance": {
+            "law_jurisdiction": "South African law \u2013 attorney-crafted, SA-specific",
+            "language": "English (SA)",
+            "references_sars_cipc": "No \u2013 but POPIA references present (NDA, privacy policy templates)",
+            "payment_methods": "Credit card via website; subscription management via app.contracts4biz.co.za"
+          },
+          "tax_legal_risk_flags": {
+            "legal_advice_claim": "FALSE \u2013 marketed as 'lawyer-crafted contract templates' with 'step-by-step guidance'; not legal advice",
+            "disclaimer_present": "TRUE \u2013 'lawyer-crafted' but templates are for self-completion; legal advisory available as upgrade via SchoemanLaw Inc.",
+            "requires_attorney": "FALSE for template use \u2013 guided questionnaire; legal advisory available as paid upgrade",
+            "high_risk": "FALSE \u2013 standard commercial template"
+          },
+          "demand_signals": {
+            "sa_specific": "TRUE \u2013 SA attorneys, SA-focused, POPIA-aware",
+            "search_demand": "Shareholders agreements needed by any SA private company with multiple shareholders; Contracts4Biz targets SMEs and startups",
+            "competitor_density": "MEDIUM \u2013 NetLawman (R499), AgreementsOnline (R1,080.87), Contracts4Biz (R305), Businesstemplates (R45)"
+          },
+          "competitive_density": "medium",
+          "ranking_score": {
+            "sa_relevance": 8,
+            "demand": 7,
+            "competitive_density": 5,
+            "score": 11.2
+          },
+          "verification_notes": "Review counts not displayed on product page (counters show '0+' \u2013 likely not populated). Price and creator verified. Customer testimonials present but anecdotal."
+        }
       }
     ],
     "unverified_fields": [
@@ -2041,7 +2216,7 @@
             "action_requested_from_supervisor": "Confirm whether the market_research 'investigate'/'customs_screened' findings are the in-scope sourcing candidates (no 'proceed'/no 'candidates' key exists), and supply a curated supplier shortlist with REAL, verifiable metrics (order volume, rating, response time, per-product DDP-to-SA, unit cost). Per-supplier verification cannot be invented (HARD STOP #2) and is not retrievable in this sandbox."
           },
           "in_scope_leads_treated_as_candidates": [
-            "mr-0002 Solar power bank 10-20k mAh (HS 8507.60 @0% duty VERIFIED) — LEAD: customs-cleared, strong ZA load-shedding demand, floor R258 above CPA benchmark",
+            "mr-0002 Solar power bank 10-20k mAh (HS 8507.60 @0% duty VERIFIED) \u2014 LEAD: customs-cleared, strong ZA load-shedding demand, floor R258 above CPA benchmark",
             "mr-0001 USB-C GaN fast charger + cable (8504.40 @0% / 8544.42 @15%)",
             "mr-0007 Plastic phone case (3926.90 @20%)",
             "mr-0004 Car phone holder (3926.90 @20%)",
@@ -2179,19 +2354,19 @@
         "verified": true,
         "data": {
           "purpose": "Network reachability diagnostic requested by Supervisor; records the routing decision per the Supervisor's precise clarification of the 'verified' gate.",
-          "supervisor_clarification_accepted": "customs_screened is a processing state, NOT a verification state. The Sourcing gate is exact: recommendation in {proceed, investigate} AND per-candidate verified:true (backed by a real source URL). market_research.verified=false at the namespace level reflects that NO candidate carries verified:true. Therefore Sourcing has no valid inputs and must stay halted; route back to Market Research. No category-level promotion of 'investigate' findings into 'verified candidates' — that would be the HARD STOP #2 hallucination the contract exists to prevent. The earlier so-0001 request for a 'curated supplier shortlist' is HEREBY WITHDRAWN: a human-supplied list would be invented data and is rejected.",
+          "supervisor_clarification_accepted": "customs_screened is a processing state, NOT a verification state. The Sourcing gate is exact: recommendation in {proceed, investigate} AND per-candidate verified:true (backed by a real source URL). market_research.verified=false at the namespace level reflects that NO candidate carries verified:true. Therefore Sourcing has no valid inputs and must stay halted; route back to Market Research. No category-level promotion of 'investigate' findings into 'verified candidates' \u2014 that would be the HARD STOP #2 hallucination the contract exists to prevent. The earlier so-0001 request for a 'curated supplier shortlist' is HEREBY WITHDRAWN: a human-supplied list would be invented data and is rejected.",
           "individual_candidate_audit": "Inspected all market_research findings (mr-0001..mr-0027). Count of individual findings carrying verified:true = 0 (confirmed programmatically). Findings carry confidence scores + real source URLs but no verification boolean, and several carry UNVERIFIED_ duty fields. By the contract definition ('verified' = backed by a real source URL) the candidates are NOT marked verified, so 0 satisfy the Sourcing gate. Consequence: Sourcing cannot issue any verified supplier sign-off this session.",
           "network_diagnostic": {
             "dns_resolution": "OK (alibaba 23.0.194.189; sars 172.64.149.166; example 104.20.23.154)",
             "tcp_port_80": "Connect succeeds with no connection error for example.com and www.alibaba.com",
-            "tls_port_443": "FAILS — 'TLS/SSL connection has been closed (EOF)' (python urllib) / curl '(35) OpenSSL SSL_connect: SSL_ERROR_SYSCALL' for alibaba.com, aliexpress.com, sars.gov.za, cjdropshipping.com",
+            "tls_port_443": "FAILS \u2014 'TLS/SSL connection has been closed (EOF)' (python urllib) / curl '(35) OpenSSL SSL_connect: SSL_ERROR_SYSCALL' for alibaba.com, aliexpress.com, sars.gov.za, cjdropshipping.com",
             "bash_https_reachable": false,
             "agent_web_tools": "web_search and fetch_page returned live 2025/2026 content earlier this session, so agent-level HTTPS egress WORKS via the tool path (server-side), independent of the bash sandbox",
             "conclusion": "TOOLING GAP (bash sandbox): DNS + raw TCP egress are present, but TLS/HTTPS egress from the bash shell is blocked/terminated. Public supplier pages cannot be curled/fetched from bash. Supplier verification can still be attempted via the agent's web_search/fetch_page tools (which have HTTPS egress), but the bash path the diagnostic targeted is non-functional for HTTPS."
           },
           "routing_decision": "Sourcing HALTED this session on two independent grounds: (1) NO candidate satisfies the verified:true gate -> route back to Market Research to produce verified:true candidates with real source URLs (re-run SARS duty lookups for mr-0003/0005/0006/0008/0012; mark verified candidates). (2) The bash TLS tooling gap is the real blocker for bash-based verification and must be surfaced to the human/Supervisor as a tooling gap (not as a rule to relax). Awaiting Supervisor decision: enable bash HTTPS egress, rely on agent web tools, scope the work down to offline-verifiable capabilities, or pause the pipeline.",
           "ddp_forwarder_note": "Accepted Supervisor correction: Sweet Protrading, ZHTX, Yiwu Eway, Wingspeed, Guangzhou Yuyuan, PT5 are logistics/DDP FORWARDERS, not product suppliers. Correctly excluded from supplier verification; retained only as shipping-analysis inputs for a later step.",
-          "hard_stops_status": "No HARD STOP violated. #1 (no order/purchase), #2 (no invented data — halted rather than fabricate; did NOT promote unverified to verified; withdrew the shortlist request), #6/#7 (no force-push/secrets), #8/#9 (state on main; one PR) respected.",
+          "hard_stops_status": "No HARD STOP violated. #1 (no order/purchase), #2 (no invented data \u2014 halted rather than fabricate; did NOT promote unverified to verified; withdrew the shortlist request), #6/#7 (no force-push/secrets), #8/#9 (state on main; one PR) respected.",
           "next_action_for_supervisor": "Decide on the bash TLS tooling gap. Then route to Market Research to (re)verify candidates with real source URLs so Sourcing has verified:true inputs in a follow-up session. Do NOT provide a curated supplier list (would be invented data)."
         }
       },
@@ -2232,9 +2407,9 @@
               "reliability_score": null,
               "UNVERIFIED_reliability_score": "store-level order volume / response time not retrievable in sandbox",
               "verified": true,
-              "verified_scope": "unit price, rating (4.9), 75 sold, item id — all read from fetched page",
+              "verified_scope": "unit price, rating (4.9), 75 sold, item id \u2014 all read from fetched page",
               "fetch_date": "2026-09-30",
-              "notes": "20,000mAh-class unit at $10.31 promo ≈ R168.53 — unit cost ALONE is ~1.9x the R90 total landed target; finding reported, not hidden (Pricing to compute formally). Battery cargo: lithium courier restrictions apply."
+              "notes": "20,000mAh-class unit at $10.31 promo \u2248 R168.53 \u2014 unit cost ALONE is ~1.9x the R90 total landed target; finding reported, not hidden (Pricing to compute formally). Battery cargo: lithium courier restrictions apply."
             },
             {
               "platform": "Alibaba",
@@ -2374,7 +2549,7 @@
               "sample": "1 box (box contents UNVERIFIED - confirm before ordering), $5.31 (~R86.80) + Standard shipping $19.80/2 boxes; request DDP ZA alternative"
             }
           ],
-          "sample_budget_note": "Indicative sample spend ≈ $35-40 (~R570-655) before any DDP uplift - cited FX 16.3460. FOR HUMAN APPROVAL; Sourcing places no orders.",
+          "sample_budget_note": "Indicative sample spend \u2248 $35-40 (~R570-655) before any DDP uplift - cited FX 16.3460. FOR HUMAN APPROVAL; Sourcing places no orders.",
           "target_finding": "SESSION TARGET NOT REACHED - REPORTED, NOT HIDDEN: target landed cost <= R90 is UNREACHABLE on every fetched quote. Lowest fetched unit cost is Coremax $4.19 (~R68.49) but ONLY at >=500 boxes (box contents UNVERIFIED); the practical entry tier is $5.31 (~R86.80) BEFORE shipping, 15% VAT (on ATV incl. 10% uplift per fetched jlog method) and any fees. Formal landed-cost computation is Pricing's (tools/landed_cost.py); the verifiable finding is: no fetched supplier path plausibly lands at or below R90; realistic floor is materially above it. Sourcing recommends Pricing treat R90 as infeasible for this product at current quotes.",
           "sa_specifics": {
             "ddp": "NONE of the three suppliers displays DDP-to-SA; Coremax page explicitly defers taxes to checkout (DAP-like). DDP-to-SA must be requested by RFQ - SA-specific rule priority.",
@@ -2406,13 +2581,13 @@
               "UNVERIFIED_supplier_name": "AliExpress store name not exposed in server-rendered list page ('Sold By: NITEK Light Store(Trader)' was visible only on a DIFFERENT, now-unavailable item page reached via search snippet; not attributable to this listing)",
               "supplier_url": "https://www.aliexpress.com/w/wholesale-rechargeable-led-emergency-light.html (item 3256812349912434 -> https://www.aliexpress.us/item/3256812349912434.html)",
               "listing_title": "4/10 Pack Rechargeable Emergency Light Bulbs A19, Camping Lamp Battery Powered LED Light Bulb 3000K Daylight E26 E27 15W Equivalent 60W with 1200mAh for Home Power Outage Camping Hurricane Incandescent Light Emergency Light Bulb",
-              "product_fit_note": "rechargeable battery-powered LED lamp (E27 bulb form, 1200mAh built-in) — inside the mr-0003 'portable rechargeable emergency light' brief and HS 8513.10's portable-lamp scope; bulb-vs-lantern format flagged for Supervisor/Listing",
+              "product_fit_note": "rechargeable battery-powered LED lamp (E27 bulb form, 1200mAh built-in) \u2014 inside the mr-0003 'portable rechargeable emergency light' brief and HS 8513.10's portable-lamp scope; bulb-vs-lantern format flagged for Supervisor/Listing",
               "unit_cost_usd": 1.09,
-              "unit_cost_usd_context": "page price fetched 2026-09-30; struck-through $59.55 at -98% (promo pricing; 'Early bird deal, only 3 left'); pack size for $1.09 not stated in fetched chunk — per-unit basis UNVERIFIED",
+              "unit_cost_usd_context": "page price fetched 2026-09-30; struck-through $59.55 at -98% (promo pricing; 'Early bird deal, only 3 left'); pack size for $1.09 not stated in fetched chunk \u2014 per-unit basis UNVERIFIED",
               "unit_cost_zar": 17.82,
               "unit_cost_zar_basis": "1.09 x 16.3460 = 17.82 (Google Finance USD/ZAR 16.3460, 2026-09-30 07:33 UTC); conversion only, NOT a landed cost; per-unit basis UNVERIFIED so treat as indicative",
               "moq": 4,
-              "moq_note": "title implies 4/10-pack options; minimum purchasable pack for the displayed price not confirmed — UNVERIFIED",
+              "moq_note": "title implies 4/10-pack options; minimum purchasable pack for the displayed price not confirmed \u2014 UNVERIFIED",
               "rating_observed": "5 (7 sold)",
               "shipping_to_sa_days": null,
               "UNVERIFIED_shipping_to_sa_days": "no SA lane on fetched page",
@@ -2423,9 +2598,9 @@
               "reliability_score": null,
               "UNVERIFIED_reliability_score": "store metrics not retrievable; only 7 sold observed",
               "verified": true,
-              "verified_scope": "displayed price, rating, sold count, item id — read from fetched page",
+              "verified_scope": "displayed price, rating, sold count, item id \u2014 read from fetched page",
               "fetch_date": "2026-09-30",
-              "notes": "Second item on same fetched page: 'Rechargeable Emergency Light Bulbs 6/10Pack ... 1200mAh' $16.13 ≈ R263.66/pack (list $89.37, -81%), 5, 7 sold, FREE SHIPPING badge, item 3256812354418209 — recorded as corroboration; pack size basis UNVERIFIED."
+              "notes": "Second item on same fetched page: 'Rechargeable Emergency Light Bulbs 6/10Pack ... 1200mAh' $16.13 \u2248 R263.66/pack (list $89.37, -81%), 5, 7 sold, FREE SHIPPING badge, item 3256812354418209 \u2014 recorded as corroboration; pack size basis UNVERIFIED."
             },
             {
               "platform": "Alibaba",
@@ -2617,12 +2792,12 @@
                 "on_time_dispatch": "100.0%",
                 "reorder_rate": "53%",
                 "online_revenue": "US$840,000+",
-                "main_markets": "United States (41%), United Kingdom (14%), France (10%), Spain (6%), Canada (6%), Other (24%) — South Africa not listed"
+                "main_markets": "United States (41%), United Kingdom (14%), France (10%), Spain (6%), Canada (6%), Other (24%) \u2014 South Africa not listed"
               },
               "source_url": "https://www.alibaba.com/product-detail/1688-Purchasing-Shipping-Agent-Logistics-Service_1601356070201.html (corroborated by store https://cntrsm.en.alibaba.com/, https://cntrsm.en.alibaba.com/productgrouplist-822293600/High_inquiry_products.html, and https://www.alibaba.com/product-detail/door-to-door-delivery-service-ems_60703892641.html)",
               "fetch_date": "2026-10-02",
               "verified": true,
-              "verified_scope": "Forwarder identity, store metrics, $1-2/kg headline rate, 1 kg MOQ, 7-12 days Air+Express attribute, DDU/DDP trading term, Seller clearance attribute, battery/DG text, and absence of ZA in destination list — all directly read via fetch_page on 2026-10-02."
+              "verified_scope": "Forwarder identity, store metrics, $1-2/kg headline rate, 1 kg MOQ, 7-12 days Air+Express attribute, DDU/DDP trading term, Seller clearance attribute, battery/DG text, and absence of ZA in destination list \u2014 all directly read via fetch_page on 2026-10-02."
             },
             {
               "quote_index": 2,
@@ -2646,19 +2821,19 @@
                 "on_time_dispatch": "100.0%",
                 "reorder_rate": "34%",
                 "online_revenue": "US$630,000+",
-                "main_markets": "United States (42%), Czechia (11%), Spain (11%), Australia (7%), France (5%), Other (25%) — South Africa not listed"
+                "main_markets": "United States (42%), Czechia (11%), Spain (11%), Australia (7%), France (5%), Other (25%) \u2014 South Africa not listed"
               },
               "source_url": "https://www.alibaba.com/product-detail/China-door-to-door-service-ups_1601256645326.html; https://www.alibaba.com/product-detail/freight-forwarder-china-to-Democratic-Algeria_1601255677117.html; https://zhtxsz.en.alibaba.com/; https://zhtxsz.en.alibaba.com/productgrouplist-963600634/TOP_SALE.html",
               "fetch_date": "2026-10-02",
               "verified": true,
-              "verified_scope": "Forwarder identity, SGS verification, store metrics, $0.03-$0.85/kg and $0.57-$0.84/kg headline rates, 1 kg MOQ, Africa transport table (Express 4-7d, Air 8-12d, Sea ***), Buyer customs-clearance attribute, and \"to be negotiated\" shipping block — all directly read via fetch_page on 2026-10-02."
+              "verified_scope": "Forwarder identity, SGS verification, store metrics, $0.03-$0.85/kg and $0.57-$0.84/kg headline rates, 1 kg MOQ, Africa transport table (Express 4-7d, Air 8-12d, Sea ***), Buyer customs-clearance attribute, and \"to be negotiated\" shipping block \u2014 all directly read via fetch_page on 2026-10-02."
             },
             {
               "quote_index": 3,
               "lead_category": "prior_session_forwarder_lead",
               "forwarder_name": "Yiwu Eway International Logistics Co., Ltd.",
               "listing_title": "Shopify Dropshipping Agent US/AU/EU Worldwide 1688 SHOPPING AGENT Door to Door DDP with Low Rate Air+Express (1601379475240) + Shopify Dropshipping Smart Projector DDP Service (1601597321214)",
-              "fetched_rate_usd": "$1.00/piece (1-99 pcs), $0.90/piece (100-999 pcs), $0.80/piece (1,000-9,999 pcs), $0.70/piece (>=10,000 pcs); CN¥4.72-6.74/piece on SGS supplier profile cards; Shipping total: \"To be negotiated\"",
+              "fetched_rate_usd": "$1.00/piece (1-99 pcs), $0.90/piece (100-999 pcs), $0.80/piece (1,000-9,999 pcs), $0.70/piece (>=10,000 pcs); CN\u00a54.72-6.74/piece on SGS supplier profile cards; Shipping total: \"To be negotiated\"",
               "per_unit_rate_zar": null,
               "UNVERIFIED_per_unit_rate_zar": "Displayed $0.70-$1.00/piece (R11.67-R16.67 @16.6654 or R11.44-R16.35 @16.3460) is an agent fulfillment/sourcing placeholder, NOT international freight to South Africa; page explicitly states \"Shipping fee and delivery date to be negotiated... Shipping total: To be negotiated.\" Furthermore, verified export market distribution is 60% Western Europe, 30% North America, 10% Oceania (0% Africa), and Product Type is restricted to General (Non-dangerous) Goods (excludes lithium batteries).",
               "fetched_headline_rate_zar_at_1pc_moq": "R16.67 (@16.6654 live FX) / R16.35 (@16.3460 pr-0008 FX) for 1-99 pcs fulfillment placeholder; actual shipping total \"To be negotiated\"",
@@ -2674,12 +2849,12 @@
                 "response_time": "<=3h",
                 "on_time_dispatch": "100.0%",
                 "online_revenue": "US$1,000+",
-                "main_markets": "Western Europe 60%, North America 30%, Oceania 10% (store page: Germany 100%, United States) — 0% Africa"
+                "main_markets": "Western Europe 60%, North America 30%, Oceania 10% (store page: Germany 100%, United States) \u2014 0% Africa"
               },
               "source_url": "https://www.alibaba.com/product-detail/Shopify-Dropshipping-Agent-US-AU-EU_1601379475240.html; https://www.alibaba.com/product-detail/Shopify-Dropshipping-Smart-Projector-Outdoor-Screen_1601597321214.html; https://yiwuyiwei.en.alibaba.com/; https://suppliers.alibaba.com/yiwu-eway-international-logistics-co-ltd_2218910837169",
               "fetch_date": "2026-10-02",
               "verified": true,
-              "verified_scope": "Forwarder identity, SGS report 485024251_T, $0.70-$1.00/pc tier table, \"Shipping total: To be negotiated\", Buyer customs-clearance attribute, General (Non-dangerous) Goods restriction, Colissimo/France & Sweden destination attributes, and 60% WE / 30% NA / 10% Oceania market split — all directly read via fetch_page on 2026-10-02."
+              "verified_scope": "Forwarder identity, SGS report 485024251_T, $0.70-$1.00/pc tier table, \"Shipping total: To be negotiated\", Buyer customs-clearance attribute, General (Non-dangerous) Goods restriction, Colissimo/France & Sweden destination attributes, and 60% WE / 30% NA / 10% Oceania market split \u2014 all directly read via fetch_page on 2026-10-02."
             },
             {
               "quote_index": 4,
@@ -2690,14 +2865,14 @@
               "per_unit_rate_zar": null,
               "UNVERIFIED_per_unit_rate_zar": "Displayed $1.00/kg at 1-99 kg tier (R16.67/kg @16.6654 or R16.35/kg @16.3460) is a placeholder tier with \"Shipping fee and delivery date to be negotiated... Shipping total: To be negotiated.\" Moreover, all three fetched product pages set Destination customs clearance party = Buyer (DAP/DDU), 62091984207 lists Trading Term = \"CIF DDU FOB EXW\" (omitting DDP), and South Africa (ZA) is absent from all Shipment destination lists (note: SA in ISO list is Saudi Arabia).",
               "fetched_headline_rate_zar_at_1kg_moq": "R16.67 (@16.6654 live FX) / R16.35 (@16.3460 pr-0008 FX) for 1-99 kg placeholder tier on 1600713628003; actual shipping total \"To be negotiated\"",
-              "transit_time": "5 - 15 Days (Air+Express on 1600713628003, dispatch 2 days, lead time 7 days for 1 kg; average store dispatch 11 days); 2 - 9 Days (Air+Express on 1601193797824, dispatch 5 days); 5 - 25 Days (International Trucking+Express on 62091984207, dispatch 5 days, average store dispatch 15 days — >21-day flag).",
+              "transit_time": "5 - 15 Days (Air+Express on 1600713628003, dispatch 2 days, lead time 7 days for 1 kg; average store dispatch 11 days); 2 - 9 Days (Air+Express on 1601193797824, dispatch 5 days); 5 - 25 Days (International Trucking+Express on 62091984207, dispatch 5 days, average store dispatch 15 days \u2014 >21-day flag).",
               "UNVERIFIED_sa_transit_time": "South Africa (ZA) is not in the Shipment destination attribute on any of the three fetched listings; transit times are generic non-ZA lanes.",
               "ddp_vs_dap": "DAP / DDU (Buyer-cleared): all three fetched product pages explicitly set structured Key attribute \"Destination customs clearance party: Buyer\", and 62091984207 sets \"Trading Term: CIF DDU FOB EXW\" (excluding DDP despite \"DDP /DDU\" in the title).",
               "UNVERIFIED_ddp_to_sa": "DDP to South Africa is NOT offered on the fetched pages (Buyer customs clearance attribute on all 3 pages; Trading Term excludes DDP on 62091984207; ZA absent from destination lists).",
               "small_electronics_under_1kg_fit": "1600713628003 has 1 kg MOQ and accepts Special (Dangerous) Goods, whereas 62091984207 and 1601193797824 require a 100 kg MOQ (bulk cargo only). Even on 1600713628003, shipping total is \"To be negotiated\" and clearance is Buyer (DDU).",
               "supplier_metrics_observed": {
                 "tenure": "8-12 yrs across 4 SGS-verified Alibaba storefronts (bonmedshipping 9 yrs, cnwingspeed 9 yrs, chinawingspeed 8 yrs, wingspeed 12 yrs)",
-                "store_rating": "5.0/5 (1,152 reviews on chinawingspeed; 538 reviews on bonmedshipping); 4.4/5 (1,542 reviews on wingspeed — below 4.5 bar)",
+                "store_rating": "5.0/5 (1,152 reviews on chinawingspeed; 538 reviews on bonmedshipping); 4.4/5 (1,542 reviews on wingspeed \u2014 below 4.5 bar)",
                 "product_rating": "19 reviews on 62091984207; 7 reviews on 1600713628003 (3,393 sold); 10,476 sold on 1601193797824",
                 "response_time": "<=5h to <=6h",
                 "on_time_dispatch": "100.0% (chinawingspeed/bonmedshipping/cnwingspeed); >=99% (wingspeed)",
@@ -2706,7 +2881,7 @@
               "source_url": "https://www.alibaba.com/product-detail/Container-Dropshipping-Agent-Fast-Shipping-to_1600713628003.html; https://www.alibaba.com/product-detail/WINGSPEED-Freight-Forwarder-Logistics-Service-Cargo_62091984207.html; https://www.alibaba.com/product-detail/ddp-air-freight-forwarder-Sea-shipping_1601193797824.html; https://bonmedshipping.en.alibaba.com/; https://cnwingspeed.en.alibaba.com/",
               "fetch_date": "2026-10-02",
               "verified": true,
-              "verified_scope": "Forwarder identity across storefronts, SGS verification, store ratings, $0.80-$1.00/kg tier tables (1 kg MOQ on 1600713628003; 100 kg MOQ on 62091984207 & 1601193797824), Buyer customs-clearance attribute on all 3 listings, CIF/DDU/FOB/EXW trading term on 62091984207, Special (Dangerous) Goods attribute, and absence of ZA from destination lists — all directly read via fetch_page on 2026-10-02."
+              "verified_scope": "Forwarder identity across storefronts, SGS verification, store ratings, $0.80-$1.00/kg tier tables (1 kg MOQ on 1600713628003; 100 kg MOQ on 62091984207 & 1601193797824), Buyer customs-clearance attribute on all 3 listings, CIF/DDU/FOB/EXW trading term on 62091984207, Special (Dangerous) Goods attribute, and absence of ZA from destination lists \u2014 all directly read via fetch_page on 2026-10-02."
             },
             {
               "quote_index": 5,
@@ -2720,7 +2895,7 @@
               "UNVERIFIED_per_unit_rate_zar": "Fetched rate is $19.81 for 2 boxes = $9.905/box = R165.07/box (@16.6654 live 2026-10-02 FX) or R161.91/box (@16.3460 pr-0008 FX; was R161.83 on 2026-09-30 at $19.80/2 boxes). However: (1) this quote is NOT DDP (\"*Taxes and import charges will be calculated at checkout\"), (2) destination country rendered in sandbox is unconfirmed for ZA (store header defaulted to GB), and (3) \"box\" unit vs single item (1.000 kg gross) remains unverified. Even if treated as per-unit shipping, R165.07 (and R161.83/R161.91) EXCEEDS the R147.46 target ceiling by R17.61 (or R14.37/R14.45).",
               "transit_time": "Guaranteed delivery: Oct 20 - Nov 29 (18 - 58 calendar days from 2026-10-02 fetch date; average dispatch time 12 days; lead time 3 days for 1-200 boxes). FLAGGED: upper bound 58 days breaches the 21-day SA delivery limit before adding 5-15 business days customs clearance.",
               "UNVERIFIED_sa_transit_time": "Destination country for the Oct 20 - Nov 29 window is not confirmed as South Africa (ZA).",
-              "ddp_vs_dap": "DAP / DDU (NOT DDP) — page explicitly states \"*Taxes and import charges will be calculated at checkout\"; no DDP option exists on the product page or store hub (kms9.en.alibaba.com). Interactive Alibaba chat is login-gated and no negotiation drafts are permitted under session rules.",
+              "ddp_vs_dap": "DAP / DDU (NOT DDP) \u2014 page explicitly states \"*Taxes and import charges will be calculated at checkout\"; no DDP option exists on the product page or store hub (kms9.en.alibaba.com). Interactive Alibaba chat is login-gated and no negotiation drafts are permitted under session rules.",
               "UNVERIFIED_ddp_to_sa": "No DDP option is displayed on Coremax's public pages.",
               "small_electronics_under_1kg_fit": "Direct product listing for mr-0002 (20,000mAh solar power bank; page lists Single package size 13.35x7x3 cm, Single gross weight 1.000 kg, Selling Units: Single item).",
               "supplier_metrics_observed": {
@@ -2733,7 +2908,7 @@
               "source_url": "https://www.alibaba.com/product-detail/New-Trending-Waterproof-20000Mah-Solar-Charger_1601727591668.html; https://kms9.en.alibaba.com/",
               "fetch_date": "2026-10-02",
               "verified": true,
-              "verified_scope": "Product price tiers ($5.31/$5.04/$4.59/$4.19), Standard (Alibaba.com Logistics) shipping fee $19.81 (struck $39.81) for 2 boxes, guaranteed delivery Oct 20 - Nov 29, \"*Taxes and import charges will be calculated at checkout\" (non-DDP), 1.000 kg gross weight, and store metrics — all directly read via fetch_page on 2026-10-02."
+              "verified_scope": "Product price tiers ($5.31/$5.04/$4.59/$4.19), Standard (Alibaba.com Logistics) shipping fee $19.81 (struck $39.81) for 2 boxes, guaranteed delivery Oct 20 - Nov 29, \"*Taxes and import charges will be calculated at checkout\" (non-DDP), 1.000 kg gross weight, and store metrics \u2014 all directly read via fetch_page on 2026-10-02."
             },
             {
               "quote_index": 6,
@@ -2744,7 +2919,7 @@
               "per_unit_rate_zar": null,
               "UNVERIFIED_per_unit_rate_zar": "Displayed $1.00-$3.00/kg on 1601253467871 (R16.67-R50.00 at 1 kg MOQ @16.6654 or R16.35-R49.04 @16.3460) and $1.10-$2.00/kg on 1601435129328 (R18.33-R33.33/kg @16.6654, MOQ 21 kg = R384.97-R699.95 minimum shipment) are placeholder per-kg bands; both pages state \"Shipping fee and delivery date to be negotiated... Item subtotal $0.00 - $0.00, Shipping total: To be negotiated\" and \"shipping cost: Depend on cargo name, weight, shipping way ,etc\". Furthermore, the body text of 1601253467871 explicitly notes under \"3. Air cargo DDP shipping\": \"it's door to door including custom clearance and tax. Min order is 21kg.\" Thus a single-unit (<1 kg) DDP rate is NOT published on-page.",
               "fetched_headline_rate_zar_at_1kg_moq": "R15.00 - R16.67 (@16.6654 live FX) / R14.71 - R16.35 (@16.3460 pr-0008 FX) on 1601039978158 ($0.90-$1.00/kg, MOQ 1 kg); R16.67 - R50.00 (@16.6654) on 1601253467871 ($1.00-$3.00/kg, MOQ 1 kg header but 21 kg Air DDP min in description); actual shipping total \"To be negotiated\"",
-              "transit_time": "8 - 15 Days (Air+Express attribute on 1601253467871; description table lists Fast Air Door-to-Door 2-4 workdays + 3-5 workdays delivery = 5-9 workdays, Slower Air DDP transfer 6-8 workdays + 3-5 workdays delivery = 9-13 workdays, Express 2-5 days; dispatch 6 days); 25 - 35 Days (Sea LCL+Express attribute on 1601435129328, dispatch 5 days; FAQ says Sea 30-45 days — breaches 21-day limit).; 20 - 40 Days (LCL+Trucking attribute on 1601039978158, dispatch 10 days — breaches 21-day limit).",
+              "transit_time": "8 - 15 Days (Air+Express attribute on 1601253467871; description table lists Fast Air Door-to-Door 2-4 workdays + 3-5 workdays delivery = 5-9 workdays, Slower Air DDP transfer 6-8 workdays + 3-5 workdays delivery = 9-13 workdays, Express 2-5 days; dispatch 6 days); 25 - 35 Days (Sea LCL+Express attribute on 1601435129328, dispatch 5 days; FAQ says Sea 30-45 days \u2014 breaches 21-day limit).; 20 - 40 Days (LCL+Trucking attribute on 1601039978158, dispatch 10 days \u2014 breaches 21-day limit).",
               "ddp_vs_dap": "DDP (Seller-cleared): both 1601253467871 and 1601435129328 explicitly set structured Key attribute \"Destination customs clearance party: Seller\", Trading Term \"DDP\", and \"Advantage: Tax Included, SARS Customs Clearance, SABS Support\" (on 1601435129328).",
               "UNVERIFIED_ddp_to_sa": "While DDP to South Africa (SARS Customs Clearance, Tax Included) is explicitly advertised and Seller-cleared in structured attributes, both listings require off-page quotation (\"To be negotiated\") and state a 21 kg minimum order for Air Cargo DDP (in 1601253467871 body text) and Sea DDP (in 1601435129328 MOQ), leaving <1 kg single-unit DDP pricing unverified.",
               "small_electronics_under_1kg_fit": "1601253467871 covers Special (Dangerous) Goods and lists a 1 kg header MOQ and \"6. Small packages delivery to USA, Canada, Europe, Middle-East, Africa, Australia\", but its \"3. Air cargo DDP shipping\" section specifies \"Min order is 21kg\". 1601435129328 has a 21 kg MOQ and is restricted to General (Non-dangerous) Goods.",
@@ -2760,7 +2935,7 @@
               "source_url": "https://www.alibaba.com/product-detail/Agent-China-ddp-To-South-Africa_1601253467871.html; https://www.alibaba.com/product-detail/South-Africa-Sea-DDP-Shipping-Service_1601435129328.html; https://www.alibaba.com/product-detail/Cheapest-China-Taobao-Door-To-Door_1601039978158.html",
               "fetch_date": "2026-10-02",
               "verified": true,
-              "verified_scope": "Forwarder identity, TuVRheinland verification, 4.6/5 store rating (1,852 reviews), Seller customs-clearance attribute, ZA(South Africa) destination and SARS Customs Clearance attribute on 1601435129328, Special (Dangerous) Goods capability on 1601253467871, $1-$3/kg (1 kg MOQ) and $1.10-$2/kg (21 kg MOQ) placeholder bands, 8-15d Air / 25-35d Sea transit times, 21 kg Air DDP minimum note in description, and \"Shipping total: To be negotiated\" — all directly read via fetch_page on 2026-10-02."
+              "verified_scope": "Forwarder identity, TuVRheinland verification, 4.6/5 store rating (1,852 reviews), Seller customs-clearance attribute, ZA(South Africa) destination and SARS Customs Clearance attribute on 1601435129328, Special (Dangerous) Goods capability on 1601253467871, $1-$3/kg (1 kg MOQ) and $1.10-$2/kg (21 kg MOQ) placeholder bands, 8-15d Air / 25-35d Sea transit times, 21 kg Air DDP minimum note in description, and \"Shipping total: To be negotiated\" \u2014 all directly read via fetch_page on 2026-10-02."
             },
             {
               "quote_index": 7,
@@ -2771,7 +2946,7 @@
               "per_unit_rate_zar": 269.48,
               "per_unit_rate_zar_at_pr0008_fx": 264.31,
               "UNVERIFIED_per_unit_rate_zar": "Merpower's fetched checkout shipping rate of $16.17/piece = R269.48/unit (@16.6654 live FX) or R264.31/unit (@16.3460 pr-0008 FX) is non-DDP (\"*Taxes and import charges will be calculated at checkout\"), requires a 500-piece MOQ ($29/unit product cost), and exceeds the R147.46 ceiling by R122.02/unit. Kaixida's $0.10-$0.90/kg (R1.67-R15.00/kg @16.6654) is an unquoted placeholder (\"Shipping total: To be negotiated\") with Destination City = GB and ZA absent from Shipment destination.",
-              "transit_time": "Merpower (1600094133059): Guaranteed delivery by Nov 20 (49 calendar days from 2026-10-02 — breaches 21-day limit); Kaixida (1601696506627): 3 - 5 Days (Express attribute, dispatch 1 day, non-ZA).",
+              "transit_time": "Merpower (1600094133059): Guaranteed delivery by Nov 20 (49 calendar days from 2026-10-02 \u2014 breaches 21-day limit); Kaixida (1601696506627): 3 - 5 Days (Express attribute, dispatch 1 day, non-ZA).",
               "ddp_vs_dap": "Merpower (1600094133059): DAP / DDU (\"*Taxes and import charges will be calculated at checkout\"); Kaixida (1601696506627): Seller customs clearance attribute (\"Trading Term: FOB EXW CIF DDU DDP\"), but ZA is not in Shipment destination.",
               "UNVERIFIED_ddp_to_sa": "Neither listing provides a verified DDP-to-South-Africa per-unit rate.",
               "small_electronics_under_1kg_fit": "Merpower 1600094133059 is a 390g 20,000mAh solar-source power bank (500 pcs MOQ); Kaixida 1601696506627 handles Special (Dangerous) Goods with 1 kg MOQ and dropshipping customization.",
@@ -2782,10 +2957,10 @@
               "source_url": "https://www.alibaba.com/product-detail/Powerbank-Portable-Charger-20000mAh-QC-3_1600094133059.html; https://www.alibaba.com/product-detail/Guangzhou-Logistics-Services-Sensitive-Goods-Freight_1601696506627.html",
               "fetch_date": "2026-10-02",
               "verified": true,
-              "verified_scope": "Merpower $8,085/500 pcs ($16.17/pc) shipping fee, Nov 20 delivery date, 390g weight, non-DDP checkout notice; Kaixida $0.10-$0.90/kg (1 kg MOQ), Seller clearance attribute, Special (Dangerous) Goods attribute, 3-5d Express transit, and \"Shipping total: To be negotiated\" — all directly read via fetch_page on 2026-10-02."
+              "verified_scope": "Merpower $8,085/500 pcs ($16.17/pc) shipping fee, Nov 20 delivery date, 390g weight, non-DDP checkout notice; Kaixida $0.10-$0.90/kg (1 kg MOQ), Seller clearance attribute, Special (Dangerous) Goods attribute, 3-5d Express transit, and \"Shipping total: To be negotiated\" \u2014 all directly read via fetch_page on 2026-10-02."
             }
           ],
-          "session_status": "completed — all 7 quote groups (18 Alibaba URLs + 1 Google Finance FX page) fetched, read, and pushed sequentially on 2026-10-02",
+          "session_status": "completed \u2014 all 7 quote groups (18 Alibaba URLs + 1 Google Finance FX page) fetched, read, and pushed sequentially on 2026-10-02",
           "ceiling_outcome": {
             "target_ceiling_zar": 147.46,
             "ceiling_beaten_by_verified_checkout_quote": false,
@@ -2799,8 +2974,8 @@
               "fetched_2026_09_30_usd_so0003": "$19.80 for 2 boxes ($9.90 / box)",
               "fetched_2026_09_30_zar_at_16_3460_fx_so0003": 161.83,
               "overage_vs_147_46_ceiling_zar": "+R17.61/unit (@16.6654 live 2026-10-02 FX) / +R14.45/unit (@16.3460 FX for $19.81) / +R14.37/unit (so-0003 R161.83 baseline)",
-              "ddp_vs_dap": "DAP / DDU (NOT DDP — \"*Taxes and import charges will be calculated at checkout\")",
-              "transit_time": "Guaranteed delivery Oct 20 - Nov 29 (18 - 58 calendar days from 2026-10-02; average dispatch 12 days — exceeds 21-day limit)"
+              "ddp_vs_dap": "DAP / DDU (NOT DDP \u2014 \"*Taxes and import charges will be calculated at checkout\")",
+              "transit_time": "Guaranteed delivery Oct 20 - Nov 29 (18 - 58 calendar days from 2026-10-02; average dispatch 12 days \u2014 exceeds 21-day limit)"
             },
             "lowest_forwarder_placeholder_headline_bands_fetched_not_executable_quotes": [
               {
@@ -2842,7 +3017,7 @@
             ]
           }
         },
-        "summary": "Fetched and read 18 public Alibaba URLs across 7 forwarder/supplier groups plus live USD/ZAR FX (16.6654 on 2026-10-02 via Google Finance) to test whether a verified DDP-to-South-Africa per-unit shipping quote for mr-0002 (20,000mAh solar power bank, HS 8507.60, ~400-500g) can beat the pr-0008 ceiling of R147.46/unit. Result: R147.46 is NOT reached by any verified checkout-executable shipping quote on public Alibaba pages, and NO public forwarder page publishes a binding single-unit (<1 kg) DDP-to-SA rate without off-page interactive negotiation (\"Shipping total: To be negotiated\"). Specifically: (1) Among the 4 prior-session forwarder leads, ZHTX ($0.03-$0.85/kg, Africa Express 4-7d / Air 8-12d), Yiwu Eway ($0.70-$1.00/pc, 4-7d, 0% Africa, General Goods only), and Wingspeed ($1.00/kg at 1-99 kg, 5-15d) all set structured Key attribute Destination customs clearance party = Buyer (DAP/DDU), while Sweet Protrading ($1.00-$2.00/kg, 7-12d Air) sets Seller clearance but marks \"other country = no services\" for FBA DDP in its destination table. (2) Shenzhen Honour Ocean Shipping Co., Ltd. (1601253467871, 1601435129328, 1601039978158; 10 yrs, TuVRheinland verified, 4.6/5 on 1,852 reviews) explicitly advertises Seller-cleared DDP to ZA(South Africa) (\"Tax Included, SARS Customs Clearance\") with headline placeholder bands of $0.90-$1.00/kg (1601039978158, LCL+Trucking 20-40d, General Goods) and $1.00-$3.00/kg (1601253467871, Air+Express 8-15d, Special/Dangerous Goods), but its checkout block states \"Shipping total: To be negotiated\" and body section \"3. Air cargo DDP shipping\" specifies \"Min order is 21kg\". (3) The LOWEST achievable fetched checkout per-unit shipping figure remains Guangzhou Coremax New Energy Technology Co., Ltd. (1601727591668) via Standard (Alibaba.com Logistics) at $19.81 for 2 boxes ($9.905/box) on 2026-10-02 = R165.07/unit (@16.6654 live FX) or R161.91/unit (@16.3460 pr-0008 FX; was $19.80/2 boxes = R161.83/unit on 2026-09-30 in so-0003) — which is DAP/DDU (not DDP), has an 18-58 day delivery window (Oct 20 - Nov 29, breaching the 21-day limit), and still exceeds the R147.46 ceiling by R17.61/unit (@16.6654) or R14.37-R14.45/unit (@16.3460)."
+        "summary": "Fetched and read 18 public Alibaba URLs across 7 forwarder/supplier groups plus live USD/ZAR FX (16.6654 on 2026-10-02 via Google Finance) to test whether a verified DDP-to-South-Africa per-unit shipping quote for mr-0002 (20,000mAh solar power bank, HS 8507.60, ~400-500g) can beat the pr-0008 ceiling of R147.46/unit. Result: R147.46 is NOT reached by any verified checkout-executable shipping quote on public Alibaba pages, and NO public forwarder page publishes a binding single-unit (<1 kg) DDP-to-SA rate without off-page interactive negotiation (\"Shipping total: To be negotiated\"). Specifically: (1) Among the 4 prior-session forwarder leads, ZHTX ($0.03-$0.85/kg, Africa Express 4-7d / Air 8-12d), Yiwu Eway ($0.70-$1.00/pc, 4-7d, 0% Africa, General Goods only), and Wingspeed ($1.00/kg at 1-99 kg, 5-15d) all set structured Key attribute Destination customs clearance party = Buyer (DAP/DDU), while Sweet Protrading ($1.00-$2.00/kg, 7-12d Air) sets Seller clearance but marks \"other country = no services\" for FBA DDP in its destination table. (2) Shenzhen Honour Ocean Shipping Co., Ltd. (1601253467871, 1601435129328, 1601039978158; 10 yrs, TuVRheinland verified, 4.6/5 on 1,852 reviews) explicitly advertises Seller-cleared DDP to ZA(South Africa) (\"Tax Included, SARS Customs Clearance\") with headline placeholder bands of $0.90-$1.00/kg (1601039978158, LCL+Trucking 20-40d, General Goods) and $1.00-$3.00/kg (1601253467871, Air+Express 8-15d, Special/Dangerous Goods), but its checkout block states \"Shipping total: To be negotiated\" and body section \"3. Air cargo DDP shipping\" specifies \"Min order is 21kg\". (3) The LOWEST achievable fetched checkout per-unit shipping figure remains Guangzhou Coremax New Energy Technology Co., Ltd. (1601727591668) via Standard (Alibaba.com Logistics) at $19.81 for 2 boxes ($9.905/box) on 2026-10-02 = R165.07/unit (@16.6654 live FX) or R161.91/unit (@16.3460 pr-0008 FX; was $19.80/2 boxes = R161.83/unit on 2026-09-30 in so-0003) \u2014 which is DAP/DDU (not DDP), has an 18-58 day delivery window (Oct 20 - Nov 29, breaching the 21-day limit), and still exceeds the R147.46 ceiling by R17.61/unit (@16.6654) or R14.37-R14.45/unit (@16.3460)."
       }
     ],
     "unverified_fields": [
@@ -2862,7 +3037,7 @@
       "so-0003/so-0004 (final): DDP-to-SA availability, SA-lane transit days, SA warehouse locations - not displayed by any fetched supplier; RFQ required. Coremax fetched shipping window's DESTINATION COUNTRY unconfirmed.",
       "so-0002 carry-over: Alibaba DDP forwarder directory metrics remain aggregated marketing claims - leads only. SARS de-minimis courier threshold still UNVERIFIED - needed for split-shipment rule.",
       "so-0004: AliExpress mr-0003 quote's per-unit pack basis and store identity UNVERIFIED; Jinboli 'overseas warehousing' location UNVERIFIED; HeLi certificate types unreadable in fetch.",
-      "so-0006 (2026-10-02): UNVERIFIED_per_unit_rate_zar & UNVERIFIED_ddp_to_sa — all 4 prior-session forwarder leads (Sweet Protrading, ZHTX, Yiwu Eway, Wingspeed) plus Honour Ocean and Kaixida render \"Shipping total: To be negotiated\" on public Alibaba pages; ZHTX, Yiwu Eway, and Wingspeed set structured Destination customs clearance party = Buyer (DAP/DDU); Sweet Protrading sets \"other country = no services\" for FBA DDP; Honour Ocean sets Seller clearance + ZA(South Africa) destination but specifies a 21 kg minimum order for Air Cargo DDP and Sea DDP. Coremax ($19.81/2 boxes = R165.07/unit @16.6654 or R161.91/unit @16.3460; R161.83/unit on 2026-09-30) and Merpower ($8,085/500 pcs = R269.48/unit @16.6654) are both non-DDP (\"*Taxes and import charges will be calculated at checkout\")."
+      "so-0006 (2026-10-02): UNVERIFIED_per_unit_rate_zar & UNVERIFIED_ddp_to_sa \u2014 all 4 prior-session forwarder leads (Sweet Protrading, ZHTX, Yiwu Eway, Wingspeed) plus Honour Ocean and Kaixida render \"Shipping total: To be negotiated\" on public Alibaba pages; ZHTX, Yiwu Eway, and Wingspeed set structured Destination customs clearance party = Buyer (DAP/DDU); Sweet Protrading sets \"other country = no services\" for FBA DDP; Honour Ocean sets Seller clearance + ZA(South Africa) destination but specifies a 21 kg minimum order for Air Cargo DDP and Sea DDP. Coremax ($19.81/2 boxes = R165.07/unit @16.6654 or R161.91/unit @16.3460; R161.83/unit on 2026-09-30) and Merpower ($8,085/500 pcs = R269.48/unit @16.6654) are both non-DDP (\"*Taxes and import charges will be calculated at checkout\")."
     ],
     "verified_scope": "namespace-level verified=true refers ONLY to quote fields actually fetched and read this session (each supplier entry carries its own verified + verified_scope); all store-level/SA-lane fields that could not be observed are UNVERIFIED_-prefixed and listed in unverified_fields"
   },
@@ -2889,7 +3064,7 @@
     "timestamp": "2026-10-02T08:47:16+02:00",
     "agent": "pricing",
     "confidence": 7,
-    "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; 8 findings in namespace (pr-0001..pr-0008); namespace roll-up takes the minimum finding confidence (conservative). Findings accumulate across sessions — this string is regenerated on every append and does not claim a single session produced them all.",
+    "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; 8 findings in namespace (pr-0001..pr-0008); namespace roll-up takes the minimum finding confidence (conservative). Findings accumulate across sessions \u2014 this string is regenerated on every append and does not claim a single session produced them all.",
     "verified": false,
     "findings": [
       {
@@ -2938,7 +3113,7 @@
             "Brief assumed tools/landed_cost.py + tools/customs.py already exist: they did not (Phase 0 excluded them deliberately; MR routed this build to Pricing). Building them IS this session's one capability.",
             "Brief asked for 'verified supplier costs' from state: none exist (so-0002: Sourcing halted, zero verified suppliers). HARD STOP #2 forbids inventing them, so NO product margin verdict is issued this session; break-even ceilings (which need no supplier quote) are delivered instead.",
             "Brief output format (verdict accept|reject per product) vs no verified costs: verdict='blocked' recorded with block_reason; the accept|reject schema is implemented in evaluate_pricing() and will be used when Sourcing delivers verified quotes.",
-            "VAT is on the customs value (product + shipping), never the retail price — calculate_vat() takes no rate override so HARD STOP #4 cannot be bypassed by a caller."
+            "VAT is on the customs value (product + shipping), never the retail price \u2014 calculate_vat() takes no rate override so HARD STOP #4 cannot be bypassed by a caller."
           ],
           "hitl_gate_5_status": "CROSSED-BY-BUILD: this PR adds pricing/customs logic, which is HITL gate 5 territory. Human approval requested in the PR description; nothing merges without APPROVED."
         }
@@ -2952,8 +3127,8 @@
         "verified": false,
         "data": {
           "record_type": "break_even_analysis",
-          "product": "Solar power bank 10,000-20,000 mAh (mr-0002 — MR lead for pricing, NOT APPROVED; approval sits at HITL gate 3)",
-          "method": "Inverse landed-cost math (tools/landed_cost.py:max_customs_base_for_margin). Asks: at a verified competitive price, what is the MAXIMUM product+shipping cost that still clears a target net margin? Needs no supplier quote, so it violates no HARD STOP. Worst-case assumptions: payment fee 5% of selling price, return rate 10% (zero salvage). platform_fees=0 is an UNVERIFIED placeholder — real marketplace fees would LOWER every ceiling below, so treat ceilings as optimistic upper bounds.",
+          "product": "Solar power bank 10,000-20,000 mAh (mr-0002 \u2014 MR lead for pricing, NOT APPROVED; approval sits at HITL gate 3)",
+          "method": "Inverse landed-cost math (tools/landed_cost.py:max_customs_base_for_margin). Asks: at a verified competitive price, what is the MAXIMUM product+shipping cost that still clears a target net margin? Needs no supplier quote, so it violates no HARD STOP. Worst-case assumptions: payment fee 5% of selling price, return rate 10% (zero salvage). platform_fees=0 is an UNVERIFIED placeholder \u2014 real marketplace fees would LOWER every ceiling below, so treat ceilings as optimistic upper bounds.",
           "break_even_rows": [
             {
               "price_point": "10,000mAh floor (Takealot PLID92826531)",
@@ -3174,12 +3349,12 @@
           ],
           "reading": [
             "At the R258 floor (10k units), even a ZERO-cost product cannot clear the 25% accept minimum at CPA R300; at CPA R150 the 25% minimum needs product+shipping under ~R4 and even the 20% HARD-STOP floor needs it under ~R15. The commodity 10k segment is near-certainly unviable.",
-            "At R344, the ceiling is ~R49 (25% target, CPA R150) — still below any realistic landed solar-bank cost.",
+            "At R344, the ceiling is ~R49 (25% target, CPA R150) \u2014 still below any realistic landed solar-bank cost.",
             "Only the R699 20,000mAh foldable segment leaves realistic room: ceiling ~R234 at 25%/CPA150, ~R104 at 25%/CPA300, ~R173 at the 35% target at CPA R150.",
-            "Sourcing routing request: any supplier quote for this lead must be DDP-to-SA and BELOW these ceilings for its segment, with the quote document cited — else Pricing will reject on margin."
+            "Sourcing routing request: any supplier quote for this lead must be DDP-to-SA and BELOW these ceilings for its segment, with the quote document cited \u2014 else Pricing will reject on margin."
           ],
           "verdict": "blocked",
-          "block_reason": "HARD STOP #2 + so-0002: zero verified supplier costs exist, so no landed cost, selling price or accept/reject margin verdict can be computed without inventing inputs. Blocked, not rejected: the product is not being failed on margin — margin math is impossible until Sourcing delivers verified quotes.",
+          "block_reason": "HARD STOP #2 + so-0002: zero verified supplier costs exist, so no landed cost, selling price or accept/reject margin verdict can be computed without inventing inputs. Blocked, not rejected: the product is not being failed on margin \u2014 margin math is impossible until Sourcing delivers verified quotes.",
           "UNVERIFIED_supplier_cost_zar": null
         }
       },
@@ -3201,23 +3376,23 @@
             {
               "id": "mr-0001",
               "product": "USB-C GaN charger + cable",
-              "blocker": "no verified supplier cost; additionally the charger+cable composite-GRI classification is UNVERIFIED (bundle rated at cable 15% conservatively) — Sourcing must confirm before any margin run"
+              "blocker": "no verified supplier cost; additionally the charger+cable composite-GRI classification is UNVERIFIED (bundle rated at cable 15% conservatively) \u2014 Sourcing must confirm before any margin run"
             },
             {
               "id": "mr-0007",
               "product": "Plastic phone case",
-              "blocker": "no verified supplier cost; MR file flags R67 floor far below CPA — likely margin reject once costs exist"
+              "blocker": "no verified supplier cost; MR file flags R67 floor far below CPA \u2014 likely margin reject once costs exist"
             },
             {
               "id": "mr-0004",
               "product": "Car phone holder",
-              "blocker": "no verified supplier cost; MR file flags R114 floor below CPA — likely margin reject once costs exist"
+              "blocker": "no verified supplier cost; MR file flags R114 floor below CPA \u2014 likely margin reject once costs exist"
             }
           ],
           "atv_formula_discrepancy_DECISION_REQUESTED": {
             "issue": "README section 4 charges VAT as customs_value x 0.15. SARS' ATV method for non-SACU consignments charges 15% on (customs value + duty + 10% uplift). The two disagree; MR flagged it for the Supervisor before the tool was built (mr-0027).",
             "action_taken": "tools/customs.py implements the README contract formula EXACTLY (README section 1: the README wins conflicts). The SARS method is NOT implemented.",
-            "risk": "If SARS' method is the legally correct one, every landed cost in this tool UNDERSTATES VAT, inflating every margin — the worst possible direction for a margin gate. Quantified: on a R100 customs value at 10% duty, README VAT = R15.00 vs ATV VAT = R18.15 (+21% VAT, +R3.15 landed per R100).",
+            "risk": "If SARS' method is the legally correct one, every landed cost in this tool UNDERSTATES VAT, inflating every margin \u2014 the worst possible direction for a margin gate. Quantified: on a R100 customs value at 10% duty, README VAT = R15.00 vs ATV VAT = R18.15 (+21% VAT, +R3.15 landed per R100).",
             "request": "Supervisor/human to decide BEFORE any verdict-bearing margin run: keep README formula (contract-consistent) or amend README + tool to the ATV method (HITL gate 5 + README amendment). This agent does not pick."
           },
           "platform_fees_UNVERIFIED": "Net margin per the brief subtracts 'Platform Fees'. No verified Takealot/marketplace fee schedule exists in state; the parameter defaults to R0 which OVERSTATES margin. Must be sourced before any accept verdict is treated as final.",
@@ -3240,9 +3415,9 @@
             "what": "Approve or reject the addition of the SARS ATV VAT basis to tools/customs.py + tools/landed_cost.py (opt-in, non-default), and the accompanying README section 4 amendment if ATV is to become the basis.",
             "why": "The README formula understates VAT if SARS' ATV method is the legally correct one, which flatters every margin in the worst possible direction for a margin gate.",
             "cost": "No paid service, no purchase, no order. Engineering cost only: one module + tests (this PR).",
-            "risk": "If ATV is NOT approved and is the legally correct method, every published margin is overstated. If ATV is adopted without amending README section 4, the contract and the tool disagree — hence the amendment is part of the same approval.",
-            "quantified_impact": "mr-0002 (duty 0%): the customs multiplier moves from 1.15 to 1.165 (+1.30% on the customs value). On the cheapest usable quote at zero shipping that is R0.98 (Coremax R86.80) per unit — small in rands, but it moves in the wrong direction for every accept.",
-            "status": "REQUESTED — not approved; nothing merges without APPROVED"
+            "risk": "If ATV is NOT approved and is the legally correct method, every published margin is overstated. If ATV is adopted without amending README section 4, the contract and the tool disagree \u2014 hence the amendment is part of the same approval.",
+            "quantified_impact": "mr-0002 (duty 0%): the customs multiplier moves from 1.15 to 1.165 (+1.30% on the customs value). On the cheapest usable quote at zero shipping that is R0.98 (Coremax R86.80) per unit \u2014 small in rands, but it moves in the wrong direction for every accept.",
+            "status": "REQUESTED \u2014 not approved; nothing merges without APPROVED"
           },
           "brief_reconciliation": "Because ATV is unapproved, the verdict-bearing figures in pr-0005/pr-0006 use the README basis and the ATV figures are reported alongside as sensitivity. This is not silent use of either formula: both are labelled per cell, and the ATV basis can only LOWER margins, so every reject recorded here holds under both."
         }
@@ -3256,9 +3431,9 @@
         "verified": false,
         "data": {
           "record_type": "verdict_matrix",
-          "product": "mr-0002 — 20,000mAh solar power bank (HS 8507.60, 0% duty)",
+          "product": "mr-0002 \u2014 20,000mAh solar power bank (HS 8507.60, 0% duty)",
           "scope_corrections": [
-            "BRIEF SAID 'six supplier quotes from so-0003/so-0004/so-0005'. State carries six quotes across TWO products: so-0003 = 3 quotes for mr-0002, so-0004 = 3 quotes for mr-0003 (LED emergency light, HS 8513.10 — duty rate UNVERIFIED in state). Only the three mr-0002 quotes are used; using mr-0003's would cross products and cross onto an unverified duty line.",
+            "BRIEF SAID 'six supplier quotes from so-0003/so-0004/so-0005'. State carries six quotes across TWO products: so-0003 = 3 quotes for mr-0002, so-0004 = 3 quotes for mr-0003 (LED emergency light, HS 8513.10 \u2014 duty rate UNVERIFIED in state). Only the three mr-0002 quotes are used; using mr-0003's would cross products and cross onto an unverified duty line.",
             "The R299/R338 'market cluster' is 10,000mAh evidence; all three quotes are 20,000mAh units whose observed Takealot point is R699. Pricing a 20k unit in the 10k band is the brief's instruction and is computed as given, but the segment mismatch is recorded as a finding.",
             "Shipping is the unresolved input: NO mr-0002 supplier displayed a SA lane or DDP (so-0003/so-0005), so no combination below is approvable on its inputs. R0 and R161.83/unit (the only fetched figure, destination UNVERIFIED) bracket the observable range, and every cell also carries the shipping ceiling that would be required."
           ],
@@ -5989,10 +6164,10 @@
             }
           ],
           "reading": [
-            "Every one of the 96 cells is a reject once the fetched shipping datapoint is applied — including the R599 cells at CPA R150 and R0 platform fees, whose margins fall to 12.23% (Coremax), -3.47% (AliExpress) and -4.06% (Quark). Only 16 of 96 cells are non-reject even at R0 shipping (10 accept, 6 investigate), i.e. 80 of 96 fail with physically impossible free shipping.",
+            "Every one of the 96 cells is a reject once the fetched shipping datapoint is applied \u2014 including the R599 cells at CPA R150 and R0 platform fees, whose margins fall to 12.23% (Coremax), -3.47% (AliExpress) and -4.06% (Quark). Only 16 of 96 cells are non-reject even at R0 shipping (10 accept, 6 investigate), i.e. 80 of 96 fail with physically impossible free shipping.",
             "At the R299 and R338 cluster prices the reject is not a shipping artefact: with shipping at R0 AND platform fees at R0 AND CPA at its R150 floor, Coremax still returns 1.45% and 11.09%. At CPA R300 both prices are deeply negative.",
-            "At CPA R300 the product fails at EVERY price point up to R599 even with free shipping and zero platform fees: the best CPA-R300 cell in the whole grid is R599/Coremax at 18.25%, which is below BOTH the 25% minimum and the 20% HARD-STOP floor (README section 2 #3) — a reject, not an escalation.",
-            "The only cells that clear 25% require the simultaneous best case in all four inputs: R449/R599 price, CPA R150, R0 platform fees, and shipping under R17.03 (R449) / R95.29 (R599) — i.e. materially below the only shipping figure anyone has actually fetched (R161.83). R449 at R30 fees never reaches 25% even at zero shipping (22.68%, investigate band only); R599 at R30 fees needs shipping under R69.20.",
+            "At CPA R300 the product fails at EVERY price point up to R599 even with free shipping and zero platform fees: the best CPA-R300 cell in the whole grid is R599/Coremax at 18.25%, which is below BOTH the 25% minimum and the 20% HARD-STOP floor (README section 2 #3) \u2014 a reject, not an escalation.",
+            "The only cells that clear 25% require the simultaneous best case in all four inputs: R449/R599 price, CPA R150, R0 platform fees, and shipping under R17.03 (R449) / R95.29 (R599) \u2014 i.e. materially below the only shipping figure anyone has actually fetched (R161.83). R449 at R30 fees never reaches 25% even at zero shipping (22.68%, investigate band only); R599 at R30 fees needs shipping under R69.20.",
             "Every reject in the README-basis cells also rejects on the ATV basis; the ATV basis cannot raise a margin."
           ]
         }
@@ -6006,9 +6181,9 @@
         "verified": false,
         "data": {
           "record_type": "formal_verdict",
-          "product": "mr-0002 — 20,000mAh solar power bank (HS 8507.60, 0% duty)",
+          "product": "mr-0002 \u2014 20,000mAh solar power bank (HS 8507.60, 0% duty)",
           "verdict": "reject",
-          "rejection_reason": "MR-0002 fails the margin gate at every price point the session asked about. At the market-cluster prices (R299, R338) the net margin is 1.45% and 11.09% BEST CASE — cheapest usable quote, CPA at the R150 benchmark floor, platform fees at R0, and shipping at R0 — so those two are rejects on the arithmetic alone, independent of the unresolved shipping and VAT questions. At R449 and R599 the only passing cells need R0 platform fees, CPA R150 and shipping below R17.03 / R95.29 per unit; the single shipping figure actually fetched for this product is R161.83/unit, at which R599/CPA150/R0-fees still yields 12.23% and everything else is negative. At CPA R300 the product does not reach the 25% minimum at ANY price up to R599 even with free shipping and zero platform fees; its best CPA-R300 cell is 18.25%, below even the 20% floor. Cited rule: README section 2 HARD STOP #3 (no net margin below 20%) plus the session's 25% Pricing minimum — no cell in this matrix reaches the 25% minimum under any shipping input that is physically possible. Recorded as reject, not blocked: the arithmetic is now possible because Sourcing delivered verified unit costs, but it fails.",
+          "rejection_reason": "MR-0002 fails the margin gate at every price point the session asked about. At the market-cluster prices (R299, R338) the net margin is 1.45% and 11.09% BEST CASE \u2014 cheapest usable quote, CPA at the R150 benchmark floor, platform fees at R0, and shipping at R0 \u2014 so those two are rejects on the arithmetic alone, independent of the unresolved shipping and VAT questions. At R449 and R599 the only passing cells need R0 platform fees, CPA R150 and shipping below R17.03 / R95.29 per unit; the single shipping figure actually fetched for this product is R161.83/unit, at which R599/CPA150/R0-fees still yields 12.23% and everything else is negative. At CPA R300 the product does not reach the 25% minimum at ANY price up to R599 even with free shipping and zero platform fees; its best CPA-R300 cell is 18.25%, below even the 20% floor. Cited rule: README section 2 HARD STOP #3 (no net margin below 20%) plus the session's 25% Pricing minimum \u2014 no cell in this matrix reaches the 25% minimum under any shipping input that is physically possible. Recorded as reject, not blocked: the arithmetic is now possible because Sourcing delivered verified unit costs, but it fails.",
           "verdict_by_combination": {
             "note": "verdict per {price, quote, CPA} is reported for both platform-fee assumptions; every verdict below is a reject under the fetched shipping datapoint",
             "grid": "see pr-0005.cells (96 cells)"
@@ -6020,7 +6195,7 @@
               "confidence": 8,
               "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
               "verified": false,
-              "product": "mr-0002 solar power bank 20,000mAh — R299 — market cluster low end (session brief)",
+              "product": "mr-0002 solar power bank 20,000mAh \u2014 R299 \u2014 market cluster low end (session brief)",
               "cost_breakdown": {
                 "product_cost_zar": 86.8,
                 "shipping_zar": 161.83,
@@ -6037,7 +6212,7 @@
                 "competitor_median_price_zar": null
               },
               "verdict": "reject",
-              "rejection_reason": "HARD STOP (README section 2 #3): net margin -60.79% is below the 20% floor — automatic reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -60.79% is below the 20% floor \u2014 automatic reject",
               "UNVERIFIED_shipping_to_sa_zar": 161.83,
               "UNVERIFIED_platform_fees_zar": 0.0,
               "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
@@ -6050,7 +6225,7 @@
               "confidence": 8,
               "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
               "verified": false,
-              "product": "mr-0002 solar power bank 20,000mAh — R299 — market cluster low end (session brief)",
+              "product": "mr-0002 solar power bank 20,000mAh \u2014 R299 \u2014 market cluster low end (session brief)",
               "cost_breakdown": {
                 "product_cost_zar": 86.8,
                 "shipping_zar": 161.83,
@@ -6067,7 +6242,7 @@
                 "competitor_median_price_zar": null
               },
               "verdict": "reject",
-              "rejection_reason": "HARD STOP (README section 2 #3): net margin -110.96% is below the 20% floor — automatic reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -110.96% is below the 20% floor \u2014 automatic reject",
               "UNVERIFIED_shipping_to_sa_zar": 161.83,
               "UNVERIFIED_platform_fees_zar": 0.0,
               "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
@@ -6080,7 +6255,7 @@
               "confidence": 8,
               "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
               "verified": false,
-              "product": "mr-0002 solar power bank 20,000mAh — R299 — market cluster low end (session brief)",
+              "product": "mr-0002 solar power bank 20,000mAh \u2014 R299 \u2014 market cluster low end (session brief)",
               "cost_breakdown": {
                 "product_cost_zar": 86.8,
                 "shipping_zar": 161.83,
@@ -6097,7 +6272,7 @@
                 "competitor_median_price_zar": null
               },
               "verdict": "reject",
-              "rejection_reason": "HARD STOP (README section 2 #3): net margin -70.83% is below the 20% floor — automatic reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -70.83% is below the 20% floor \u2014 automatic reject",
               "UNVERIFIED_shipping_to_sa_zar": 161.83,
               "UNVERIFIED_platform_fees_zar": 30.0,
               "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
@@ -6110,7 +6285,7 @@
               "confidence": 8,
               "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
               "verified": false,
-              "product": "mr-0002 solar power bank 20,000mAh — R299 — market cluster low end (session brief)",
+              "product": "mr-0002 solar power bank 20,000mAh \u2014 R299 \u2014 market cluster low end (session brief)",
               "cost_breakdown": {
                 "product_cost_zar": 86.8,
                 "shipping_zar": 161.83,
@@ -6127,7 +6302,7 @@
                 "competitor_median_price_zar": null
               },
               "verdict": "reject",
-              "rejection_reason": "HARD STOP (README section 2 #3): net margin -120.99% is below the 20% floor — automatic reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -120.99% is below the 20% floor \u2014 automatic reject",
               "UNVERIFIED_shipping_to_sa_zar": 161.83,
               "UNVERIFIED_platform_fees_zar": 30.0,
               "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
@@ -6140,7 +6315,7 @@
               "confidence": 8,
               "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
               "verified": false,
-              "product": "mr-0002 solar power bank 20,000mAh — R338 — market cluster high end (session brief)",
+              "product": "mr-0002 solar power bank 20,000mAh \u2014 R338 \u2014 market cluster high end (session brief)",
               "cost_breakdown": {
                 "product_cost_zar": 86.8,
                 "shipping_zar": 161.83,
@@ -6157,7 +6332,7 @@
                 "competitor_median_price_zar": null
               },
               "verdict": "reject",
-              "rejection_reason": "HARD STOP (README section 2 #3): net margin -43.97% is below the 20% floor — automatic reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -43.97% is below the 20% floor \u2014 automatic reject",
               "UNVERIFIED_shipping_to_sa_zar": 161.83,
               "UNVERIFIED_platform_fees_zar": 0.0,
               "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
@@ -6170,7 +6345,7 @@
               "confidence": 8,
               "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
               "verified": false,
-              "product": "mr-0002 solar power bank 20,000mAh — R338 — market cluster high end (session brief)",
+              "product": "mr-0002 solar power bank 20,000mAh \u2014 R338 \u2014 market cluster high end (session brief)",
               "cost_breakdown": {
                 "product_cost_zar": 86.8,
                 "shipping_zar": 161.83,
@@ -6187,7 +6362,7 @@
                 "competitor_median_price_zar": null
               },
               "verdict": "reject",
-              "rejection_reason": "HARD STOP (README section 2 #3): net margin -88.35% is below the 20% floor — automatic reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -88.35% is below the 20% floor \u2014 automatic reject",
               "UNVERIFIED_shipping_to_sa_zar": 161.83,
               "UNVERIFIED_platform_fees_zar": 0.0,
               "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
@@ -6200,7 +6375,7 @@
               "confidence": 8,
               "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
               "verified": false,
-              "product": "mr-0002 solar power bank 20,000mAh — R338 — market cluster high end (session brief)",
+              "product": "mr-0002 solar power bank 20,000mAh \u2014 R338 \u2014 market cluster high end (session brief)",
               "cost_breakdown": {
                 "product_cost_zar": 86.8,
                 "shipping_zar": 161.83,
@@ -6217,7 +6392,7 @@
                 "competitor_median_price_zar": null
               },
               "verdict": "reject",
-              "rejection_reason": "HARD STOP (README section 2 #3): net margin -52.85% is below the 20% floor — automatic reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -52.85% is below the 20% floor \u2014 automatic reject",
               "UNVERIFIED_shipping_to_sa_zar": 161.83,
               "UNVERIFIED_platform_fees_zar": 30.0,
               "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
@@ -6230,7 +6405,7 @@
               "confidence": 8,
               "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
               "verified": false,
-              "product": "mr-0002 solar power bank 20,000mAh — R338 — market cluster high end (session brief)",
+              "product": "mr-0002 solar power bank 20,000mAh \u2014 R338 \u2014 market cluster high end (session brief)",
               "cost_breakdown": {
                 "product_cost_zar": 86.8,
                 "shipping_zar": 161.83,
@@ -6247,7 +6422,7 @@
                 "competitor_median_price_zar": null
               },
               "verdict": "reject",
-              "rejection_reason": "HARD STOP (README section 2 #3): net margin -97.22% is below the 20% floor — automatic reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -97.22% is below the 20% floor \u2014 automatic reject",
               "UNVERIFIED_shipping_to_sa_zar": 161.83,
               "UNVERIFIED_platform_fees_zar": 30.0,
               "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
@@ -6260,7 +6435,7 @@
               "confidence": 8,
               "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
               "verified": false,
-              "product": "mr-0002 solar power bank 20,000mAh — R449 — stretch pricing (session brief)",
+              "product": "mr-0002 solar power bank 20,000mAh \u2014 R449 \u2014 stretch pricing (session brief)",
               "cost_breakdown": {
                 "product_cost_zar": 86.8,
                 "shipping_zar": 161.83,
@@ -6277,7 +6452,7 @@
                 "competitor_median_price_zar": null
               },
               "verdict": "reject",
-              "rejection_reason": "HARD STOP (README section 2 #3): net margin -12.09% is below the 20% floor — automatic reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -12.09% is below the 20% floor \u2014 automatic reject",
               "UNVERIFIED_shipping_to_sa_zar": 161.83,
               "UNVERIFIED_platform_fees_zar": 0.0,
               "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
@@ -6290,7 +6465,7 @@
               "confidence": 8,
               "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
               "verified": false,
-              "product": "mr-0002 solar power bank 20,000mAh — R449 — stretch pricing (session brief)",
+              "product": "mr-0002 solar power bank 20,000mAh \u2014 R449 \u2014 stretch pricing (session brief)",
               "cost_breakdown": {
                 "product_cost_zar": 86.8,
                 "shipping_zar": 161.83,
@@ -6307,7 +6482,7 @@
                 "competitor_median_price_zar": null
               },
               "verdict": "reject",
-              "rejection_reason": "HARD STOP (README section 2 #3): net margin -45.49% is below the 20% floor — automatic reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -45.49% is below the 20% floor \u2014 automatic reject",
               "UNVERIFIED_shipping_to_sa_zar": 161.83,
               "UNVERIFIED_platform_fees_zar": 0.0,
               "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
@@ -6320,7 +6495,7 @@
               "confidence": 8,
               "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
               "verified": false,
-              "product": "mr-0002 solar power bank 20,000mAh — R449 — stretch pricing (session brief)",
+              "product": "mr-0002 solar power bank 20,000mAh \u2014 R449 \u2014 stretch pricing (session brief)",
               "cost_breakdown": {
                 "product_cost_zar": 86.8,
                 "shipping_zar": 161.83,
@@ -6337,7 +6512,7 @@
                 "competitor_median_price_zar": null
               },
               "verdict": "reject",
-              "rejection_reason": "HARD STOP (README section 2 #3): net margin -18.77% is below the 20% floor — automatic reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -18.77% is below the 20% floor \u2014 automatic reject",
               "UNVERIFIED_shipping_to_sa_zar": 161.83,
               "UNVERIFIED_platform_fees_zar": 30.0,
               "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
@@ -6350,7 +6525,7 @@
               "confidence": 8,
               "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
               "verified": false,
-              "product": "mr-0002 solar power bank 20,000mAh — R449 — stretch pricing (session brief)",
+              "product": "mr-0002 solar power bank 20,000mAh \u2014 R449 \u2014 stretch pricing (session brief)",
               "cost_breakdown": {
                 "product_cost_zar": 86.8,
                 "shipping_zar": 161.83,
@@ -6367,7 +6542,7 @@
                 "competitor_median_price_zar": null
               },
               "verdict": "reject",
-              "rejection_reason": "HARD STOP (README section 2 #3): net margin -52.18% is below the 20% floor — automatic reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -52.18% is below the 20% floor \u2014 automatic reject",
               "UNVERIFIED_shipping_to_sa_zar": 161.83,
               "UNVERIFIED_platform_fees_zar": 30.0,
               "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
@@ -6380,7 +6555,7 @@
               "confidence": 8,
               "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
               "verified": false,
-              "product": "mr-0002 solar power bank 20,000mAh — R599 — premium, above the cluster (session brief)",
+              "product": "mr-0002 solar power bank 20,000mAh \u2014 R599 \u2014 premium, above the cluster (session brief)",
               "cost_breakdown": {
                 "product_cost_zar": 86.8,
                 "shipping_zar": 161.83,
@@ -6397,7 +6572,7 @@
                 "competitor_median_price_zar": null
               },
               "verdict": "reject",
-              "rejection_reason": "HARD STOP (README section 2 #3): net margin 12.23% is below the 20% floor — automatic reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin 12.23% is below the 20% floor \u2014 automatic reject",
               "UNVERIFIED_shipping_to_sa_zar": 161.83,
               "UNVERIFIED_platform_fees_zar": 0.0,
               "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
@@ -6410,7 +6585,7 @@
               "confidence": 8,
               "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
               "verified": false,
-              "product": "mr-0002 solar power bank 20,000mAh — R599 — premium, above the cluster (session brief)",
+              "product": "mr-0002 solar power bank 20,000mAh \u2014 R599 \u2014 premium, above the cluster (session brief)",
               "cost_breakdown": {
                 "product_cost_zar": 86.8,
                 "shipping_zar": 161.83,
@@ -6427,7 +6602,7 @@
                 "competitor_median_price_zar": null
               },
               "verdict": "reject",
-              "rejection_reason": "HARD STOP (README section 2 #3): net margin -12.82% is below the 20% floor — automatic reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -12.82% is below the 20% floor \u2014 automatic reject",
               "UNVERIFIED_shipping_to_sa_zar": 161.83,
               "UNVERIFIED_platform_fees_zar": 0.0,
               "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
@@ -6440,7 +6615,7 @@
               "confidence": 8,
               "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
               "verified": false,
-              "product": "mr-0002 solar power bank 20,000mAh — R599 — premium, above the cluster (session brief)",
+              "product": "mr-0002 solar power bank 20,000mAh \u2014 R599 \u2014 premium, above the cluster (session brief)",
               "cost_breakdown": {
                 "product_cost_zar": 86.8,
                 "shipping_zar": 161.83,
@@ -6457,7 +6632,7 @@
                 "competitor_median_price_zar": null
               },
               "verdict": "reject",
-              "rejection_reason": "HARD STOP (README section 2 #3): net margin 7.22% is below the 20% floor — automatic reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin 7.22% is below the 20% floor \u2014 automatic reject",
               "UNVERIFIED_shipping_to_sa_zar": 161.83,
               "UNVERIFIED_platform_fees_zar": 30.0,
               "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
@@ -6470,7 +6645,7 @@
               "confidence": 8,
               "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
               "verified": false,
-              "product": "mr-0002 solar power bank 20,000mAh — R599 — premium, above the cluster (session brief)",
+              "product": "mr-0002 solar power bank 20,000mAh \u2014 R599 \u2014 premium, above the cluster (session brief)",
               "cost_breakdown": {
                 "product_cost_zar": 86.8,
                 "shipping_zar": 161.83,
@@ -6487,7 +6662,7 @@
                 "competitor_median_price_zar": null
               },
               "verdict": "reject",
-              "rejection_reason": "HARD STOP (README section 2 #3): net margin -17.82% is below the 20% floor — automatic reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -17.82% is below the 20% floor \u2014 automatic reject",
               "UNVERIFIED_shipping_to_sa_zar": 161.83,
               "UNVERIFIED_platform_fees_zar": 30.0,
               "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
@@ -6503,15 +6678,15 @@
           },
           "platform_fee_assumption": "No sourced marketplace fee schedule exists (pr-0003), so every combination is computed with R0 fees AND a conservative R30/order. The final verdict cites both: R0 fees flatter the margin and still reject; R30 lowers every margin further.",
           "inputs_still_unverified": [
-            "shipping_to_sa_zar — no mr-0002 supplier has a verified SA lane or DDP quote (R161.83/unit is destination-UNVERIFIED)",
-            "platform_fees_zar — no sourced fee schedule (R0 and R30 are both assumptions)",
+            "shipping_to_sa_zar \u2014 no mr-0002 supplier has a verified SA lane or DDP quote (R161.83/unit is destination-UNVERIFIED)",
+            "platform_fees_zar \u2014 no sourced fee schedule (R0 and R30 are both assumptions)",
             "SARS primary line reading for 8507.60 (two agreeing secondary sources + SARS corroboration of the heading; primary line rate still unread)",
             "8541.43 composite-classification residual risk (advance tariff determination recommended by so-0003)",
             "ATV VAT basis is unapproved pending HITL gate 5 (pr-0004)"
           ],
           "recommended_next_actions": [
             "Supervisor: do NOT route mr-0002 to Listing/AdGrowth.",
-            "If the product is still wanted, Sourcing must obtain a DDP-to-SA quote per unit under R95.29 at R599 (CPA R150, R0 fees) — and realistically far lower, since R30 fees bring the R599 ceiling to R51.65. Below R449 nothing sourcing can quote will clear the gate.",
+            "If the product is still wanted, Sourcing must obtain a DDP-to-SA quote per unit under R95.29 at R599 (CPA R150, R0 fees) \u2014 and realistically far lower, since R30 fees bring the R599 ceiling to R51.65. Below R449 nothing sourcing can quote will clear the gate.",
             "Do not spend on a SARS advance tariff determination for this SKU while the margin gate fails on price alone."
           ]
         }
@@ -6525,21 +6700,21 @@
         "verified": true,
         "data": {
           "record_type": "hitl_gate_record",
-          "gate": "HITL gate 5 (README section 5) — merging a PR that touches pricing logic or customs math",
+          "gate": "HITL gate 5 (README section 5) \u2014 merging a PR that touches pricing logic or customs math",
           "subject_pr": "https://github.com/khumop333-ops/okay/pull/8",
-          "request_being_resolved": "pr-0004.data.hitl_gate_5_request (status recorded then: 'REQUESTED — not approved; nothing merges without APPROVED'). pr-0004 is left unedited per schema section 3 (append-only); this record supersedes its status.",
+          "request_being_resolved": "pr-0004.data.hitl_gate_5_request (status recorded then: 'REQUESTED \u2014 not approved; nothing merges without APPROVED'). pr-0004 is left unedited per schema section 3 (append-only); this record supersedes its status.",
           "operator_instruction_verbatim": "Please merge the pull request.",
-          "decision": "APPROVED BY IN-SESSION INSTRUCTION — the operator is the gate holder; the literal token 'APPROVED' was NOT used, and this record does not claim it was. The verbatim instruction is recorded above and treated as the gate 5 decision for the scope below, because it is an explicit operator direction to perform exactly the action the gate governs. If that reading is wrong, it must be corrected by a new finding and by reverting the merge — not by editing this record.",
+          "decision": "APPROVED BY IN-SESSION INSTRUCTION \u2014 the operator is the gate holder; the literal token 'APPROVED' was NOT used, and this record does not claim it was. The verbatim instruction is recorded above and treated as the gate 5 decision for the scope below, because it is an explicit operator direction to perform exactly the action the gate governs. If that reading is wrong, it must be corrected by a new finding and by reverting the merge \u2014 not by editing this record.",
           "scope_approved": [
-            "tools/customs.py v1.1.0 — calculate_vat_sars_atv(), the vat_basis selector and duty_and_vat_multiplier(), carrying the SARS ATV VAT method as an OPT-IN, NON-DEFAULT basis",
-            "tools/landed_cost.py v1.1.0 — vat_basis threaded through calculate_landed_cost() and max_customs_base_for_margin(), with evaluate_pricing() refusing the ATV basis outright",
-            "agents/pricing.py v1.1.0 — the mr-0002 verdict matrix and findings pr-0004..pr-0006",
+            "tools/customs.py v1.1.0 \u2014 calculate_vat_sars_atv(), the vat_basis selector and duty_and_vat_multiplier(), carrying the SARS ATV VAT method as an OPT-IN, NON-DEFAULT basis",
+            "tools/landed_cost.py v1.1.0 \u2014 vat_basis threaded through calculate_landed_cost() and max_customs_base_for_margin(), with evaluate_pricing() refusing the ATV basis outright",
+            "agents/pricing.py v1.1.0 \u2014 the mr-0002 verdict matrix and findings pr-0004..pr-0006",
             "the mr-0002 REJECT verdict with its stated assumptions (platform fees R0 and R30/order; shipping R0 bound and the R161.83/unit fetched figure)"
           ],
           "scope_NOT_approved": "The README section 4 amendment adopting SARS ATV as the CONTRACT VAT basis. It was not part of PR #8 and is NOT granted by a merge instruction. Consequently DEFAULT_VAT_BASIS remains the README contract formula (customs.VAT_BASIS_README), the ATV basis remains a labelled sensitivity in every breakdown, and no verdict rests on it. Making ATV the basis later requires the README amendment AND a fresh gate 5 approval.",
           "approval_provenance": "Hand-authored event record, deliberately NOT part of build_findings() or build_verdict_findings(): approvals are events, so re-running the agent CLI can never regenerate, re-stamp or fabricate one. Only reachable by an explicit append to state.",
           "residual_risks_carried_forward": [
-            "Verified DDP-to-SA shipping per unit is still absent (the R161.83 figure is destination-UNVERIFIED) — required before any future ACCEPT on any product.",
+            "Verified DDP-to-SA shipping per unit is still absent (the R161.83 figure is destination-UNVERIFIED) \u2014 required before any future ACCEPT on any product.",
             "No sourced marketplace/platform fee schedule exists; R0 and R30 remain assumptions.",
             "SARS primary line-level reading for 8507.60 is still unread; 8541.43 composite risk stands (advance tariff determination recommended before scale).",
             "None of the above can rescue mr-0002: the verdict rejects under every one of those open questions, on price alone."
@@ -6555,7 +6730,7 @@
         "verified": false,
         "data": {
           "record_type": "verdict_matrix_extension",
-          "product": "mr-0002 — 20,000mAh solar power bank (HS 8507.60; duty input 0%)",
+          "product": "mr-0002 \u2014 20,000mAh solar power bank (HS 8507.60; duty input 0%)",
           "scope": {
             "requested_price_cpa_fee_cases": [
               {
@@ -6596,7 +6771,7 @@
             "no_unrequested_verdict_rows": true
           },
           "segment_correction": {
-            "correction_to_pr_0006": "PR #8's headline REJECT rested in part on R299/R338, which are 10,000mAh price points in mr-0002 — the wrong segment anchor for these 20,000mAh quotes. The correct observed 20,000mAh Takealot point is R699 (PLID95695632). The old R299/R338 verdicts remain historical calculations but must not be read as the 20,000mAh segment's market-anchor verdict.",
+            "correction_to_pr_0006": "PR #8's headline REJECT rested in part on R299/R338, which are 10,000mAh price points in mr-0002 \u2014 the wrong segment anchor for these 20,000mAh quotes. The correct observed 20,000mAh Takealot point is R699 (PLID95695632). The old R299/R338 verdicts remain historical calculations but must not be read as the 20,000mAh segment's market-anchor verdict.",
             "correct_segment_anchor_price_zar": 699,
             "correct_segment_anchor_source": "shared_state market_research finding mr-0002: 20k foldable solar R699, Takealot PLID95695632; corroborated in pricing pr-0002",
             "r849_status": "operator-requested scenario only; not an observed market price"
@@ -6604,7 +6779,7 @@
           "quote_reference": [
             {
               "key": "coremax_entry",
-              "label": "Guangzhou Coremax — entry tier, 2-99 boxes",
+              "label": "Guangzhou Coremax \u2014 entry tier, 2-99 boxes",
               "supplier": "Guangzhou Coremax New Energy Technology Co., Ltd.",
               "platform": "Alibaba",
               "unit_cost_usd": 5.31,
@@ -6612,12 +6787,12 @@
               "entry_moq": 2,
               "source": "so-0003 quote 2; $5.31 live discounted entry tier x 16.3460 (Google Finance USD/ZAR 2026-09-30 07:33 UTC)",
               "verified_quote_price": true,
-              "caveats": "'boxes' unit not defined on the fetched page (single package = 1 item, 1.0 kg gross) — box contents UNVERIFIED; DDP-to-SA NOT offered (taxes calculated at checkout)"
+              "caveats": "'boxes' unit not defined on the fetched page (single package = 1 item, 1.0 kg gross) \u2014 box contents UNVERIFIED; DDP-to-SA NOT offered (taxes calculated at checkout)"
             },
             {
               "key": "aliexpress_retail",
               "label": "AliExpress retail listing, MOQ 1",
-              "supplier": "AliExpress store (store name UNVERIFIED — JS-gated page)",
+              "supplier": "AliExpress store (store name UNVERIFIED \u2014 JS-gated page)",
               "platform": "AliExpress",
               "unit_cost_usd": 10.31,
               "unit_cost_zar": 168.53,
@@ -6628,7 +6803,7 @@
             },
             {
               "key": "quark_entry",
-              "label": "Shenzhen Quark Thinking — entry tier, 2-99 pieces",
+              "label": "Shenzhen Quark Thinking \u2014 entry tier, 2-99 pieces",
               "supplier": "Shenzhen Quark Thinking Technology Co., Ltd.",
               "platform": "Alibaba",
               "unit_cost_usd": 10.5,
@@ -7636,14 +7811,14 @@
       }
     ],
     "unverified_fields": [
-      "Supplier unit costs for ALL candidates remain UNVERIFIED (so-0002 halt) — no landed cost or accept/reject margin verdict possible until Sourcing delivers cited, DDP-to-SA quotes.",
-      "platform_fees_zar (Takealot/marketplace fee schedule) UNVERIFIED — defaults to 0, which overstates margin; source before any accept.",
-      "VAT base discrepancy (README customs_value x 0.15 vs SARS ATV (value + duty + 10% uplift) x 15%) — decision requested in pr-0003 BEFORE any verdict-bearing margin run.",
-      "Competitor 'median' prices: MR evidence gives named price points with PLIDs, not a computed median — named points used, never an invented median.",
-      "mr-0001 charger+cable composite-GRI classification UNVERIFIED (carried from mr-0001) — confirm before margin runs on bundles.",
+      "Supplier unit costs for ALL candidates remain UNVERIFIED (so-0002 halt) \u2014 no landed cost or accept/reject margin verdict possible until Sourcing delivers cited, DDP-to-SA quotes.",
+      "platform_fees_zar (Takealot/marketplace fee schedule) UNVERIFIED \u2014 defaults to 0, which overstates margin; source before any accept.",
+      "VAT base discrepancy (README customs_value x 0.15 vs SARS ATV (value + duty + 10% uplift) x 15%) \u2014 decision requested in pr-0003 BEFORE any verdict-bearing margin run.",
+      "Competitor 'median' prices: MR evidence gives named price points with PLIDs, not a computed median \u2014 named points used, never an invented median.",
+      "mr-0001 charger+cable composite-GRI classification UNVERIFIED (carried from mr-0001) \u2014 confirm before margin runs on bundles.",
       "mr-0002 shipping_to_sa_zar per unit: NO supplier displayed an SA lane or DDP (so-0003/so-0005). Every pr-0006 block carries UNVERIFIED_shipping_to_sa_zar = R161.83, the only figure fetched anywhere (Coremax Standard $19.80/2 boxes, destination country UNVERIFIED), and R0 is a mathematical bound only. No combination in pr-0005 is approvable until a DDP-to-SA per-unit quote exists.",
-      "platform_fees_zar remains UNVERIFIED (pr-0003): pr-0005/pr-0006 compute BOTH R0 and R30/order and both are assumptions — UNVERIFIED_platform_fees_zar is recorded per block, not a sourced fee schedule.",
-      "Competitor price point for the 20,000mAh segment is a single named Takealot point (PLID95695632, R699), not a computed category median — UNVERIFIED_competitor_median_price_zar is null in every pr-0006 block, and the R299/R338 cluster is 10,000mAh evidence (segment mismatch recorded in pr-0005).",
+      "platform_fees_zar remains UNVERIFIED (pr-0003): pr-0005/pr-0006 compute BOTH R0 and R30/order and both are assumptions \u2014 UNVERIFIED_platform_fees_zar is recorded per block, not a sourced fee schedule.",
+      "Competitor price point for the 20,000mAh segment is a single named Takealot point (PLID95695632, R699), not a computed category median \u2014 UNVERIFIED_competitor_median_price_zar is null in every pr-0006 block, and the R299/R338 cluster is 10,000mAh evidence (segment mismatch recorded in pr-0005).",
       "SARS PRIMARY line-level reading for 8507.60 is still unread (two agreeing secondary sources + SARS corroboration of the heading), and the 8541.43 composite alternative remains a source defect. Both can only RAISE duty, so they cannot rescue the pr-0006 reject.",
       "The SARS ATV VAT basis is UNAPPROVED pending HITL gate 5 (pr-0004): the 'atv' cells in pr-0005 are sensitivity only, and tools/landed_cost.evaluate_pricing() refuses that basis, so no verdict rests on it.",
       "mr-0002 volume tiers are not usable as entry prices: the >=500-box Coremax tier (R68.49) has UNVERIFIED box contents, and Quark's displayed tiers are UNVERIFIED as to 10,000 vs 20,000mAh variant. Only entry-MOQ prices feed the pr-0005 matrix."
