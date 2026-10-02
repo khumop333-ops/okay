@@ -34,7 +34,7 @@
       "provisional": true
     },
     "warranty_repair_delay_runaround": {
-      "definition": "Brand/distributor warranty or repair takes months, parts awaited, job numbers untraceable, escalations unanswered, claims bounced between parties.",
+      "definition": "Brand/distributor support or warranty repair: months-long repairs, parts awaited, untraceable job numbers, unanswered escalations, claims bounced between parties, or unhelpful agents.",
       "provisional": true
     },
     "inverter_fault_recurring": {
@@ -91,6 +91,26 @@
     },
     "billing_debit_order_errors": {
       "definition": "Rent-to-own/finance billing problems: debits after cancellation, misallocated payments, unactioned debit-order changes, promised refunds not paid, no reachable accounts department.",
+      "provisional": true
+    },
+    "municipal_billing_metering_mismatch": {
+      "definition": "Municipal billing/metering treats solar generation as grid consumption or needs a bidirectional/prepaid meter, undermining savings; not explained up front by the provider.",
+      "provisional": true
+    },
+    "warranty_claim_rejected": {
+      "definition": "Warranty claim rejected with vague or contradictory reasons (e.g. 'misuse'), no failure explanation given.",
+      "provisional": true
+    },
+    "inverter_battery_compat_config": {
+      "definition": "Inverter/battery/logger compatibility or configuration problems (BMS comms, current limits, odd readings, loggers) that owners must debug themselves.",
+      "provisional": true
+    },
+    "monitoring_app_issues": {
+      "definition": "Monitoring/alerting gaps: apps or portals offline, inaccurate, too complex, or missing alerts; owners rely on extra tools or notice faults late.",
+      "provisional": true
+    },
+    "cannot_verify_installation_quality": {
+      "definition": "Owner cannot judge whether the install/configuration is correct or whether the system performs as sold; relies on the installer's word or pays for a second opinion; problems found only after months or years.",
       "provisional": true
     }
   }
