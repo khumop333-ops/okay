@@ -25,10 +25,10 @@
       "must_never": "Execute sub-agent tasks directly (README section 3)",
       "append_key": "sessions"
     },
-    "timestamp": "2026-09-30T08:15:38+02:00",
+    "timestamp": "2026-10-02T18:22:47+02:00",
     "agent": "supervisor",
     "confidence": 9,
-    "source": "Session 01a0f0e5 (Supervisor, operator-directed close-out): process-failure record sup-0001 appended to supervisor.findings. Facts verified directly this session against primary sources: git log --all (full 15-commit history; NEXT_SESSION_HANDOFF.md never existed in any commit; mr-0028+ appears in no version of this file), git branch -a + git ls-remote origin (main + 4 arena branches, all merged), gh pr list --state all (4 PRs, all MERGED, none contains the handoff), git cat-file -t 21b39b6 + git fsck --lost-found (not a valid object; no dangling objects). The root_cause narrative in sup-0001 is operator-provided; the absence facts it rests on were directly verified.",
+    "source": "Session 01a0fd60 (Supervisor, operator-directed strategic pivot): sup-0002 appended to supervisor.findings. Operator instructions are quoted verbatim in sup-0002. Archive scope verified by sandbox audit of shared_state.json at base commit bbee341 (ids and counts).",
     "verified": true,
     "sessions": [
       {
@@ -139,6 +139,155 @@
           "root_cause": "Agent committed locally but did not push before session ended. HARD STOP #9 requires merge before next session, but does not explicitly require push before session end.",
           "impact": "Nine candidates (mr-0003/0005/0006/0008/0012/0002/0021/0023/0025) revert to unverified in state on main. Sourcing remains blocked.",
           "mitigation": "Amend README §8 to add: 'A session MUST push its commit to a remote branch before ending. Work that exists only in the local sandbox is lost. Push early, push often.'"
+        }
+      },
+      {
+        "id": "sup-0002",
+        "timestamp": "2026-10-02T18:22:47+02:00",
+        "agent": "supervisor",
+        "confidence": 9,
+        "source": "Operator written instructions in this session (2026-10-02), quoted verbatim in data.operator_directives_verbatim: the strategic-pivot brief, the follow-up message confirming DIGITAL, and the scope reminder limiting README section 4. Archive scope checked by sandbox test: programmatic audit of shared_state.json at base commit bbee341 (every id named in data.archived_as_background and data.carried_over.findings_not_archived exists in its namespace; namespace counts 42 / 6 / 8 match).",
+        "verified": true,
+        "data": {
+          "type": "strategic_pivot",
+          "session_id": "01a0fd60",
+          "branch": "arena/01a0fd60-okay",
+          "base_commit": "bbee341918b14ad052259b7521c6fa1ce03d6505",
+          "description": "Strategic pivot. The operator confirmed there is no capital for bulk import, so import-from-China dropshipping, the model the pipeline was built for, is RETIRED. Three models are viable: local SA dropshipping, high-ticket items, digital products. The operator confirmed DIGITAL as the starting model. Contract, state structure, session discipline and tools architecture carry over unchanged; the product research is archived as background. README sections 1 and 4 are amended to match in the same PR.",
+          "verified_scope": "Verified: (1) the archive scope, by the sandbox audit named in source; (2) the operator's directives, quoted verbatim. NOT claimed: that any of the three models is commercially viable, or that DIGITAL beats the other two. No market, product or viability research was performed this session and none is implied; the starting model is the operator's confirmed decision, not a finding of fact. No UNVERIFIED_ value is recorded: gaps are listed in open_items as questions, not carried as data.",
+          "operator_directives_verbatim": [
+            {
+              "message": "session brief",
+              "quote": "The operator has confirmed: no capital for bulk import. The viable models are now (1) local SA dropshipping, (2) high-ticket items, (3) digital products."
+            },
+            {
+              "message": "session brief",
+              "quote": "The prior pipeline was built for import-from-China dropship. That model is retired. Everything built so far (contract, state structure, session discipline, tools architecture) carries over. The product research (mr-0002, mr-0003, SARS rates, DDP quotes) is archived as background."
+            },
+            {
+              "message": "follow-up message",
+              "quote": "Decision confirmed: DIGITAL is the starting model."
+            },
+            {
+              "message": "follow-up message",
+              "quote": "Scope reminder for the README §4 amendment: one short paragraph per model, no model-specific compliance detail — that belongs in future agent prompts, not the contract."
+            }
+          ],
+          "constraint_change": {
+            "before": "The pipeline (MarketResearch, Sourcing, Pricing) was built for import-from-China dropship, per the operator. README section 4 is import-shaped: VAT on customs value, SARS duty, the landed-cost formula, the customs-clearance delay flag.",
+            "after": "No capital for bulk import (operator-confirmed). Only that stated constraint is recorded; the operator did not state a capital figure for anything else (see open_items).",
+            "source": "operator_directives_verbatim[0]"
+          },
+          "retired_model": {
+            "name": "import-from-China dropshipping",
+            "status": "RETIRED",
+            "reason": "Operator confirmed no capital for bulk import.",
+            "pipeline_it_was_built_for": "MarketResearch (HS code and duty screen) -> Sourcing (China suppliers, DDP-to-SA quotes) -> Pricing (landed cost with SARS duty and 15% VAT; ATV question open).",
+            "revival": "Only by an operator amendment to README section 1. Nothing is deleted: the research, quotes, cost tools and tests stay in the repo."
+          },
+          "viable_models": [
+            {
+              "n": 1,
+              "model": "local SA dropshipping",
+              "summary": "A South African supplier holds the stock and ships to our customer.",
+              "import_math_applies": false
+            },
+            {
+              "n": 2,
+              "model": "high-ticket items",
+              "summary": "Few, high-value sales where one order carries the margin.",
+              "import_math_applies": "only if the item is imported"
+            },
+            {
+              "n": 3,
+              "model": "digital products",
+              "summary": "Delivered electronically, with no physical stock, shipping or customs.",
+              "import_math_applies": false
+            }
+          ],
+          "starting_model": {
+            "operator_decision": "DIGITAL",
+            "status": "CONFIRMED",
+            "recommended_in_brief": "DIGITAL",
+            "decision_source": "operator_directives_verbatim[2]",
+            "rationale": "None was stated by the operator and none is invented here.",
+            "listing_order_is_not_priority": "The operator listed the models as local dropshipping, high-ticket, digital. That is not a ranking; README section 1 says so."
+          },
+          "archived_as_background": {
+            "status": "ARCHIVED_AS_BACKGROUND",
+            "effect": "Findings stay in place, unedited and undeleted (append-only, schema section 3). They are reference material only: not live pipeline input, and no agent may route from or build on them without a Supervisor re-activation record. Archive status is recorded in this finding only; no earlier finding was re-labelled.",
+            "named_by_operator": {
+              "mr-0002": "Solar power bank 10,000-20,000 mAh (HS 8507.60), the lead candidate",
+              "mr-0003": "Rechargeable LED / solar emergency light (HS 8513.10)",
+              "SARS rates": "market_research mr-0028..mr-0041: the 14 SARS tariff duty-rate verification findings (11 resolved, 3 recorded as negative results, per mr-0042)",
+              "DDP quotes": "sourcing so-0003 and so-0004 (supplier quotes for mr-0002 and mr-0003) and so-0006 (DDP-to-SA shipping quote sweep for mr-0002)"
+            },
+            "by_namespace": {
+              "market_research": {
+                "ids": "mr-0001..mr-0042",
+                "count": 42,
+                "contents": "26 candidate screens (mr-0001..mr-0026), summary mr-0027, 14 duty verification supersessions (mr-0028..mr-0041), summary mr-0042"
+              },
+              "sourcing": {
+                "ids": "so-0001..so-0006",
+                "count": 6,
+                "contents": "supplier-verification framework and halt record (so-0001, so-0002), supplier quotes (so-0003, so-0004), session summary (so-0005), DDP-to-SA quote sweep (so-0006)"
+              },
+              "pricing": {
+                "ids": [
+                  "pr-0002",
+                  "pr-0005",
+                  "pr-0006",
+                  "pr-0008"
+                ],
+                "count": 4,
+                "contents": "break-even analysis, verdict matrix, formal REJECT verdict and the R699 extension, all for mr-0002 on the import cost stack",
+                "basis": "SUPERVISOR INFERENCE, not named by the operator: archived because each is derived from the archived mr-0002 research and quotes. Reversible by a one-line Supervisor record; no data was changed."
+              }
+            },
+            "total_archived": 52
+          },
+          "carried_over": {
+            "status": "UNCHANGED - carries over, per operator",
+            "contract": "README.md: section 2 HARD STOPS, section 5 HITL gates and sections 6-12 as written (sections 1 and 4 amended in this PR)",
+            "state_structure": "shared_state.json shape, _conventions and shared_state.schema.md; _schema_version stays 1.0.0",
+            "session_discipline": "README section 8: read README and state at start, push before the session ends, one PR per session, merge before the next session opens (HARD STOPS 8 and 9)",
+            "tools_architecture": "tools/customs.py, tools/landed_cost.py, agents/market_research.py, agents/pricing.py and tests/ retained unmodified. README section 6 still holds: cost math lives only in tools/. They are import-shaped and stay available to any model that imports.",
+            "findings_not_archived": {
+              "sup-0001": "process-failure record (session discipline)",
+              "pr-0001": "capability record for the cost tools (tools architecture)",
+              "pr-0003, pr-0004, pr-0007": "open decisions and the gate-5 audit record. The ATV VAT-basis question stays open and is dormant unless a model that imports is built. This PR does not decide it."
+            }
+          },
+          "readme_amendments": {
+            "file": "README.md, this PR",
+            "section_1_mission": "Rewritten: the three viable models listed (listing order is not a priority order); import-from-China dropshipping named as RETIRED with the reason; research archived as background; the starting model is an operator decision recorded in state, not in the contract.",
+            "section_4_model_specific_rules": "New subsection: a short lead-in stating that import math (HS-code lookup, SARS duty, import VAT on customs value or ATV, landed-cost formula, clearance-delay flag) applies only to a product a model actually imports and that section 2 still binds every model; then one short paragraph each for local dropship, high-ticket and digital. Per operator directive, no model-specific compliance detail: that belongs in future agent prompts.",
+            "not_amended": "README sections 2, 3 and 5-12 (wording), the title and shared_state.schema.md: out of scope this session (see open_items)."
+          },
+          "not_done_this_session": [
+            "No agent prompts touched (follow-up session).",
+            "No sub-agent routed.",
+            "No code, tests or files changed other than README.md and shared_state.json.",
+            "No market, product or viability research on any of the three models.",
+            "No model-specific compliance detail written into the contract, or recorded here.",
+            "No existing finding edited, deleted or re-labelled."
+          ],
+          "follow_up": {
+            "next_session": "Rewrite the Market Research agent prompt for digital product discovery. Separate session, separate PR, and this PR merged to main first (HARD STOP 9).",
+            "basis": "Operator confirmed DIGITAL.",
+            "if_the_decision_changes": "Local dropship or high-ticket instead: the same prompt rewrite is scoped to that model, and a new sup- finding supersedes the starting_model block here (append-only).",
+            "model_specific_compliance_detail": "Belongs in the agent prompts (operator directive). Every figure or legal requirement put there must come from a real source or be marked UNVERIFIED (HARD STOP 2)."
+          },
+          "open_items": [
+            "README wording outside sections 1 and 4 still reads import-first and was NOT amended (out of scope): HARD STOPS 3 and 4 (VAT on customs value, landed-cost margin), the section 3 roster (MarketResearch 'verified HS code', Sourcing, Pricing 'landed cost'), section 9 phase order, section 10 Definition of Done, the document title, shared_state.schema.md and _conventions ('SA Dropship Agent Crew'). The new section 4 lead-in scopes the import obligations to imported products; any reword of the HARD STOPS is the operator's call.",
+            "Capital for non-import costs (ads, tools, platform fees, unit purchases) was not stated by the operator. Not recorded, not assumed. HARD STOP 1 stands: nothing is spent without explicit written approval in-session.",
+            "No cost model exists for non-import products. tools/ is import-shaped and README section 6 still requires cost math to live only in tools/. A cost model for the chosen model needs its own PR and HITL gate 5. Not started.",
+            "'High-ticket' has no price threshold; none was invented. The model summaries in README section 1 are the Supervisor's minimal working wording; the operator listed model names only.",
+            "The ATV VAT-basis decision (pr-0003, pr-0004, pr-0007) remains open and is dormant unless a model that imports is built. README section 4 names ATV only to scope it; it does not adopt it, and the contract VAT basis is unchanged."
+          ],
+          "hard_stops_status": "No HARD STOP violated. #1 no spend (no paid API, sample order or ad); #2 nothing invented: every id and count here was read from shared_state.json at the base commit and the operator's words are quoted verbatim; #3 and #4 no product approved and no cost math touched; #5 Supervisor session, no sub-agent output; #6 no force-push or history rewrite; #7 no secrets; #8 shared_state.json is on main; #9 the previous PR (#10) was merged before this session.",
+          "hitl_gates_note": "No HITL gate crossed: no paid service, sample order, launch recommendation, ad campaign or customer-facing commitment. Gate 5 (merging a PR that touches pricing logic or customs math) is not triggered on this reading: no code, formula or rate changed, and the section 4 text only scopes where the existing import math applies, as the operator directed. Flagged so the operator can overrule that reading before merge."
         }
       }
     ]
