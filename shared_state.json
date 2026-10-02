@@ -2341,10 +2341,10 @@
         "cost_math_rule": "All cost math must call tools/landed_cost.py. Never re-implement the formula. 15% VAT on customs value is mandatory in every calculation."
       }
     },
-    "timestamp": "2026-09-29T23:00:05+02:00",
+    "timestamp": "2026-10-02T08:38:11+02:00",
     "agent": "pricing",
     "confidence": 7,
-    "source": "tools/landed_cost.py v1.0.0, tools/customs.py v1.0.0; 3 findings appended this session (pr-0001..pr-0003); namespace roll-up takes the minimum finding confidence (conservative)",
+    "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; 7 findings in namespace (pr-0001..pr-0007); namespace roll-up takes the minimum finding confidence (conservative). Findings accumulate across sessions — this string is regenerated on every append and does not claim a single session produced them all.",
     "verified": false,
     "findings": [
       {
@@ -2678,6 +2678,3328 @@
           "platform_fees_UNVERIFIED": "Net margin per the brief subtracts 'Platform Fees'. No verified Takealot/marketplace fee schedule exists in state; the parameter defaults to R0 which OVERSTATES margin. Must be sourced before any accept verdict is treated as final.",
           "competitor_median_note": "MR evidence provides named Takealot price points/floors with PLIDs, not a computed category median. This session uses named price points, never a fabricated median; a real median needs the Takealot browsing fix noted in so-0002/mr method_limits."
         }
+      },
+      {
+        "id": "pr-0004",
+        "timestamp": "2026-09-30T20:49:08+02:00",
+        "agent": "pricing",
+        "confidence": 9,
+        "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; tools/customs.py v1.0.0 module docstring (ATV 'deliberately NOT implemented'); pricing pr-0003 atv_formula_discrepancy_DECISION_REQUESTED; README sections 1, 2 (#4), 4, 5 (gate 5)",
+        "verified": true,
+        "data": {
+          "record_type": "hard_stop_and_hitl_request",
+          "hard_stop": "The session task requires the SARS ATV VAT method. On entering this session tools/customs.py v1.0.0 did NOT implement it (its docstring says so explicitly and pr-0003 had already escalated the conflict). Reported as a HARD STOP rather than silently computing margins on the README flat formula.",
+          "contract_conflict": "README section 4 / HARD STOP #4 say VAT = customs_value x 0.15. SARS' ATV method for non-SACU consignments charges 15% on (customs value + duty + 10% uplift). README section 1: the README wins conflicts, so the README formula remains the default and the only verdict-bearing basis.",
+          "action_taken_this_session": "Added customs.calculate_vat_sars_atv() + a vat_basis selector to tools/customs.py (v1.1.0) and threaded it through tools/landed_cost.py (v1.1.0) so the ATV variant lives INSIDE the one module allowed to hold cost math (README section 6) instead of being re-implemented by this agent. Defaults are UNCHANGED: DEFAULT_VAT_BASIS is the README contract formula, and evaluate_pricing() REFUSES the ATV basis outright (a verdict may not rest on an unapproved formula).",
+          "hitl_gate_5_request": {
+            "what": "Approve or reject the addition of the SARS ATV VAT basis to tools/customs.py + tools/landed_cost.py (opt-in, non-default), and the accompanying README section 4 amendment if ATV is to become the basis.",
+            "why": "The README formula understates VAT if SARS' ATV method is the legally correct one, which flatters every margin in the worst possible direction for a margin gate.",
+            "cost": "No paid service, no purchase, no order. Engineering cost only: one module + tests (this PR).",
+            "risk": "If ATV is NOT approved and is the legally correct method, every published margin is overstated. If ATV is adopted without amending README section 4, the contract and the tool disagree — hence the amendment is part of the same approval.",
+            "quantified_impact": "mr-0002 (duty 0%): the customs multiplier moves from 1.15 to 1.165 (+1.30% on the customs value). On the cheapest usable quote at zero shipping that is R0.98 (Coremax R86.80) per unit — small in rands, but it moves in the wrong direction for every accept.",
+            "status": "REQUESTED — not approved; nothing merges without APPROVED"
+          },
+          "brief_reconciliation": "Because ATV is unapproved, the verdict-bearing figures in pr-0005/pr-0006 use the README basis and the ATV figures are reported alongside as sensitivity. This is not silent use of either formula: both are labelled per cell, and the ATV basis can only LOWER margins, so every reject recorded here holds under both."
+        }
+      },
+      {
+        "id": "pr-0005",
+        "timestamp": "2026-09-30T20:49:08+02:00",
+        "agent": "pricing",
+        "confidence": 8,
+        "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (3 mr-0002 quotes: Coremax $5.31, AliExpress $10.31, Quark $10.50, FX 16.3460) + so-0005 session summary; mr-0002 price evidence; README sections 2 (#3, #4) and 4; pr-0003 (platform-fee gap)",
+        "verified": false,
+        "data": {
+          "record_type": "verdict_matrix",
+          "product": "mr-0002 — 20,000mAh solar power bank (HS 8507.60, 0% duty)",
+          "scope_corrections": [
+            "BRIEF SAID 'six supplier quotes from so-0003/so-0004/so-0005'. State carries six quotes across TWO products: so-0003 = 3 quotes for mr-0002, so-0004 = 3 quotes for mr-0003 (LED emergency light, HS 8513.10 — duty rate UNVERIFIED in state). Only the three mr-0002 quotes are used; using mr-0003's would cross products and cross onto an unverified duty line.",
+            "The R299/R338 'market cluster' is 10,000mAh evidence; all three quotes are 20,000mAh units whose observed Takealot point is R699. Pricing a 20k unit in the 10k band is the brief's instruction and is computed as given, but the segment mismatch is recorded as a finding.",
+            "Shipping is the unresolved input: NO mr-0002 supplier displayed a SA lane or DDP (so-0003/so-0005), so no combination below is approvable on its inputs. R0 and R161.83/unit (the only fetched figure, destination UNVERIFIED) bracket the observable range, and every cell also carries the shipping ceiling that would be required."
+          ],
+          "cheapest_usable_quote_definition": "cheapest verified per-unit price purchasable at the supplier's stated entry MOQ, no bulk commitment assumed",
+          "cheapest_usable_quote_zar": 86.8,
+          "deep_tier_excluded": {
+            "key": "coremax_deep_tier",
+            "unit_cost_zar": 68.49,
+            "unit_cost_usd": 4.19,
+            "requires": ">=500 boxes",
+            "source": "so-0003 quote 2, >=500-box tier x 16.3460",
+            "why_excluded_from_primary_matrix": "box contents UNVERIFIED (could be multi-unit) and no verified demand for a 500-unit commitment; shown only as the cheapest fetched unit cost, never as a purchasable entry price"
+          },
+          "cell_field_legend": {
+            "ship0": "landed cost + margin with shipping R0 (bound only)",
+            "ship_fetched": "with shipping R161.83/unit (UNVERIFIED destination)",
+            "max_shipping_25pct_zar": "shipping/unit ceiling for a 25% margin; null = product cost alone already exceeds the ceiling",
+            "max_shipping_20pct_zar": "same for the 20% HARD-STOP floor",
+            "band_verdict": "accept >=25 / investigate 20-25 / reject <20",
+            "tool_verdict": "landed_cost.verdict_for_margin (accept/reject only)"
+          },
+          "counts": {
+            "ship0_accept": 10,
+            "ship0_investigate": 6,
+            "ship0_reject": 80,
+            "ship_fetched_accept": 0,
+            "ship_fetched_investigate": 0,
+            "ship_fetched_reject": 96
+          },
+          "robustness_under_the_atv_question": {
+            "ship0": {
+              "readme_atv_pairs": 48,
+              "reject_on_both_vat_bases": 40
+            },
+            "ship_fetched": {
+              "readme_atv_pairs": 48,
+              "reject_on_both_vat_bases": 48
+            }
+          },
+          "cells": [
+            {
+              "price_zar": 299.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 114.77,
+                "vat_zar": 13.02,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": 4.33,
+                "net_margin_pct": 1.45,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 300.87,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -181.77,
+                "net_margin_pct": -60.79,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 116.07,
+                "vat_zar": 14.32,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": 3.03,
+                "net_margin_pct": 1.01,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 304.6,
+                "vat_zar": 41.02,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -185.5,
+                "net_margin_pct": -62.04,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 114.77,
+                "vat_zar": 13.02,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -25.67,
+                "net_margin_pct": -8.59,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 300.87,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -211.77,
+                "net_margin_pct": -70.83,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 116.07,
+                "vat_zar": 14.32,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -26.97,
+                "net_margin_pct": -9.02,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 304.6,
+                "vat_zar": 41.02,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -215.5,
+                "net_margin_pct": -72.07,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 114.77,
+                "vat_zar": 13.02,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -145.67,
+                "net_margin_pct": -48.72,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 300.87,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -331.77,
+                "net_margin_pct": -110.96,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 116.07,
+                "vat_zar": 14.32,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -146.97,
+                "net_margin_pct": -49.15,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 304.6,
+                "vat_zar": 41.02,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -335.5,
+                "net_margin_pct": -112.21,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 114.77,
+                "vat_zar": 13.02,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -175.67,
+                "net_margin_pct": -58.75,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 300.87,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -361.77,
+                "net_margin_pct": -120.99,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 116.07,
+                "vat_zar": 14.32,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -176.97,
+                "net_margin_pct": -59.19,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 304.6,
+                "vat_zar": 41.02,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -365.5,
+                "net_margin_pct": -122.24,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 208.76,
+                "vat_zar": 25.28,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -89.66,
+                "net_margin_pct": -29.99,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 394.86,
+                "vat_zar": 49.55,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -275.76,
+                "net_margin_pct": -92.23,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 211.29,
+                "vat_zar": 27.81,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -92.19,
+                "net_margin_pct": -30.83,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 399.82,
+                "vat_zar": 54.51,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -280.72,
+                "net_margin_pct": -93.89,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 208.76,
+                "vat_zar": 25.28,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -119.66,
+                "net_margin_pct": -40.02,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 394.86,
+                "vat_zar": 49.55,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -305.76,
+                "net_margin_pct": -102.26,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 211.29,
+                "vat_zar": 27.81,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -122.19,
+                "net_margin_pct": -40.87,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 399.82,
+                "vat_zar": 54.51,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -310.72,
+                "net_margin_pct": -103.92,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 208.76,
+                "vat_zar": 25.28,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -239.66,
+                "net_margin_pct": -80.15,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 394.86,
+                "vat_zar": 49.55,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -425.76,
+                "net_margin_pct": -142.39,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 211.29,
+                "vat_zar": 27.81,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -242.19,
+                "net_margin_pct": -81.0,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 399.82,
+                "vat_zar": 54.51,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -430.72,
+                "net_margin_pct": -144.05,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 208.76,
+                "vat_zar": 25.28,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -269.66,
+                "net_margin_pct": -90.19,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 394.86,
+                "vat_zar": 49.55,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -455.76,
+                "net_margin_pct": -152.43,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 211.29,
+                "vat_zar": 27.81,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -272.19,
+                "net_margin_pct": -91.03,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 399.82,
+                "vat_zar": 54.51,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -460.72,
+                "net_margin_pct": -154.09,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 212.32,
+                "vat_zar": 25.74,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -93.22,
+                "net_margin_pct": -31.18,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 398.43,
+                "vat_zar": 50.02,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -279.33,
+                "net_margin_pct": -93.42,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 214.9,
+                "vat_zar": 28.32,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -95.8,
+                "net_margin_pct": -32.04,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 403.43,
+                "vat_zar": 55.02,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -284.33,
+                "net_margin_pct": -95.09,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 212.32,
+                "vat_zar": 25.74,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -123.22,
+                "net_margin_pct": -41.21,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 398.43,
+                "vat_zar": 50.02,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -309.33,
+                "net_margin_pct": -103.45,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 214.9,
+                "vat_zar": 28.32,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -125.8,
+                "net_margin_pct": -42.07,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 403.43,
+                "vat_zar": 55.02,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -314.33,
+                "net_margin_pct": -105.13,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 212.32,
+                "vat_zar": 25.74,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -243.22,
+                "net_margin_pct": -81.34,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 398.43,
+                "vat_zar": 50.02,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -429.33,
+                "net_margin_pct": -143.59,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 214.9,
+                "vat_zar": 28.32,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -245.8,
+                "net_margin_pct": -82.21,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 403.43,
+                "vat_zar": 55.02,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -434.33,
+                "net_margin_pct": -145.26,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 212.32,
+                "vat_zar": 25.74,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -273.22,
+                "net_margin_pct": -91.38,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 398.43,
+                "vat_zar": 50.02,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -459.33,
+                "net_margin_pct": -153.62,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 299.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 214.9,
+                "vat_zar": 28.32,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -275.8,
+                "net_margin_pct": -92.24,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 403.43,
+                "vat_zar": 55.02,
+                "payment_fees_zar": 14.95,
+                "net_margin_zar": -464.33,
+                "net_margin_pct": -155.29,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 116.72,
+                "vat_zar": 13.02,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": 37.48,
+                "net_margin_pct": 11.09,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 302.82,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -148.62,
+                "net_margin_pct": -43.97,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 118.02,
+                "vat_zar": 14.32,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": 36.18,
+                "net_margin_pct": 10.7,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 306.55,
+                "vat_zar": 41.02,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -152.35,
+                "net_margin_pct": -45.07,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 116.72,
+                "vat_zar": 13.02,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": 7.48,
+                "net_margin_pct": 2.21,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 302.82,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -178.62,
+                "net_margin_pct": -52.85,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 118.02,
+                "vat_zar": 14.32,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": 6.18,
+                "net_margin_pct": 1.83,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 306.55,
+                "vat_zar": 41.02,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -182.35,
+                "net_margin_pct": -53.95,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 116.72,
+                "vat_zar": 13.02,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -112.52,
+                "net_margin_pct": -33.29,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 302.82,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -298.62,
+                "net_margin_pct": -88.35,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 118.02,
+                "vat_zar": 14.32,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -113.82,
+                "net_margin_pct": -33.67,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 306.55,
+                "vat_zar": 41.02,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -302.35,
+                "net_margin_pct": -89.45,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 116.72,
+                "vat_zar": 13.02,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -142.52,
+                "net_margin_pct": -42.17,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 302.82,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -328.62,
+                "net_margin_pct": -97.22,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 118.02,
+                "vat_zar": 14.32,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -143.82,
+                "net_margin_pct": -42.55,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 306.55,
+                "vat_zar": 41.02,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -332.35,
+                "net_margin_pct": -98.33,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 210.71,
+                "vat_zar": 25.28,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -56.51,
+                "net_margin_pct": -16.72,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 396.81,
+                "vat_zar": 49.55,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -242.61,
+                "net_margin_pct": -71.78,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 213.24,
+                "vat_zar": 27.81,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -59.04,
+                "net_margin_pct": -17.47,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 401.77,
+                "vat_zar": 54.51,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -247.57,
+                "net_margin_pct": -73.25,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 210.71,
+                "vat_zar": 25.28,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -86.51,
+                "net_margin_pct": -25.59,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 396.81,
+                "vat_zar": 49.55,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -272.61,
+                "net_margin_pct": -80.65,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 213.24,
+                "vat_zar": 27.81,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -89.04,
+                "net_margin_pct": -26.34,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 401.77,
+                "vat_zar": 54.51,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -277.57,
+                "net_margin_pct": -82.12,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 210.71,
+                "vat_zar": 25.28,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -206.51,
+                "net_margin_pct": -61.1,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 396.81,
+                "vat_zar": 49.55,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -392.61,
+                "net_margin_pct": -116.16,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 213.24,
+                "vat_zar": 27.81,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -209.04,
+                "net_margin_pct": -61.85,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 401.77,
+                "vat_zar": 54.51,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -397.57,
+                "net_margin_pct": -117.62,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 210.71,
+                "vat_zar": 25.28,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -236.51,
+                "net_margin_pct": -69.97,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 396.81,
+                "vat_zar": 49.55,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -422.61,
+                "net_margin_pct": -125.03,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 213.24,
+                "vat_zar": 27.81,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -239.04,
+                "net_margin_pct": -70.72,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 401.77,
+                "vat_zar": 54.51,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -427.57,
+                "net_margin_pct": -126.5,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 214.27,
+                "vat_zar": 25.74,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -60.07,
+                "net_margin_pct": -17.77,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 400.38,
+                "vat_zar": 50.02,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -246.18,
+                "net_margin_pct": -72.83,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 216.85,
+                "vat_zar": 28.32,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -62.65,
+                "net_margin_pct": -18.54,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 405.38,
+                "vat_zar": 55.02,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -251.18,
+                "net_margin_pct": -74.31,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 214.27,
+                "vat_zar": 25.74,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -90.07,
+                "net_margin_pct": -26.65,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 400.38,
+                "vat_zar": 50.02,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -276.18,
+                "net_margin_pct": -81.71,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 216.85,
+                "vat_zar": 28.32,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -92.65,
+                "net_margin_pct": -27.41,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 405.38,
+                "vat_zar": 55.02,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -281.18,
+                "net_margin_pct": -83.19,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 214.27,
+                "vat_zar": 25.74,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -210.07,
+                "net_margin_pct": -62.15,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 400.38,
+                "vat_zar": 50.02,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -396.18,
+                "net_margin_pct": -117.21,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 216.85,
+                "vat_zar": 28.32,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -212.65,
+                "net_margin_pct": -62.91,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 405.38,
+                "vat_zar": 55.02,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -401.18,
+                "net_margin_pct": -118.69,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 214.27,
+                "vat_zar": 25.74,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -240.07,
+                "net_margin_pct": -71.03,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 400.38,
+                "vat_zar": 50.02,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -426.18,
+                "net_margin_pct": -126.09,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 338.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 216.85,
+                "vat_zar": 28.32,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -242.65,
+                "net_margin_pct": -71.79,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 405.38,
+                "vat_zar": 55.02,
+                "payment_fees_zar": 16.9,
+                "net_margin_zar": -431.18,
+                "net_margin_pct": -127.57,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 122.27,
+                "vat_zar": 13.02,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": 131.83,
+                "net_margin_pct": 29.36,
+                "band_verdict": "accept",
+                "tool_verdict": "accept"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 308.37,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -54.27,
+                "net_margin_pct": -12.09,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": 17.03,
+              "max_shipping_20pct_zar": 36.55
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 123.57,
+                "vat_zar": 14.32,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": 130.53,
+                "net_margin_pct": 29.07,
+                "band_verdict": "accept",
+                "tool_verdict": "accept"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 312.1,
+                "vat_zar": 41.02,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -58.0,
+                "net_margin_pct": -12.92,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": 15.69,
+              "max_shipping_20pct_zar": 34.96
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 122.27,
+                "vat_zar": 13.02,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": 101.83,
+                "net_margin_pct": 22.68,
+                "band_verdict": "investigate",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 308.37,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -84.27,
+                "net_margin_pct": -18.77,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": 10.46
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 123.57,
+                "vat_zar": 14.32,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": 100.53,
+                "net_margin_pct": 22.39,
+                "band_verdict": "investigate",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 312.1,
+                "vat_zar": 41.02,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -88.0,
+                "net_margin_pct": -19.6,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": 9.21
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 122.27,
+                "vat_zar": 13.02,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -18.17,
+                "net_margin_pct": -4.05,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 308.37,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -204.27,
+                "net_margin_pct": -45.49,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 123.57,
+                "vat_zar": 14.32,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -19.47,
+                "net_margin_pct": -4.34,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 312.1,
+                "vat_zar": 41.02,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -208.0,
+                "net_margin_pct": -46.33,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 122.27,
+                "vat_zar": 13.02,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -48.17,
+                "net_margin_pct": -10.73,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 308.37,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -234.27,
+                "net_margin_pct": -52.18,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 123.57,
+                "vat_zar": 14.32,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -49.47,
+                "net_margin_pct": -11.02,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 312.1,
+                "vat_zar": 41.02,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -238.0,
+                "net_margin_pct": -53.01,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 216.26,
+                "vat_zar": 25.28,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": 37.84,
+                "net_margin_pct": 8.43,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 402.36,
+                "vat_zar": 49.55,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -148.26,
+                "net_margin_pct": -33.02,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 218.79,
+                "vat_zar": 27.81,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": 35.31,
+                "net_margin_pct": 7.86,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 407.32,
+                "vat_zar": 54.51,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -153.22,
+                "net_margin_pct": -34.12,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 216.26,
+                "vat_zar": 25.28,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": 7.84,
+                "net_margin_pct": 1.75,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 402.36,
+                "vat_zar": 49.55,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -178.26,
+                "net_margin_pct": -39.7,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 218.79,
+                "vat_zar": 27.81,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": 5.31,
+                "net_margin_pct": 1.18,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 407.32,
+                "vat_zar": 54.51,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -183.22,
+                "net_margin_pct": -40.81,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 216.26,
+                "vat_zar": 25.28,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -112.16,
+                "net_margin_pct": -24.98,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 402.36,
+                "vat_zar": 49.55,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -298.26,
+                "net_margin_pct": -66.43,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 218.79,
+                "vat_zar": 27.81,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -114.69,
+                "net_margin_pct": -25.54,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 407.32,
+                "vat_zar": 54.51,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -303.22,
+                "net_margin_pct": -67.53,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 216.26,
+                "vat_zar": 25.28,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -142.16,
+                "net_margin_pct": -31.66,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 402.36,
+                "vat_zar": 49.55,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -328.26,
+                "net_margin_pct": -73.11,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 218.79,
+                "vat_zar": 27.81,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -144.69,
+                "net_margin_pct": -32.22,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 407.32,
+                "vat_zar": 54.51,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -333.22,
+                "net_margin_pct": -74.21,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 219.82,
+                "vat_zar": 25.74,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": 34.28,
+                "net_margin_pct": 7.63,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 405.93,
+                "vat_zar": 50.02,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -151.83,
+                "net_margin_pct": -33.82,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 222.4,
+                "vat_zar": 28.32,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": 31.7,
+                "net_margin_pct": 7.06,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 410.93,
+                "vat_zar": 55.02,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -156.83,
+                "net_margin_pct": -34.93,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 219.82,
+                "vat_zar": 25.74,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": 4.28,
+                "net_margin_pct": 0.95,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 405.93,
+                "vat_zar": 50.02,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -181.83,
+                "net_margin_pct": -40.5,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 222.4,
+                "vat_zar": 28.32,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": 1.7,
+                "net_margin_pct": 0.38,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 410.93,
+                "vat_zar": 55.02,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -186.83,
+                "net_margin_pct": -41.61,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 219.82,
+                "vat_zar": 25.74,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -115.72,
+                "net_margin_pct": -25.77,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 405.93,
+                "vat_zar": 50.02,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -301.83,
+                "net_margin_pct": -67.22,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 222.4,
+                "vat_zar": 28.32,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -118.3,
+                "net_margin_pct": -26.35,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 410.93,
+                "vat_zar": 55.02,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -306.83,
+                "net_margin_pct": -68.34,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 219.82,
+                "vat_zar": 25.74,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -145.72,
+                "net_margin_pct": -32.45,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 405.93,
+                "vat_zar": 50.02,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -331.83,
+                "net_margin_pct": -73.9,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 449.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 222.4,
+                "vat_zar": 28.32,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -148.3,
+                "net_margin_pct": -33.03,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 410.93,
+                "vat_zar": 55.02,
+                "payment_fees_zar": 22.45,
+                "net_margin_zar": -336.83,
+                "net_margin_pct": -75.02,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 129.77,
+                "vat_zar": 13.02,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 259.33,
+                "net_margin_pct": 43.29,
+                "band_verdict": "accept",
+                "tool_verdict": "accept"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 315.87,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 73.23,
+                "net_margin_pct": 12.23,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": 95.29,
+              "max_shipping_20pct_zar": 121.33
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 131.07,
+                "vat_zar": 14.32,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 258.03,
+                "net_margin_pct": 43.08,
+                "band_verdict": "accept",
+                "tool_verdict": "accept"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 319.6,
+                "vat_zar": 41.02,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 69.5,
+                "net_margin_pct": 11.6,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": 92.94,
+              "max_shipping_20pct_zar": 118.65
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 129.77,
+                "vat_zar": 13.02,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 229.33,
+                "net_margin_pct": 38.29,
+                "band_verdict": "accept",
+                "tool_verdict": "accept"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 315.87,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 43.23,
+                "net_margin_pct": 7.22,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": 69.2,
+              "max_shipping_20pct_zar": 95.24
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 131.07,
+                "vat_zar": 14.32,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 228.03,
+                "net_margin_pct": 38.07,
+                "band_verdict": "accept",
+                "tool_verdict": "accept"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 319.6,
+                "vat_zar": 41.02,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 39.5,
+                "net_margin_pct": 6.59,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": 67.19,
+              "max_shipping_20pct_zar": 92.9
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 129.77,
+                "vat_zar": 13.02,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 109.33,
+                "net_margin_pct": 18.25,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 315.87,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -76.77,
+                "net_margin_pct": -12.82,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 131.07,
+                "vat_zar": 14.32,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 108.03,
+                "net_margin_pct": 18.04,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 319.6,
+                "vat_zar": 41.02,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -80.5,
+                "net_margin_pct": -13.44,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 129.77,
+                "vat_zar": 13.02,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 79.33,
+                "net_margin_pct": 13.24,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 315.87,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -106.77,
+                "net_margin_pct": -17.82,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "coremax_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 131.07,
+                "vat_zar": 14.32,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 78.03,
+                "net_margin_pct": 13.03,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 319.6,
+                "vat_zar": 41.02,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -110.5,
+                "net_margin_pct": -18.45,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 223.76,
+                "vat_zar": 25.28,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 165.34,
+                "net_margin_pct": 27.6,
+                "band_verdict": "accept",
+                "tool_verdict": "accept"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 409.86,
+                "vat_zar": 49.55,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -20.76,
+                "net_margin_pct": -3.47,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": 13.56,
+              "max_shipping_20pct_zar": 39.6
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 226.29,
+                "vat_zar": 27.81,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 162.81,
+                "net_margin_pct": 27.18,
+                "band_verdict": "accept",
+                "tool_verdict": "accept"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 414.82,
+                "vat_zar": 54.51,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -25.72,
+                "net_margin_pct": -4.29,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": 11.21,
+              "max_shipping_20pct_zar": 36.92
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 223.76,
+                "vat_zar": 25.28,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 135.34,
+                "net_margin_pct": 22.59,
+                "band_verdict": "investigate",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 409.86,
+                "vat_zar": 49.55,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -50.76,
+                "net_margin_pct": -8.47,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": 13.51
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 226.29,
+                "vat_zar": 27.81,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 132.81,
+                "net_margin_pct": 22.17,
+                "band_verdict": "investigate",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 414.82,
+                "vat_zar": 54.51,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -55.72,
+                "net_margin_pct": -9.3,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": 11.17
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 223.76,
+                "vat_zar": 25.28,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 15.34,
+                "net_margin_pct": 2.56,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 409.86,
+                "vat_zar": 49.55,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -170.76,
+                "net_margin_pct": -28.51,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 226.29,
+                "vat_zar": 27.81,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 12.81,
+                "net_margin_pct": 2.14,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 414.82,
+                "vat_zar": 54.51,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -175.72,
+                "net_margin_pct": -29.34,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 223.76,
+                "vat_zar": 25.28,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -14.66,
+                "net_margin_pct": -2.45,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 409.86,
+                "vat_zar": 49.55,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -200.76,
+                "net_margin_pct": -33.52,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "aliexpress_retail",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 226.29,
+                "vat_zar": 27.81,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -17.19,
+                "net_margin_pct": -2.87,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 414.82,
+                "vat_zar": 54.51,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -205.72,
+                "net_margin_pct": -34.34,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 227.32,
+                "vat_zar": 25.74,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 161.78,
+                "net_margin_pct": 27.01,
+                "band_verdict": "accept",
+                "tool_verdict": "accept"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 413.43,
+                "vat_zar": 50.02,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -24.33,
+                "net_margin_pct": -4.06,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": 10.46,
+              "max_shipping_20pct_zar": 36.5
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 229.9,
+                "vat_zar": 28.32,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 159.2,
+                "net_margin_pct": 26.58,
+                "band_verdict": "accept",
+                "tool_verdict": "accept"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 418.43,
+                "vat_zar": 55.02,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -29.33,
+                "net_margin_pct": -4.9,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": 8.11,
+              "max_shipping_20pct_zar": 33.82
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 227.32,
+                "vat_zar": 25.74,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 131.78,
+                "net_margin_pct": 22.0,
+                "band_verdict": "investigate",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 413.43,
+                "vat_zar": 50.02,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -54.33,
+                "net_margin_pct": -9.07,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": 10.41
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 150.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 229.9,
+                "vat_zar": 28.32,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 129.2,
+                "net_margin_pct": 21.57,
+                "band_verdict": "investigate",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 418.43,
+                "vat_zar": 55.02,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -59.33,
+                "net_margin_pct": -9.9,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": 8.07
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 227.32,
+                "vat_zar": 25.74,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 11.78,
+                "net_margin_pct": 1.97,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 413.43,
+                "vat_zar": 50.02,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -174.33,
+                "net_margin_pct": -29.1,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 0.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 229.9,
+                "vat_zar": 28.32,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": 9.2,
+                "net_margin_pct": 1.54,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 418.43,
+                "vat_zar": 55.02,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -179.33,
+                "net_margin_pct": -29.94,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "readme",
+              "verdict_bearing": true,
+              "ship0": {
+                "total_landed_cost_zar": 227.32,
+                "vat_zar": 25.74,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -18.22,
+                "net_margin_pct": -3.04,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 413.43,
+                "vat_zar": 50.02,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -204.33,
+                "net_margin_pct": -34.11,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            },
+            {
+              "price_zar": 599.0,
+              "quote": "quark_entry",
+              "ad_cpa_zar": 300.0,
+              "platform_fees_zar": 30.0,
+              "vat_basis": "atv",
+              "verdict_bearing": false,
+              "ship0": {
+                "total_landed_cost_zar": 229.9,
+                "vat_zar": 28.32,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -20.8,
+                "net_margin_pct": -3.47,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "ship_fetched": {
+                "total_landed_cost_zar": 418.43,
+                "vat_zar": 55.02,
+                "payment_fees_zar": 29.95,
+                "net_margin_zar": -209.33,
+                "net_margin_pct": -34.95,
+                "band_verdict": "reject",
+                "tool_verdict": "reject"
+              },
+              "max_shipping_25pct_zar": null,
+              "max_shipping_20pct_zar": null
+            }
+          ],
+          "reading": [
+            "Every one of the 96 cells is a reject once the fetched shipping datapoint is applied — including the R599 cells at CPA R150 and R0 platform fees, whose margins fall to 12.23% (Coremax), -3.47% (AliExpress) and -4.06% (Quark). Only 16 of 96 cells are non-reject even at R0 shipping (10 accept, 6 investigate), i.e. 80 of 96 fail with physically impossible free shipping.",
+            "At the R299 and R338 cluster prices the reject is not a shipping artefact: with shipping at R0 AND platform fees at R0 AND CPA at its R150 floor, Coremax still returns 1.45% and 11.09%. At CPA R300 both prices are deeply negative.",
+            "At CPA R300 the product fails at EVERY price point up to R599 even with free shipping and zero platform fees: the best CPA-R300 cell in the whole grid is R599/Coremax at 18.25%, which is below BOTH the 25% minimum and the 20% HARD-STOP floor (README section 2 #3) — a reject, not an escalation.",
+            "The only cells that clear 25% require the simultaneous best case in all four inputs: R449/R599 price, CPA R150, R0 platform fees, and shipping under R17.03 (R449) / R95.29 (R599) — i.e. materially below the only shipping figure anyone has actually fetched (R161.83). R449 at R30 fees never reaches 25% even at zero shipping (22.68%, investigate band only); R599 at R30 fees needs shipping under R69.20.",
+            "Every reject in the README-basis cells also rejects on the ATV basis; the ATV basis cannot raise a margin."
+          ]
+        }
+      },
+      {
+        "id": "pr-0006",
+        "timestamp": "2026-09-30T20:49:08+02:00",
+        "agent": "pricing",
+        "confidence": 8,
+        "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 quotes + so-0005 summary; README sections 2 (#3) and 4; session brief banding (>=25 accept / 20-25 investigate / <20 reject)",
+        "verified": false,
+        "data": {
+          "record_type": "formal_verdict",
+          "product": "mr-0002 — 20,000mAh solar power bank (HS 8507.60, 0% duty)",
+          "verdict": "reject",
+          "rejection_reason": "MR-0002 fails the margin gate at every price point the session asked about. At the market-cluster prices (R299, R338) the net margin is 1.45% and 11.09% BEST CASE — cheapest usable quote, CPA at the R150 benchmark floor, platform fees at R0, and shipping at R0 — so those two are rejects on the arithmetic alone, independent of the unresolved shipping and VAT questions. At R449 and R599 the only passing cells need R0 platform fees, CPA R150 and shipping below R17.03 / R95.29 per unit; the single shipping figure actually fetched for this product is R161.83/unit, at which R599/CPA150/R0-fees still yields 12.23% and everything else is negative. At CPA R300 the product does not reach the 25% minimum at ANY price up to R599 even with free shipping and zero platform fees; its best CPA-R300 cell is 18.25%, below even the 20% floor. Cited rule: README section 2 HARD STOP #3 (no net margin below 20%) plus the session's 25% Pricing minimum — no cell in this matrix reaches the 25% minimum under any shipping input that is physically possible. Recorded as reject, not blocked: the arithmetic is now possible because Sourcing delivered verified unit costs, but it fails.",
+          "verdict_by_combination": {
+            "note": "verdict per {price, quote, CPA} is reported for both platform-fee assumptions; every verdict below is a reject under the fetched shipping datapoint",
+            "grid": "see pr-0005.cells (96 cells)"
+          },
+          "blocks": [
+            {
+              "timestamp": "2026-09-30T20:49:08+02:00",
+              "agent": "pricing",
+              "confidence": 8,
+              "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
+              "verified": false,
+              "product": "mr-0002 solar power bank 20,000mAh — R299 — market cluster low end (session brief)",
+              "cost_breakdown": {
+                "product_cost_zar": 86.8,
+                "shipping_zar": 161.83,
+                "duty_zar": 0.0,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 14.95,
+                "total_landed_cost_zar": 300.87
+              },
+              "pricing": {
+                "recommended_selling_price_zar": 299.0,
+                "gross_margin_pct": -0.63,
+                "ad_cpa_estimate_zar": 150.0,
+                "net_margin_pct": -60.79,
+                "competitor_median_price_zar": null
+              },
+              "verdict": "reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -60.79% is below the 20% floor — automatic reject",
+              "UNVERIFIED_shipping_to_sa_zar": 161.83,
+              "UNVERIFIED_platform_fees_zar": 0.0,
+              "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
+              "vat_basis": "readme_contract",
+              "net_margin_at_zero_shipping_pct": 1.45
+            },
+            {
+              "timestamp": "2026-09-30T20:49:08+02:00",
+              "agent": "pricing",
+              "confidence": 8,
+              "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
+              "verified": false,
+              "product": "mr-0002 solar power bank 20,000mAh — R299 — market cluster low end (session brief)",
+              "cost_breakdown": {
+                "product_cost_zar": 86.8,
+                "shipping_zar": 161.83,
+                "duty_zar": 0.0,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 14.95,
+                "total_landed_cost_zar": 300.87
+              },
+              "pricing": {
+                "recommended_selling_price_zar": 299.0,
+                "gross_margin_pct": -0.63,
+                "ad_cpa_estimate_zar": 300.0,
+                "net_margin_pct": -110.96,
+                "competitor_median_price_zar": null
+              },
+              "verdict": "reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -110.96% is below the 20% floor — automatic reject",
+              "UNVERIFIED_shipping_to_sa_zar": 161.83,
+              "UNVERIFIED_platform_fees_zar": 0.0,
+              "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
+              "vat_basis": "readme_contract",
+              "net_margin_at_zero_shipping_pct": -48.72
+            },
+            {
+              "timestamp": "2026-09-30T20:49:08+02:00",
+              "agent": "pricing",
+              "confidence": 8,
+              "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
+              "verified": false,
+              "product": "mr-0002 solar power bank 20,000mAh — R299 — market cluster low end (session brief)",
+              "cost_breakdown": {
+                "product_cost_zar": 86.8,
+                "shipping_zar": 161.83,
+                "duty_zar": 0.0,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 14.95,
+                "total_landed_cost_zar": 300.87
+              },
+              "pricing": {
+                "recommended_selling_price_zar": 299.0,
+                "gross_margin_pct": -0.63,
+                "ad_cpa_estimate_zar": 150.0,
+                "net_margin_pct": -70.83,
+                "competitor_median_price_zar": null
+              },
+              "verdict": "reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -70.83% is below the 20% floor — automatic reject",
+              "UNVERIFIED_shipping_to_sa_zar": 161.83,
+              "UNVERIFIED_platform_fees_zar": 30.0,
+              "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
+              "vat_basis": "readme_contract",
+              "net_margin_at_zero_shipping_pct": -8.59
+            },
+            {
+              "timestamp": "2026-09-30T20:49:08+02:00",
+              "agent": "pricing",
+              "confidence": 8,
+              "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
+              "verified": false,
+              "product": "mr-0002 solar power bank 20,000mAh — R299 — market cluster low end (session brief)",
+              "cost_breakdown": {
+                "product_cost_zar": 86.8,
+                "shipping_zar": 161.83,
+                "duty_zar": 0.0,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 14.95,
+                "total_landed_cost_zar": 300.87
+              },
+              "pricing": {
+                "recommended_selling_price_zar": 299.0,
+                "gross_margin_pct": -0.63,
+                "ad_cpa_estimate_zar": 300.0,
+                "net_margin_pct": -120.99,
+                "competitor_median_price_zar": null
+              },
+              "verdict": "reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -120.99% is below the 20% floor — automatic reject",
+              "UNVERIFIED_shipping_to_sa_zar": 161.83,
+              "UNVERIFIED_platform_fees_zar": 30.0,
+              "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
+              "vat_basis": "readme_contract",
+              "net_margin_at_zero_shipping_pct": -58.75
+            },
+            {
+              "timestamp": "2026-09-30T20:49:08+02:00",
+              "agent": "pricing",
+              "confidence": 8,
+              "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
+              "verified": false,
+              "product": "mr-0002 solar power bank 20,000mAh — R338 — market cluster high end (session brief)",
+              "cost_breakdown": {
+                "product_cost_zar": 86.8,
+                "shipping_zar": 161.83,
+                "duty_zar": 0.0,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 16.9,
+                "total_landed_cost_zar": 302.82
+              },
+              "pricing": {
+                "recommended_selling_price_zar": 338.0,
+                "gross_margin_pct": 10.41,
+                "ad_cpa_estimate_zar": 150.0,
+                "net_margin_pct": -43.97,
+                "competitor_median_price_zar": null
+              },
+              "verdict": "reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -43.97% is below the 20% floor — automatic reject",
+              "UNVERIFIED_shipping_to_sa_zar": 161.83,
+              "UNVERIFIED_platform_fees_zar": 0.0,
+              "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
+              "vat_basis": "readme_contract",
+              "net_margin_at_zero_shipping_pct": 11.09
+            },
+            {
+              "timestamp": "2026-09-30T20:49:08+02:00",
+              "agent": "pricing",
+              "confidence": 8,
+              "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
+              "verified": false,
+              "product": "mr-0002 solar power bank 20,000mAh — R338 — market cluster high end (session brief)",
+              "cost_breakdown": {
+                "product_cost_zar": 86.8,
+                "shipping_zar": 161.83,
+                "duty_zar": 0.0,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 16.9,
+                "total_landed_cost_zar": 302.82
+              },
+              "pricing": {
+                "recommended_selling_price_zar": 338.0,
+                "gross_margin_pct": 10.41,
+                "ad_cpa_estimate_zar": 300.0,
+                "net_margin_pct": -88.35,
+                "competitor_median_price_zar": null
+              },
+              "verdict": "reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -88.35% is below the 20% floor — automatic reject",
+              "UNVERIFIED_shipping_to_sa_zar": 161.83,
+              "UNVERIFIED_platform_fees_zar": 0.0,
+              "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
+              "vat_basis": "readme_contract",
+              "net_margin_at_zero_shipping_pct": -33.29
+            },
+            {
+              "timestamp": "2026-09-30T20:49:08+02:00",
+              "agent": "pricing",
+              "confidence": 8,
+              "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
+              "verified": false,
+              "product": "mr-0002 solar power bank 20,000mAh — R338 — market cluster high end (session brief)",
+              "cost_breakdown": {
+                "product_cost_zar": 86.8,
+                "shipping_zar": 161.83,
+                "duty_zar": 0.0,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 16.9,
+                "total_landed_cost_zar": 302.82
+              },
+              "pricing": {
+                "recommended_selling_price_zar": 338.0,
+                "gross_margin_pct": 10.41,
+                "ad_cpa_estimate_zar": 150.0,
+                "net_margin_pct": -52.85,
+                "competitor_median_price_zar": null
+              },
+              "verdict": "reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -52.85% is below the 20% floor — automatic reject",
+              "UNVERIFIED_shipping_to_sa_zar": 161.83,
+              "UNVERIFIED_platform_fees_zar": 30.0,
+              "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
+              "vat_basis": "readme_contract",
+              "net_margin_at_zero_shipping_pct": 2.21
+            },
+            {
+              "timestamp": "2026-09-30T20:49:08+02:00",
+              "agent": "pricing",
+              "confidence": 8,
+              "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
+              "verified": false,
+              "product": "mr-0002 solar power bank 20,000mAh — R338 — market cluster high end (session brief)",
+              "cost_breakdown": {
+                "product_cost_zar": 86.8,
+                "shipping_zar": 161.83,
+                "duty_zar": 0.0,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 16.9,
+                "total_landed_cost_zar": 302.82
+              },
+              "pricing": {
+                "recommended_selling_price_zar": 338.0,
+                "gross_margin_pct": 10.41,
+                "ad_cpa_estimate_zar": 300.0,
+                "net_margin_pct": -97.22,
+                "competitor_median_price_zar": null
+              },
+              "verdict": "reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -97.22% is below the 20% floor — automatic reject",
+              "UNVERIFIED_shipping_to_sa_zar": 161.83,
+              "UNVERIFIED_platform_fees_zar": 30.0,
+              "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
+              "vat_basis": "readme_contract",
+              "net_margin_at_zero_shipping_pct": -42.17
+            },
+            {
+              "timestamp": "2026-09-30T20:49:08+02:00",
+              "agent": "pricing",
+              "confidence": 8,
+              "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
+              "verified": false,
+              "product": "mr-0002 solar power bank 20,000mAh — R449 — stretch pricing (session brief)",
+              "cost_breakdown": {
+                "product_cost_zar": 86.8,
+                "shipping_zar": 161.83,
+                "duty_zar": 0.0,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 22.45,
+                "total_landed_cost_zar": 308.37
+              },
+              "pricing": {
+                "recommended_selling_price_zar": 449.0,
+                "gross_margin_pct": 31.32,
+                "ad_cpa_estimate_zar": 150.0,
+                "net_margin_pct": -12.09,
+                "competitor_median_price_zar": null
+              },
+              "verdict": "reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -12.09% is below the 20% floor — automatic reject",
+              "UNVERIFIED_shipping_to_sa_zar": 161.83,
+              "UNVERIFIED_platform_fees_zar": 0.0,
+              "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
+              "vat_basis": "readme_contract",
+              "net_margin_at_zero_shipping_pct": 29.36
+            },
+            {
+              "timestamp": "2026-09-30T20:49:08+02:00",
+              "agent": "pricing",
+              "confidence": 8,
+              "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
+              "verified": false,
+              "product": "mr-0002 solar power bank 20,000mAh — R449 — stretch pricing (session brief)",
+              "cost_breakdown": {
+                "product_cost_zar": 86.8,
+                "shipping_zar": 161.83,
+                "duty_zar": 0.0,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 22.45,
+                "total_landed_cost_zar": 308.37
+              },
+              "pricing": {
+                "recommended_selling_price_zar": 449.0,
+                "gross_margin_pct": 31.32,
+                "ad_cpa_estimate_zar": 300.0,
+                "net_margin_pct": -45.49,
+                "competitor_median_price_zar": null
+              },
+              "verdict": "reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -45.49% is below the 20% floor — automatic reject",
+              "UNVERIFIED_shipping_to_sa_zar": 161.83,
+              "UNVERIFIED_platform_fees_zar": 0.0,
+              "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
+              "vat_basis": "readme_contract",
+              "net_margin_at_zero_shipping_pct": -4.05
+            },
+            {
+              "timestamp": "2026-09-30T20:49:08+02:00",
+              "agent": "pricing",
+              "confidence": 8,
+              "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
+              "verified": false,
+              "product": "mr-0002 solar power bank 20,000mAh — R449 — stretch pricing (session brief)",
+              "cost_breakdown": {
+                "product_cost_zar": 86.8,
+                "shipping_zar": 161.83,
+                "duty_zar": 0.0,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 22.45,
+                "total_landed_cost_zar": 308.37
+              },
+              "pricing": {
+                "recommended_selling_price_zar": 449.0,
+                "gross_margin_pct": 31.32,
+                "ad_cpa_estimate_zar": 150.0,
+                "net_margin_pct": -18.77,
+                "competitor_median_price_zar": null
+              },
+              "verdict": "reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -18.77% is below the 20% floor — automatic reject",
+              "UNVERIFIED_shipping_to_sa_zar": 161.83,
+              "UNVERIFIED_platform_fees_zar": 30.0,
+              "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
+              "vat_basis": "readme_contract",
+              "net_margin_at_zero_shipping_pct": 22.68
+            },
+            {
+              "timestamp": "2026-09-30T20:49:08+02:00",
+              "agent": "pricing",
+              "confidence": 8,
+              "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
+              "verified": false,
+              "product": "mr-0002 solar power bank 20,000mAh — R449 — stretch pricing (session brief)",
+              "cost_breakdown": {
+                "product_cost_zar": 86.8,
+                "shipping_zar": 161.83,
+                "duty_zar": 0.0,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 22.45,
+                "total_landed_cost_zar": 308.37
+              },
+              "pricing": {
+                "recommended_selling_price_zar": 449.0,
+                "gross_margin_pct": 31.32,
+                "ad_cpa_estimate_zar": 300.0,
+                "net_margin_pct": -52.18,
+                "competitor_median_price_zar": null
+              },
+              "verdict": "reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -52.18% is below the 20% floor — automatic reject",
+              "UNVERIFIED_shipping_to_sa_zar": 161.83,
+              "UNVERIFIED_platform_fees_zar": 30.0,
+              "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
+              "vat_basis": "readme_contract",
+              "net_margin_at_zero_shipping_pct": -10.73
+            },
+            {
+              "timestamp": "2026-09-30T20:49:08+02:00",
+              "agent": "pricing",
+              "confidence": 8,
+              "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
+              "verified": false,
+              "product": "mr-0002 solar power bank 20,000mAh — R599 — premium, above the cluster (session brief)",
+              "cost_breakdown": {
+                "product_cost_zar": 86.8,
+                "shipping_zar": 161.83,
+                "duty_zar": 0.0,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 29.95,
+                "total_landed_cost_zar": 315.87
+              },
+              "pricing": {
+                "recommended_selling_price_zar": 599.0,
+                "gross_margin_pct": 47.27,
+                "ad_cpa_estimate_zar": 150.0,
+                "net_margin_pct": 12.23,
+                "competitor_median_price_zar": null
+              },
+              "verdict": "reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin 12.23% is below the 20% floor — automatic reject",
+              "UNVERIFIED_shipping_to_sa_zar": 161.83,
+              "UNVERIFIED_platform_fees_zar": 0.0,
+              "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
+              "vat_basis": "readme_contract",
+              "net_margin_at_zero_shipping_pct": 43.29
+            },
+            {
+              "timestamp": "2026-09-30T20:49:08+02:00",
+              "agent": "pricing",
+              "confidence": 8,
+              "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
+              "verified": false,
+              "product": "mr-0002 solar power bank 20,000mAh — R599 — premium, above the cluster (session brief)",
+              "cost_breakdown": {
+                "product_cost_zar": 86.8,
+                "shipping_zar": 161.83,
+                "duty_zar": 0.0,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 29.95,
+                "total_landed_cost_zar": 315.87
+              },
+              "pricing": {
+                "recommended_selling_price_zar": 599.0,
+                "gross_margin_pct": 47.27,
+                "ad_cpa_estimate_zar": 300.0,
+                "net_margin_pct": -12.82,
+                "competitor_median_price_zar": null
+              },
+              "verdict": "reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -12.82% is below the 20% floor — automatic reject",
+              "UNVERIFIED_shipping_to_sa_zar": 161.83,
+              "UNVERIFIED_platform_fees_zar": 0.0,
+              "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
+              "vat_basis": "readme_contract",
+              "net_margin_at_zero_shipping_pct": 18.25
+            },
+            {
+              "timestamp": "2026-09-30T20:49:08+02:00",
+              "agent": "pricing",
+              "confidence": 8,
+              "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
+              "verified": false,
+              "product": "mr-0002 solar power bank 20,000mAh — R599 — premium, above the cluster (session brief)",
+              "cost_breakdown": {
+                "product_cost_zar": 86.8,
+                "shipping_zar": 161.83,
+                "duty_zar": 0.0,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 29.95,
+                "total_landed_cost_zar": 315.87
+              },
+              "pricing": {
+                "recommended_selling_price_zar": 599.0,
+                "gross_margin_pct": 47.27,
+                "ad_cpa_estimate_zar": 150.0,
+                "net_margin_pct": 7.22,
+                "competitor_median_price_zar": null
+              },
+              "verdict": "reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin 7.22% is below the 20% floor — automatic reject",
+              "UNVERIFIED_shipping_to_sa_zar": 161.83,
+              "UNVERIFIED_platform_fees_zar": 30.0,
+              "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
+              "vat_basis": "readme_contract",
+              "net_margin_at_zero_shipping_pct": 38.29
+            },
+            {
+              "timestamp": "2026-09-30T20:49:08+02:00",
+              "agent": "pricing",
+              "confidence": 8,
+              "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; so-0003 (coremax_entry unit cost R86.8 at MOQ 2); HS 8507.60 duty 0.0% (mr-0002/mr-0034 + two agreeing secondary sources, SARS primary line rate still UNREAD); CPA R150-R300 per README section 4; shipping R161.83/unit from the only fetched quote (destination UNVERIFIED)",
+              "verified": false,
+              "product": "mr-0002 solar power bank 20,000mAh — R599 — premium, above the cluster (session brief)",
+              "cost_breakdown": {
+                "product_cost_zar": 86.8,
+                "shipping_zar": 161.83,
+                "duty_zar": 0.0,
+                "vat_zar": 37.29,
+                "payment_fees_zar": 29.95,
+                "total_landed_cost_zar": 315.87
+              },
+              "pricing": {
+                "recommended_selling_price_zar": 599.0,
+                "gross_margin_pct": 47.27,
+                "ad_cpa_estimate_zar": 300.0,
+                "net_margin_pct": -17.82,
+                "competitor_median_price_zar": null
+              },
+              "verdict": "reject",
+              "rejection_reason": "HARD STOP (README section 2 #3): net margin -17.82% is below the 20% floor — automatic reject",
+              "UNVERIFIED_shipping_to_sa_zar": 161.83,
+              "UNVERIFIED_platform_fees_zar": 30.0,
+              "UNVERIFIED_competitor_median_price_zar": "MR evidence is named price points with PLIDs, not a computed category median (pr-0003)",
+              "vat_basis": "readme_contract",
+              "net_margin_at_zero_shipping_pct": 13.24
+            }
+          ],
+          "summary_counts": {
+            "cells_total": 96,
+            "reject_at_fetched_shipping": 96,
+            "reject_at_zero_shipping": 80,
+            "accept_or_investigate_requiring_physically_impossible_free_shipping": 16
+          },
+          "platform_fee_assumption": "No sourced marketplace fee schedule exists (pr-0003), so every combination is computed with R0 fees AND a conservative R30/order. The final verdict cites both: R0 fees flatter the margin and still reject; R30 lowers every margin further.",
+          "inputs_still_unverified": [
+            "shipping_to_sa_zar — no mr-0002 supplier has a verified SA lane or DDP quote (R161.83/unit is destination-UNVERIFIED)",
+            "platform_fees_zar — no sourced fee schedule (R0 and R30 are both assumptions)",
+            "SARS primary line reading for 8507.60 (two agreeing secondary sources + SARS corroboration of the heading; primary line rate still unread)",
+            "8541.43 composite-classification residual risk (advance tariff determination recommended by so-0003)",
+            "ATV VAT basis is unapproved pending HITL gate 5 (pr-0004)"
+          ],
+          "recommended_next_actions": [
+            "Supervisor: do NOT route mr-0002 to Listing/AdGrowth.",
+            "If the product is still wanted, Sourcing must obtain a DDP-to-SA quote per unit under R95.29 at R599 (CPA R150, R0 fees) — and realistically far lower, since R30 fees bring the R599 ceiling to R51.65. Below R449 nothing sourcing can quote will clear the gate.",
+            "Do not spend on a SARS advance tariff determination for this SKU while the margin gate fails on price alone."
+          ]
+        }
+      },
+      {
+        "id": "pr-0007",
+        "timestamp": "2026-10-02T08:38:11+02:00",
+        "agent": "pricing",
+        "confidence": 9,
+        "source": "Operator instruction in this session (2026-10-02), recorded verbatim on PR #8: https://github.com/khumop333-ops/okay/pull/8#issuecomment-5946826818 ; resolves pr-0004.data.hitl_gate_5_request (README section 5, gate 5; session brief: changes to tools/landed_cost.py or tools/customs.py require a HITL gate before merge)",
+        "verified": true,
+        "data": {
+          "record_type": "hitl_gate_record",
+          "gate": "HITL gate 5 (README section 5) — merging a PR that touches pricing logic or customs math",
+          "subject_pr": "https://github.com/khumop333-ops/okay/pull/8",
+          "request_being_resolved": "pr-0004.data.hitl_gate_5_request (status recorded then: 'REQUESTED — not approved; nothing merges without APPROVED'). pr-0004 is left unedited per schema section 3 (append-only); this record supersedes its status.",
+          "operator_instruction_verbatim": "Please merge the pull request.",
+          "decision": "APPROVED BY IN-SESSION INSTRUCTION — the operator is the gate holder; the literal token 'APPROVED' was NOT used, and this record does not claim it was. The verbatim instruction is recorded above and treated as the gate 5 decision for the scope below, because it is an explicit operator direction to perform exactly the action the gate governs. If that reading is wrong, it must be corrected by a new finding and by reverting the merge — not by editing this record.",
+          "scope_approved": [
+            "tools/customs.py v1.1.0 — calculate_vat_sars_atv(), the vat_basis selector and duty_and_vat_multiplier(), carrying the SARS ATV VAT method as an OPT-IN, NON-DEFAULT basis",
+            "tools/landed_cost.py v1.1.0 — vat_basis threaded through calculate_landed_cost() and max_customs_base_for_margin(), with evaluate_pricing() refusing the ATV basis outright",
+            "agents/pricing.py v1.1.0 — the mr-0002 verdict matrix and findings pr-0004..pr-0006",
+            "the mr-0002 REJECT verdict with its stated assumptions (platform fees R0 and R30/order; shipping R0 bound and the R161.83/unit fetched figure)"
+          ],
+          "scope_NOT_approved": "The README section 4 amendment adopting SARS ATV as the CONTRACT VAT basis. It was not part of PR #8 and is NOT granted by a merge instruction. Consequently DEFAULT_VAT_BASIS remains the README contract formula (customs.VAT_BASIS_README), the ATV basis remains a labelled sensitivity in every breakdown, and no verdict rests on it. Making ATV the basis later requires the README amendment AND a fresh gate 5 approval.",
+          "approval_provenance": "Hand-authored event record, deliberately NOT part of build_findings() or build_verdict_findings(): approvals are events, so re-running the agent CLI can never regenerate, re-stamp or fabricate one. Only reachable by an explicit append to state.",
+          "residual_risks_carried_forward": [
+            "Verified DDP-to-SA shipping per unit is still absent (the R161.83 figure is destination-UNVERIFIED) — required before any future ACCEPT on any product.",
+            "No sourced marketplace/platform fee schedule exists; R0 and R30 remain assumptions.",
+            "SARS primary line-level reading for 8507.60 is still unread; 8541.43 composite risk stands (advance tariff determination recommended before scale).",
+            "None of the above can rescue mr-0002: the verdict rejects under every one of those open questions, on price alone."
+          ]
+        }
       }
     ],
     "unverified_fields": [
@@ -2685,7 +6007,13 @@
       "platform_fees_zar (Takealot/marketplace fee schedule) UNVERIFIED — defaults to 0, which overstates margin; source before any accept.",
       "VAT base discrepancy (README customs_value x 0.15 vs SARS ATV (value + duty + 10% uplift) x 15%) — decision requested in pr-0003 BEFORE any verdict-bearing margin run.",
       "Competitor 'median' prices: MR evidence gives named price points with PLIDs, not a computed median — named points used, never an invented median.",
-      "mr-0001 charger+cable composite-GRI classification UNVERIFIED (carried from mr-0001) — confirm before margin runs on bundles."
+      "mr-0001 charger+cable composite-GRI classification UNVERIFIED (carried from mr-0001) — confirm before margin runs on bundles.",
+      "mr-0002 shipping_to_sa_zar per unit: NO supplier displayed an SA lane or DDP (so-0003/so-0005). Every pr-0006 block carries UNVERIFIED_shipping_to_sa_zar = R161.83, the only figure fetched anywhere (Coremax Standard $19.80/2 boxes, destination country UNVERIFIED), and R0 is a mathematical bound only. No combination in pr-0005 is approvable until a DDP-to-SA per-unit quote exists.",
+      "platform_fees_zar remains UNVERIFIED (pr-0003): pr-0005/pr-0006 compute BOTH R0 and R30/order and both are assumptions — UNVERIFIED_platform_fees_zar is recorded per block, not a sourced fee schedule.",
+      "Competitor price point for the 20,000mAh segment is a single named Takealot point (PLID95695632, R699), not a computed category median — UNVERIFIED_competitor_median_price_zar is null in every pr-0006 block, and the R299/R338 cluster is 10,000mAh evidence (segment mismatch recorded in pr-0005).",
+      "SARS PRIMARY line-level reading for 8507.60 is still unread (two agreeing secondary sources + SARS corroboration of the heading), and the 8541.43 composite alternative remains a source defect. Both can only RAISE duty, so they cannot rescue the pr-0006 reject.",
+      "The SARS ATV VAT basis is UNAPPROVED pending HITL gate 5 (pr-0004): the 'atv' cells in pr-0005 are sensitivity only, and tools/landed_cost.evaluate_pricing() refuses that basis, so no verdict rests on it.",
+      "mr-0002 volume tiers are not usable as entry prices: the >=500-box Coremax tier (R68.49) has UNVERIFIED box contents, and Quark's displayed tiers are UNVERIFIED as to 10,000 vs 20,000mAh variant. Only entry-MOQ prices feed the pr-0005 matrix."
     ]
   },
   "listing": {
