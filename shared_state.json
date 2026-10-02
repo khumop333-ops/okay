@@ -25,10 +25,10 @@
       "must_never": "Execute sub-agent tasks directly (README section 3)",
       "append_key": "sessions"
     },
-    "timestamp": "2026-10-02T18:22:47+02:00",
+    "timestamp": "2026-10-02T19:22:54+02:00",
     "agent": "supervisor",
     "confidence": 9,
-    "source": "Session 01a0fd60 (Supervisor, operator-directed strategic pivot): sup-0002 appended to supervisor.findings. Operator instructions are quoted verbatim in sup-0002. Archive scope verified by sandbox audit of shared_state.json at base commit bbee341 (ids and counts).",
+    "source": "Session 01a0fd84 (Supervisor, README contract amendment): appended to supervisor.sessions. Operator decisions quoted verbatim in operator_decisions; SARS ATV rule verified from https://www.sars.gov.za/customs-and-excise/duties-and-taxes/duties-and-taxes-for-importers/ fetched 2026-10-02.",
     "verified": true,
     "sessions": [
       {
@@ -121,6 +121,81 @@
           "No agent reads shared_state.json yet, so the contract is unexercised until the first Phase 1+ PR appends its first finding.",
           "Agent correctness note, see agent_error_log: the operator's 'Phase 0, README section 9' citation was correct and the agent wrongly 'corrected' it against a stale README.",
           "Historical: the option panel recorded 'halt' for the branch-naming question while the written operator direction said to proceed on the pinned branch. The written direction was treated as operative. No code, spend, or git safety rule was affected either way."
+        ]
+      },
+      {
+        "session_id": "01a0fd84",
+        "branch": "arena/01a0fd84-okay",
+        "timestamp": "2026-10-02T19:22:54+02:00",
+        "agent": "supervisor",
+        "confidence": 9,
+        "source": "Operator-written session brief 2026-10-02 (README contract amendment) and three operator answers escalating conflicts per README section 1, quoted verbatim in operator_decisions; SARS ATV rule verified from https://www.sars.gov.za/customs-and-excise/duties-and-taxes/duties-and-taxes-for-importers/ fetched 2026-10-02 (page last updated 21/02/2025); repo checks: gh pr list --state open returned zero open PRs, README.md and shared_state.json read at base commit abd17e3, python3 -m unittest discover -s tests = 121 tests OK.",
+        "task": "README contract amendment only: make the section 3 roster model-conditional for MarketResearch, Sourcing and Pricing; rewrite HARD STOPS 3 and 4 model-conditionally; add the pre-merge open-PR collision check to section 8. Plus one operator-approved shared_state.json session record (an explicit exception to the brief's 'do not touch shared_state.json', so README section 8 and section 10 are satisfied).",
+        "why": "Sections 2 and 3 were still import-shaped after the PR #11 pivot, so a future session on the operator-confirmed DIGITAL model would read 'never recommend without a verified HS code' and 'VAT on customs value' as binding rules that cannot apply to it. The amendment restates the same failure boundary - no recommendation on unverified data - per model instead of per import, and makes the HARD STOP margin and VAT rules point at the model being priced.",
+        "base_commit": "abd17e39160c2cae92ea234ee8107b86148f6dc5",
+        "session_open_declaration": "Acting as Supervisor. Task: README contract amendment (section 3 model-conditional roster, section 2 HARD STOPS 3-4, section 8 pre-merge PR check). No HARD STOP rules violated.",
+        "active_model": "DIGITAL - operator-confirmed starting model (sup-0002.starting_model). Sub-agents routed from this session must be told DIGITAL.",
+        "operator_decisions": [
+          {
+            "topic": "HARD STOP 4 import VAT basis",
+            "escalated_because": "The brief's draft text ('15% on customs value + ATV upliftment (see section 4.1)') conflicted with section 4 (untouchable this session; still flat 15% on customs value), referenced a non-existent section 4.1, and disagreed with tools/customs.py's default VAT basis (README flat formula; the ATV basis is opt-in and unapproved per pr-0004/pr-0007). README section 1 requires the conflict to be escalated to the operator, not resolved silently.",
+            "operator_answer_verbatim": "No omitting VAT applicable to the model being priced. Import model: 15% on the ATV — customs value + 10% upliftment + non-rebated duty, per SARS (sars.gov.za, Duties and Taxes for Importers). No upliftment for BLNS-origin goods. §4 and the tools' default currently reflect the older flat basis; they are pending alignment under a separate HITL gate 5 amendment. Until that amendment lands, do not run an import pricing verdict."
+          },
+          {
+            "topic": "HARD STOP 3 digital margin gate",
+            "escalated_because": "The brief left the digital equivalent gate as '[define]'.",
+            "operator_answer_verbatim": "The refund/chargeback allowance must itself be sourced, not defaulted. So the §2 #3 rewrite should read:  No accept verdict with net margin below 20% for models with material landed cost (import, local SA dropshipping, high-ticket). For digital products, the same 20% net-margin floor applies, measured after payment processing fees, platform fees, ad CPA, and a refund/chargeback allowance. Every input in the digital cost stack must be verified from a cited source; if any input — including the digital VAT treatment — is undefined or unverified, the margin is UNVERIFIED and the session halts. Do not use a default refund percentage without a source."
+          },
+          {
+            "topic": "shared_state.json session record",
+            "escalated_because": "The brief said 'Do not touch shared_state.json' while README section 8 ('Update shared_state.json with the session's output') and section 10 (Definition of Done) require a session record.",
+            "operator_answer": "APPROVED - option 'Allow a minimal session record in state': append one supervisor session entry to shared_state.json in this PR so section 8 and section 10 are satisfied. Recorded as a one-session exception to the brief."
+          }
+        ],
+        "readme_amendments": {
+          "hard_stop_3": "Section 2 #3 rewritten: 20% net-margin floor for models with material landed cost (import, local SA dropshipping, high-ticket); for digital, the same 20% floor measured after payment processing fees, platform fees, ad CPA and a sourced refund/chargeback allowance; unverified inputs (including digital VAT treatment) mean UNVERIFIED and halt; no default refund percentage without a source.",
+          "hard_stop_4": "Section 2 #4 rewritten: import model VAT is 15% on the ATV (customs value + 10% upliftment + non-rebated duty) per SARS, with no upliftment for BLNS-origin goods; section 4 and the tools' default are recorded as pending alignment under a separate HITL gate 5 amendment, and import pricing verdicts must not run until it lands; other models' VAT rules remain to be defined - pricing a non-import product is UNVERIFIED and halts.",
+          "section_3_rows": "MarketResearch, Sourcing and Pricing 'Must NEVER do' cells rewritten as model-conditional (imported / local SA dropship / high-ticket / digital), each preserving the no-recommendation-on-unverified-data boundary for its model. The two import-specific 'Owns' cells (customs viability, landed cost) were made model-conditional so the rows do not read as import-only.",
+          "section_8": "Added to 'At the End of Every Session': before merging, list all open PRs (gh pr list --state open); if more than one PR exists against the same state file, halt and escalate - duplicate sessions are reconciled by the human operator, not merged blindly.",
+          "not_amended": [
+            "section 1 Mission (amended by PR #11; out of scope)",
+            "section 4 (explicitly out of scope; section 2 #4 now records that it is pending alignment)",
+            "sections 5-7 and 9-12 wording",
+            "agents/*.py prompts and logic (explicit follow-up session)",
+            "tools/*.py cost math (gate 5 territory; untouched)",
+            "tests/*.py",
+            "shared_state.schema.md"
+          ]
+        },
+        "vat_source": {
+          "url": "https://www.sars.gov.za/customs-and-excise/duties-and-taxes/duties-and-taxes-for-importers/",
+          "fetched": "2026-10-02",
+          "page_last_updated": "21/02/2025",
+          "quoted_formula": "[(Customs Value + 10% thereof) + (any non-rebated duties levied on the goods)] x 15% = [ATV] x 15% = VAT payable",
+          "blns_note": "The 10% mark-up on the customs value applies only when goods originate outside the Customs Union; for BLNS-origin goods the upliftment is not added.",
+          "corroborating_sources": [
+            "https://www.sars.gov.za/FAQs/Pages/477.aspx",
+            "https://www.sars.gov.za/wp-content/uploads/Ops/Guides/Legal-CE-G06-Value-added-tax-levied-on-the-importation-of-goods-into-South-Africa.pdf"
+          ]
+        },
+        "session_checks": [
+          "gh pr list --state open = zero open PRs (no session collision; satisfies the new section 8 rule at this session's PR)",
+          "README.md read in full from a tree identical to origin/main (abd17e3); shared_state.json read; active model DIGITAL confirmed from sup-0002",
+          "python3 -m unittest discover -s tests = Ran 121 tests, OK (no code changed this session)",
+          "json.dumps round-trip checked byte-identical against shared_state.json before the append; JSON validity and contract assertions re-run after",
+          "git diff secret scan: clean"
+        ],
+        "hard_stops_status": "No HARD STOP violated. #1 no spend; #2 nothing invented (SARS rule taken from an official source URL; operator wording quoted verbatim; no new figures); #3 no product verdict issued; #4 the import VAT basis changed only by explicit in-session operator direction, and the amended text itself blocks import pricing verdicts until section 4 and the tools align; #5 Supervisor session, no sub-agent output; #6 no force-push, no branch deletion, no history rewrite; #7 no secrets; #8 shared_state.json exists on main; #9 PR #11 was merged before this session (zero open PRs at open).",
+        "hitl_gates": "HITL gate 5 (merging a PR that touches pricing logic or customs math) is flagged for the operator's merge decision: this PR changes contract VAT wording for imports but touches no code, formula or rate. The operator supplied and approved the exact section 2 #4 text in-session. A separate gate-5 PR is required before section 4 and the tools' default are aligned; until then the new section 2 #4 blocks import pricing verdicts.",
+        "gaps_carried_forward": [
+          "Section 4 still says 'VAT: 15% on customs value' and tools/customs.py DEFAULT_VAT_BASIS remains the README flat formula; both are pending a separate HITL gate 5 amendment, and the new section 2 #4 blocks import pricing verdicts until then.",
+          "Section 3 wording was drafted by the Supervisor from the operator's examples; it is subject to the operator's review at merge.",
+          "Agent prompts still carry the old import-shaped boundaries (explicitly deferred by the brief to a follow-up session).",
+          "Non-import VAT rules remain undefined (section 2 #4): non-import pricing sessions halt as UNVERIFIED."
+        ],
+        "outputs": [
+          "README.md - sections 2 (#3, #4), 3 (MarketResearch, Sourcing, Pricing rows) and 8 (pre-merge PR check) amended",
+          "shared_state.json - this session record appended to supervisor.sessions; no existing finding edited, deleted or re-labelled"
         ]
       }
     ],

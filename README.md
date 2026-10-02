@@ -47,11 +47,23 @@ would be violated:
 2. **No guessed data.** Never invent HS codes, duty rates, supplier costs,
    shipping times, or competitor prices. If a value cannot be verified from
    a real source, mark it `UNVERIFIED` and stop.
-3. **No margin < 20%.** Never approve a product whose net margin (after
-   product + shipping + duty + 15% VAT + payment fees + ad CPA) is below 20%.
-   Reject it and explain why.
-4. **No skipping VAT.** Every landed-cost calculation MUST include 15% VAT
-   on the customs value. There are no exceptions.
+3. **No accept verdict below the 20% margin floor.** No accept verdict with
+   net margin below 20% for models with material landed cost (import, local SA
+   dropshipping, high-ticket). For digital products, the same 20% net-margin
+   floor applies, measured after payment processing fees, platform fees,
+   ad CPA, and a refund/chargeback allowance. Every input in the digital cost
+   stack must be verified from a cited source; if any input — including the
+   digital VAT treatment — is undefined or unverified, the margin is
+   `UNVERIFIED` and the session halts. Do not use a default refund percentage
+   without a source.
+4. **No omitting VAT applicable to the model being priced.** Import model:
+   15% on the ATV — customs value + 10% upliftment + non-rebated duty, per
+   SARS (sars.gov.za, Duties and Taxes for Importers). No upliftment for
+   BLNS-origin goods. §4 and the tools' default currently reflect the older
+   flat basis; they are pending alignment under a separate HITL gate 5
+   amendment. Until that amendment lands, do not run an import pricing
+   verdict. Other models: VAT rules to be defined in a future session — if
+   pricing a non-import product, mark `UNVERIFIED` and halt. Do not assume.
 5. **No direct-to-human sub-agent output.** Sub-agents report to the
    Supervisor Agent. Only the Supervisor Agent addresses the human.
 6. **No destructive git operations.** Never force-push, never delete
@@ -71,9 +83,9 @@ would be violated:
 | Agent | Owns | Must NEVER do |
 |---|---|---|
 | **Supervisor** | Task decomposition, routing, final briefing, top-level state structure | Execute sub-agent tasks directly |
-| **MarketResearch** | SA product discovery, customs viability | Recommend without verified HS code |
-| **Sourcing** | Supplier verification, sample planning | Commit to purchases |
-| **Pricing** | Landed cost, margin math, price setting | Approve margin < 20% |
+| **MarketResearch** | SA product discovery; model-appropriate viability screening (customs screening only where the product is imported) | Recommend on unverified data. Imported: no recommendation without a verified HS code. Local SA dropship: no recommendation without a verified local supplier. High-ticket: no recommendation without a verified fulfilment path. Digital: no unverifiable claims about results, no fabricated testimonials, no copyrighted material. |
+| **Sourcing** | Supplier, fulfilment and rights verification for the active model; sample planning | Commit to purchases, or present an unverified input as verified. Imported: no unverified supplier quote. Local SA dropship: no unverified local supplier, stock or delivery claim. High-ticket: no unverified fulfilment path. Digital: no unverified platform, licence or rights claim. |
+| **Pricing** | Cost and margin math for the active model (landed cost only where the product is imported); price setting | Accept a verdict below the model-appropriate floor (HARD STOP 3), or on unverified inputs. Imported: no accept without a verified HS code, duty rate and landed cost. Local SA dropship: no accept without a verified local supplier cost, and halt while the model's VAT rule is undefined (HARD STOP 4). High-ticket: no accept without verified fulfilment costs and price evidence. Digital: no accept below the digital gate in HARD STOP 3; no unverifiable result claims used as inputs. |
 | **Listing** | SEO copy, product descriptions | Make unverifiable claims |
 | **AdGrowth** | Campaign design, ad copy, budgets | Launch campaigns without approval |
 | **Support** | Ticket handling, FAQs | Promise refunds/replacements |
@@ -237,6 +249,10 @@ session to `main`, that is a real violation: halt.
 - Push the branch to remote BEFORE the session ends. Arena sandboxes are
   ephemeral — a local commit that is not pushed is permanently lost when
   the session closes. Push is not optional.
+- Before merging, list all open PRs (`gh pr list --state open`) to detect
+  session collisions. If more than one PR exists against the same state file,
+  halt and escalate — duplicate sessions must be reconciled by the human
+  operator, not merged blindly.
 - **Merge rule:** the human operator must merge this PR to `main` before the
   next session opens. Unmerged PRs do not carry forward. This is the only
   manual step in the loop, and it is non-optional.
