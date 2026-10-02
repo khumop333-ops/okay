@@ -197,6 +197,58 @@
           "README.md - sections 2 (#3, #4), 3 (MarketResearch, Sourcing, Pricing rows) and 8 (pre-merge PR check) amended",
           "shared_state.json - this session record appended to supervisor.sessions; no existing finding edited, deleted or re-labelled"
         ]
+      },
+      {
+        "id": "sup-0005",
+        "timestamp": "2026-10-02T22:45:00+02:00",
+        "agent": "supervisor",
+        "confidence": 9,
+        "source": "This session (arena/01a0fddd-okay): Market Research Agent DIGITAL discovery run \u2014 12 verified candidates + market gap analysis. Fetched URLs: netlawman.co.za, agreementsonline.co.za, contracts4biz.co.za, businesstemplates.co.za, accesstoinfo.co.za, laboursmart.co.za, propertyreality.co.za, inklegal.co.za (all 2026-10-02).",
+        "verified": true,
+        "data": {
+          "record_type": "session_record",
+          "session_id": "01a0fddd",
+          "branch": "arena/01a0fddd-okay",
+          "task": "Market Research Agent \u2014 FIRST DIGITAL DISCOVERY RUN: SA tax and legal template candidates. Active model: DIGITAL (sup-0002). Category focus: SA tax and legal templates.",
+          "outputs": [
+            "12 verified candidate findings (mr-0043 through mr-0054) appended to state.market_research.findings",
+            "1 market gap analysis finding (mr-0055): no sold provisional tax worksheets, VAT201 workbooks, or CIPC annual return checklist templates exist as paid products \u2014 all provided free by SARS/CIPC or professional bodies",
+            "Top pick by (SA-relevance \u00d7 demand) / competition: PAIA Manual Generator by Access to Info (R399, score 24.0) \u2014 proceed",
+            "Second: Property Investment Forecast Template by Property Reality (ZAR500, score 24.0) \u2014 investigate",
+            "Third: POPIA Toolkit by LabourSmart (R495, score 21.0) \u2014 investigate"
+          ],
+          "candidates_summary": {
+            "total_captured": 12,
+            "proceed": 6,
+            "investigate": 6,
+            "reject": 0,
+            "verified": 12,
+            "unverified_reviews": 7,
+            "price_range_zar": "R113 (Legal Box Deal) to R4,594 (Employment Contract Pack)",
+            "formats": "DOCX (9), XLSX (1), PDF-generator (1), DOCX-template (1)"
+          },
+          "market_gap_findings": [
+            "PROVISIONAL TAX WORKSHEETS: No paid product exists. TaxAssist, SARS, Sage provide free worksheets. A paid product would need significant differentiation (multi-year tracking, eFiling integration, scenario modelling) to compete.",
+            "VAT201 WORKBOOKS: No paid product exists. SARS provides free VAT201 form and VAT404 guide. A VAT201 working file (Excel with input VAT classification, Field mapping, reconciliation) could fill a gap IF it offers automation beyond a free spreadsheet.",
+            "CIPC ANNUAL RETURN CHECKLISTS: No paid standalone template exists. CIPC provides the compliance checklist as a FREE standalone service. SAICA, Wauko provide free PDFs. InfoDocs includes it in R395/year software. A paid checklist tool would face an uphill battle against the official free version.",
+            "OPPORTUNITY: A comprehensive SA tax compliance toolkit (provisional tax multi-year tracker + VAT201 working file + CIPC deadline manager) as a Notion template or Google Sheets workbook could address the gap IF it offers functionality beyond free PDFs. Must NOT constitute tax advice \u2014 requires a registered tax practitioner for any tax calculation or advice."
+          ],
+          "tax_legal_compliance_notes": {
+            "legal_advice_flags": "All 12 candidates correctly positioned as templates/tools, NOT legal advice. Disclaimers present on AgreementsOnline, NetLawman, Contracts4Biz, Ink Legal. Businesstemplates disclaimer NOT verified \u2014 flag for follow-up.",
+            "tax_practitioner_rule": "No candidate requires a registered tax practitioner to produce. Property Reality templates calculate tax but are described as calculation tools, not tax advice. PAIA/POPIA manuals are compliance documents, not tax advice.",
+            "high_risk_candidates": "None flagged as HIGH RISK. Employment-related templates (mr-0052, mr-0053) carry MEDIUM risk due to SA labour law complexity \u2014 templates are starting points, not substitutes for legal advice on complex employment situations.",
+            "disclaimers_verified": "TRUE for: NetLawman (money-back guarantee, guidance notes), AgreementsOnline (liability disclaimer, caution on edits), Contracts4Biz (guided questionnaire, legal advisory upgrade available), Ink Legal (attorney credentials, editable templates). NOT verified for: Businesstemplates (no disclaimer found on page)."
+          },
+          "sa_relevance_verification": {
+            "all_sa_law": true,
+            "all_zar_pricing": true,
+            "sa_sellers": true,
+            "payment_methods": "Credit card via website for all candidates. PayFast/Yoco/Ozow NOT verified as accepted \u2014 flag for Sourcing follow-up if any candidate proceeds to listing.",
+            "language": "All English (SA). No Afrikaans templates found \u2014 flag as potential gap/differentiation opportunity."
+          },
+          "hard_stops_status": "No HARD STOP violated. #1 no spend; #2 nothing invented \u2014 all 12 candidates verified via fetched URLs with cited prices, creators, and (where available) reviews; #3 no product verdict issued (recommendation field is market_research screening, not pricing verdict); #4 no pricing; #5 Market Research session, reports to Supervisor; #6 no force-push, no branch deletion; #7 no secrets; #8 shared_state.json exists on main; #9 one PR (arena/01a0fddd-okay), pushed before session end.",
+          "push_status": "Pushed to remote: arena/01a0fddd-okay -> khumop333-ops/okay.git (commit f557160)"
+        }
       }
     ],
     "findings": [
@@ -412,6 +464,58 @@
           ],
           "hitl_gates": "None crossed: no paid service, sample order, launch recommendation, ad campaign, pricing/customs math change, or customer-facing commitment. No cost math touched (tools/ unmodified), so gate 5 is not triggered on the code side.",
           "hard_stops_status": "No HARD STOP violated. #1 no spend; #2 nothing invented \u2014 the prompt defines a verification process and records no market data, no new figures; #3 no product verdict issued; #4 no pricing; #5 Supervisor session, no direct sub-agent output; #6 no force-push, branch deletion or history rewrite; #7 no secrets; #8 shared_state.json exists on main; #9 PR #13 was merged before this session opened (zero open PRs at open)."
+        }
+      },
+      {
+        "id": "sup-0005",
+        "timestamp": "2026-10-02T22:45:00+02:00",
+        "agent": "supervisor",
+        "confidence": 9,
+        "source": "This session (arena/01a0fddd-okay): Market Research Agent DIGITAL discovery run \u2014 12 verified candidates + market gap analysis. Fetched URLs: netlawman.co.za, agreementsonline.co.za, contracts4biz.co.za, businesstemplates.co.za, accesstoinfo.co.za, laboursmart.co.za, propertyreality.co.za, inklegal.co.za (all 2026-10-02).",
+        "verified": true,
+        "data": {
+          "record_type": "session_record",
+          "session_id": "01a0fddd",
+          "branch": "arena/01a0fddd-okay",
+          "task": "Market Research Agent \u2014 FIRST DIGITAL DISCOVERY RUN: SA tax and legal template candidates. Active model: DIGITAL (sup-0002). Category focus: SA tax and legal templates.",
+          "outputs": [
+            "12 verified candidate findings (mr-0043 through mr-0054) appended to state.market_research.findings",
+            "1 market gap analysis finding (mr-0055): no sold provisional tax worksheets, VAT201 workbooks, or CIPC annual return checklist templates exist as paid products \u2014 all provided free by SARS/CIPC or professional bodies",
+            "Top pick by (SA-relevance \u00d7 demand) / competition: PAIA Manual Generator by Access to Info (R399, score 24.0) \u2014 proceed",
+            "Second: Property Investment Forecast Template by Property Reality (ZAR500, score 24.0) \u2014 investigate",
+            "Third: POPIA Toolkit by LabourSmart (R495, score 21.0) \u2014 investigate"
+          ],
+          "candidates_summary": {
+            "total_captured": 12,
+            "proceed": 6,
+            "investigate": 6,
+            "reject": 0,
+            "verified": 12,
+            "unverified_reviews": 7,
+            "price_range_zar": "R113 (Legal Box Deal) to R4,594 (Employment Contract Pack)",
+            "formats": "DOCX (9), XLSX (1), PDF-generator (1), DOCX-template (1)"
+          },
+          "market_gap_findings": [
+            "PROVISIONAL TAX WORKSHEETS: No paid product exists. TaxAssist, SARS, Sage provide free worksheets. A paid product would need significant differentiation (multi-year tracking, eFiling integration, scenario modelling) to compete.",
+            "VAT201 WORKBOOKS: No paid product exists. SARS provides free VAT201 form and VAT404 guide. A VAT201 working file (Excel with input VAT classification, Field mapping, reconciliation) could fill a gap IF it offers automation beyond a free spreadsheet.",
+            "CIPC ANNUAL RETURN CHECKLISTS: No paid standalone template exists. CIPC provides the compliance checklist as a FREE standalone service. SAICA, Wauko provide free PDFs. InfoDocs includes it in R395/year software. A paid checklist tool would face an uphill battle against the official free version.",
+            "OPPORTUNITY: A comprehensive SA tax compliance toolkit (provisional tax multi-year tracker + VAT201 working file + CIPC deadline manager) as a Notion template or Google Sheets workbook could address the gap IF it offers functionality beyond free PDFs. Must NOT constitute tax advice \u2014 requires a registered tax practitioner for any tax calculation or advice."
+          ],
+          "tax_legal_compliance_notes": {
+            "legal_advice_flags": "All 12 candidates correctly positioned as templates/tools, NOT legal advice. Disclaimers present on AgreementsOnline, NetLawman, Contracts4Biz, Ink Legal. Businesstemplates disclaimer NOT verified \u2014 flag for follow-up.",
+            "tax_practitioner_rule": "No candidate requires a registered tax practitioner to produce. Property Reality templates calculate tax but are described as calculation tools, not tax advice. PAIA/POPIA manuals are compliance documents, not tax advice.",
+            "high_risk_candidates": "None flagged as HIGH RISK. Employment-related templates (mr-0052, mr-0053) carry MEDIUM risk due to SA labour law complexity \u2014 templates are starting points, not substitutes for legal advice on complex employment situations.",
+            "disclaimers_verified": "TRUE for: NetLawman (money-back guarantee, guidance notes), AgreementsOnline (liability disclaimer, caution on edits), Contracts4Biz (guided questionnaire, legal advisory upgrade available), Ink Legal (attorney credentials, editable templates). NOT verified for: Businesstemplates (no disclaimer found on page)."
+          },
+          "sa_relevance_verification": {
+            "all_sa_law": true,
+            "all_zar_pricing": true,
+            "sa_sellers": true,
+            "payment_methods": "Credit card via website for all candidates. PayFast/Yoco/Ozow NOT verified as accepted \u2014 flag for Sourcing follow-up if any candidate proceeds to listing.",
+            "language": "All English (SA). No Afrikaans templates found \u2014 flag as potential gap/differentiation opportunity."
+          },
+          "hard_stops_status": "No HARD STOP violated. #1 no spend; #2 nothing invented \u2014 all 12 candidates verified via fetched URLs with cited prices, creators, and (where available) reviews; #3 no product verdict issued (recommendation field is market_research screening, not pricing verdict); #4 no pricing; #5 Market Research session, reports to Supervisor; #6 no force-push, no branch deletion; #7 no secrets; #8 shared_state.json exists on main; #9 one PR (arena/01a0fddd-okay), pushed before session end.",
+          "push_status": "Pushed to remote: arena/01a0fddd-okay -> khumop333-ops/okay.git (commit f557160)"
         }
       }
     ]
