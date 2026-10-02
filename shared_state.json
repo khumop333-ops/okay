@@ -153,7 +153,7 @@
           "session_id": "01a0fd60",
           "branch": "arena/01a0fd60-okay",
           "base_commit": "bbee341918b14ad052259b7521c6fa1ce03d6505",
-          "description": "Strategic pivot. The operator confirmed there is no capital for bulk import, so import-from-China dropshipping, the model the pipeline was built for, is RETIRED. Three models are viable: local SA dropshipping, high-ticket items, digital products. The operator confirmed DIGITAL as the starting model. Contract, state structure, session discipline and tools architecture carry over unchanged; the product research is archived as background. README sections 1 and 4 are amended to match in the same PR.",
+          "description": "Strategic pivot. The operator confirmed there is no capital for bulk import, so import-from-China dropshipping, the model the pipeline was built for, is RETIRED. Three models are viable: local SA dropshipping, high-ticket items, digital products. The operator confirmed DIGITAL as the starting model. Contract, state structure, session discipline and tools architecture carry over; the product research is archived as background. README sections 1 and 4 are amended to match in the same PR.",
           "verified_scope": "Verified: (1) the archive scope, by the sandbox audit named in source; (2) the operator's directives, quoted verbatim. NOT claimed: that any of the three models is commercially viable, or that DIGITAL beats the other two. No market, product or viability research was performed this session and none is implied; the starting model is the operator's confirmed decision, not a finding of fact. No UNVERIFIED_ value is recorded: gaps are listed in open_items as questions, not carried as data.",
           "operator_directives_verbatim": [
             {
@@ -248,8 +248,8 @@
             "total_archived": 52
           },
           "carried_over": {
-            "status": "UNCHANGED - carries over, per operator",
-            "contract": "README.md: section 2 HARD STOPS, section 5 HITL gates and sections 6-12 as written (sections 1 and 4 amended in this PR)",
+            "status": "CARRIES OVER, per operator (README sections 1 and 4 are the only contract text amended)",
+            "contract": "README.md: sections 2, 3 and 5-12 as written (sections 1 and 4 amended in this PR)",
             "state_structure": "shared_state.json shape, _conventions and shared_state.schema.md; _schema_version stays 1.0.0",
             "session_discipline": "README section 8: read README and state at start, push before the session ends, one PR per session, merge before the next session opens (HARD STOPS 8 and 9)",
             "tools_architecture": "tools/customs.py, tools/landed_cost.py, agents/market_research.py, agents/pricing.py and tests/ retained unmodified. README section 6 still holds: cost math lives only in tools/. They are import-shaped and stay available to any model that imports.",
