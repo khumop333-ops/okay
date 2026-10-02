@@ -545,9 +545,11 @@ def apply_findings(state: Dict, findings: List[Dict], ts: str) -> Dict:
     ns["agent"] = AGENT
     ns["confidence"] = min(confidences)
     ns["source"] = (
-        f"{MODULES()}; {len(ns['findings'])} findings appended this session "
+        f"{MODULES()}; {len(ns['findings'])} findings in namespace "
         f"(pr-0001..pr-{len(ns['findings']):04d}); namespace roll-up takes "
-        "the minimum finding confidence (conservative)"
+        "the minimum finding confidence (conservative). Findings accumulate "
+        "across sessions — this string is regenerated on every append and "
+        "does not claim a single session produced them all."
     )
     ns["verified"] = all(f["verified"] for f in ns["findings"])
     extra = [

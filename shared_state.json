@@ -2341,10 +2341,10 @@
         "cost_math_rule": "All cost math must call tools/landed_cost.py. Never re-implement the formula. 15% VAT on customs value is mandatory in every calculation."
       }
     },
-    "timestamp": "2026-09-30T20:49:08+02:00",
+    "timestamp": "2026-10-02T08:38:11+02:00",
     "agent": "pricing",
     "confidence": 7,
-    "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; 6 findings appended this session (pr-0001..pr-0006); namespace roll-up takes the minimum finding confidence (conservative)",
+    "source": "tools/landed_cost.py v1.1.0, tools/customs.py v1.1.0; 7 findings in namespace (pr-0001..pr-0007); namespace roll-up takes the minimum finding confidence (conservative). Findings accumulate across sessions — this string is regenerated on every append and does not claim a single session produced them all.",
     "verified": false,
     "findings": [
       {
@@ -5968,6 +5968,36 @@
             "Supervisor: do NOT route mr-0002 to Listing/AdGrowth.",
             "If the product is still wanted, Sourcing must obtain a DDP-to-SA quote per unit under R95.29 at R599 (CPA R150, R0 fees) — and realistically far lower, since R30 fees bring the R599 ceiling to R51.65. Below R449 nothing sourcing can quote will clear the gate.",
             "Do not spend on a SARS advance tariff determination for this SKU while the margin gate fails on price alone."
+          ]
+        }
+      },
+      {
+        "id": "pr-0007",
+        "timestamp": "2026-10-02T08:38:11+02:00",
+        "agent": "pricing",
+        "confidence": 9,
+        "source": "Operator instruction in this session (2026-10-02), recorded verbatim on PR #8: https://github.com/khumop333-ops/okay/pull/8#issuecomment-5946826818 ; resolves pr-0004.data.hitl_gate_5_request (README section 5, gate 5; session brief: changes to tools/landed_cost.py or tools/customs.py require a HITL gate before merge)",
+        "verified": true,
+        "data": {
+          "record_type": "hitl_gate_record",
+          "gate": "HITL gate 5 (README section 5) — merging a PR that touches pricing logic or customs math",
+          "subject_pr": "https://github.com/khumop333-ops/okay/pull/8",
+          "request_being_resolved": "pr-0004.data.hitl_gate_5_request (status recorded then: 'REQUESTED — not approved; nothing merges without APPROVED'). pr-0004 is left unedited per schema section 3 (append-only); this record supersedes its status.",
+          "operator_instruction_verbatim": "Please merge the pull request.",
+          "decision": "APPROVED BY IN-SESSION INSTRUCTION — the operator is the gate holder; the literal token 'APPROVED' was NOT used, and this record does not claim it was. The verbatim instruction is recorded above and treated as the gate 5 decision for the scope below, because it is an explicit operator direction to perform exactly the action the gate governs. If that reading is wrong, it must be corrected by a new finding and by reverting the merge — not by editing this record.",
+          "scope_approved": [
+            "tools/customs.py v1.1.0 — calculate_vat_sars_atv(), the vat_basis selector and duty_and_vat_multiplier(), carrying the SARS ATV VAT method as an OPT-IN, NON-DEFAULT basis",
+            "tools/landed_cost.py v1.1.0 — vat_basis threaded through calculate_landed_cost() and max_customs_base_for_margin(), with evaluate_pricing() refusing the ATV basis outright",
+            "agents/pricing.py v1.1.0 — the mr-0002 verdict matrix and findings pr-0004..pr-0006",
+            "the mr-0002 REJECT verdict with its stated assumptions (platform fees R0 and R30/order; shipping R0 bound and the R161.83/unit fetched figure)"
+          ],
+          "scope_NOT_approved": "The README section 4 amendment adopting SARS ATV as the CONTRACT VAT basis. It was not part of PR #8 and is NOT granted by a merge instruction. Consequently DEFAULT_VAT_BASIS remains the README contract formula (customs.VAT_BASIS_README), the ATV basis remains a labelled sensitivity in every breakdown, and no verdict rests on it. Making ATV the basis later requires the README amendment AND a fresh gate 5 approval.",
+          "approval_provenance": "Hand-authored event record, deliberately NOT part of build_findings() or build_verdict_findings(): approvals are events, so re-running the agent CLI can never regenerate, re-stamp or fabricate one. Only reachable by an explicit append to state.",
+          "residual_risks_carried_forward": [
+            "Verified DDP-to-SA shipping per unit is still absent (the R161.83 figure is destination-UNVERIFIED) — required before any future ACCEPT on any product.",
+            "No sourced marketplace/platform fee schedule exists; R0 and R30 remain assumptions.",
+            "SARS primary line-level reading for 8507.60 is still unread; 8541.43 composite risk stands (advance tariff determination recommended before scale).",
+            "None of the above can rescue mr-0002: the verdict rejects under every one of those open questions, on price alone."
           ]
         }
       }

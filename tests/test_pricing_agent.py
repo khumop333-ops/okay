@@ -521,6 +521,27 @@ class TestRealStateReadOnly(unittest.TestCase):
         self.assertEqual(lead["data"]["hs_code"], "8507.60")
         self.assertEqual(customs.lookup_duty_rate_pct("8507.60"), 0.0)
 
+    def test_gate_5_decision_is_recorded_and_atv_did_not_become_the_basis(self):
+        """The gate-5 merge approval must be auditable, and approving the
+        ATV *code* must not have adopted the ATV *basis* (pr-0007)."""
+        state = pricing.load_state(pricing.default_state_path())
+        records = [
+            f
+            for f in state["pricing"]["findings"]
+            if f["data"].get("record_type") == "hitl_gate_record"
+        ]
+        self.assertTrue(records, "gate 5 decision record missing from state")
+        rec = records[-1]
+        self.assertIn("Please merge", rec["data"]["operator_instruction_verbatim"])
+        self.assertIn("README section 4", rec["data"]["scope_NOT_approved"])
+        self.assertIn("NOT granted", rec["data"]["scope_NOT_approved"])
+        self.assertIn("fresh gate 5 approval", rec["data"]["scope_NOT_approved"])
+        # The code that landed must still default to the README formula.
+        self.assertEqual(customs.DEFAULT_VAT_BASIS, customs.VAT_BASIS_README)
+        self.assertEqual(
+            landed_cost.VAT_BASIS_FOR_VERDICTS, customs.VAT_BASIS_README
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
