@@ -1746,10 +1746,10 @@
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
       }
     },
-    "timestamp": "2026-10-02T12:52:00+00:00",
+    "timestamp": "2026-10-02T12:55:00+00:00",
     "agent": "sourcing",
     "confidence": 7,
-    "source": "so-0006 (push 3: Sweet Protrading + ZHTX + Yiwu Eway fetched & read 2026-10-02; USD/ZAR 16.6654 Google Finance 2026-10-02) + prior so-0001..so-0005.",
+    "source": "so-0006 (push 4: all 4 prior-session forwarder leads Sweet Protrading, ZHTX, Yiwu Eway, Wingspeed fetched & read 2026-10-02; USD/ZAR 16.6654 Google Finance 2026-10-02) + prior so-0001..so-0005.",
     "verified": true,
     "findings": [
       {
@@ -2302,10 +2302,10 @@
       },
       {
         "id": "so-0006",
-        "timestamp": "2026-10-02T12:52:00+00:00",
+        "timestamp": "2026-10-02T12:55:00+00:00",
         "agent": "sourcing",
         "confidence": 7,
-        "source": "fetch_page, all fetched & read 2026-10-02: https://www.google.com/finance/quote/USD-ZAR (USD/ZAR 16.6654 @ 2026-10-02 12:30:19 UTC); https://cntrsm.en.alibaba.com/; https://cntrsm.en.alibaba.com/productgrouplist-822293600/High_inquiry_products.html; https://www.alibaba.com/product-detail/1688-Purchasing-Shipping-Agent-Logistics-Service_1601356070201.html; https://www.alibaba.com/product-detail/door-to-door-delivery-service-ems_60703892641.html; https://zhtxsz.en.alibaba.com/; https://zhtxsz.en.alibaba.com/productgrouplist-963600634/TOP_SALE.html; https://www.alibaba.com/product-detail/China-door-to-door-service-ups_1601256645326.html; https://www.alibaba.com/product-detail/freight-forwarder-china-to-Democratic-Algeria_1601255677117.html; https://suppliers.alibaba.com/yiwu-eway-international-logistics-co-ltd_2218910837169; https://yiwuyiwei.en.alibaba.com/; https://www.alibaba.com/product-detail/Shopify-Dropshipping-Agent-US-AU-EU_1601379475240.html; https://www.alibaba.com/product-detail/Shopify-Dropshipping-Smart-Projector-Outdoor-Screen_1601597321214.html",
+        "source": "fetch_page, all fetched & read 2026-10-02: https://www.google.com/finance/quote/USD-ZAR (USD/ZAR 16.6654 @ 2026-10-02 12:30:19 UTC); https://cntrsm.en.alibaba.com/; https://cntrsm.en.alibaba.com/productgrouplist-822293600/High_inquiry_products.html; https://www.alibaba.com/product-detail/1688-Purchasing-Shipping-Agent-Logistics-Service_1601356070201.html; https://www.alibaba.com/product-detail/door-to-door-delivery-service-ems_60703892641.html; https://zhtxsz.en.alibaba.com/; https://zhtxsz.en.alibaba.com/productgrouplist-963600634/TOP_SALE.html; https://www.alibaba.com/product-detail/China-door-to-door-service-ups_1601256645326.html; https://www.alibaba.com/product-detail/freight-forwarder-china-to-Democratic-Algeria_1601255677117.html; https://suppliers.alibaba.com/yiwu-eway-international-logistics-co-ltd_2218910837169; https://yiwuyiwei.en.alibaba.com/; https://www.alibaba.com/product-detail/Shopify-Dropshipping-Agent-US-AU-EU_1601379475240.html; https://www.alibaba.com/product-detail/Shopify-Dropshipping-Smart-Projector-Outdoor-Screen_1601597321214.html; https://bonmedshipping.en.alibaba.com/; https://cnwingspeed.en.alibaba.com/; https://www.alibaba.com/product-detail/Container-Dropshipping-Agent-Fast-Shipping-to_1600713628003.html; https://www.alibaba.com/product-detail/WINGSPEED-Freight-Forwarder-Logistics-Service-Cargo_62091984207.html; https://www.alibaba.com/product-detail/ddp-air-freight-forwarder-Sea-shipping_1601193797824.html",
         "verified": true,
         "verified_scope": "verified=true applies ONLY to pages actually fetched and read via fetch_page on 2026-10-02 and the literal figures/attributes displayed on them. Where a forwarder displays a generic per-kg headline placeholder without a confirmed South Africa (ZA) battery/small-electronics DDP tariff table, the exact fetched numbers are reported alongside UNVERIFIED_ markers per HARD STOP #2.",
         "data": {
@@ -2320,7 +2320,7 @@
             "pr_0008_baseline_usd_zar": 16.346,
             "pr_0008_fx_source": "Google Finance USD/ZAR 16.3460 @ 2026-09-30 07:33 UTC (used in so-0003 and pr-0008)"
           },
-          "quotes_fetched_count": 3,
+          "quotes_fetched_count": 4,
           "quotes": [
             {
               "quote_index": 1,
@@ -2407,9 +2407,36 @@
               "fetch_date": "2026-10-02",
               "verified": true,
               "verified_scope": "Forwarder identity, SGS report 485024251_T, $0.70-$1.00/pc tier table, \"Shipping total: To be negotiated\", Buyer customs-clearance attribute, General (Non-dangerous) Goods restriction, Colissimo/France & Sweden destination attributes, and 60% WE / 30% NA / 10% Oceania market split — all directly read via fetch_page on 2026-10-02."
+            },
+            {
+              "quote_index": 4,
+              "lead_category": "prior_session_forwarder_lead",
+              "forwarder_name": "Shenzhen Wingspeed International Forwarding Co., Ltd.",
+              "listing_title": "Container Dropshipping Agent Fast Shipping to Us Au Eu Worldwide Supplier Door to Door Dropshipping With Low Rate (1600713628003, MOQ 1 kg) + WINGSPEED Freight Forwarder DDP/DDU (62091984207, MOQ 100 kg) + Ddp air Freight Forwarder (1601193797824, MOQ 100 kg)",
+              "fetched_rate_usd": "$1.00/kg (1-99 kg), $0.80/kg (>=100 kg) on 1600713628003 (MOQ 1 kg); $1.00/kg (100-299 kg), $0.90/kg (300-499 kg), $0.85/kg (500-999 kg), $0.80/kg (>=1,000 kg) on 62091984207 & 1601193797824 (MOQ 100 kg); Shipping total: \"To be negotiated\"",
+              "per_unit_rate_zar": null,
+              "UNVERIFIED_per_unit_rate_zar": "Displayed $1.00/kg at 1-99 kg tier (R16.67/kg @16.6654 or R16.35/kg @16.3460) is a placeholder tier with \"Shipping fee and delivery date to be negotiated... Shipping total: To be negotiated.\" Moreover, all three fetched product pages set Destination customs clearance party = Buyer (DAP/DDU), 62091984207 lists Trading Term = \"CIF DDU FOB EXW\" (omitting DDP), and South Africa (ZA) is absent from all Shipment destination lists (note: SA in ISO list is Saudi Arabia).",
+              "fetched_headline_rate_zar_at_1kg_moq": "R16.67 (@16.6654 live FX) / R16.35 (@16.3460 pr-0008 FX) for 1-99 kg placeholder tier on 1600713628003; actual shipping total \"To be negotiated\"",
+              "transit_time": "5 - 15 Days (Air+Express on 1600713628003, dispatch 2 days, lead time 7 days for 1 kg; average store dispatch 11 days); 2 - 9 Days (Air+Express on 1601193797824, dispatch 5 days); 5 - 25 Days (International Trucking+Express on 62091984207, dispatch 5 days, average store dispatch 15 days — >21-day flag).",
+              "UNVERIFIED_sa_transit_time": "South Africa (ZA) is not in the Shipment destination attribute on any of the three fetched listings; transit times are generic non-ZA lanes.",
+              "ddp_vs_dap": "DAP / DDU (Buyer-cleared): all three fetched product pages explicitly set structured Key attribute \"Destination customs clearance party: Buyer\", and 62091984207 sets \"Trading Term: CIF DDU FOB EXW\" (excluding DDP despite \"DDP /DDU\" in the title).",
+              "UNVERIFIED_ddp_to_sa": "DDP to South Africa is NOT offered on the fetched pages (Buyer customs clearance attribute on all 3 pages; Trading Term excludes DDP on 62091984207; ZA absent from destination lists).",
+              "small_electronics_under_1kg_fit": "1600713628003 has 1 kg MOQ and accepts Special (Dangerous) Goods, whereas 62091984207 and 1601193797824 require a 100 kg MOQ (bulk cargo only). Even on 1600713628003, shipping total is \"To be negotiated\" and clearance is Buyer (DDU).",
+              "supplier_metrics_observed": {
+                "tenure": "8-12 yrs across 4 SGS-verified Alibaba storefronts (bonmedshipping 9 yrs, cnwingspeed 9 yrs, chinawingspeed 8 yrs, wingspeed 12 yrs)",
+                "store_rating": "5.0/5 (1,152 reviews on chinawingspeed; 538 reviews on bonmedshipping); 4.4/5 (1,542 reviews on wingspeed — below 4.5 bar)",
+                "product_rating": "19 reviews on 62091984207; 7 reviews on 1600713628003 (3,393 sold); 10,476 sold on 1601193797824",
+                "response_time": "<=5h to <=6h",
+                "on_time_dispatch": "100.0% (chinawingspeed/bonmedshipping/cnwingspeed); >=99% (wingspeed)",
+                "online_revenue": "$500K-$1M (chinawingspeed); $50K-$100K (bonmedshipping)"
+              },
+              "source_url": "https://www.alibaba.com/product-detail/Container-Dropshipping-Agent-Fast-Shipping-to_1600713628003.html; https://www.alibaba.com/product-detail/WINGSPEED-Freight-Forwarder-Logistics-Service-Cargo_62091984207.html; https://www.alibaba.com/product-detail/ddp-air-freight-forwarder-Sea-shipping_1601193797824.html; https://bonmedshipping.en.alibaba.com/; https://cnwingspeed.en.alibaba.com/",
+              "fetch_date": "2026-10-02",
+              "verified": true,
+              "verified_scope": "Forwarder identity across storefronts, SGS verification, store ratings, $0.80-$1.00/kg tier tables (1 kg MOQ on 1600713628003; 100 kg MOQ on 62091984207 & 1601193797824), Buyer customs-clearance attribute on all 3 listings, CIF/DDU/FOB/EXW trading term on 62091984207, Special (Dangerous) Goods attribute, and absence of ZA from destination lists — all directly read via fetch_page on 2026-10-02."
             }
           ],
-          "session_status": "in_progress — push 3 after verified quote #3 (Yiwu Eway)"
+          "session_status": "in_progress — push 4 after verified quote #4 (Wingspeed)"
         }
       }
     ],
