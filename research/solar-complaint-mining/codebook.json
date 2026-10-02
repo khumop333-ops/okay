@@ -1,0 +1,97 @@
+{
+  "_note": "Complaint codebook for the SA solar-owner complaint-mining run. Tags are added ONLY when at least one logged item supports them. 'provisional' tags may be merged/split before the final tally; any merge is applied through tag_map in the final tally, never by editing evidence rows.",
+  "tags": {
+    "savings_below_expectation": {
+      "definition": "Owner reports electricity cost/units bought did not fall as expected after install, or system cost exceeds the saving.",
+      "provisional": true
+    },
+    "installer_trust_scam_fear": {
+      "definition": "Prospective buyer or owner distrusts installers/financiers/pricing (scam fear, suspicious contract terms, bad review-site reputation) when choosing a provider.",
+      "provisional": true
+    },
+    "financing_rent_to_own_terms": {
+      "definition": "Rent-to-own/financed solar: monthly cost vs saving, price escalation, buy-out markup, lock-in or exit fees, contract opacity.",
+      "provisional": true
+    },
+    "workmanship_defects": {
+      "definition": "Installer workmanship or safety defects (wrong/non-spec DB parts, ungrounded system, fire hazard, unsealed roof penetrations).",
+      "provisional": true
+    },
+    "municipal_fixed_charge_solar_owners": {
+      "definition": "Fixed/connection/tariff charges that remain or rise for homes with solar.",
+      "provisional": true
+    },
+    "grid_connection_cost_delay": {
+      "definition": "High cost or long wait for a new grid connection/approvals, pushing owners off-grid.",
+      "provisional": true
+    },
+    "repair_downtime_no_fallback": {
+      "definition": "Fear or experience of having no power while equipment fails and is repaired, esp. no grid fallback or no loan unit.",
+      "provisional": true
+    },
+    "installer_aftersales_unresponsive": {
+      "definition": "Installer/seller unresponsive or deflects responsibility after payment/installation (unanswered calls/WhatsApps, hand-offs, blame-shifting).",
+      "provisional": true
+    },
+    "warranty_repair_delay_runaround": {
+      "definition": "Brand/distributor warranty or repair takes months, parts awaited, job numbers untraceable, escalations unanswered, claims bounced between parties.",
+      "provisional": true
+    },
+    "inverter_fault_recurring": {
+      "definition": "Inverter hardware/firmware faults that recur or are not fixed after repair (error codes, shutdowns, flicker).",
+      "provisional": true
+    },
+    "battery_failure_degradation": {
+      "definition": "Battery swelling, BMS faults, premature failure or capacity problems.",
+      "provisional": true
+    },
+    "repeat_callout_fees": {
+      "definition": "Paying repeated call-out/labour fees for faults that remain unresolved or should be under warranty.",
+      "provisional": true
+    },
+    "firmware_update_failure": {
+      "definition": "Remote or firmware update bricks or destabilises a working system.",
+      "provisional": true
+    },
+    "system_overpromised_mismatch": {
+      "definition": "Delivered system capacity/performance does not match what was sold or advertised.",
+      "provisional": true
+    },
+    "coc_compliance_integrity": {
+      "definition": "Certificate-of-compliance process unreliable (CoC electrician did not inspect, approved-inverter list issues).",
+      "provisional": true
+    },
+    "grid_voltage_issues": {
+      "definition": "High or unstable municipal voltage tripping or stressing equipment.",
+      "provisional": true
+    },
+    "installation_delays_lead_time": {
+      "definition": "Installation scheduling delays, long lead times, late arrivals, repeated visits.",
+      "provisional": true
+    },
+    "refund_returns_refused": {
+      "definition": "Seller refuses return/refund of defective goods despite consumer-protection rights.",
+      "provisional": true
+    },
+    "replacement_unit_quality": {
+      "definition": "Loan/replacement units are used, a different brand, or also defective.",
+      "provisional": true
+    },
+    "warranty_verification_serial": {
+      "definition": "Cannot verify serial number/warranty status; units supplied without warranty stickers.",
+      "provisional": true
+    },
+    "sseg_registration_burden": {
+      "definition": "SSEG registration fees/penalties/sign-off/process confusion.",
+      "provisional": true
+    },
+    "installer_misconfiguration_settings": {
+      "definition": "Owner discovers the installer configured the system incorrectly (CT coil position, discharge %, overnight grid-charge, phase layout) so expected savings do not materialise; fixing needs a second paid opinion.",
+      "provisional": true
+    },
+    "billing_debit_order_errors": {
+      "definition": "Rent-to-own/finance billing problems: debits after cancellation, misallocated payments, unactioned debit-order changes, promised refunds not paid, no reachable accounts department.",
+      "provisional": true
+    }
+  }
+}
