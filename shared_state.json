@@ -1746,10 +1746,10 @@
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
       }
     },
-    "timestamp": "2026-09-30T09:42:57+02:00",
+    "timestamp": "2026-10-02T12:46:00+00:00",
     "agent": "sourcing",
     "confidence": 7,
-    "source": "so-0003 (mr-0002 quotes + both mandatory cross-checks), so-0004 (mr-0003 quotes), so-0005 (session summary for Supervisor). 6 supplier quotes + 4 cross-check pages fetched & read 2026-09-30; FX Google Finance 16.3460.",
+    "source": "so-0006 (push 1: Sweet Protrading fetched & read 2026-10-02; USD/ZAR 16.6654 Google Finance 2026-10-02) + prior so-0001..so-0005.",
     "verified": true,
     "findings": [
       {
@@ -2298,6 +2298,61 @@
           ],
           "shipping_carrier_note": "Carrier-level e-Packet/DHL/Aramex comparison for SA was delivered in so-0001 (previously sourced); this session adds the only fresh lane datapoint: Alibaba Standard Logistics $19.80/2 boxes, Oct 11 - Nov 19 guaranteed window (destination country UNVERIFIED in fetch). No new carrier claims made.",
           "hard_stop_compliance": "No purchase commitments; no invented supplier/metric/rate - every quoted number carries its fetched URL and fetch date; unobservable fields are UNVERIFIED_-prefixed and listed in unverified_fields; no direct-to-human briefing beyond this state record + PR description (README-required PR contents); no destructive git ops; no secrets; no unrelated files touched; shared_state.json pre-existed on main (verified) and was only appended to under state.sourcing."
+        }
+      },
+      {
+        "id": "so-0006",
+        "timestamp": "2026-10-02T12:46:00+00:00",
+        "agent": "sourcing",
+        "confidence": 7,
+        "source": "fetch_page, all fetched & read 2026-10-02: https://www.google.com/finance/quote/USD-ZAR (USD/ZAR 16.6654 @ 2026-10-02 12:30:19 UTC); https://cntrsm.en.alibaba.com/; https://cntrsm.en.alibaba.com/productgrouplist-822293600/High_inquiry_products.html; https://www.alibaba.com/product-detail/1688-Purchasing-Shipping-Agent-Logistics-Service_1601356070201.html; https://www.alibaba.com/product-detail/door-to-door-delivery-service-ems_60703892641.html",
+        "verified": true,
+        "verified_scope": "verified=true applies ONLY to pages actually fetched and read via fetch_page on 2026-10-02 and the literal figures/attributes displayed on them. Where a forwarder displays a generic per-kg headline placeholder without a confirmed South Africa (ZA) battery/small-electronics DDP tariff table, the exact fetched numbers are reported alongside UNVERIFIED_ markers per HARD STOP #2.",
+        "data": {
+          "record_type": "ddp_to_sa_shipping_quotes",
+          "product_id": "mr-0002",
+          "product": "20,000mAh solar power bank (HS 8507.60, 0% duty, ~400-500g per unit; lithium-ion battery cargo ~74Wh)",
+          "target_shipping_ceiling_zar": 147.46,
+          "target_context": "R147.46/unit shipping ceiling at R699 retail, R150 CPA, R0 platform fees, 25% net margin, Coremax entry unit cost R86.80 (from pricing.pr-0008)",
+          "fx_rates_referenced": {
+            "live_2026_10_02_usd_zar": 16.6654,
+            "live_fx_source": "https://www.google.com/finance/quote/USD-ZAR (fetched 2026-10-02, timestamped 2 Oct 12:30:19 UTC)",
+            "pr_0008_baseline_usd_zar": 16.346,
+            "pr_0008_fx_source": "Google Finance USD/ZAR 16.3460 @ 2026-09-30 07:33 UTC (used in so-0003 and pr-0008)"
+          },
+          "quotes_fetched_count": 1,
+          "quotes": [
+            {
+              "quote_index": 1,
+              "lead_category": "prior_session_forwarder_lead",
+              "forwarder_name": "Shenzhen Sweet Protrading Co., Ltd.",
+              "listing_title": "1688 Purchasing Shipping Agent Logistics Service Freight Forwarder Purchasing-agent Taobao 1688 Buying Sourcing Agent in China (#11 hot selling in Air+Express)",
+              "fetched_rate_usd": "$1.00 - $2.00 per kg (Minimum order quantity: 1 kilogram)",
+              "per_unit_rate_zar": null,
+              "UNVERIFIED_per_unit_rate_zar": "Headline rate is $1-2/kg (MOQ 1 kg) -> R16.67-R33.33 at 1 kg minimum billing (@16.6654; or R16.35-R32.69 @16.3460), or R8.33-R16.67 if pro-rated at 0.4-0.5 kg, BUT page explicitly states: \"Shipping fee and delivery date to be negotiated\" and FAQ #1: \"The exact price can be offered when the details of your goods finalized, like weight, volume, loaded city and destination city.\" South Africa (ZA) is NOT in the listing's 45-country Shipment destination attribute.",
+              "fetched_headline_rate_zar_at_1kg_moq": "R16.67 - R33.33 (@16.6654 live FX) / R16.35 - R32.69 (@16.3460 pr-0008 FX)",
+              "transit_time": "7 - 12 Days (Air+Express attribute on 1601356070201; dispatch 3 days, lead time 2 days). Secondary listing 60703892641 shows 30 - 40 Days (LCL+Express) and embedded service table lists \"other country\": express 4-5 days, FBA Amazon \"no services\", sea freight \"port to port or shipping and delivery\".",
+              "UNVERIFIED_sa_transit_time": "No South Africa-specific (ZA) transit time confirmed on fetched pages; 7-12 days is generic Air+Express headline before SA customs (5-15 business days if non-DDP).",
+              "ddp_vs_dap": "DDU / DDP (both listed in Trading Term attribute; Seller listed as Destination customs clearance party; description claims \"DDP door-to-door solutions\" and battery/dangerous goods handling, while embedded service table on 60703892641 shows DDP only for America/Europe/Canada/Australia/Japan and \"no services\" / \"port to port\" for \"other country\").",
+              "UNVERIFIED_ddp_to_sa": "DDP to South Africa (ZA) is NOT confirmed on the fetched pages (ZA absent from Shipment destination list and service table).",
+              "small_electronics_under_1kg_fit": "MOQ is 1 kilogram; accepts Special (Dangerous) Goods including batteries per fetched description, but single-unit 400-500g parcel incurs at least the 1 kg MOQ and requires bespoke quote.",
+              "supplier_metrics_observed": {
+                "tenure": "10 yrs on Alibaba (Verified by TuVRheinland)",
+                "store_rating": "4.8/5 (6,157 / 9,432 reviews)",
+                "product_rating": "4.9/5 (56 reviews, 18,447 sold on 1601356070201)",
+                "response_time": "<=3h",
+                "on_time_dispatch": "100.0%",
+                "reorder_rate": "53%",
+                "online_revenue": "US$840,000+",
+                "main_markets": "United States (41%), United Kingdom (14%), France (10%), Spain (6%), Canada (6%), Other (24%) — South Africa not listed"
+              },
+              "source_url": "https://www.alibaba.com/product-detail/1688-Purchasing-Shipping-Agent-Logistics-Service_1601356070201.html (corroborated by store https://cntrsm.en.alibaba.com/, https://cntrsm.en.alibaba.com/productgrouplist-822293600/High_inquiry_products.html, and https://www.alibaba.com/product-detail/door-to-door-delivery-service-ems_60703892641.html)",
+              "fetch_date": "2026-10-02",
+              "verified": true,
+              "verified_scope": "Forwarder identity, store metrics, $1-2/kg headline rate, 1 kg MOQ, 7-12 days Air+Express attribute, DDU/DDP trading term, Seller clearance attribute, battery/DG text, and absence of ZA in destination list — all directly read via fetch_page on 2026-10-02."
+            }
+          ],
+          "session_status": "in_progress — push 1 after verified quote #1 (Sweet Protrading)"
         }
       }
     ],
