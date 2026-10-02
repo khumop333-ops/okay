@@ -1746,10 +1746,10 @@
         "unverified_marker": "Any data field that could not be verified from a real source must be named with an UNVERIFIED_ prefix and additionally listed in this namespace's unverified_fields array."
       }
     },
-    "timestamp": "2026-10-02T12:55:00+00:00",
+    "timestamp": "2026-10-02T12:58:00+00:00",
     "agent": "sourcing",
     "confidence": 7,
-    "source": "so-0006 (push 4: all 4 prior-session forwarder leads Sweet Protrading, ZHTX, Yiwu Eway, Wingspeed fetched & read 2026-10-02; USD/ZAR 16.6654 Google Finance 2026-10-02) + prior so-0001..so-0005.",
+    "source": "so-0006 (push 5: 4 forwarder leads + Coremax direct re-check fetched & read 2026-10-02; USD/ZAR 16.6654 Google Finance 2026-10-02) + prior so-0001..so-0005.",
     "verified": true,
     "findings": [
       {
@@ -2302,10 +2302,10 @@
       },
       {
         "id": "so-0006",
-        "timestamp": "2026-10-02T12:55:00+00:00",
+        "timestamp": "2026-10-02T12:58:00+00:00",
         "agent": "sourcing",
         "confidence": 7,
-        "source": "fetch_page, all fetched & read 2026-10-02: https://www.google.com/finance/quote/USD-ZAR (USD/ZAR 16.6654 @ 2026-10-02 12:30:19 UTC); https://cntrsm.en.alibaba.com/; https://cntrsm.en.alibaba.com/productgrouplist-822293600/High_inquiry_products.html; https://www.alibaba.com/product-detail/1688-Purchasing-Shipping-Agent-Logistics-Service_1601356070201.html; https://www.alibaba.com/product-detail/door-to-door-delivery-service-ems_60703892641.html; https://zhtxsz.en.alibaba.com/; https://zhtxsz.en.alibaba.com/productgrouplist-963600634/TOP_SALE.html; https://www.alibaba.com/product-detail/China-door-to-door-service-ups_1601256645326.html; https://www.alibaba.com/product-detail/freight-forwarder-china-to-Democratic-Algeria_1601255677117.html; https://suppliers.alibaba.com/yiwu-eway-international-logistics-co-ltd_2218910837169; https://yiwuyiwei.en.alibaba.com/; https://www.alibaba.com/product-detail/Shopify-Dropshipping-Agent-US-AU-EU_1601379475240.html; https://www.alibaba.com/product-detail/Shopify-Dropshipping-Smart-Projector-Outdoor-Screen_1601597321214.html; https://bonmedshipping.en.alibaba.com/; https://cnwingspeed.en.alibaba.com/; https://www.alibaba.com/product-detail/Container-Dropshipping-Agent-Fast-Shipping-to_1600713628003.html; https://www.alibaba.com/product-detail/WINGSPEED-Freight-Forwarder-Logistics-Service-Cargo_62091984207.html; https://www.alibaba.com/product-detail/ddp-air-freight-forwarder-Sea-shipping_1601193797824.html",
+        "source": "fetch_page, all fetched & read 2026-10-02: https://www.google.com/finance/quote/USD-ZAR (USD/ZAR 16.6654 @ 2026-10-02 12:30:19 UTC); https://cntrsm.en.alibaba.com/; https://cntrsm.en.alibaba.com/productgrouplist-822293600/High_inquiry_products.html; https://www.alibaba.com/product-detail/1688-Purchasing-Shipping-Agent-Logistics-Service_1601356070201.html; https://www.alibaba.com/product-detail/door-to-door-delivery-service-ems_60703892641.html; https://zhtxsz.en.alibaba.com/; https://zhtxsz.en.alibaba.com/productgrouplist-963600634/TOP_SALE.html; https://www.alibaba.com/product-detail/China-door-to-door-service-ups_1601256645326.html; https://www.alibaba.com/product-detail/freight-forwarder-china-to-Democratic-Algeria_1601255677117.html; https://suppliers.alibaba.com/yiwu-eway-international-logistics-co-ltd_2218910837169; https://yiwuyiwei.en.alibaba.com/; https://www.alibaba.com/product-detail/Shopify-Dropshipping-Agent-US-AU-EU_1601379475240.html; https://www.alibaba.com/product-detail/Shopify-Dropshipping-Smart-Projector-Outdoor-Screen_1601597321214.html; https://bonmedshipping.en.alibaba.com/; https://cnwingspeed.en.alibaba.com/; https://www.alibaba.com/product-detail/Container-Dropshipping-Agent-Fast-Shipping-to_1600713628003.html; https://www.alibaba.com/product-detail/WINGSPEED-Freight-Forwarder-Logistics-Service-Cargo_62091984207.html; https://www.alibaba.com/product-detail/ddp-air-freight-forwarder-Sea-shipping_1601193797824.html; https://www.alibaba.com/product-detail/New-Trending-Waterproof-20000Mah-Solar-Charger_1601727591668.html; https://kms9.en.alibaba.com/",
         "verified": true,
         "verified_scope": "verified=true applies ONLY to pages actually fetched and read via fetch_page on 2026-10-02 and the literal figures/attributes displayed on them. Where a forwarder displays a generic per-kg headline placeholder without a confirmed South Africa (ZA) battery/small-electronics DDP tariff table, the exact fetched numbers are reported alongside UNVERIFIED_ markers per HARD STOP #2.",
         "data": {
@@ -2320,7 +2320,7 @@
             "pr_0008_baseline_usd_zar": 16.346,
             "pr_0008_fx_source": "Google Finance USD/ZAR 16.3460 @ 2026-09-30 07:33 UTC (used in so-0003 and pr-0008)"
           },
-          "quotes_fetched_count": 4,
+          "quotes_fetched_count": 5,
           "quotes": [
             {
               "quote_index": 1,
@@ -2434,9 +2434,36 @@
               "fetch_date": "2026-10-02",
               "verified": true,
               "verified_scope": "Forwarder identity across storefronts, SGS verification, store ratings, $0.80-$1.00/kg tier tables (1 kg MOQ on 1600713628003; 100 kg MOQ on 62091984207 & 1601193797824), Buyer customs-clearance attribute on all 3 listings, CIF/DDU/FOB/EXW trading term on 62091984207, Special (Dangerous) Goods attribute, and absence of ZA from destination lists — all directly read via fetch_page on 2026-10-02."
+            },
+            {
+              "quote_index": 5,
+              "lead_category": "coremax_direct_recheck",
+              "forwarder_name": "Guangzhou Coremax New Energy Technology Co., Ltd. (via Standard Alibaba.com Logistics)",
+              "listing_title": "New Trending Waterproof 20000Mah Solar Charger Outdoor Travel Solar Charger Power Bank (model 30A, 1601727591668)",
+              "fetched_rate_usd": "Standard (Alibaba.com Logistics): $19.81 (struck $39.81) for 2 boxes = $9.905 per box (on 2026-09-30 it was $19.80 / 2 boxes = $9.90/box)",
+              "per_unit_rate_zar": 165.07,
+              "per_unit_rate_zar_at_pr0008_fx": 161.91,
+              "prior_so0003_per_unit_rate_zar": 161.83,
+              "UNVERIFIED_per_unit_rate_zar": "Fetched rate is $19.81 for 2 boxes = $9.905/box = R165.07/box (@16.6654 live 2026-10-02 FX) or R161.91/box (@16.3460 pr-0008 FX; was R161.83 on 2026-09-30 at $19.80/2 boxes). However: (1) this quote is NOT DDP (\"*Taxes and import charges will be calculated at checkout\"), (2) destination country rendered in sandbox is unconfirmed for ZA (store header defaulted to GB), and (3) \"box\" unit vs single item (1.000 kg gross) remains unverified. Even if treated as per-unit shipping, R165.07 (and R161.83/R161.91) EXCEEDS the R147.46 target ceiling by R17.61 (or R14.37/R14.45).",
+              "transit_time": "Guaranteed delivery: Oct 20 - Nov 29 (18 - 58 calendar days from 2026-10-02 fetch date; average dispatch time 12 days; lead time 3 days for 1-200 boxes). FLAGGED: upper bound 58 days breaches the 21-day SA delivery limit before adding 5-15 business days customs clearance.",
+              "UNVERIFIED_sa_transit_time": "Destination country for the Oct 20 - Nov 29 window is not confirmed as South Africa (ZA).",
+              "ddp_vs_dap": "DAP / DDU (NOT DDP) — page explicitly states \"*Taxes and import charges will be calculated at checkout\"; no DDP option exists on the product page or store hub (kms9.en.alibaba.com). Interactive Alibaba chat is login-gated and no negotiation drafts are permitted under session rules.",
+              "UNVERIFIED_ddp_to_sa": "No DDP option is displayed on Coremax's public pages.",
+              "small_electronics_under_1kg_fit": "Direct product listing for mr-0002 (20,000mAh solar power bank; page lists Single package size 13.35x7x3 cm, Single gross weight 1.000 kg, Selling Units: Single item).",
+              "supplier_metrics_observed": {
+                "tenure": "1 yr on Alibaba (Manufacturer, Trading Company)",
+                "store_rating": "No reviews yet (0 product reviews, 0 store reviews)",
+                "response_time": "<=2h (response rate 99.65% on store hub)",
+                "on_time_dispatch": "83.3% (product page, average dispatch time 12 days)",
+                "online_revenue": "$5K-$10K (7 top buyers served)"
+              },
+              "source_url": "https://www.alibaba.com/product-detail/New-Trending-Waterproof-20000Mah-Solar-Charger_1601727591668.html; https://kms9.en.alibaba.com/",
+              "fetch_date": "2026-10-02",
+              "verified": true,
+              "verified_scope": "Product price tiers ($5.31/$5.04/$4.59/$4.19), Standard (Alibaba.com Logistics) shipping fee $19.81 (struck $39.81) for 2 boxes, guaranteed delivery Oct 20 - Nov 29, \"*Taxes and import charges will be calculated at checkout\" (non-DDP), 1.000 kg gross weight, and store metrics — all directly read via fetch_page on 2026-10-02."
             }
           ],
-          "session_status": "in_progress — push 4 after verified quote #4 (Wingspeed)"
+          "session_status": "in_progress — push 5 after verified quote #5 (Coremax direct re-check)"
         }
       }
     ],
